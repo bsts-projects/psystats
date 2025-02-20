@@ -6,6 +6,7 @@ An ongoing project to create a series of juypter notebooks that can be used to r
 * Calculating the standard deviation for population data
 * Calculating the standard deviation for sample data
 * Calculating *z*-scores
+* Probability:  *z*-scores and proportions of the normal distribution
 
 ## Drafts in Progress
-* Probability:  *z*-scores and proportions of the normal distribution
+* Probability and Samples
