@@ -8,8 +8,11 @@ class RandomData():
     def __init__(self, groups = 1, n = 10, distribution = "normal"):
         self.groups = groups
         self.n = n
-        self.distribution = distribution # placeholder to add the ability to generate data from other distributions
-        
+        if distribution == "normal":
+            self.distribution = distribution 
+        else:
+            raise ValueError("only the normal distribution is currently supported")
+            # TODO add the ability to generate data from other distribuions
             
     def generate_data(self):
         self.df = pd.DataFrame()
@@ -67,26 +70,52 @@ class RandomData():
             raise Exception("Dataframe error: no data columns")
         else:            
             # calculate the standard error
-            var = self.df.variance()
-            sem = round(math.sqrt(round(var/self.n),2),2)
-            mean = self.df.group_means()
+            var = self.variance()
+            sem = round(math.sqrt(round((var[0]/self.n),2)),2)
+            mean = self.group_means()
             mu = null
-            t_obt = round((mean - mu) / sem, 2)
+            t_obt = round((mean[0] - mu) / sem, 2)
 
+            # print the caluclations for the standard error
+            # TODO add a way to determine environment so output can display in terminal or notebook
             print("calculating the standard error...")
             display(Markdown("$s_M = \\sqrt{{\\frac{{s^2}}{{n}}}}$"))
-            display(Markdown(f"$s_M = \\sqrt{{\\frac{{{var}}}{{{self.n}}}}}$"))
-            display(Markdown(f"$s_M = \\sqrt{{{round((var/self.n),2)}}}$"))
+            display(Markdown(f"$s_M = \\sqrt{{\\frac{{{var[0]}}}{{{self.n}}}}}$"))
+            display(Markdown(f"$s_M = \\sqrt{{{round((var[0]/self.n),2)}}}$"))
             display(Markdown(f"$s_M = {{{sem}}}$"))
-
+            print() # blank space
+            # print the caluclations for t_obt
             display(Markdown("calculating $t_{(obt}}$..."))
             display(Markdown("$t_{{obt}} = \\frac{{M - \\mu}}{{s_M}}"))
-            display(Markdown(f"$t_{{obt}} = \\frac{{{mean} - {mu}}}{{{sem}}}$"))
-            display(Markdown(f"$t_{{obt}} = \\frac{{{mean - mu}}}{{{sem}}}$"))
+            display(Markdown(f"$t_{{obt}} = \\frac{{{mean[0]} - {mu}}}{{{sem}}}$"))
+            display(Markdown(f"$t_{{obt}} = \\frac{{{mean[0] - mu}}}{{{sem}}}$"))
             display(Markdown(f"$t_{{obt}} = {{{t_obt}}}"))
 
+            return t_obt
 
-            
+
+    def critical_t(self, test, alpha = 0.05, tails = 2):
+        if test == "independent-samples":
+            degf = (self.n - 1) + (self.n - 1)
+        elif test == "one-sample" or "dependent-samples":
+            degf = self.n - 1
+        else:
+            raise ValueError("Test options include:  'independent-samples', 'one-sample' or 'dependent-samples'")
+        
+        crit_values = {}
+        if tails == 1:
+            t_crit = stats.t.ppf(1 - alpha, degf)
+            crit_values["t_crit_pos"] = round(t_crit, 3)
+            crit_values["t_crit_neg"] = round(-t_crit, 3)
+        elif tails == 2:
+            t_crit_upper = stats.t.ppf(1 - alpha/2, degf)
+            t_crit_lower = stats.t.ppf(alpha/2, degf)
+            crit_values["t_crit_upper"] = round(t_crit_upper, 3)
+            crit_values["t_crit_lower"] = round(t_crit_lower, 3)
+        else:
+            return ValueError("tails must be 1 or 2")
+
+        return crit_values
             
 
 

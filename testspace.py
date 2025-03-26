@@ -45,15 +45,17 @@ print(ss)"""
 
 df = RandomData(groups = 1, n = 15)
 
-#data = df.generate_data()
+data = df.generate_data()
 ss = df.sum_of_squares()
 means = df.group_means()
 sd = df.stdev()
 
-print(df)
+print(data)
 print(ss)
 print(means)
 print(sd)
 
-#df.one_sample_t_test(null = 0)
+df.one_sample_t_test(null = 0)
 
+crit = df.critical_t(test = "one-sample", alpha = 0.05, tails = 1)
+print(crit)
