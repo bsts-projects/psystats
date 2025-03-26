@@ -43,13 +43,17 @@ print(means)
 
 print(ss)"""
 
-df = RandomData(groups = 3, n = 15)
+df = RandomData(groups = 1, n = 15)
 
-data = df.generate_data()
+#data = df.generate_data()
 ss = df.sum_of_squares()
 means = df.group_means()
+sd = df.stdev()
 
-print(data)
+print(df)
 print(ss)
 print(means)
+print(sd)
+
+#df.one_sample_t_test(null = 0)
 
