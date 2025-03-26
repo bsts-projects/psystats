@@ -43,5 +43,13 @@ print(means)
 
 print(ss)"""
 
-df = RandomData(groups = 3, n = 15).generate_data()
-print(df)
+df = RandomData(groups = 3, n = 15)
+
+data = df.generate_data()
+ss = df.sum_of_squares()
+means = df.group_means()
+
+print(data)
+print(ss)
+print(means)
+
