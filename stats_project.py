@@ -93,6 +93,36 @@ class RandomData():
         return crit_values
 
 
+    def z_test(self, null: int):
+        if len(self.df.columns) > 1:
+            raise Exception("Data contains more than one sample")
+        elif len(self.df.columns) == 0:
+            raise Exception("Dataframe error: no data columns")
+        else:            
+            # calculate the standard error
+            # TODO This all needs to be edited and adapted for the z-test
+            sem = round(math.sqrt(round((self.var[0]/self.n),2)),2)
+            mu = null
+            t_obt = round((self.means[0] - mu) / sem, 2)
+
+            # print the caluclations for the standard error
+            # TODO add a way to determine environment so output can display in terminal or notebook
+            print("calculating the standard error...")
+            display(Markdown("$s_M = \\sqrt{{\\frac{{s^2}}{{n}}}}$"))
+            display(Markdown(f"$s_M = \\sqrt{{\\frac{{{self.var[0]}}}{{{self.n}}}}}$"))
+            display(Markdown(f"$s_M = \\sqrt{{{round((self.var[0]/self.n),2)}}}$"))
+            display(Markdown(f"$s_M = {{{sem}}}$"))
+            print() # blank space
+            # print the caluclations for t_obt
+            display(Markdown("calculating $t_{{obt}}$..."))
+            display(Markdown(f"$t_{{obt}} = {{\\frac{{M - \\mu}}{{s_M}}}}$"))
+            display(Markdown(f"$t_{{obt}} = \\frac{{{self.means[0]} - {mu}}}{{{sem}}}$"))
+            display(Markdown(f"$t_{{obt}} = \\frac{{{self.means[0] - mu}}}{{{sem}}}$"))
+            display(Markdown(f"$t_{{obt}} = {{{t_obt}}}$"))
+
+            return t_obt  
+
+
     def one_sample_t_test(self, null: int):
         if len(self.df.columns) > 1:
             raise Exception("Data contains more than one sample")
@@ -170,21 +200,22 @@ class RandomData():
             self.df['D'] = self.df['1'] - self.df['0']
             
             # print the dataframe with the difference scores
+            display(Markdown("Calculating the difference scores $D = X_1 - X_0$"))
             print(self.df.to_string(index = False))
             
             # Calculate the Mean of the Difference Scores
             sum_d = self.df['D'].sum()
-            n = self.df['D'].value_counts()
+            n = len(self.df['D'])
             mean_d = round(sum_d/n, 2)
             display(Markdown("Calculating the Mean of the Difference Scores..."))
-            display(Markdown("$M_D = \\frac{{\\Sigma{{D}}}}{{n}}"))
-            display(Markdown(f"$M_D = \\frac{{{sum_d}}}{{{n}}}"))
-            display(Markdown(f"$M_D = {{{mean_d}}}"))
+            display(Markdown("$M_D = \\frac{{\\Sigma D}}{{n}}$"))
+            display(Markdown(f"$M_D = \\frac{{{sum_d}}}{{{n}}}$"))
+            display(Markdown(f"$M_D = {{{mean_d}}}$"))
 
             # calculate the SS for the difference scores
-            self.df['D^2'] = self.df['d'].apply(lambda x: x ** 2)
+            self.df['D^2'] = self.df['D'].apply(lambda x: x ** 2)
             sum_sqared_scores = self.df['D^2'].sum()
-            ss = sum_sqared_scores - round((sum_d ** 2)/n, 2)
+            ss = round(sum_sqared_scores - round((sum_d ** 2)/n, 2), 2)
             # print the dataframe with the squared difference scores
             display(Markdown("Calculating the sum of the squared deviations..."))
             print(self.df.to_string(index = False))
@@ -197,7 +228,7 @@ class RandomData():
             variance = round(ss / (n - 1), 2)
             display(Markdown("$ s^2 = \\frac{{SS_D}}{{n}}$")) 
             display(Markdown(f"$ s^2 = \\frac{{{ss}}}{{{n}}}$"))   
-            display(Markdown(f"$ s^2 = \\frac{{{round(ss/n, 2)}}}$"))
+            display(Markdown(f"$ s^2 = \\frac{{{round(ss/n, 2)}}} $"))
             display(Markdown(f"$ s^2 = {{{variance}}}$"))  
 
             # Calculate the estimated standard error
