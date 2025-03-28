@@ -43,7 +43,7 @@ print(means)
 
 print(ss)"""
 
-df = RandomData(groups = 1, n = 15)
+df = RandomData(groups = 2, n = 10)
 
 data = df.generate_data()
 ss = df.sum_of_squares()
@@ -55,7 +55,7 @@ print(ss)
 print(means)
 print(sd)
 
-df.one_sample_t_test(null = 0)
+df.independent_samples_t_test(null = 0)
 
-crit = df.critical_t(test = "one-sample", alpha = 0.05, tails = 1)
+crit = df.critical_t(test = "independent-samples", alpha = 0.05, tails = 2)
 print(crit)
