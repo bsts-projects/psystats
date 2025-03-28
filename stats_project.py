@@ -9,6 +9,10 @@ class RandomData():
         self.groups = groups
         self.n = n
         self.df = self.generate_data()
+        self.ss = self.sum_of_squares()
+        self.means = self.group_means()
+        self.var = self.variance()
+        self.std = self.stdev()
         if distribution == "normal":
             self.distribution = distribution 
         else:
@@ -95,25 +99,25 @@ class RandomData():
             raise Exception("Dataframe error: no data columns")
         else:            
             # calculate the standard error
-            var = self.variance()
-            sem = round(math.sqrt(round((var[0]/self.n),2)),2)
-            mean = self.group_means()
+            #var = self.variance()
+            sem = round(math.sqrt(round((self.var[0]/self.n),2)),2)
+            #mean = self.group_means()
             mu = null
-            t_obt = round((mean[0] - mu) / sem, 2)
+            t_obt = round((self.means[0] - mu) / sem, 2)
 
             # print the caluclations for the standard error
             # TODO add a way to determine environment so output can display in terminal or notebook
             print("calculating the standard error...")
             display(Markdown("$s_M = \\sqrt{{\\frac{{s^2}}{{n}}}}$"))
-            display(Markdown(f"$s_M = \\sqrt{{\\frac{{{var[0]}}}{{{self.n}}}}}$"))
-            display(Markdown(f"$s_M = \\sqrt{{{round((var[0]/self.n),2)}}}$"))
+            display(Markdown(f"$s_M = \\sqrt{{\\frac{{{self.var[0]}}}{{{self.n}}}}}$"))
+            display(Markdown(f"$s_M = \\sqrt{{{round((self.var[0]/self.n),2)}}}$"))
             display(Markdown(f"$s_M = {{{sem}}}$"))
             print() # blank space
             # print the caluclations for t_obt
             display(Markdown("calculating $t_{{obt}}$..."))
             display(Markdown(f"$t_{{obt}} = {{\\frac{{M - \\mu}}{{s_M}}}}$"))
-            display(Markdown(f"$t_{{obt}} = \\frac{{{mean[0]} - {mu}}}{{{sem}}}$"))
-            display(Markdown(f"$t_{{obt}} = \\frac{{{mean[0] - mu}}}{{{sem}}}$"))
+            display(Markdown(f"$t_{{obt}} = \\frac{{{self.means[0]} - {mu}}}{{{sem}}}$"))
+            display(Markdown(f"$t_{{obt}} = \\frac{{{self.means[0] - mu}}}{{{sem}}}$"))
             display(Markdown(f"$t_{{obt}} = {{{t_obt}}}$"))
 
             return t_obt         
@@ -126,36 +130,40 @@ class RandomData():
             raise ValueError("Dataframe error: no data columns")
         else:            
             # primary calculations
-            ss = self.sum_of_squares()
-            pooled_var = round(((ss[0] + ss[1]) / ((self.n - 1) + (self.n - 1))), 2)
+            pooled_var = round(((self.ss[0] + self.ss[1]) / ((self.n - 1) + (self.n - 1))), 2)
             sem = round(math.sqrt((round((pooled_var/self.n),2))+(round((pooled_var/self.n),2))),2)
-            mean = self.group_means()
-            t_obt = round(((mean[0] - mean[1]) - null) / sem, 2)
+            t_obt = round(((self.means[0] - self.means[1]) - null) / sem, 2)
 
             # TODO adapt to display in the terminal or a notebook
             # display the caluclations for the pooled variance
             print("calculatig the pooled variance...")
             display(Markdown("$s_p^2 = {{\\frac{{SS_1 + SS_2}}{{df_1 + df_2}}}}$"))
-            display(Markdown(f"$s_p^2 = {{\\frac{{{ss[0]} + {ss[1]}}}{{{self.n - 1} + {self.n - 1}}}}}$"))
-            display(Markdown(f"$s_p^2 = {{\\frac{{{round(ss[0] + ss[1],2)}}}{{{(self.n - 1) + (self.n - 1)}}}}}$"))
+            display(Markdown(f"$s_p^2 = {{\\frac{{{self.ss[0]} + {self.ss[1]}}}{{{self.n - 1} + {self.n - 1}}}}}$"))
+            display(Markdown(f"$s_p^2 = \\frac{{{round(self.ss[0] + self.ss[1],2)}}}{{{(self.n - 1) + (self.n - 1)}}}$"))
             display(Markdown(f"$s_p^2 = {{{pooled_var}}}$"))
             # display the calculations for the estimated standard error
             print("calculating the estimated standard error of the difference between means...")
             display(Markdown("$s_{{(M_1 - M_2)}} = \\sqrt{{\\frac{{s_p^2}}{{n_1}} + \\frac{{s_p^2}}{{n_1}}}}$"))
             display(Markdown(f"$s_{{(M_1 - M_2)}} = \\sqrt{{\\frac{{{pooled_var}}}{{{self.n}}} + \\frac{{{pooled_var}}}{{{self.n}}}}}$"))
-            display(Markdown(f"$s_{{(M_1 - M_2)}} = \\sqrt{{\\frac{{{round(pooled_var/self.n, 2)}}} + \\frac{{{round(pooled_var/self.n, 2)}}}}}$"))
+            display(Markdown(f"$s_{{(M_1 - M_2)}} = \\sqrt{{{round(pooled_var/self.n, 2)} + {round(pooled_var/self.n, 2)}}}$"))
             display(Markdown(f"$s_{{(M_1 - M_2)}} = \\sqrt{{{round(pooled_var/self.n, 2) + round(pooled_var/self.n, 2)}}}$"))
             display(Markdown(f"$s_{{(M_1 - M_2)}} = {{{sem}}}$"))
             # display the caluclations for t_obt
             display(Markdown("calculating $t_{{obt}}$..."))
             display(Markdown(f"$t_{{obt}} = {{\\frac{{(M_1 - M_2) - (\\mu_1 - \\mu_2)}}{{s_{{(M_1 - M_2)}}}}}}$"))
-            display(Markdown(f"$t_{{obt}} = \\frac{{({mean[0]} {mean[1]}) - {{{null}}}}}{{{sem}}}$"))
-            display(Markdown(f"$t_{{obt}} = \\frac{{{mean[0] - mean[1] - null}}}{{{sem}}}$"))
+            display(Markdown(f"$t_{{obt}} = \\frac{{({self.means[0]} - {self.means[1]}) - {{{null}}}}}{{{sem}}}$")) 
+            display(Markdown(f"$t_{{obt}} = \\frac{{{round(self.means[0] - self.means[1] - null, 2)}}}{{{sem}}}$"))
             display(Markdown(f"$t_{{obt}} = {{{t_obt}}}$"))
 
             return t_obt
+        
 
-
-
-
-
+    def dependent_samples_t_test(self):
+        if len(self.df.columns) == 1 or len(self.df.columns) > 2:
+            raise ValueError("Data does not contain two samples")
+        elif len(self.df.columns) == 0:
+            raise ValueError("Dataframe error: no data columns")
+        else:            
+            # primary calculations
+            # need to gather the difference scores
+            pass
