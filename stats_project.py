@@ -22,6 +22,7 @@ class RandomData():
     def generate_data(self):
         self.df = pd.DataFrame()
         # create data for each group and add it to the dataframe
+        # df.columns = range(1, len(df.columns) + 1)
         for group in range(self.groups):
             mean = random.randint(10, 100)
             sd = mean * random.uniform(0.05, 0.50)
@@ -158,7 +159,7 @@ class RandomData():
             return t_obt
         
 
-    def dependent_samples_t_test(self):
+    def dependent_samples_t_test(self, null=0):
         if len(self.df.columns) == 1 or len(self.df.columns) > 2:
             raise ValueError("Data does not contain two samples")
         elif len(self.df.columns) == 0:
@@ -166,4 +167,53 @@ class RandomData():
         else:            
             # primary calculations
             # need to gather the difference scores
-            pass
+            self.df['D'] = self.df['1'] - self.df['0']
+            
+            # print the dataframe with the difference scores
+            print(self.df.to_string(index = False))
+            
+            # Calculate the Mean of the Difference Scores
+            sum_d = self.df['D'].sum()
+            n = self.df['D'].value_counts()
+            mean_d = round(sum_d/n, 2)
+            display(Markdown("Calculating the Mean of the Difference Scores..."))
+            display(Markdown("$M_D = \\frac{{\\Sigma{{D}}}}{{n}}"))
+            display(Markdown(f"$M_D = \\frac{{{sum_d}}}{{{n}}}"))
+            display(Markdown(f"$M_D = {{{mean_d}}}"))
+
+            # calculate the SS for the difference scores
+            self.df['D^2'] = self.df['d'].apply(lambda x: x ** 2)
+            sum_sqared_scores = self.df['D^2'].sum()
+            ss = sum_sqared_scores - round((sum_d ** 2)/n, 2)
+            # print the dataframe with the squared difference scores
+            display(Markdown("Calculating the sum of the squared deviations..."))
+            print(self.df.to_string(index = False))
+            display(Markdown("$ SS_D = \\Sigma D^2 - \\frac{{(\\Sigma D)^2}}{{n}}$"))
+            display(Markdown(f"$ SS_D = {{{sum_sqared_scores}}} - \\frac{{{sum_d ** 2}}}{{{n}}}$"))
+            display(Markdown(f"$ SS_D = {{{sum_sqared_scores}}} - {{{round((sum_d ** 2)/n, 2)}}}$"))
+            display(Markdown(f"$ SS_D = {{{ss}}}$"))
+
+            # calculate the variance    
+            variance = round(ss / (n - 1), 2)
+            display(Markdown("$ s^2 = \\frac{{SS_D}}{{n}}$")) 
+            display(Markdown(f"$ s^2 = \\frac{{{ss}}}{{{n}}}$"))   
+            display(Markdown(f"$ s^2 = \\frac{{{round(ss/n, 2)}}}$"))
+            display(Markdown(f"$ s^2 = {{{variance}}}$"))  
+
+            # Calculate the estimated standard error
+            sem = round(math.sqrt(variance/n), 2)
+            display(Markdown("Calculating the estimated standard error..."))
+            display(Markdown("$ s_{M_D} = \\sqrt{{\\frac{{s^2}}{{n}}}}$"))
+            display(Markdown(f"$ s_{{M_D}} = \\sqrt{{\\frac{{{variance}}}{{{n}}}}}$"))
+            display(Markdown(f"$ s_{{M_D}} = \\sqrt{{{round(variance/n, 2)}}}$"))
+            display(Markdown(f"$ s_{{M_D}} = {{{sem}}}$"))
+
+            # caclulate the t-statistic
+            t_obt = round((mean_d - null) / sem, 2)
+            display(Markdown("calculating $t_{{obt}}$..."))
+            display(Markdown("$t_{{obt}} = {{\\frac{{M_D - \\mu_D}}{{s_{M_D}}}}}$"))
+            display(Markdown(f"$t_{{obt}} = \\frac{{{mean_d} - {null}}}{{{sem}}}$"))
+            display(Markdown(f"$t_{{obt}} = \\frac{{{mean_d - null}}}{{{sem}}}$"))
+            display(Markdown(f"$t_{{obt}} = {{{t_obt}}}$"))
+
+            return t_obt
