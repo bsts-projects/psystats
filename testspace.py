@@ -43,19 +43,21 @@ print(means)
 
 print(ss)"""
 
-df = RandomData(groups = 2, n = 10)
+data = RandomData(groups = 2, n = 10)
 
-data = df.generate_data()
-ss = df.sum_of_squares()
-means = df.group_means()
-sd = df.stdev()
+print(data.sum_of_squares())
 
-print(data)
+#data = df.generate_data()
+ss = data.sum_of_squares()
+means = data.group_means()
+sd = data.stdev()
+
+print(data.df)
 print(ss)
 print(means)
 print(sd)
 
-df.independent_samples_t_test(null = 0)
+data.independent_samples_t_test(null = 0)
 
-crit = df.critical_t(test = "independent-samples", alpha = 0.05, tails = 2)
+crit = data.critical_t(test = "independent-samples", alpha = 0.05, tails = 2)
 print(crit)

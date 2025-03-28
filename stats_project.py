@@ -8,6 +8,7 @@ class RandomData():
     def __init__(self, groups = 1, n = 10, distribution = "normal"):
         self.groups = groups
         self.n = n
+        self.df = self.generate_data()
         if distribution == "normal":
             self.distribution = distribution 
         else:
@@ -126,7 +127,7 @@ class RandomData():
         else:            
             # primary calculations
             ss = self.sum_of_squares()
-            pooled_var = (ss[0] + ss[1]) / ((self.n - 1) + (self.n - 1))
+            pooled_var = round(((ss[0] + ss[1]) / ((self.n - 1) + (self.n - 1))), 2)
             sem = round(math.sqrt((round((pooled_var/self.n),2))+(round((pooled_var/self.n),2))),2)
             mean = self.group_means()
             t_obt = round(((mean[0] - mean[1]) - null) / sem, 2)
@@ -134,10 +135,10 @@ class RandomData():
             # TODO adapt to display in the terminal or a notebook
             # display the caluclations for the pooled variance
             print("calculatig the pooled variance...")
-            display(Markdown("$s_p^2 = {{\\frac{{SS_1 + ss_2}}{{df_1 + df_2}}}}$"))
+            display(Markdown("$s_p^2 = {{\\frac{{SS_1 + SS_2}}{{df_1 + df_2}}}}$"))
             display(Markdown(f"$s_p^2 = {{\\frac{{{ss[0]} + {ss[1]}}}{{{self.n - 1} + {self.n - 1}}}}}$"))
-            display(Markdown(f"$s_p^2 = {{\\frac{{{ss[0] + ss[1]}}}{{{(self.n - 1) + (self.n - 1)}}}}}$"))
-            display(Markdown(f"$s_p^2 = {{{pooled_var}}}"))
+            display(Markdown(f"$s_p^2 = {{\\frac{{{round(ss[0] + ss[1],2)}}}{{{(self.n - 1) + (self.n - 1)}}}}}$"))
+            display(Markdown(f"$s_p^2 = {{{pooled_var}}}$"))
             # display the calculations for the estimated standard error
             print("calculating the estimated standard error of the difference between means...")
             display(Markdown("$s_{{(M_1 - M_2)}} = \\sqrt{{\\frac{{s_p^2}}{{n_1}} + \\frac{{s_p^2}}{{n_1}}}}$"))
