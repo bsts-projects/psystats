@@ -100,27 +100,29 @@ class RandomData():
             raise Exception("Dataframe error: no data columns")
         else:            
             # calculate the standard error
-            # TODO This all needs to be edited and adapted for the z-test
-            sem = round(math.sqrt(round((self.var[0]/self.n),2)),2)
+            # TODO double check the work here to make sure it is accurate
+            sd = self.df['0'].std(ddof = 0)
+            n = len(self.df['0'])
             mu = null
-            t_obt = round((self.means[0] - mu) / sem, 2)
+            sem = round(sd/(round(math.sqrt(n),2)),2)
+            z_obt = round((self.means[0] - mu) / sem, 2)
 
-            # print the caluclations for the standard error
             # TODO add a way to determine environment so output can display in terminal or notebook
-            print("calculating the standard error...")
-            display(Markdown("$s_M = \\sqrt{{\\frac{{s^2}}{{n}}}}$"))
-            display(Markdown(f"$s_M = \\sqrt{{\\frac{{{self.var[0]}}}{{{self.n}}}}}$"))
-            display(Markdown(f"$s_M = \\sqrt{{{round((self.var[0]/self.n),2)}}}$"))
-            display(Markdown(f"$s_M = {{{sem}}}$"))
+            # print calculations for the standard error
+            display(Markdown("Calculating the standard error..."))
+            display(Markdown(f"$\\sigma_M = \\frac{{\\sigma}}{{\\sqrt{{N}}}}$"))
+            display(Markdown(f"$\\sigma_M = \\frac{{{sd}}}{{\\sqrt{n}}}$"))
+            display(Markdown(f"$\\sigma_M = \\frac{{{sd}}}{{{round(math.sqrt(n),2)}}}$"))
+            display(Markdown(f"$\\sigma_M = {{{sem}}}$"))
             print() # blank space
-            # print the caluclations for t_obt
-            display(Markdown("calculating $t_{{obt}}$..."))
-            display(Markdown(f"$t_{{obt}} = {{\\frac{{M - \\mu}}{{s_M}}}}$"))
-            display(Markdown(f"$t_{{obt}} = \\frac{{{self.means[0]} - {mu}}}{{{sem}}}$"))
-            display(Markdown(f"$t_{{obt}} = \\frac{{{self.means[0] - mu}}}{{{sem}}}$"))
-            display(Markdown(f"$t_{{obt}} = {{{t_obt}}}$"))
+            # print the caluclations for z_obt
+            display(Markdown("calculating $z_{{obt}}$..."))
+            display(Markdown(f"$z_{{obt}} = {{\\frac{{M - \\mu}}{{\\sigma_M}}}}$"))
+            display(Markdown(f"$z_{{obt}} = \\frac{{{self.means[0]} - {mu}}}{{{sem}}}$"))
+            display(Markdown(f"$z_{{obt}} = \\frac{{{self.means[0] - mu}}}{{{sem}}}$"))
+            display(Markdown(f"$z_{{obt}} = {{{z_obt}}}$"))
 
-            return t_obt  
+            return z_obt  
 
 
     def one_sample_t_test(self, null: int):
