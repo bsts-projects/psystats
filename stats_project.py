@@ -13,16 +13,30 @@ class RandomData():
         self.means = self.group_means()
         self.var = self.variance()
         self.std = self.stdev()
+        self.test = "" # value is set when a stats function is called
+        self.alpha = self.set_alpha()
+        self.tails = self.set_tails()
+        self.null = self.set_null_hypothesis()
         if distribution == "normal":
             self.distribution = distribution 
         else:
             raise ValueError("only the normal distribution is currently supported")
             # TODO add the ability to generate data from other distribuions
+
+
+    def set_alpha(self):
+        self.alpha = random.choice([0.05, 0.01, 0.001])
+        return self.alpha
+        
+    
+    def set_tails(self):
+        self.tails = random.choice([1, 2])
+        return self.tails
             
+
     def generate_data(self):
         self.df = pd.DataFrame()
         # create data for each group and add it to the dataframe
-        # df.columns = range(1, len(df.columns) + 1)
         for group in range(self.groups):
             mean = random.randint(10, 100)
             sd = mean * random.uniform(0.05, 0.50)
@@ -37,6 +51,17 @@ class RandomData():
             self.df[f'{group}'] = sample
         return self.df
     
+
+    def set_null_hypothesis(self):
+        # for one sample tests, sets a null hypothess between -3 to + 3 x the mean
+        if  self.test in ["one-sample t-test", "z"]:
+            mean = self.means[0]
+            multiplier = random.uniform(-3, 3)
+            self.null = round(mean * multiplier)
+        else:
+            self.null = 0
+        return self.null
+
 
     def sum_of_squares(self):  # calculating the values presented in the problem.
         ss = []
@@ -69,43 +94,57 @@ class RandomData():
         return stdevs
 
 
-    def critical_t(self, test, alpha = 0.05, tails = 2):
-        if test == "independent-samples":
+    def critical_t(self):
+        # calculate the degrees of freedom based on the type of test used
+        if self.test == "independent-samples t-test":
             degf = (self.n - 1) + (self.n - 1)
-        elif test == "one-sample" or "dependent-samples":
+        elif self.test == "one-sample t-test" or "dependent-samples t-test":
             degf = self.n - 1
         else:
-            raise ValueError("Test options include:  'independent-samples', 'one-sample' or 'dependent-samples'")
+            raise ValueError("incorrect test specification - degrees of freedom")
         
-        crit_values = {}
-        if tails == 1:
-            t_crit = stats.t.ppf(1 - alpha, degf)
-            crit_values["t_crit_pos"] = round(t_crit, 3)
-            crit_values["t_crit_neg"] = round(-t_crit, 3)
-        elif tails == 2:
-            t_crit_upper = stats.t.ppf(1 - alpha/2, degf)
-            t_crit_lower = stats.t.ppf(alpha/2, degf)
-            crit_values["t_crit_upper"] = round(t_crit_upper, 3)
-            crit_values["t_crit_lower"] = round(t_crit_lower, 3)
+        # determine the critical values for the inferential test      
+        if self.tails == 1:
+            if self.test in ["independent-samples t-test", "one-sample t-test", "dependent-samples t-test"]:
+                crit = round(stats.t.ppf(1 - self.alpha, degf), 2)
+            elif self.test == "z":
+                crit = print(round(stats.norm.ppf(1 - self.alpha)), 2)
+            else:
+                return ValueError("improper test specification - selecting crit values")
+        elif self.tails == 2:
+            if self.test in ["independent-samples t-test", "one-sample t-test", "dependent-samples t-test"]: 
+                crit = round(stats.t.ppf(1 - self.alpha/2, degf), 2)
+            elif self.test == "z":
+                crit = print(round(stats.norm.ppf(1 - (self.alpha/2)), 2))
+            else:
+                return ValueError("improper test specification - selecting crit values")
         else:
-            return ValueError("tails must be 1 or 2")
+            return ValueError("self.tails must equal 1 or 2")
+        crit_values = {"positive": crit, "negative": -crit}
 
+        # add a direction for one-tailed tests
+        if self.tails == 1:  
+            direction = random.choice(["increase", "decrease"])
+            crit_values["direction"] = direction
+        else:
+            return ValueError("tails must be 1 for directional crit values")
+        
         return crit_values
 
 
-    def z_test(self, null: int):
+    def z_test(self):
         if len(self.df.columns) > 1:
             raise Exception("Data contains more than one sample")
         elif len(self.df.columns) == 0:
             raise Exception("Dataframe error: no data columns")
-        else:            
+        else:
+            self.test = "z"
             # calculate the standard error
             # TODO double check the work here to make sure it is accurate
             sd = self.df['0'].std(ddof = 0)
             n = len(self.df['0'])
-            mu = null
             sem = round(sd/(round(math.sqrt(n),2)),2)
-            z_obt = round((self.means[0] - mu) / sem, 2)
+            z_obt = round((self.means[0] - self.null) / sem, 2)
 
             # TODO add a way to determine environment so output can display in terminal or notebook
             # print calculations for the standard error
@@ -118,25 +157,23 @@ class RandomData():
             # print the caluclations for z_obt
             display(Markdown("calculating $z_{{obt}}$..."))
             display(Markdown(f"$z_{{obt}} = {{\\frac{{M - \\mu}}{{\\sigma_M}}}}$"))
-            display(Markdown(f"$z_{{obt}} = \\frac{{{self.means[0]} - {mu}}}{{{sem}}}$"))
-            display(Markdown(f"$z_{{obt}} = \\frac{{{self.means[0] - mu}}}{{{sem}}}$"))
+            display(Markdown(f"$z_{{obt}} = \\frac{{{self.means[0]} - {self.null}}}{{{sem}}}$"))
+            display(Markdown(f"$z_{{obt}} = \\frac{{{self.means[0] - self.null}}}{{{sem}}}$"))
             display(Markdown(f"$z_{{obt}} = {{{z_obt}}}$"))
 
             return z_obt  
 
 
-    def one_sample_t_test(self, null: int):
+    def one_sample_t_test(self):
         if len(self.df.columns) > 1:
             raise Exception("Data contains more than one sample")
         elif len(self.df.columns) == 0:
             raise Exception("Dataframe error: no data columns")
-        else:            
+        else:
+            self.test = "one-sample t-test"   
             # calculate the standard error
-            #var = self.variance()
             sem = round(math.sqrt(round((self.var[0]/self.n),2)),2)
-            #mean = self.group_means()
-            mu = null
-            t_obt = round((self.means[0] - mu) / sem, 2)
+            t_obt = round((self.means[0] - self.null) / sem, 2)
 
             # print the caluclations for the standard error
             # TODO add a way to determine environment so output can display in terminal or notebook
@@ -149,23 +186,24 @@ class RandomData():
             # print the caluclations for t_obt
             display(Markdown("calculating $t_{{obt}}$..."))
             display(Markdown(f"$t_{{obt}} = {{\\frac{{M - \\mu}}{{s_M}}}}$"))
-            display(Markdown(f"$t_{{obt}} = \\frac{{{self.means[0]} - {mu}}}{{{sem}}}$"))
-            display(Markdown(f"$t_{{obt}} = \\frac{{{self.means[0] - mu}}}{{{sem}}}$"))
+            display(Markdown(f"$t_{{obt}} = \\frac{{{self.means[0]} - {self.null}}}{{{sem}}}$"))
+            display(Markdown(f"$t_{{obt}} = \\frac{{{self.means[0] - self.null}}}{{{sem}}}$"))
             display(Markdown(f"$t_{{obt}} = {{{t_obt}}}$"))
 
             return t_obt         
 
 
-    def independent_samples_t_test(self, null: int):
+    def independent_samples_t_test(self):
         if len(self.df.columns) == 1 or len(self.df.columns) > 2:
             raise ValueError("Data does not contain two samples")
         elif len(self.df.columns) == 0:
             raise ValueError("Dataframe error: no data columns")
-        else:            
+        else: 
+            self.test = "independent-samples t-test"           
             # primary calculations
             pooled_var = round(((self.ss[0] + self.ss[1]) / ((self.n - 1) + (self.n - 1))), 2)
             sem = round(math.sqrt((round((pooled_var/self.n),2))+(round((pooled_var/self.n),2))),2)
-            t_obt = round(((self.means[0] - self.means[1]) - null) / sem, 2)
+            t_obt = round(((self.means[0] - self.means[1]) - self.null) / sem, 2)
 
             # TODO adapt to display in the terminal or a notebook
             # display the caluclations for the pooled variance
@@ -184,19 +222,20 @@ class RandomData():
             # display the caluclations for t_obt
             display(Markdown("calculating $t_{{obt}}$..."))
             display(Markdown(f"$t_{{obt}} = {{\\frac{{(M_1 - M_2) - (\\mu_1 - \\mu_2)}}{{s_{{(M_1 - M_2)}}}}}}$"))
-            display(Markdown(f"$t_{{obt}} = \\frac{{({self.means[0]} - {self.means[1]}) - {{{null}}}}}{{{sem}}}$")) 
-            display(Markdown(f"$t_{{obt}} = \\frac{{{round(self.means[0] - self.means[1] - null, 2)}}}{{{sem}}}$"))
+            display(Markdown(f"$t_{{obt}} = \\frac{{({self.means[0]} - {self.means[1]}) - {{{self.null}}}}}{{{sem}}}$")) 
+            display(Markdown(f"$t_{{obt}} = \\frac{{{round(self.means[0] - self.means[1] - self.null, 2)}}}{{{sem}}}$"))
             display(Markdown(f"$t_{{obt}} = {{{t_obt}}}$"))
 
             return t_obt
         
 
-    def dependent_samples_t_test(self, null=0):
+    def dependent_samples_t_test(self):
         if len(self.df.columns) == 1 or len(self.df.columns) > 2:
             raise ValueError("Data does not contain two samples")
         elif len(self.df.columns) == 0:
             raise ValueError("Dataframe error: no data columns")
-        else:            
+        else:
+            self.test = "dependent-samples t-test"     
             # primary calculations
             # need to gather the difference scores
             self.df['D'] = self.df['1'] - self.df['0']
@@ -242,11 +281,11 @@ class RandomData():
             display(Markdown(f"$ s_{{M_D}} = {{{sem}}}$"))
 
             # caclulate the t-statistic
-            t_obt = round((mean_d - null) / sem, 2)
+            t_obt = round((mean_d - self.null) / sem, 2)
             display(Markdown("calculating $t_{{obt}}$..."))
             display(Markdown("$t_{{obt}} = {{\\frac{{M_D - \\mu_D}}{{s_{M_D}}}}}$"))
-            display(Markdown(f"$t_{{obt}} = \\frac{{{mean_d} - {null}}}{{{sem}}}$"))
-            display(Markdown(f"$t_{{obt}} = \\frac{{{mean_d - null}}}{{{sem}}}$"))
+            display(Markdown(f"$t_{{obt}} = \\frac{{{mean_d} - {self.null}}}{{{sem}}}$"))
+            display(Markdown(f"$t_{{obt}} = \\frac{{{mean_d - self.null}}}{{{sem}}}$"))
             display(Markdown(f"$t_{{obt}} = {{{t_obt}}}$"))
 
             return t_obt
