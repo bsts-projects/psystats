@@ -7,7 +7,7 @@ from IPython.display import Markdown, display
 class RandomData():
     def __init__(self, groups = 1, n = 10, distribution = "normal"):
         self.groups = groups
-        self.n = n
+        self.n = n # TODO add option for unequal sample sizes.
         self.df = self.generate_data()
         self.ss = self.sum_of_squares()
         self.means = self.group_means()
@@ -51,6 +51,20 @@ class RandomData():
             self.df[f'{group}'] = sample
         return self.df
     
+
+    def generate_question(self):
+        # determine the test type
+        if self.test == "z":
+            q_test = f""
+        elif self.test == "one-sample t-test":
+            q_test = f""
+        elif self.test == "independent-samples t-test":
+            q_test = f""
+        elif self.test == "dependent-samples t-test":
+            q_test = f""
+        else:
+            return ValueError("test-type specification error in question geneneration")
+
 
     def set_null_hypothesis(self):
         # for one sample tests, sets a null hypothess between -3 to + 3 x the mean
