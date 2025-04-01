@@ -16,7 +16,7 @@ class RandomData():
         self.test = "" # value is set when a stats function is called
         self.alpha = self.set_alpha()
         self.tails = self.set_tails()
-        self.null = self.set_null_hypothesis()
+        self.null = int
         self.obt = float
         self.crit_values = {}; dict
         self.significance = bool
@@ -58,15 +58,28 @@ class RandomData():
     def generate_question(self):
         # determine the test type
         if self.test == "z":
-            q_test = f""
+            display(Markdown(f"Given the following data, does $Group_0$ significantly differ from ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
+            display(Markdown(f"$M_0 = {{{self.means[0]}}}$"))
+            display(Markdown(f"$ {{\\sigma_0}} = {{{round(self.df['0'].std(ddof = 0), 2)}}}$"))
+            display(Markdown(f"$ n = {{{len(self.df['0'])}}}$"))
         elif self.test == "one-sample t-test":
-            q_test = f""
+            display(Markdown(f"Given the following data, does $Group_0$ significantly differ from ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
+            display(Markdown(f"$M_0 = {{{self.means[0]}}}$"))
+            display(Markdown(f"$s^2 = {{{self.var[0]}}}$"))
+            display(Markdown(f"$ n = {{{len(self.df['0'])}}}$"))
         elif self.test == "independent-samples t-test":
-            q_test = f""
+            display(Markdown(f"Given the following between-subjects data, does $Group_0$ significantly differ from $Group_1$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
+            display(Markdown(f"$M_0 = {{{self.means[0]}}}, M_1 = {{{self.means[1]}}}$"))
+            display(Markdown(f"$SS_0 = {{{self.ss[0]}}}, SS_1 = {{{self.ss[1]}}}$"))
+            display(Markdown(f"$ n_0 = {{{len(self.df['0'])}}}, n_1 = {{{len(self.df["1"])}}}$"))
         elif self.test == "dependent-samples t-test":
-            q_test = f""
+            display(Markdown(f"Given the following within-subjects data, does $M_0$ significantly differ from $M_1$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
+            display(Markdown(f"$M_0 = {{{self.means[0]}}}, M_1 = {{{self.means[1]}}}$"))
+            display(Markdown(f"$ n = {{{len(self.df['0'])}}}$"))
         else:
             return ValueError("test-type specification error in question geneneration")
+        
+        print(self.df)
         
 
     def final_decision(self):
@@ -137,6 +150,7 @@ class RandomData():
             multiplier = random.uniform(-3, 3)
             self.null = round(mean * multiplier)
         else:
+            print("else triggered")
             self.null = 0
         return self.null
 
@@ -218,6 +232,11 @@ class RandomData():
             raise Exception("Dataframe error: no data columns")
         else:
             self.test = "z"
+
+            # set the null and write out the question
+            self.set_null_hypothesis()
+            self.generate_question()
+
             # calculate the standard error
             # TODO double check the work here to make sure it is accurate
             sd = round(self.df['0'].std(ddof = 0), 2)
@@ -254,6 +273,11 @@ class RandomData():
             raise Exception("Dataframe error: no data columns")
         else:
             self.test = "one-sample t-test"   
+            
+            # set the null and write out the question
+            self.set_null_hypothesis()
+            self.generate_question()
+
             # calculate the standard error
             sem = round(math.sqrt(round((self.var[0]/self.n),2)),2)
             self.obt = round((self.means[0] - self.null) / sem, 2)
@@ -287,6 +311,11 @@ class RandomData():
             raise ValueError("Dataframe error: no data columns")
         else: 
             self.test = "independent-samples t-test"           
+                        
+            # set the null and write out the question
+            self.set_null_hypothesis()
+            self.generate_question()
+            
             # primary calculations
             pooled_var = round(((self.ss[0] + self.ss[1]) / ((self.n - 1) + (self.n - 1))), 2)
             sem = round(math.sqrt((round((pooled_var/self.n),2))+(round((pooled_var/self.n),2))),2)
@@ -327,6 +356,11 @@ class RandomData():
             raise ValueError("Dataframe error: no data columns")
         else:
             self.test = "dependent-samples t-test"     
+            
+            # set the null and write out the question
+            self.set_null_hypothesis()
+            self.generate_question()
+
             # primary calculations
             # need to gather the difference scores
             self.df['D'] = self.df['1'] - self.df['0']
@@ -360,7 +394,7 @@ class RandomData():
             variance = round(ss / (n - 1), 2)
             display(Markdown("$ s^2 = \\frac{{SS_D}}{{n}}$")) 
             display(Markdown(f"$ s^2 = \\frac{{{ss}}}{{{n}}}$"))   
-            display(Markdown(f"$ s^2 = \\frac{{{round(ss/n, 2)}}} $"))
+            display(Markdown(f"$ s^2 = \\frac{{{round(ss/n, 2)}}}$"))
             display(Markdown(f"$ s^2 = {{{variance}}}$"))  
 
             # Calculate the estimated standard error
