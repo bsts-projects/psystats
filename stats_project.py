@@ -17,6 +17,9 @@ class RandomData():
         self.alpha = self.set_alpha()
         self.tails = self.set_tails()
         self.null = self.set_null_hypothesis()
+        self.obt = float
+        self.crit_values = {}; dict
+        self.significance = bool
         if distribution == "normal":
             self.distribution = distribution 
         else:
@@ -64,6 +67,67 @@ class RandomData():
             q_test = f""
         else:
             return ValueError("test-type specification error in question geneneration")
+        
+
+    def final_decision(self):
+        if self.tails == 2:
+            if self.obt > self.crit_values["positive"] or self.obt < self.crit_values["negative"]:
+                self.significance = True
+            else:
+                self.significance = False
+        elif self.tails == 1:
+            if self.crit_values["direction"] == "increase" and self.obt > self.crit_values["positive"]:
+                self.significance = True
+            elif self.crit_values["direction"] == "decrease" and self.obt < self.crit_values["negative"]:
+                self.significance = True
+            else:
+                self.significance = False
+        else:
+            return ValueError("error in tails specification for final decision")
+        
+        return self.significance 
+    
+
+    def write_result(self):
+        # TODO add more elaborate functionality for the results
+        if self.test in ["independent-samples t-test", "one-sample t-test", "dependent-samples t-test"]:
+            # print the critical value for the test
+            if self.tails == 2:
+                display(Markdown(f"$t_{{crit}} = \\pm{{{self.crit_values["positive"]}}}, \\alpha_{{two-tailed}} = {{{self.alpha}}}, df = {{{self.crit_values["degf"]}}}$"))
+            elif self.tails == 1 and self.crit_values["direction"] == "increase":
+                display(Markdown(f"$t_{{crit}} = +{{{self.crit_values["positive"]}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}, df = {{{self.crit_values["degf"]}}}$"))
+            elif self.tails == 1 and self.crit_values["direction"] == "decrease":
+                display(Markdown(f"$t_{{crit}} = {{{self.crit_values["negative"]}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}, df = {{{self.crit_values["degf"]}}}$"))
+            else:
+                return ValueError("tails error in writing results")
+            # determine significance
+            if self.significance:
+                print(f"reject the null hypothesis, results are significant, t({self.crit_values["degf"]}) = {self.obt}, p < {self.alpha}")
+            elif not self.significance:
+                print(f"fail to reject the null hypothesis, results not significant, t({self.crit_values["degf"]}) = {self.obt}, p > {self.alpha}")
+            else:
+                return ValueError("significance boolean error in writing results")
+        elif self.test == "z":
+            # print the critical value of t
+            if self.tails == 2:
+                display(Markdown(f"$z_{{crit}} = \\pm{{{self.crit_values["positive"]}}}, \\alpha_{{two-tailed}} = {{{self.alpha}}}$"))
+            elif self.tails == 1 and self.crit_values["direction"] == "increase":
+                display(Markdown(f"$z_{{crit}} = +{{{self.crit_values["positive"]}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}$"))
+            elif self.tails == 1 and self.crit_values["direction"] == "decrease":
+                display(Markdown(f"$z_{{crit}} = {{{self.crit_values["negative"]}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}$"))
+            else:
+                return ValueError("tails error in writing results")
+            # determine significance
+            if self.significance:
+                print(f"reject the null hypothesis, results are significant, z = {self.obt}, p < {self.alpha}")
+            elif not self.significance:
+                print(f"fail to reject the null hypothesis, results not significant, z = {self.obt}, p > {self.alpha}")
+            else:
+                return ValueError("significance boolean error in writing results")
+        else:
+            return ValueError("test specificaion error when writing results")
+        
+        
 
 
     def set_null_hypothesis(self):
@@ -108,7 +172,7 @@ class RandomData():
         return stdevs
 
 
-    def critical_t(self):
+    def critical_value(self):
         # calculate the degrees of freedom based on the type of test used
         if self.test == "independent-samples t-test":
             degf = (self.n - 1) + (self.n - 1)
@@ -122,28 +186,29 @@ class RandomData():
             if self.test in ["independent-samples t-test", "one-sample t-test", "dependent-samples t-test"]:
                 crit = round(stats.t.ppf(1 - self.alpha, degf), 2)
             elif self.test == "z":
-                crit = print(round(stats.norm.ppf(1 - self.alpha)), 2)
+                crit = round(stats.norm.ppf(1 - self.alpha), 2)
             else:
                 return ValueError("improper test specification - selecting crit values")
         elif self.tails == 2:
             if self.test in ["independent-samples t-test", "one-sample t-test", "dependent-samples t-test"]: 
                 crit = round(stats.t.ppf(1 - self.alpha/2, degf), 2)
             elif self.test == "z":
-                crit = print(round(stats.norm.ppf(1 - (self.alpha/2)), 2))
+                crit = round(stats.norm.ppf(1 - self.alpha/2), 2)
             else:
                 return ValueError("improper test specification - selecting crit values")
         else:
             return ValueError("self.tails must equal 1 or 2")
-        crit_values = {"positive": crit, "negative": -crit}
+        
+        self.crit_values = {"positive": crit, "negative": -crit, "degf": degf}
 
         # add a direction for one-tailed tests
         if self.tails == 1:  
             direction = random.choice(["increase", "decrease"])
-            crit_values["direction"] = direction
+            self.crit_values["direction"] = direction
         else:
             return ValueError("tails must be 1 for directional crit values")
         
-        return crit_values
+        return self.crit_values
 
 
     def z_test(self):
@@ -155,10 +220,10 @@ class RandomData():
             self.test = "z"
             # calculate the standard error
             # TODO double check the work here to make sure it is accurate
-            sd = self.df['0'].std(ddof = 0)
+            sd = round(self.df['0'].std(ddof = 0), 2)
             n = len(self.df['0'])
             sem = round(sd/(round(math.sqrt(n),2)),2)
-            z_obt = round((self.means[0] - self.null) / sem, 2)
+            self.obt = round((self.means[0] - self.null) / sem, 2)
 
             # TODO add a way to determine environment so output can display in terminal or notebook
             # print calculations for the standard error
@@ -173,9 +238,13 @@ class RandomData():
             display(Markdown(f"$z_{{obt}} = {{\\frac{{M - \\mu}}{{\\sigma_M}}}}$"))
             display(Markdown(f"$z_{{obt}} = \\frac{{{self.means[0]} - {self.null}}}{{{sem}}}$"))
             display(Markdown(f"$z_{{obt}} = \\frac{{{self.means[0] - self.null}}}{{{sem}}}$"))
-            display(Markdown(f"$z_{{obt}} = {{{z_obt}}}$"))
+            display(Markdown(f"$z_{{obt}} = {{{self.obt}}}$"))
 
-            return z_obt  
+            self.critical_value()
+            self.significance = self.final_decision()
+            self.write_result()
+
+            # return self.obt - not returning b/c it was printing out the value of self.obt.  need to figure out why but commenting out fixed it
 
 
     def one_sample_t_test(self):
@@ -187,7 +256,7 @@ class RandomData():
             self.test = "one-sample t-test"   
             # calculate the standard error
             sem = round(math.sqrt(round((self.var[0]/self.n),2)),2)
-            t_obt = round((self.means[0] - self.null) / sem, 2)
+            self.obt = round((self.means[0] - self.null) / sem, 2)
 
             # print the caluclations for the standard error
             # TODO add a way to determine environment so output can display in terminal or notebook
@@ -202,9 +271,13 @@ class RandomData():
             display(Markdown(f"$t_{{obt}} = {{\\frac{{M - \\mu}}{{s_M}}}}$"))
             display(Markdown(f"$t_{{obt}} = \\frac{{{self.means[0]} - {self.null}}}{{{sem}}}$"))
             display(Markdown(f"$t_{{obt}} = \\frac{{{self.means[0] - self.null}}}{{{sem}}}$"))
-            display(Markdown(f"$t_{{obt}} = {{{t_obt}}}$"))
+            display(Markdown(f"$t_{{obt}} = {{{self.obt}}}$"))
 
-            return t_obt         
+            self.critical_value()
+            self.significance = self.final_decision()
+            self.write_result()
+
+            # return self.obt - not returning b/c it was printing out the value of self.obt.  need to figure out why but commenting out fixed it        
 
 
     def independent_samples_t_test(self):
@@ -217,11 +290,11 @@ class RandomData():
             # primary calculations
             pooled_var = round(((self.ss[0] + self.ss[1]) / ((self.n - 1) + (self.n - 1))), 2)
             sem = round(math.sqrt((round((pooled_var/self.n),2))+(round((pooled_var/self.n),2))),2)
-            t_obt = round(((self.means[0] - self.means[1]) - self.null) / sem, 2)
+            self.obt = round(((self.means[0] - self.means[1]) - self.null) / sem, 2)
 
             # TODO adapt to display in the terminal or a notebook
             # display the caluclations for the pooled variance
-            print("calculatig the pooled variance...")
+            print("calculating the pooled variance...")
             display(Markdown("$s_p^2 = {{\\frac{{SS_1 + SS_2}}{{df_1 + df_2}}}}$"))
             display(Markdown(f"$s_p^2 = {{\\frac{{{self.ss[0]} + {self.ss[1]}}}{{{self.n - 1} + {self.n - 1}}}}}$"))
             display(Markdown(f"$s_p^2 = \\frac{{{round(self.ss[0] + self.ss[1],2)}}}{{{(self.n - 1) + (self.n - 1)}}}$"))
@@ -238,9 +311,13 @@ class RandomData():
             display(Markdown(f"$t_{{obt}} = {{\\frac{{(M_1 - M_2) - (\\mu_1 - \\mu_2)}}{{s_{{(M_1 - M_2)}}}}}}$"))
             display(Markdown(f"$t_{{obt}} = \\frac{{({self.means[0]} - {self.means[1]}) - {{{self.null}}}}}{{{sem}}}$")) 
             display(Markdown(f"$t_{{obt}} = \\frac{{{round(self.means[0] - self.means[1] - self.null, 2)}}}{{{sem}}}$"))
-            display(Markdown(f"$t_{{obt}} = {{{t_obt}}}$"))
+            display(Markdown(f"$t_{{obt}} = {{{self.obt}}}$"))
 
-            return t_obt
+            self.critical_value()
+            self.significance = self.final_decision()
+            self.write_result()
+
+            # return self.obt - not returning b/c it was printing out the value of self.obt.  need to figure out why but commenting out fixed it
         
 
     def dependent_samples_t_test(self):
@@ -295,11 +372,15 @@ class RandomData():
             display(Markdown(f"$ s_{{M_D}} = {{{sem}}}$"))
 
             # caclulate the t-statistic
-            t_obt = round((mean_d - self.null) / sem, 2)
+            self.obt = round((mean_d - self.null) / sem, 2)
             display(Markdown("calculating $t_{{obt}}$..."))
             display(Markdown("$t_{{obt}} = {{\\frac{{M_D - \\mu_D}}{{s_{M_D}}}}}$"))
             display(Markdown(f"$t_{{obt}} = \\frac{{{mean_d} - {self.null}}}{{{sem}}}$"))
             display(Markdown(f"$t_{{obt}} = \\frac{{{mean_d - self.null}}}{{{sem}}}$"))
-            display(Markdown(f"$t_{{obt}} = {{{t_obt}}}$"))
+            display(Markdown(f"$t_{{obt}} = {{{self.obt}}}$"))
 
-            return t_obt
+            self.critical_value()
+            self.significance = self.final_decision()
+            self.write_result()
+
+            # return self.obt - not returning b/c it was printing out the value of self.obt.  need to figure out why but commenting out fixed it
