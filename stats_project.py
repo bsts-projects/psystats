@@ -18,6 +18,7 @@ class RandomData():
         self.tails = self.set_tails()
         self.null = int
         self.obt = float
+        self.effect_size = float
         self.crit_values = {}; dict
         self.significance = bool
         if distribution == "normal":
@@ -71,7 +72,7 @@ class RandomData():
             display(Markdown(f"Given the following between-subjects data, does $Group_0$ significantly differ from $Group_1$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
             display(Markdown(f"$M_0 = {{{self.means[0]}}}, M_1 = {{{self.means[1]}}}$"))
             display(Markdown(f"$SS_0 = {{{self.ss[0]}}}, SS_1 = {{{self.ss[1]}}}$"))
-            display(Markdown(f"$ n_0 = {{{len(self.df['0'])}}}, n_1 = {{{len(self.df["1"])}}}$"))
+            display(Markdown(f"$ n_0 = {{{len(self.df['0'])}}}, n_1 = {{{len(self.df['1'])}}}$"))
         elif self.test == "dependent-samples t-test":
             display(Markdown(f"Given the following within-subjects data, does $M_0$ significantly differ from $M_1$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
             display(Markdown(f"$M_0 = {{{self.means[0]}}}, M_1 = {{{self.means[1]}}}$"))
@@ -106,35 +107,35 @@ class RandomData():
         if self.test in ["independent-samples t-test", "one-sample t-test", "dependent-samples t-test"]:
             # print the critical value for the test
             if self.tails == 2:
-                display(Markdown(f"$t_{{crit}} = \\pm{{{self.crit_values["positive"]}}}, \\alpha_{{two-tailed}} = {{{self.alpha}}}, df = {{{self.crit_values["degf"]}}}$"))
+                display(Markdown(f"$t_{{crit}} = \\pm{{{self.crit_values['positive']}}}, \\alpha_{{two-tailed}} = {{{self.alpha}}}, df = {{{self.crit_values['degf']}}}$"))
             elif self.tails == 1 and self.crit_values["direction"] == "increase":
-                display(Markdown(f"$t_{{crit}} = +{{{self.crit_values["positive"]}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}, df = {{{self.crit_values["degf"]}}}$"))
+                display(Markdown(f"$t_{{crit}} = +{{{self.crit_values['positive']}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}, df = {{{self.crit_values['degf']}}}$"))
             elif self.tails == 1 and self.crit_values["direction"] == "decrease":
-                display(Markdown(f"$t_{{crit}} = {{{self.crit_values["negative"]}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}, df = {{{self.crit_values["degf"]}}}$"))
+                display(Markdown(f"$t_{{crit}} = {{{self.crit_values['negative']}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}, df = {{{self.crit_values['degf']}}}$"))
             else:
                 return ValueError("tails error in writing results")
             # determine significance
             if self.significance:
-                print(f"reject the null hypothesis, results are significant, t({self.crit_values["degf"]}) = {self.obt}, p < {self.alpha}")
+                print(f"reject the null hypothesis, results are significant, t({self.crit_values['degf']}) = {self.obt}, p < {self.alpha}")
             elif not self.significance:
-                print(f"fail to reject the null hypothesis, results not significant, t({self.crit_values["degf"]}) = {self.obt}, p > {self.alpha}")
+                print(f"fail to reject the null hypothesis, results not significant, t({self.crit_values['degf']}) = {self.obt}, p > {self.alpha}")
             else:
                 return ValueError("significance boolean error in writing results")
         elif self.test == "z":
             # print the critical value of t
             if self.tails == 2:
-                display(Markdown(f"$z_{{crit}} = \\pm{{{self.crit_values["positive"]}}}, \\alpha_{{two-tailed}} = {{{self.alpha}}}$"))
+                display(Markdown(f"$z_{{crit}} = \\pm{{{self.crit_values['positive']}}}, \\alpha_{{two-tailed}} = {{{self.alpha}}}$"))
             elif self.tails == 1 and self.crit_values["direction"] == "increase":
-                display(Markdown(f"$z_{{crit}} = +{{{self.crit_values["positive"]}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}$"))
+                display(Markdown(f"$z_{{crit}} = +{{{self.crit_values['positive']}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}$"))
             elif self.tails == 1 and self.crit_values["direction"] == "decrease":
-                display(Markdown(f"$z_{{crit}} = {{{self.crit_values["negative"]}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}$"))
+                display(Markdown(f"$z_{{crit}} = {{{self.crit_values['negative']}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}$"))
             else:
                 return ValueError("tails error in writing results")
             # determine significance
             if self.significance:
-                print(f"reject the null hypothesis, results are significant, z = {self.obt}, p < {self.alpha}")
+                print(f"reject the null hypothesis, results are significant, z = {self.obt}, p < {self.alpha}, d = {self.effect_size}")
             elif not self.significance:
-                print(f"fail to reject the null hypothesis, results not significant, z = {self.obt}, p > {self.alpha}")
+                print(f"fail to reject the null hypothesis, results not significant, z = {self.obt}, p > {self.alpha}, d = {self.effect_size}")
             else:
                 return ValueError("significance boolean error in writing results")
         else:
@@ -150,7 +151,6 @@ class RandomData():
             multiplier = random.uniform(-3, 3)
             self.null = round(mean * multiplier)
         else:
-            print("else triggered")
             self.null = 0
         return self.null
 
@@ -243,6 +243,7 @@ class RandomData():
             n = len(self.df['0'])
             sem = round(sd/(round(math.sqrt(n),2)),2)
             self.obt = round((self.means[0] - self.null) / sem, 2)
+            self.effect_size = round((self.means[0] - self.null) / sd, 2)
 
             # TODO add a way to determine environment so output can display in terminal or notebook
             # print calculations for the standard error
@@ -258,6 +259,14 @@ class RandomData():
             display(Markdown(f"$z_{{obt}} = \\frac{{{self.means[0]} - {self.null}}}{{{sem}}}$"))
             display(Markdown(f"$z_{{obt}} = \\frac{{{self.means[0] - self.null}}}{{{sem}}}$"))
             display(Markdown(f"$z_{{obt}} = {{{self.obt}}}$"))
+            print() # blank space
+            # print calculations for cohen's d
+            display(Markdown("calculating Cohen's d..."))
+            display(Markdown("Cohen's d = $\\frac{{M - \\mu}}{{\\sigma}}$"))
+            display(Markdown(f"Cohen's d = $\\frac{{{self.means[0]} - {self.null}}}{{{sd}}}$"))
+            display(Markdown(f"Cohen's d = $\\frac{{{self.means[0] - self.null}}}{{{sd}}}$"))
+            display(Markdown(f"Cohen's d = ${{{self.effect_size}}}$"))
+            print() # blank space
 
             self.critical_value()
             self.significance = self.final_decision()
@@ -281,6 +290,7 @@ class RandomData():
             # calculate the standard error
             sem = round(math.sqrt(round((self.var[0]/self.n),2)),2)
             self.obt = round((self.means[0] - self.null) / sem, 2)
+            self.effect_size = round((self.means[0] - self.null) / self.std[0], 2)
 
             # print the caluclations for the standard error
             # TODO add a way to determine environment so output can display in terminal or notebook
@@ -296,6 +306,14 @@ class RandomData():
             display(Markdown(f"$t_{{obt}} = \\frac{{{self.means[0]} - {self.null}}}{{{sem}}}$"))
             display(Markdown(f"$t_{{obt}} = \\frac{{{self.means[0] - self.null}}}{{{sem}}}$"))
             display(Markdown(f"$t_{{obt}} = {{{self.obt}}}$"))
+            print() # blank space
+            # print calculations for cohen's d
+            display(Markdown("calculating Cohen's d..."))
+            display(Markdown("Cohen's d = $\\frac{{M - \\mu}}{{s}}$"))
+            display(Markdown(f"Cohen's d = $\\frac{{{self.means[0]} - {self.null}}}{{{self.std[0]}}}$"))
+            display(Markdown(f"Cohen's d = $\\frac{{{self.means[0] - self.null}}}{{{self.std[0]}}}$"))
+            display(Markdown(f"Cohen's d = ${{{self.effect_size}}}$"))
+            print() # blank space
 
             self.critical_value()
             self.significance = self.final_decision()
@@ -320,6 +338,7 @@ class RandomData():
             pooled_var = round(((self.ss[0] + self.ss[1]) / ((self.n - 1) + (self.n - 1))), 2)
             sem = round(math.sqrt((round((pooled_var/self.n),2))+(round((pooled_var/self.n),2))),2)
             self.obt = round(((self.means[0] - self.means[1]) - self.null) / sem, 2)
+            self.effect_size = round(((self.means[0] - self.means[1])) / round(math.sqrt(pooled_var),2), 2)
 
             # TODO adapt to display in the terminal or a notebook
             # display the caluclations for the pooled variance
@@ -341,6 +360,14 @@ class RandomData():
             display(Markdown(f"$t_{{obt}} = \\frac{{({self.means[0]} - {self.means[1]}) - {{{self.null}}}}}{{{sem}}}$")) 
             display(Markdown(f"$t_{{obt}} = \\frac{{{round(self.means[0] - self.means[1] - self.null, 2)}}}{{{sem}}}$"))
             display(Markdown(f"$t_{{obt}} = {{{self.obt}}}$"))
+            print() # blank space
+            # print calculations for cohen's d
+            display(Markdown("calculating Cohen's d..."))
+            display(Markdown("Cohen's d = $\\frac{{M)0 - M_1}}{{\\sqrt{{{s_p^2}}}}}$"))
+            display(Markdown(f"Cohen's d = $\\frac{{({self.means[0]} - {self.means[1]})}}{{{{{{\\sqrt{{{pooled_var}}}}}}}}}$"))
+            display(Markdown(f"Cohen's d = $\\frac{{({self.means[0] - self.means[1]})}}{{{round(math.sqrt(pooled_var),2)}}}$"))
+            display(Markdown(f"Cohen's d = ${{{self.effect_size}}}$"))
+            print() # blank space
 
             self.critical_value()
             self.significance = self.final_decision()
@@ -368,7 +395,7 @@ class RandomData():
             # print the dataframe with the difference scores
             display(Markdown("Calculating the difference scores $D = X_1 - X_0$"))
             print(self.df.to_string(index = False))
-            
+            print() # blank space
             # Calculate the Mean of the Difference Scores
             sum_d = self.df['D'].sum()
             n = len(self.df['D'])
@@ -377,7 +404,7 @@ class RandomData():
             display(Markdown("$M_D = \\frac{{\\Sigma D}}{{n}}$"))
             display(Markdown(f"$M_D = \\frac{{{sum_d}}}{{{n}}}$"))
             display(Markdown(f"$M_D = {{{mean_d}}}$"))
-
+            print() # blank space
             # calculate the SS for the difference scores
             self.df['D^2'] = self.df['D'].apply(lambda x: x ** 2)
             sum_sqared_scores = self.df['D^2'].sum()
@@ -389,14 +416,14 @@ class RandomData():
             display(Markdown(f"$ SS_D = {{{sum_sqared_scores}}} - \\frac{{{sum_d ** 2}}}{{{n}}}$"))
             display(Markdown(f"$ SS_D = {{{sum_sqared_scores}}} - {{{round((sum_d ** 2)/n, 2)}}}$"))
             display(Markdown(f"$ SS_D = {{{ss}}}$"))
-
+            print() # blank space
             # calculate the variance    
             variance = round(ss / (n - 1), 2)
             display(Markdown("$ s^2 = \\frac{{SS_D}}{{n}}$")) 
             display(Markdown(f"$ s^2 = \\frac{{{ss}}}{{{n}}}$"))   
             display(Markdown(f"$ s^2 = \\frac{{{round(ss/n, 2)}}}$"))
             display(Markdown(f"$ s^2 = {{{variance}}}$"))  
-
+            print() # blank space
             # Calculate the estimated standard error
             sem = round(math.sqrt(variance/n), 2)
             display(Markdown("Calculating the estimated standard error..."))
@@ -404,7 +431,7 @@ class RandomData():
             display(Markdown(f"$ s_{{M_D}} = \\sqrt{{\\frac{{{variance}}}{{{n}}}}}$"))
             display(Markdown(f"$ s_{{M_D}} = \\sqrt{{{round(variance/n, 2)}}}$"))
             display(Markdown(f"$ s_{{M_D}} = {{{sem}}}$"))
-
+            print() # blank space
             # caclulate the t-statistic
             self.obt = round((mean_d - self.null) / sem, 2)
             display(Markdown("calculating $t_{{obt}}$..."))
@@ -412,6 +439,15 @@ class RandomData():
             display(Markdown(f"$t_{{obt}} = \\frac{{{mean_d} - {self.null}}}{{{sem}}}$"))
             display(Markdown(f"$t_{{obt}} = \\frac{{{mean_d - self.null}}}{{{sem}}}$"))
             display(Markdown(f"$t_{{obt}} = {{{self.obt}}}$"))
+            print() # blank space
+            # print calculations for cohen's d
+            self.effect_size = self.obt = round(mean_d / round(math.sqrt(variance),2), 2)
+            display(Markdown("calculating Cohen's d..."))
+            display(Markdown("Cohen's d = $\\frac{{M_D}}{{\\sqrt{{s^2}}}}$"))
+            display(Markdown(f"Cohen's d = $\\frac{{{mean_d}}}{{{{{{\\sqrt{{{variance}}}}}}}}}$"))
+            display(Markdown(f"Cohen's d = $\\frac{{{mean_d}}}{{{round(math.sqrt(variance),2)}}}$"))
+            display(Markdown(f"Cohen's d = ${{{self.effect_size}}}$"))
+            print() # blank space
 
             self.critical_value()
             self.significance = self.final_decision()
