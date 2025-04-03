@@ -419,9 +419,9 @@ class RandomData():
             print() # blank space
             # calculate the variance    
             variance = round(ss / (n - 1), 2)
-            display(Markdown("$ s^2 = \\frac{{SS_D}}{{n}}$")) 
-            display(Markdown(f"$ s^2 = \\frac{{{ss}}}{{{n}}}$"))   
-            display(Markdown(f"$ s^2 = \\frac{{{round(ss/n, 2)}}}$"))
+            display(Markdown("$ s^2 = \\frac{{SS_D}}{{df}}$")) 
+            display(Markdown(f"$ s^2 = \\frac{{{ss}}}{{{n - 1}}}$"))   
+            display(Markdown(f"$ s^2 = \\frac{{{round(ss/(n - 1), 2)}}}$"))
             display(Markdown(f"$ s^2 = {{{variance}}}$"))  
             print() # blank space
             # Calculate the estimated standard error
