@@ -58,28 +58,40 @@ class RandomData():
 
     def generate_question(self):
         # determine the test type
+        if self.tails == 2:
+            text = "significantly different from"
+        elif self.tails == 1:
+            if self.crit_values["direction"] == "increase" :
+                text = "significantly greater than"
+            elif self.crit_values["direction"] == "decrease":
+                text = "significantly less than"
+            else:
+                return ValueError("direction error for generating question")
+        else:
+            return ValueError("tails error for question generation")    
+        
         if self.test == "z":
-            display(Markdown(f"Given the following data, does $Group_0$ significantly differ from ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
+            display(Markdown(f"Given the following data, is the mean of $Group_0$ {text} ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
             display(Markdown(f"$M_0 = {{{self.means[0]}}}$"))
             display(Markdown(f"$ {{\\sigma_0}} = {{{round(self.df['0'].std(ddof = 0), 2)}}}$"))
             display(Markdown(f"$ n = {{{len(self.df['0'])}}}$"))
         elif self.test == "one-sample t-test":
-            display(Markdown(f"Given the following data, does $Group_0$ significantly differ from ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
+            display(Markdown(f"Given the following data, is the mean of $Group_0$ {text} ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
             display(Markdown(f"$M_0 = {{{self.means[0]}}}$"))
             display(Markdown(f"$s^2 = {{{self.var[0]}}}$"))
             display(Markdown(f"$ n = {{{len(self.df['0'])}}}$"))
         elif self.test == "independent-samples t-test":
-            display(Markdown(f"Given the following between-subjects data, does $Group_0$ significantly differ from $Group_1$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
+            display(Markdown(f"Given the following between-subjects data, is the mean of $Group_0$ {text} the mean of $Group_1$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
             display(Markdown(f"$M_0 = {{{self.means[0]}}}, M_1 = {{{self.means[1]}}}$"))
             display(Markdown(f"$SS_0 = {{{self.ss[0]}}}, SS_1 = {{{self.ss[1]}}}$"))
             display(Markdown(f"$ n_0 = {{{len(self.df['0'])}}}, n_1 = {{{len(self.df['1'])}}}$"))
         elif self.test == "dependent-samples t-test":
-            display(Markdown(f"Given the following within-subjects data, does $M_0$ significantly differ from $M_1$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
+            display(Markdown(f"Given the following within-subjects data, is $M_D$ {text} ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
             display(Markdown(f"$M_0 = {{{self.means[0]}}}, M_1 = {{{self.means[1]}}}$"))
             display(Markdown(f"$ n = {{{len(self.df['0'])}}}$"))
         else:
             return ValueError("test-type specification error in question geneneration")
-        
+       
         print(self.df)
         
 
@@ -116,9 +128,9 @@ class RandomData():
                 return ValueError("tails error in writing results")
             # determine significance
             if self.significance:
-                print(f"reject the null hypothesis, results are significant, t({self.crit_values['degf']}) = {self.obt}, p < {self.alpha}")
+                print(f"reject the null hypothesis, results are significant, t({self.crit_values['degf']}) = {self.obt}, p < {self.alpha}, d = {self.effect_size}")
             elif not self.significance:
-                print(f"fail to reject the null hypothesis, results not significant, t({self.crit_values['degf']}) = {self.obt}, p > {self.alpha}")
+                print(f"fail to reject the null hypothesis, results not significant, t({self.crit_values['degf']}) = {self.obt}, p > {self.alpha}, d = {self.effect_size}")
             else:
                 return ValueError("significance boolean error in writing results")
         elif self.test == "z":
@@ -235,6 +247,7 @@ class RandomData():
 
             # set the null and write out the question
             self.set_null_hypothesis()
+            self.critical_value()
             self.generate_question()
 
             # calculate the standard error
@@ -268,7 +281,6 @@ class RandomData():
             display(Markdown(f"Cohen's d = ${{{self.effect_size}}}$"))
             print() # blank space
 
-            self.critical_value()
             self.significance = self.final_decision()
             self.write_result()
 
@@ -285,6 +297,7 @@ class RandomData():
             
             # set the null and write out the question
             self.set_null_hypothesis()
+            self.critical_value()
             self.generate_question()
 
             # calculate the standard error
@@ -315,7 +328,6 @@ class RandomData():
             display(Markdown(f"Cohen's d = ${{{self.effect_size}}}$"))
             print() # blank space
 
-            self.critical_value()
             self.significance = self.final_decision()
             self.write_result()
 
@@ -332,6 +344,7 @@ class RandomData():
                         
             # set the null and write out the question
             self.set_null_hypothesis()
+            self.critical_value()
             self.generate_question()
             
             # primary calculations
@@ -369,7 +382,6 @@ class RandomData():
             display(Markdown(f"Cohen's d = ${{{self.effect_size}}}$"))
             print() # blank space
 
-            self.critical_value()
             self.significance = self.final_decision()
             self.write_result()
 
@@ -386,6 +398,7 @@ class RandomData():
             
             # set the null and write out the question
             self.set_null_hypothesis()
+            self.critical_value()
             self.generate_question()
 
             # primary calculations
@@ -449,7 +462,6 @@ class RandomData():
             display(Markdown(f"Cohen's d = ${{{self.effect_size}}}$"))
             print() # blank space
 
-            self.critical_value()
             self.significance = self.final_decision()
             self.write_result()
 
