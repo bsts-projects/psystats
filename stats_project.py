@@ -11,11 +11,14 @@ class RandomData():
         self.df = self.generate_data()
         self.ss = self.sum_of_squares()
         self.means = self.group_means()
+        self.sums = self.col_sums()
+        self.g = self.anova_g()
+        self.sum_squared_scores = self.grand_sum_squared_scores()
         self.var = self.variance()
         self.std = self.stdev()
         self.test = "" # value is set when a stats function is called
         self.alpha = self.set_alpha()
-        self.tails = self.set_tails()
+        self.tails = int
         self.null = int
         self.obt = float
         self.effect_size = float
@@ -29,17 +32,15 @@ class RandomData():
 
 
     def set_alpha(self):
-        self.alpha = random.choice([0.05, 0.01, 0.001])
+        self.alpha = random.choice([0.05, 0.01])
         return self.alpha
         
     
-    def set_tails(self):
-        self.tails = random.choice([1, 2])
-        return self.tails
-            
-
     def generate_data(self):
         self.df = pd.DataFrame()
+        # list of letters for group labels
+        letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
         # create data for each group and add it to the dataframe
         for group in range(self.groups):
             mean = random.randint(10, 100)
@@ -52,12 +53,13 @@ class RandomData():
             sample = np.round(samples).astype(int)
 
             # convert to a dataframe to display the data
-            self.df[f'{group}'] = sample
+            self.df[f'{letters[group]}'] = sample
         return self.df
     
 
     def generate_question(self):
         # determine the test type
+
         if self.tails == 2:
             text = "significantly different from"
         elif self.tails == 1:
@@ -69,32 +71,38 @@ class RandomData():
                 return ValueError("direction error for generating question")
         else:
             return ValueError("tails error for question generation")    
+
+        print(self.df)
         
         if self.test == "z":
-            display(Markdown(f"Given the following data, is the mean of $Group_0$ {text} ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
-            display(Markdown(f"$M_0 = {{{self.means[0]}}}$"))
-            display(Markdown(f"$ {{\\sigma_0}} = {{{round(self.df['0'].std(ddof = 0), 2)}}}$"))
-            display(Markdown(f"$ n = {{{len(self.df['0'])}}}$"))
+            display(Markdown(f"Given the following data, is the mean of $Group_A$ {text} ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
+            display(Markdown(f"$M_A = {{{self.means[0]}}}$"))
+            display(Markdown(f"$ {{\\sigma_A}} = {{{round(self.df['A'].std(ddof = 0), 2)}}}$"))
+            display(Markdown(f"$ n = {{{len(self.df['A'])}}}$"))
         elif self.test == "one-sample t-test":
-            display(Markdown(f"Given the following data, is the mean of $Group_0$ {text} ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
-            display(Markdown(f"$M_0 = {{{self.means[0]}}}$"))
+            display(Markdown(f"Given the following data, is the mean of $Group_A$ {text} ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
+            display(Markdown(f"$M_A = {{{self.means[0]}}}$"))
             display(Markdown(f"$s^2 = {{{self.var[0]}}}$"))
-            display(Markdown(f"$ n = {{{len(self.df['0'])}}}$"))
+            display(Markdown(f"$ n = {{{len(self.df['A'])}}}$"))
         elif self.test == "independent-samples t-test":
-            display(Markdown(f"Given the following between-subjects data, is the mean of $Group_0$ {text} the mean of $Group_1$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
-            display(Markdown(f"$M_0 = {{{self.means[0]}}}, M_1 = {{{self.means[1]}}}$"))
-            display(Markdown(f"$SS_0 = {{{self.ss[0]}}}, SS_1 = {{{self.ss[1]}}}$"))
-            display(Markdown(f"$ n_0 = {{{len(self.df['0'])}}}, n_1 = {{{len(self.df['1'])}}}$"))
+            display(Markdown(f"Given the following between-subjects data, is the mean of $Group_A$ {text} the mean of $Group_B$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
+            display(Markdown(f"$M_A = {{{self.means[0]}}}, M_B = {{{self.means[1]}}}$"))
+            display(Markdown(f"$SS_A = {{{self.ss[0]}}}, SS_B = {{{self.ss[1]}}}$"))
+            display(Markdown(f"$ n_A = {{{len(self.df['A'])}}}, n_B = {{{len(self.df['B'])}}}$"))
         elif self.test == "dependent-samples t-test":
             display(Markdown(f"Given the following within-subjects data, is $M_D$ {text} ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
-            display(Markdown(f"$M_0 = {{{self.means[0]}}}, M_1 = {{{self.means[1]}}}$"))
-            display(Markdown(f"$ n = {{{len(self.df['0'])}}}$"))
+            display(Markdown(f"$M_A = {{{self.means[0]}}}, M_B = {{{self.means[1]}}}$"))
+            display(Markdown(f"$ n = {{{len(self.df['A'])}}}$"))
+        elif self.test == "one-way ANOVA":
+            display(Markdown(f"Given the following between-subjects data, use a one-way ANOVA with $\\alpha = {{{self.alpha}}}$"))
+            display(Markdown(f"$G = {{{self.g}}}, \\Sigma X^2 = {{{self.sum_squared_scores}}}, k = {{{self.groups}}}, N = {{{self.groups * self.n}}}$"))
+            letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            for group in range(self.groups):
+                display(Markdown(f"$T_{{{letters[group]}}} = {{{self.sums[group]}}}, SS_{{{letters[group]}}} = {{{self.ss[group]}}}$"))   
         else:
             return ValueError("test-type specification error in question geneneration")
        
-        print(self.df)
         
-
     def final_decision(self):
         if self.tails == 2:
             if self.obt > self.crit_values["positive"] or self.obt < self.crit_values["negative"]:
@@ -150,12 +158,17 @@ class RandomData():
                 print(f"fail to reject the null hypothesis, results not significant, z = {self.obt}, p > {self.alpha}, d = {self.effect_size}")
             else:
                 return ValueError("significance boolean error in writing results")
+        elif self.test in ["one-way ANOVA"]:
+            display(Markdown(f"$F_{{crit}} = {{{self.crit_values['positive']}}}, \\alpha = {{{self.alpha}}}$"))
+            if self.significance:
+                display(Markdown(f"reject the null hypothesis, results are significant, $ F({{{self.crit_values['degf_b']}}}, {{{self.crit_values['degf_w']}}}), p < {{{self.alpha}}}, \\eta^2 = {{{self.effect_size}}}$"))
+            elif not self.significance:
+                display(Markdown(f"fail to reject the null hypothesis, results not significant, $ F({{{self.crit_values['degf_b']}}}, {{{self.crit_values['degf_w']}}}), p > {{{self.alpha}}}, \\eta^2 = {{{self.effect_size}}}$"))
+
         else:
             return ValueError("test specificaion error when writing results")
         
         
-
-
     def set_null_hypothesis(self):
         # for one sample tests, sets a null hypothess between -3 to + 3 x the mean
         if  self.test in ["one-sample t-test", "z"]:
@@ -196,44 +209,79 @@ class RandomData():
         for column in self.df:
             stdevs.append(round(self.df[column].std(ddof = 1), 2))
         return stdevs
+    
 
+    def col_sums(self):
+        sums = []
+        for column in self.df:
+            sums.append(self.df[column].sum())
+        return sums
+
+
+    def anova_g(self):
+        g = 0
+        for column in self.df:
+            g += self.df[column].sum()
+        return g
+    
+
+    def grand_sum_squared_scores(self): # for anova
+        sum_squared_scores = 0
+        for column in self.df: 
+            score = (self.df[column].apply(lambda x: x ** 2)).sum()  
+            sum_squared_scores += score
+        return sum_squared_scores
+    
 
     def critical_value(self):
         # calculate the degrees of freedom based on the type of test used
         if self.test == "independent-samples t-test":
             degf = (self.n - 1) + (self.n - 1)
-        elif self.test == "one-sample t-test" or "dependent-samples t-test":
+            self.tails = random.choice([1, 2])
+            if self.tails == 1:
+                crit = round(stats.t.ppf(1 - self.alpha, degf), 2)
+            elif self.tails == 2:
+                crit = round(stats.t.ppf(1 - self.alpha/2, degf), 2)
+            self.crit_values = {"positive": crit, "negative": -crit, "degf": degf}
+
+        elif self.test == "one-sample t-test" or self.test == "dependent-samples t-test":
             degf = self.n - 1
+            self.tails = random.choice([1, 2])
+            if self.tails == 1:
+                crit = round(stats.t.ppf(1 - self.alpha, degf), 2)
+            elif self.tails == 2:
+                crit = round(stats.t.ppf(1 - self.alpha/2, degf), 2)
+            self.crit_values = {"positive": crit, "negative": -crit, "degf": degf}
+
+        # TODO manually specify crit values for z scores.  or figure out why the math is incorrect
+        elif self.test == "z":
+            self.tails = random.choice([1, 2])
+            if self.tails == 1:
+                crit = round(stats.norm.ppf(1 - self.alpha), 2)
+            elif self.tails == 2:
+                crit = round(stats.norm.ppf(1 - self.alpha/2), 2)
+            self.crit_values = {"positive": crit, "negative": -crit}
+        
+        elif self.test == "one-way ANOVA":
+            degf_w = (self.n * self.groups) - self.groups
+            degf_b = self.groups - 1
+            self.tails = 1
+            crit = round(stats.f.ppf(q = (1 - self.alpha), dfn = degf_b, dfd = degf_w), 2)
+            self.crit_values = {"positive": crit, "degf_w": degf_w, "degf_b": degf_b}
+            
+        
         else:
             raise ValueError("incorrect test specification - degrees of freedom")
-        
-        # determine the critical values for the inferential test      
-        if self.tails == 1:
-            if self.test in ["independent-samples t-test", "one-sample t-test", "dependent-samples t-test"]:
-                crit = round(stats.t.ppf(1 - self.alpha, degf), 2)
-            elif self.test == "z":
-                crit = round(stats.norm.ppf(1 - self.alpha), 2)
-            else:
-                return ValueError("improper test specification - selecting crit values")
-        elif self.tails == 2:
-            if self.test in ["independent-samples t-test", "one-sample t-test", "dependent-samples t-test"]: 
-                crit = round(stats.t.ppf(1 - self.alpha/2, degf), 2)
-            elif self.test == "z":
-                crit = round(stats.norm.ppf(1 - self.alpha/2), 2)
-            else:
-                return ValueError("improper test specification - selecting crit values")
-        else:
-            return ValueError("self.tails must equal 1 or 2")
-        
-        self.crit_values = {"positive": crit, "negative": -crit, "degf": degf}
 
-        # add a direction for one-tailed tests
-        if self.tails == 1:  
-            direction = random.choice(["increase", "decrease"])
-            self.crit_values["direction"] = direction
+        # add a direction for one-tailed tests 
+        if self.test in ["one-way ANOVA"]:
+            self.crit_values["direction"] = "increase"
         else:
-            return ValueError("tails must be 1 for directional crit values")
-        
+            if self.tails == 1:  
+                direction = random.choice(["increase", "decrease"])
+                self.crit_values["direction"] = direction
+            else:
+                return ValueError("tails must be 1 for directional crit values")
         return self.crit_values
 
 
@@ -252,8 +300,8 @@ class RandomData():
 
             # calculate the standard error
             # TODO double check the work here to make sure it is accurate
-            sd = round(self.df['0'].std(ddof = 0), 2)
-            n = len(self.df['0'])
+            sd = round(self.df['A'].std(ddof = 0), 2)
+            n = len(self.df['A'])
             sem = round(sd/(round(math.sqrt(n),2)),2)
             self.obt = round((self.means[0] - self.null) / sem, 2)
             self.effect_size = round((self.means[0] - self.null) / sd, 2)
@@ -356,27 +404,27 @@ class RandomData():
             # TODO adapt to display in the terminal or a notebook
             # display the caluclations for the pooled variance
             print("calculating the pooled variance...")
-            display(Markdown("$s_p^2 = {{\\frac{{SS_1 + SS_2}}{{df_1 + df_2}}}}$"))
+            display(Markdown("$s_p^2 = {{\\frac{{SS_A + SS_B}}{{df_A + df_B}}}}$"))
             display(Markdown(f"$s_p^2 = {{\\frac{{{self.ss[0]} + {self.ss[1]}}}{{{self.n - 1} + {self.n - 1}}}}}$"))
             display(Markdown(f"$s_p^2 = \\frac{{{round(self.ss[0] + self.ss[1],2)}}}{{{(self.n - 1) + (self.n - 1)}}}$"))
             display(Markdown(f"$s_p^2 = {{{pooled_var}}}$"))
             # display the calculations for the estimated standard error
             print("calculating the estimated standard error of the difference between means...")
-            display(Markdown("$s_{{(M_1 - M_2)}} = \\sqrt{{\\frac{{s_p^2}}{{n_1}} + \\frac{{s_p^2}}{{n_1}}}}$"))
-            display(Markdown(f"$s_{{(M_1 - M_2)}} = \\sqrt{{\\frac{{{pooled_var}}}{{{self.n}}} + \\frac{{{pooled_var}}}{{{self.n}}}}}$"))
-            display(Markdown(f"$s_{{(M_1 - M_2)}} = \\sqrt{{{round(pooled_var/self.n, 2)} + {round(pooled_var/self.n, 2)}}}$"))
-            display(Markdown(f"$s_{{(M_1 - M_2)}} = \\sqrt{{{round(pooled_var/self.n, 2) + round(pooled_var/self.n, 2)}}}$"))
-            display(Markdown(f"$s_{{(M_1 - M_2)}} = {{{sem}}}$"))
+            display(Markdown("$s_{{(M_A - M_B)}} = \\sqrt{{\\frac{{s_p^2}}{{n_1}} + \\frac{{s_p^2}}{{n_1}}}}$"))
+            display(Markdown(f"$s_{{(M_A - M_B)}} = \\sqrt{{\\frac{{{pooled_var}}}{{{self.n}}} + \\frac{{{pooled_var}}}{{{self.n}}}}}$"))
+            display(Markdown(f"$s_{{(M_A - M_B)}} = \\sqrt{{{round(pooled_var/self.n, 2)} + {round(pooled_var/self.n, 2)}}}$"))
+            display(Markdown(f"$s_{{(M_A - M_B)}} = \\sqrt{{{round(pooled_var/self.n, 2) + round(pooled_var/self.n, 2)}}}$"))
+            display(Markdown(f"$s_{{(M_A - M_B)}} = {{{sem}}}$"))
             # display the caluclations for t_obt
             display(Markdown("calculating $t_{{obt}}$..."))
-            display(Markdown(f"$t_{{obt}} = {{\\frac{{(M_1 - M_2) - (\\mu_1 - \\mu_2)}}{{s_{{(M_1 - M_2)}}}}}}$"))
+            display(Markdown(f"$t_{{obt}} = {{\\frac{{(M_A - M_B) - (\\mu_A - \\mu_B)}}{{s_{{(M_A - M_B)}}}}}}$"))
             display(Markdown(f"$t_{{obt}} = \\frac{{({self.means[0]} - {self.means[1]}) - {{{self.null}}}}}{{{sem}}}$")) 
             display(Markdown(f"$t_{{obt}} = \\frac{{{round(self.means[0] - self.means[1] - self.null, 2)}}}{{{sem}}}$"))
             display(Markdown(f"$t_{{obt}} = {{{self.obt}}}$"))
             print() # blank space
             # print calculations for cohen's d
             display(Markdown("calculating Cohen's d..."))
-            display(Markdown("Cohen's d = $\\frac{{M)0 - M_1}}{{\\sqrt{{{s_p^2}}}}}$"))
+            display(Markdown("Cohen's d = $\\frac{{M_A - M_B}}{{\\sqrt{{{s_p^2}}}}}$"))
             display(Markdown(f"Cohen's d = $\\frac{{({self.means[0]} - {self.means[1]})}}{{{{{{\\sqrt{{{pooled_var}}}}}}}}}$"))
             display(Markdown(f"Cohen's d = $\\frac{{({self.means[0] - self.means[1]})}}{{{round(math.sqrt(pooled_var),2)}}}$"))
             display(Markdown(f"Cohen's d = ${{{self.effect_size}}}$"))
@@ -403,10 +451,10 @@ class RandomData():
 
             # primary calculations
             # need to gather the difference scores
-            self.df['D'] = self.df['1'] - self.df['0']
+            self.df['D'] = self.df['B'] - self.df['A']
             
             # print the dataframe with the difference scores
-            display(Markdown("Calculating the difference scores $D = X_1 - X_0$"))
+            display(Markdown("Calculating the difference scores $D = X_B - X_A$"))
             print(self.df.to_string(index = False))
             print() # blank space
             # Calculate the Mean of the Difference Scores
@@ -454,7 +502,7 @@ class RandomData():
             display(Markdown(f"$t_{{obt}} = {{{self.obt}}}$"))
             print() # blank space
             # print calculations for cohen's d
-            self.effect_size = self.obt = round(mean_d / round(math.sqrt(variance),2), 2)
+            self.effect_size = round(mean_d / round(math.sqrt(variance),2), 2)
             display(Markdown("calculating Cohen's d..."))
             display(Markdown("Cohen's d = $\\frac{{M_D}}{{\\sqrt{{s^2}}}}$"))
             display(Markdown(f"Cohen's d = $\\frac{{{mean_d}}}{{{{{{\\sqrt{{{variance}}}}}}}}}$"))
@@ -466,3 +514,112 @@ class RandomData():
             self.write_result()
 
             # return self.obt - not returning b/c it was printing out the value of self.obt.  need to figure out why but commenting out fixed it
+
+
+    def one_way_anova(self):
+        if len(self.df.columns) == 1:
+            raise ValueError("Data does not contain at least two samples")
+        elif len(self.df.columns) == 0:
+            raise ValueError("Dataframe error: no data columns")
+        else:
+            self.test = "one-way ANOVA"     
+
+            # set the null and write out the question
+            self.set_null_hypothesis()
+            self.critical_value()
+            self.generate_question()
+
+            # Primary Calculations
+            big_n = self.groups * self.n
+            
+            # degrees of freedom
+            df_total = big_n - 1
+            df_between = self.groups - 1
+            df_within = big_n - self.groups
+
+            print() # blank space
+            print("calculating the degrees of freedom...")
+    
+            display(Markdown(f"$df_{{total}} = N - 1$"))
+            display(Markdown(f"$df_{{total}} = {{{big_n}}} - 1$"))
+            display(Markdown(f"$df_{{total}} = {{{df_total}}}$"))
+            print() # blank space
+
+            display(Markdown(f"$df_{{between}} = k - 1 $"))
+            display(Markdown(f"$df_{{between}} = {{{self.groups}}} - 1 $"))
+            display(Markdown(f"$df_{{between}} = {{{df_between}}}$"))
+            print() # blank space
+
+            display(Markdown(f"$df_{{within}} = N - K $"))
+            display(Markdown(f"$df_{{within}} = {{{big_n}}} - {{{self.groups}}} $"))
+            display(Markdown(f"$df_{{within}} = {{{df_within}}}$"))
+            print() # blank space
+
+            # sum of squares
+            ss_total = self.sum_squared_scores - round(((self.g**2)/big_n), 2)
+            ss_within = 0
+            for group in range(self.groups):
+                ss_within += self.ss[group]
+            ss_between = ss_total - ss_within
+
+            print("calulating the sum of squares...")
+            display(Markdown(f"$ SS_{{total}} = \\Sigma X^2 - \\frac{{G^2}}{{N}} $"))
+            display(Markdown(f"$ SS_{{total}} = {{{self.sum_squared_scores}}} - \\frac{{{self.g}^2}}{{{big_n}}} $"))
+            display(Markdown(f"$ SS_{{total}} = {{{self.sum_squared_scores}}} - \\frac{{{self.g**2}}}{{{big_n}}} $"))
+            display(Markdown(f"$ SS_{{total}} = {{{self.sum_squared_scores}}} - {{{round(((self.g**2)/big_n), 2)}}} $"))
+            display(Markdown(f"$ SS_{{total}} = {{{round(ss_total, 2)}}} $"))
+            print() # blank space
+
+            display(Markdown(f"$ SS_{{within}} = \\Sigma SS_{{inside\\_each\\_condition}} $"))
+            values = ""
+            for group in range(self.groups):
+                if group == 0:
+                    values += f"{self.ss[group]}"
+                else:
+                    values += f" + {self.ss[group]}"
+            display(Markdown(f"$ SS_{{within}} = {{{values}}}$"))
+            display(Markdown(f"$ SS_{{within}} = {{{round(ss_within, 2)}}}$"))
+            print() # blank space
+
+            display(Markdown(f"$ SS_{{between}} = SS_{{total}} - SS_{{within}} $"))
+            display(Markdown(f"$ SS_{{between}} = {{{round(ss_total, 2)}}} - {{{round(ss_within, 2)}}} $"))
+            display(Markdown(f"$ SS_{{between}} = {{{round(ss_between, 2)}}} $"))
+            print() # blank space
+
+            display(Markdown("note: the other way to calculate $SS_{{betwen}}$ is:"))
+            display(Markdown("$ SS_{{between}} = \\Sigma{{\\frac{{T^2}}{{n}}}} - \\frac{{G^2}}{{N}} $"))
+            print() # blank space
+
+            # mean squares
+            ms_between = round(round(ss_between, 2)/df_between, 2)
+            ms_within = round(round(ss_within, 2)/df_within, 2)
+
+            print("calculating the mean squares...")
+            display(Markdown(f"$ MS_{{between}} = \\frac{{SS_{{between}}}}{{df_{{between}}}} $"))
+            display(Markdown(f"$ MS_{{between}} = \\frac{{{round(ss_between, 2)}}}{{{df_between}}} $"))
+            display(Markdown(f"$ MS_{{between}} = {{{round(ms_between, 2)}}} $"))
+            print() # blank space
+
+            display(Markdown(f"$ MS_{{within}} = \\frac{{SS_{{within}}}}{{df_{{within}}}} $"))
+            display(Markdown(f"$ MS_{{within}} = \\frac{{{round(ss_within, 2)}}}{{{df_within}}} $"))
+            display(Markdown(f"$ MS_{{within}} = {{{round(ms_within, 2)}}} $"))
+            print() # blank space
+
+            # F obtained
+            self.obt = round(ms_between/ms_within, 2)
+
+            print("calculating the f ratio...")
+            display(Markdown(f"$ F_{{obt}} = \\frac{{MS_{{between}}}}{{MS_{{within}}}} $"))
+            display(Markdown(f"$ F_{{obt}} = {{{round(self.obt, 2)}}} $"))
+            print() # blank space
+
+            # effect size
+            self.effect_size = round(round(ss_between, 2)/round(ss_total, 2), 2)
+            print("calculating eta squared...")
+            display(Markdown(f"$ \\eta^2 = \\frac{{SS{{between}}}}{{SS_{{total}}}} $"))
+            display(Markdown(f"$ \\eta^2 = \\frac{{{round(ss_between, 2)}}}{{{round(ss_total, 2)}}} $"))
+            display(Markdown(f"$ \\eta^2 = {{{round(self.effect_size, 2)}}} $"))
+            print() # blank space
+
+            self.significance = self.final_decision()
+            self.write_result()
