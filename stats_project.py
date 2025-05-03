@@ -610,6 +610,7 @@ class RandomData():
 
             print("calculating the f ratio...")
             display(Markdown(f"$ F_{{obt}} = \\frac{{MS_{{between}}}}{{MS_{{within}}}} $"))
+            display(Markdown(f"$ F_{{obt}} = \\frac{{{round(ms_between,2)}}}{{{round(ms_within,2)}}} $"))
             display(Markdown(f"$ F_{{obt}} = {{{round(self.obt, 2)}}} $"))
             print() # blank space
 
@@ -623,3 +624,6 @@ class RandomData():
 
             self.significance = self.final_decision()
             self.write_result()
+            print() # blank space
+
+            # Tukeys HSD
