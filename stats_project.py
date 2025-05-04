@@ -730,7 +730,7 @@ class RandomData():
                 
                 print("calculating partial eta squared...")
                 display(Markdown(f"$ \\eta_p^2 = \\frac{{SS{{between}}}}{{SS_{{total}} - SS_{{subjects}}}} $"))
-                display(Markdown(f"$ \\eta_p^2 = \\frac{{{round(ss_between, 2)}}}{{{round(ss_total, 2)}}} - {{{round(ss_subjects, 2)}}} $"))
+                display(Markdown(f"$ \\eta_p^2 = \\frac{{{round(ss_between, 2)}}}{{{{{round(ss_total, 2)}}} - {{{round(ss_subjects, 2)}}}}} $"))
                 display(Markdown(f"$ \\eta_p^2 = \\frac{{{round(ss_between, 2)}}}{{{round(ss_total, 2) - round(ss_subjects, 2)}}} $"))
                 display(Markdown(f"$ \\eta_p^2 = {{{round(self.effect_size, 2)}}} $"))
                 print() # blank space
