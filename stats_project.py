@@ -99,6 +99,12 @@ class RandomData():
             letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
             for group in range(self.groups):
                 display(Markdown(f"$T_{{{letters[group]}}} = {{{self.sums[group]}}}, SS_{{{letters[group]}}} = {{{self.ss[group]}}}$"))   
+        elif self.test == "repeated-measures ANOVA":
+            display(Markdown(f"Given the following within-subjects data, use a repeated-measures ANOVA with $\\alpha = {{{self.alpha}}}$"))
+            display(Markdown(f"$G = {{{self.g}}}, \\Sigma X^2 = {{{self.sum_squared_scores}}}, k = {{{self.groups}}}, N = {{{self.groups * self.n}}}$"))
+            letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            for group in range(self.groups):
+                display(Markdown(f"$T_{{{letters[group]}}} = {{{self.sums[group]}}}, SS_{{{letters[group]}}} = {{{self.ss[group]}}}$"))  
         else:
             return ValueError("test-type specification error in question geneneration")
        
@@ -158,12 +164,12 @@ class RandomData():
                 print(f"fail to reject the null hypothesis, results not significant, z = {self.obt}, p > {self.alpha}, d = {self.effect_size}")
             else:
                 return ValueError("significance boolean error in writing results")
-        elif self.test in ["one-way ANOVA"]:
+        elif self.test in ["one-way ANOVA", "repeated-measures ANOVA"]:
             display(Markdown(f"$F_{{crit}} = {{{self.crit_values['positive']}}}, \\alpha = {{{self.alpha}}}$"))
             if self.significance:
-                display(Markdown(f"reject the null hypothesis, results are significant, $ F({{{self.crit_values['degf_b']}}}, {{{self.crit_values['degf_w']}}}), p < {{{self.alpha}}}, \\eta^2 = {{{self.effect_size}}}$"))
+                display(Markdown(f"reject the null hypothesis, results are significant, $ F({{{self.crit_values['degf_n']}}}, {{{self.crit_values['degf_d']}}}) = {{{self.obt}}}, p < {{{self.alpha}}}, \\eta^2 = {{{self.effect_size}}}$"))
             elif not self.significance:
-                display(Markdown(f"fail to reject the null hypothesis, results not significant, $ F({{{self.crit_values['degf_b']}}}, {{{self.crit_values['degf_w']}}}), p > {{{self.alpha}}}, \\eta^2 = {{{self.effect_size}}}$"))
+                display(Markdown(f"fail to reject the null hypothesis, results not significant, $ F({{{self.crit_values['degf_n']}}}, {{{self.crit_values['degf_d']}}}) = {{{self.obt}}}, p > {{{self.alpha}}}, \\eta^2 = {{{self.effect_size}}}$"))
 
         else:
             return ValueError("test specificaion error when writing results")
@@ -267,14 +273,21 @@ class RandomData():
             degf_b = self.groups - 1
             self.tails = 1
             crit = round(stats.f.ppf(q = (1 - self.alpha), dfn = degf_b, dfd = degf_w), 2)
-            self.crit_values = {"positive": crit, "degf_w": degf_w, "degf_b": degf_b}
+            self.crit_values = {"positive": crit, "degf_d": degf_w, "degf_n": degf_b}
             
-        
+        elif self.test == "repeated-measures ANOVA":
+            degf_e = ((self.n * self.groups) - self.groups) - (self.n - 1)
+            degf_b = self.groups - 1
+            self.tails = 1
+            crit = round(stats.f.ppf(q = (1 - self.alpha), dfn = degf_b, dfd = degf_e), 2)
+            self.crit_values = {"positive": crit, "degf_d": degf_e, "degf_n": degf_b}
+
+
         else:
             raise ValueError("incorrect test specification - degrees of freedom")
 
         # add a direction for one-tailed tests 
-        if self.test in ["one-way ANOVA"]:
+        if self.test in ["one-way ANOVA", "repeated-measures ANOVA"]:
             self.crit_values["direction"] = "increase"
         else:
             if self.tails == 1:  
@@ -516,13 +529,18 @@ class RandomData():
             # return self.obt - not returning b/c it was printing out the value of self.obt.  need to figure out why but commenting out fixed it
 
 
-    def one_way_anova(self):
+    def anova(self, test: str):
         if len(self.df.columns) == 1:
             raise ValueError("Data does not contain at least two samples")
         elif len(self.df.columns) == 0:
             raise ValueError("Dataframe error: no data columns")
         else:
-            self.test = "one-way ANOVA"     
+            if test == "one-way":
+                self.test = "one-way ANOVA"     
+            elif test == "repeated-measures":
+                self.test = "repeated-measures ANOVA"
+            else:
+                raise ValueError("test must be set to: 'one-way', 'repeated-measures'")
 
             # set the null and write out the question
             self.set_null_hypothesis()
@@ -538,6 +556,9 @@ class RandomData():
             df_within = big_n - self.groups
 
             print() # blank space
+            if test == "repeated-measures":
+                print("Stage 1 Calculations:")
+
             print("calculating the degrees of freedom...")
     
             display(Markdown(f"$df_{{total}} = N - 1$"))
@@ -590,9 +611,71 @@ class RandomData():
             display(Markdown("$ SS_{{between}} = \\Sigma{{\\frac{{T^2}}{{n}}}} - \\frac{{G^2}}{{N}} $"))
             print() # blank space
 
+            if self.test == "repeated-measures ANOVA":
+                # degrees of freedom
+                df_subjects = self.n - 1
+                df_error = df_within - df_subjects
+                
+                print("Stage 2 Calculations:")
+                print("partitioning the degrees of freedom...")
+
+                display(Markdown(f"$df_{{subjects}} = n - 1 $"))
+                display(Markdown(f"$df_{{subjects}} = {{{self.n}}} - 1 $"))
+                display(Markdown(f"$df_{{subjects}} = {{{df_subjects}}}$"))
+                print() # blank space
+
+                display(Markdown(f"$df_{{error}} = df_{{within}} - df_{{subjects}} $"))
+                display(Markdown(f"$df_{{error}} = {{{df_within}}} - {{{df_subjects}}} $"))
+                display(Markdown(f"$df_{{error}} = {{{df_error}}} $"))
+                print() # blank space
+
+                # sum of squares
+                print("partitioning the sum of squares...")
+                
+                self.df["P"] = self.df.sum(axis = 1)
+                print(self.df)
+                print() # blank space
+
+                p_sums = [] # holder for the P sums for displaying below
+                p_squared = [] # holds the squared partipant sums (P^2)
+                quotients = [] # holds the value of each (P^2)/k
+                sum_quotients = 0 # holds the sum of (P^2)/k
+                for p in self.df["P"]:
+                    p_sums.append(p)
+                    p_squared.append(p ** 2)
+                    quotients.append(round((p **2 / self.groups), 2))
+                    sum_quotients += round((p **2 / self.groups), 2)
+
+                ss_subjects = round(sum_quotients, 2) - round(((self.g**2)/big_n), 2)
+                ss_error = ss_within - ss_subjects
+
+                display(Markdown(f"$SS_{{subjects}} = \\Sigma{{\\frac{{P^2}}{{k}}}} - \\frac{{G^2}}{{N}} $"))
+                temp_text = ""
+                for p in p_sums:
+                    temp_text += f" + \\frac{{{p}^2}}{{{self.groups}}}"
+                display(Markdown(f"$SS_{{subjects}} = {{{temp_text[3:]}}} - \\frac{{{self.g}^2}}{{{big_n}}}$"))
+                temp_text = ""
+                for p in p_squared:
+                    temp_text += f" + \\frac{{{p}}}{{{self.groups}}}"
+                display(Markdown(f"$SS_{{subjects}} = {{{temp_text[3:]}}} - \\frac{{{self.g**2}}}{{{big_n}}}$"))
+                temp_text = ""
+                for p in quotients:
+                    temp_text += f" + {{{p}}}"
+                display(Markdown(f"$SS_{{subjects}} = {{{temp_text[3:]}}} - {{{round(((self.g**2)/big_n), 2)}}}$"))
+                display(Markdown(f"$SS_{{subjects}} = {{{round(sum_quotients,2)}}} - {{{round(((self.g**2)/big_n), 2)}}}$")) 
+                display(Markdown(f"$SS_{{subjects}} = {{{round(ss_subjects,2)}}}$"))     
+                print() # blank space
+
+                display(Markdown(f"$SS_{{error}} = SS_{{within}} - SS_{{subjects}} $"))
+                display(Markdown(f"$SS_{{error}} = {{{round(ss_within,2)}}} - {{{round(ss_subjects,2)}}}$"))
+                display(Markdown(f"$SS_{{error}} = {{{round(ss_error,2)}}}$"))
+                print() # blank space
+
+
             # mean squares
             ms_between = round(round(ss_between, 2)/df_between, 2)
             ms_within = round(round(ss_within, 2)/df_within, 2)
+            
 
             print("calculating the mean squares...")
             display(Markdown(f"$ MS_{{between}} = \\frac{{SS_{{between}}}}{{df_{{between}}}} $"))
@@ -600,30 +683,61 @@ class RandomData():
             display(Markdown(f"$ MS_{{between}} = {{{round(ms_between, 2)}}} $"))
             print() # blank space
 
-            display(Markdown(f"$ MS_{{within}} = \\frac{{SS_{{within}}}}{{df_{{within}}}} $"))
-            display(Markdown(f"$ MS_{{within}} = \\frac{{{round(ss_within, 2)}}}{{{df_within}}} $"))
-            display(Markdown(f"$ MS_{{within}} = {{{round(ms_within, 2)}}} $"))
-            print() # blank space
+            if self.test == "one-way ANOVA":
+                display(Markdown(f"$ MS_{{within}} = \\frac{{SS_{{within}}}}{{df_{{within}}}} $"))
+                display(Markdown(f"$ MS_{{within}} = \\frac{{{round(ss_within, 2)}}}{{{df_within}}} $"))
+                display(Markdown(f"$ MS_{{within}} = {{{round(ms_within, 2)}}} $"))
+                print() # blank space
+                
+                # F value
+                self.obt = round(ms_between/ms_within, 2)
 
-            # F obtained
-            self.obt = round(ms_between/ms_within, 2)
+                print("calculating the f ratio...")
+                display(Markdown(f"$ F_{{obt}} = \\frac{{MS_{{between}}}}{{MS_{{within}}}} $"))
+                display(Markdown(f"$ F_{{obt}} = \\frac{{{round(ms_between,2)}}}{{{round(ms_within,2)}}} $"))
+                display(Markdown(f"$ F_{{obt}} = {{{round(self.obt, 2)}}} $"))
+                print() # blank space
 
-            print("calculating the f ratio...")
-            display(Markdown(f"$ F_{{obt}} = \\frac{{MS_{{between}}}}{{MS_{{within}}}} $"))
-            display(Markdown(f"$ F_{{obt}} = \\frac{{{round(ms_between,2)}}}{{{round(ms_within,2)}}} $"))
-            display(Markdown(f"$ F_{{obt}} = {{{round(self.obt, 2)}}} $"))
-            print() # blank space
+                # effect size
+                self.effect_size = round(round(ss_between, 2)/round(ss_total, 2), 2)
+                
+                print("calculating eta squared...")
+                display(Markdown(f"$ \\eta^2 = \\frac{{SS{{between}}}}{{SS_{{total}}}} $"))
+                display(Markdown(f"$ \\eta^2 = \\frac{{{round(ss_between, 2)}}}{{{round(ss_total, 2)}}} $"))
+                display(Markdown(f"$ \\eta^2 = {{{round(self.effect_size, 2)}}} $"))
+                print() # blank space
 
-            # effect size
-            self.effect_size = round(round(ss_between, 2)/round(ss_total, 2), 2)
-            print("calculating eta squared...")
-            display(Markdown(f"$ \\eta^2 = \\frac{{SS{{between}}}}{{SS_{{total}}}} $"))
-            display(Markdown(f"$ \\eta^2 = \\frac{{{round(ss_between, 2)}}}{{{round(ss_total, 2)}}} $"))
-            display(Markdown(f"$ \\eta^2 = {{{round(self.effect_size, 2)}}} $"))
-            print() # blank space
+
+            elif test == "repeated-measures":
+                ms_error = round(round(ss_error,2)/df_error, 2)
+
+                display(Markdown(f"$ MS_{{error}} = \\frac{{SS_{{error}}}}{{df_{{error}}}} $"))
+                display(Markdown(f"$ MS_{{error}} = \\frac{{{round(ss_error, 2)}}}{{{df_error}}} $"))
+                display(Markdown(f"$ MS_{{error}} = {{{round(ms_error, 2)}}} $"))
+                print() # blank space
+
+                # F value
+                self.obt = round(ms_between/ms_error, 2)
+
+                print("calculating the f ratio...")
+                display(Markdown(f"$ F_{{obt}} = \\frac{{MS_{{between}}}}{{MS_{{error}}}} $"))
+                display(Markdown(f"$ F_{{obt}} = \\frac{{{round(ms_between,2)}}}{{{round(ms_error,2)}}} $"))
+                display(Markdown(f"$ F_{{obt}} = {{{round(self.obt, 2)}}} $"))
+                print() # blank space
+
+                # effect size
+                self.effect_size = round(round(ss_between, 2)/(round(ss_total, 2) - round(ss_subjects, 2)), 2)
+                
+                print("calculating partial eta squared...")
+                display(Markdown(f"$ \\eta_p^2 = \\frac{{SS{{between}}}}{{SS_{{total}} - SS_{{subjects}}}} $"))
+                display(Markdown(f"$ \\eta_p^2 = \\frac{{{round(ss_between, 2)}}}{{{round(ss_total, 2)}}} - {{{round(ss_subjects, 2)}}} $"))
+                display(Markdown(f"$ \\eta_p^2 = \\frac{{{round(ss_between, 2)}}}{{{round(ss_total, 2) - round(ss_subjects, 2)}}} $"))
+                display(Markdown(f"$ \\eta_p^2 = {{{round(self.effect_size, 2)}}} $"))
+                print() # blank space
+
+            else:
+                raise ValueError("test accepts: 'one-way', 'repeated-measures'")
 
             self.significance = self.final_decision()
             self.write_result()
             print() # blank space
-
-            # Tukeys HSD
