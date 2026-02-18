@@ -37,7 +37,7 @@ class RandomData():
         
     
     def generate_data(self):
-        self.df = pd.DataFrame()
+        df = pd.DataFrame()
         # list of letters for group labels
         letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
@@ -53,8 +53,8 @@ class RandomData():
             sample = np.round(samples).astype(int)
 
             # convert to a dataframe to display the data
-            self.df[f'{letters[group]}'] = sample
-        return self.df
+            df[f'{letters[group]}'] = sample
+        return df
     
 
     def generate_question(self):
@@ -72,18 +72,24 @@ class RandomData():
         else:
             return ValueError("tails error for question generation")    
 
-        print(self.df)
+        #display(self.df.style.hide(axis="index"))
         
         if self.test == "z":
-            display(Markdown(f"Given the following data, is the mean of $Group_A$ {text} ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
+            display(Markdown(f"Given the following data, is the mean of $Group_A$ {text} ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$<br><br>"))
+            display(self.df.style.hide(axis="index"))
+            display(Markdown("<br><br>"))
             display(Markdown(f"$M_A = {{{self.means[0]}}}$"))
             display(Markdown(f"$ {{\\sigma_A}} = {{{round(self.df['A'].std(ddof = 0), 2)}}}$"))
             display(Markdown(f"$ n = {{{len(self.df['A'])}}}$"))
         elif self.test == "one-sample t-test":
-            display(Markdown(f"Given the following data, is the mean of $Group_A$ {text} ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
-            display(Markdown(f"$M_A = {{{self.means[0]}}}$"))
-            display(Markdown(f"$s^2 = {{{self.var[0]}}}$"))
-            display(Markdown(f"$ n = {{{len(self.df['A'])}}}$"))
+            display(Markdown(f"Given the following data, is the mean of $Group_A$ {text} ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$ <br><br>"))
+            #display(Markdown(self.df.to_markdown(index=False)))
+            display(self.df.style.hide(axis="index"))
+            display(Markdown(f"""<br><br>
+                                $M_A = {{{self.means[0]}}}$<br><br>
+                                $s^2 = {{{self.var[0]}}}$<br><br>
+                                $n = {{{len(self.df['A'])}}}$<br><br>
+                                """))
         elif self.test == "independent-samples t-test":
             display(Markdown(f"Given the following between-subjects data, is the mean of $Group_A$ {text} the mean of $Group_B$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
             display(Markdown(f"$M_A = {{{self.means[0]}}}, M_B = {{{self.means[1]}}}$"))
@@ -368,26 +374,23 @@ class RandomData():
 
             # print the caluclations for the standard error
             # TODO add a way to determine environment so output can display in terminal or notebook
-            print("calculating the standard error...")
-            display(Markdown("$s_M = \\sqrt{{\\frac{{s^2}}{{n}}}}$"))
-            display(Markdown(f"$s_M = \\sqrt{{\\frac{{{self.var[0]}}}{{{self.n}}}}}$"))
-            display(Markdown(f"$s_M = \\sqrt{{{round((self.var[0]/self.n),2)}}}$"))
-            display(Markdown(f"$s_M = {{{sem}}}$"))
-            print() # blank space
-            # print the caluclations for t_obt
-            display(Markdown("calculating $t_{{obt}}$..."))
-            display(Markdown(f"$t_{{obt}} = {{\\frac{{M - \\mu}}{{s_M}}}}$"))
-            display(Markdown(f"$t_{{obt}} = \\frac{{{self.means[0]} - {self.null}}}{{{sem}}}$"))
-            display(Markdown(f"$t_{{obt}} = \\frac{{{self.means[0] - self.null}}}{{{sem}}}$"))
-            display(Markdown(f"$t_{{obt}} = {{{self.obt}}}$"))
-            print() # blank space
-            # print calculations for cohen's d
-            display(Markdown("calculating Cohen's d..."))
-            display(Markdown("Cohen's d = $\\frac{{M - \\mu}}{{s}}$"))
-            display(Markdown(f"Cohen's d = $\\frac{{{self.means[0]} - {self.null}}}{{{self.std[0]}}}$"))
-            display(Markdown(f"Cohen's d = $\\frac{{{self.means[0] - self.null}}}{{{self.std[0]}}}$"))
-            display(Markdown(f"Cohen's d = ${{{self.effect_size}}}$"))
-            print() # blank space
+            display(Markdown(f"""calculating the standard error <br><br>
+                            $s_M = \\sqrt{{\\frac{{s^2}}{{n}}}}$ <br><br>
+                            $s_M = \\sqrt{{\\frac{{{self.var[0]}}}{{{self.n}}}}}$ <br><br>
+                            $s_M = \\sqrt{{{round((self.var[0]/self.n),2)}}}$ <br><br>
+                            $s_M = {{{sem}}}$ <br><br>
+                            calculating $t_{{obt}}$ <br><br>
+                            $t_{{obt}} = {{\\frac{{M - \\mu}}{{s_M}}}}$ <br><br>
+                            $t_{{obt}} = \\frac{{{self.means[0]} - {self.null}}}{{{sem}}}$ <br><br>
+                            $t_{{obt}} = \\frac{{{self.means[0] - self.null}}}{{{sem}}}$ <br><br>
+                            $t_{{obt}} = {{{self.obt}}}$ <br><br>
+                            calculating Cohen's d <br><br>
+                            Cohen's $d = \\frac{{M - \\mu}}{{s}}$ <br><br>
+                            Cohen's $d = \\frac{{{self.means[0]} - {self.null}}}{{{self.std[0]}}}$ <br><br>
+                            Cohen's $d = \\frac{{{self.means[0] - self.null}}}{{{self.std[0]}}}$ <br><br>
+                            Cohen's $d = {{{self.effect_size}}}$ <br><br>
+                            """))
+
 
             self.significance = self.final_decision()
             self.write_result()
