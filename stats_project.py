@@ -251,41 +251,47 @@ class RandomData():
             degf = (self.n - 1) + (self.n - 1)
             self.tails = random.choice([1, 2])
             if self.tails == 1:
-                crit = round(stats.t.ppf(1 - self.alpha, degf), 2)
+                crit = round(stats.t.ppf(1 - self.alpha, degf), 2) # type: ignore
             elif self.tails == 2:
-                crit = round(stats.t.ppf(1 - self.alpha/2, degf), 2)
+                crit = round(stats.t.ppf(1 - self.alpha/2, degf), 2) # type: ignore
+            else: 
+                return ValueError("crit not determined")
             self.crit_values = {"positive": crit, "negative": -crit, "degf": degf}
 
         elif self.test == "one-sample t-test" or self.test == "dependent-samples t-test":
             degf = self.n - 1
             self.tails = random.choice([1, 2])
             if self.tails == 1:
-                crit = round(stats.t.ppf(1 - self.alpha, degf), 2)
+                crit = round(stats.t.ppf(1 - self.alpha, degf), 2) # type: ignore
             elif self.tails == 2:
-                crit = round(stats.t.ppf(1 - self.alpha/2, degf), 2)
+                crit = round(stats.t.ppf(1 - self.alpha/2, degf), 2) # type: ignore
+            else: 
+                return ValueError("crit not determined")
             self.crit_values = {"positive": crit, "negative": -crit, "degf": degf}
 
         # TODO manually specify crit values for z scores.  or figure out why the math is incorrect
         elif self.test == "z":
             self.tails = random.choice([1, 2])
             if self.tails == 1:
-                crit = round(stats.norm.ppf(1 - self.alpha), 2)
+                crit = round(stats.norm.ppf(1 - self.alpha), 2) # type: ignore
             elif self.tails == 2:
-                crit = round(stats.norm.ppf(1 - self.alpha/2), 2)
+                crit = round(stats.norm.ppf(1 - self.alpha/2), 2) # type: ignore
+            else: 
+                return ValueError("crit not determined")
             self.crit_values = {"positive": crit, "negative": -crit}
         
         elif self.test == "one-way ANOVA":
             degf_w = (self.n * self.groups) - self.groups
             degf_b = self.groups - 1
             self.tails = 1
-            crit = round(stats.f.ppf(q = (1 - self.alpha), dfn = degf_b, dfd = degf_w), 2)
+            crit = round(stats.f.ppf(q = (1 - self.alpha), dfn = degf_b, dfd = degf_w), 2) # type: ignore
             self.crit_values = {"positive": crit, "degf_d": degf_w, "degf_n": degf_b}
             
         elif self.test == "repeated-measures ANOVA":
             degf_e = ((self.n * self.groups) - self.groups) - (self.n - 1)
             degf_b = self.groups - 1
             self.tails = 1
-            crit = round(stats.f.ppf(q = (1 - self.alpha), dfn = degf_b, dfd = degf_e), 2)
+            crit = round(stats.f.ppf(q = (1 - self.alpha), dfn = degf_b, dfd = degf_e), 2) # type: ignore
             self.crit_values = {"positive": crit, "degf_d": degf_e, "degf_n": degf_b}
 
 
@@ -712,10 +718,10 @@ class RandomData():
 
 
             elif test == "repeated-measures":
-                ms_error = round(round(ss_error,2)/df_error, 2)
+                ms_error = round(round(ss_error,2)/df_error, 2) # type: ignore
 
                 display(Markdown(f"$ MS_{{error}} = \\frac{{SS_{{error}}}}{{df_{{error}}}} $"))
-                display(Markdown(f"$ MS_{{error}} = \\frac{{{round(ss_error, 2)}}}{{{df_error}}} $"))
+                display(Markdown(f"$ MS_{{error}} = \\frac{{{round(ss_error, 2)}}}{{{df_error}}} $")) # type: ignore
                 display(Markdown(f"$ MS_{{error}} = {{{round(ms_error, 2)}}} $"))
                 print() # blank space
 
@@ -729,12 +735,12 @@ class RandomData():
                 print() # blank space
 
                 # effect size
-                self.effect_size = round(round(ss_between, 2)/(round(ss_total, 2) - round(ss_subjects, 2)), 2)
+                self.effect_size = round(round(ss_between, 2)/(round(ss_total, 2) - round(ss_subjects, 2)), 2) # type: ignore
                 
                 print("calculating partial eta squared...")
                 display(Markdown(f"$ \\eta_p^2 = \\frac{{SS{{between}}}}{{SS_{{total}} - SS_{{subjects}}}} $"))
-                display(Markdown(f"$ \\eta_p^2 = \\frac{{{round(ss_between, 2)}}}{{{{{round(ss_total, 2)}}} - {{{round(ss_subjects, 2)}}}}} $"))
-                display(Markdown(f"$ \\eta_p^2 = \\frac{{{round(ss_between, 2)}}}{{{round(ss_total, 2) - round(ss_subjects, 2)}}} $"))
+                display(Markdown(f"$ \\eta_p^2 = \\frac{{{round(ss_between, 2)}}}{{{{{round(ss_total, 2)}}} - {{{round(ss_subjects, 2)}}}}} $")) # type: ignore
+                display(Markdown(f"$ \\eta_p^2 = \\frac{{{round(ss_between, 2)}}}{{{round(ss_total, 2) - round(ss_subjects, 2)}}} $")) # type: ignore
                 display(Markdown(f"$ \\eta_p^2 = {{{round(self.effect_size, 2)}}} $"))
                 print() # blank space
 
