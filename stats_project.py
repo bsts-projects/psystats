@@ -346,7 +346,7 @@ class RandomData():
             # New output formatted for quarto render to html and screen reader
             display(Markdown(f"""Calculate the standard error <br>
                             $$\\sigma_M = \\frac{{\\sigma}}{{\\sqrt{{N}}}}$$ <br>
-                            $$\\sigma_M = \\frac{{{sd}}}{{\\sqrt{n}}}$$ <br>
+                            $$\\sigma_M = \\frac{{{sd}}}{{\\sqrt{{{n}}}}}$$ <br>
                             $$\\sigma_M = \\frac{{{sd}}}{{{round(math.sqrt(n),2)}}}$$ <br>
                             $$\\sigma_M = {{{sem}}}$$ <br><br>
                             Calculate $z_{{obt}}$ <br>
