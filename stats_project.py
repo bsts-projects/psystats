@@ -22,7 +22,7 @@ class RandomData():
         self.null = int
         self.obt = float
         self.effect_size = float
-        self.crit_values = {}; dict
+        self.crit_values = {} # dict (it was originally typed {}; dict but I have no idea why)
         self.significance = bool
         if distribution == "normal":
             self.distribution = distribution 
@@ -45,7 +45,7 @@ class RandomData():
         for group in range(self.groups):
             mean = random.randint(10, 100)
             sd = mean * random.uniform(0.05, 0.50)
-
+            self.pop_sd = round(sd, 2) # creating a variable to log the pop SD
             # generate the sample based on the above values
             samples = np.random.normal(mean, sd, self.n)
 
@@ -75,12 +75,13 @@ class RandomData():
         #display(self.df.style.hide(axis="index"))
         
         if self.test == "z":
-            display(Markdown(f"Given the following data, is the mean of $Group_A$ {text} ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$<br><br>"))
+            display(Markdown(f"Given the following data, is the mean of $Group_A$ {text} ${{{self.null}}}$?<br><br>Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$<br><br>"))
             display(self.df.style.hide(axis="index"))
-            display(Markdown("<br><br>"))
-            display(Markdown(f"$M_A = {{{self.means[0]}}}$"))
-            display(Markdown(f"$ {{\\sigma_A}} = {{{round(self.df['A'].std(ddof = 0), 2)}}}$"))
-            display(Markdown(f"$ n = {{{len(self.df['A'])}}}$"))
+            display(Markdown(f"""<br>The necessary summary statistics for these data<br>
+                            $$M_A = {{{self.means[0]}}}$$
+                            $${{\\sigma}} = {{{self.pop_sd}}}$$
+                            $$n = {{{len(self.df['A'])}}}$$<br><br>
+                            """)) #${{\\sigma_A}} = {{{round(self.df['A'].std(ddof = 0), 2)}}}$<br><br>
         elif self.test == "one-sample t-test":
             display(Markdown(f"Given the following data, is the mean of $Group_A$ {text} ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$ <br><br>"))
             #display(Markdown(self.df.to_markdown(index=False)))
@@ -139,35 +140,37 @@ class RandomData():
         if self.test in ["independent-samples t-test", "one-sample t-test", "dependent-samples t-test"]:
             # print the critical value for the test
             if self.tails == 2:
-                display(Markdown(f"$t_{{crit}} = \\pm{{{self.crit_values['positive']}}}, \\alpha_{{two-tailed}} = {{{self.alpha}}}, df = {{{self.crit_values['degf']}}}$"))
+                display(Markdown(f"$t_{{crit}} = \\pm{{{self.crit_values['positive']}}}, \\alpha_{{two-tailed}} = {{{self.alpha}}}, df = {{{self.crit_values['degf']}}}$<br><br>"))
             elif self.tails == 1 and self.crit_values["direction"] == "increase":
-                display(Markdown(f"$t_{{crit}} = +{{{self.crit_values['positive']}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}, df = {{{self.crit_values['degf']}}}$"))
+                display(Markdown(f"$t_{{crit}} = +{{{self.crit_values['positive']}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}, df = {{{self.crit_values['degf']}}}$<br><br>"))
             elif self.tails == 1 and self.crit_values["direction"] == "decrease":
-                display(Markdown(f"$t_{{crit}} = {{{self.crit_values['negative']}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}, df = {{{self.crit_values['degf']}}}$"))
+                display(Markdown(f"$t_{{crit}} = {{{self.crit_values['negative']}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}, df = {{{self.crit_values['degf']}}}$<br><br>"))
             else:
                 return ValueError("tails error in writing results")
             # determine significance
             if self.significance:
-                print(f"reject the null hypothesis, results are significant, t({self.crit_values['degf']}) = {self.obt}, p < {self.alpha}, d = {self.effect_size}")
+                print(f"reject the null hypothesis, results are significant, t({self.crit_values['degf']}) = {self.obt}, p < {self.alpha}, d = {self.effect_size}<br><br>")
             elif not self.significance:
-                print(f"fail to reject the null hypothesis, results not significant, t({self.crit_values['degf']}) = {self.obt}, p > {self.alpha}, d = {self.effect_size}")
+                print(f"fail to reject the null hypothesis, results not significant, t({self.crit_values['degf']}) = {self.obt}, p > {self.alpha}, d = {self.effect_size}<br><br>")
             else:
                 return ValueError("significance boolean error in writing results")
         elif self.test == "z":
             # print the critical value of t
+            display(Markdown("The decision criteria: <br><br>"))
             if self.tails == 2:
-                display(Markdown(f"$z_{{crit}} = \\pm{{{self.crit_values['positive']}}}, \\alpha_{{two-tailed}} = {{{self.alpha}}}$"))
+                display(Markdown(f"$z_{{crit}} = \\pm{{{self.crit_values['positive']}}}, \\alpha_{{two-tailed}} = {{{self.alpha}}}$<br><br>"))
             elif self.tails == 1 and self.crit_values["direction"] == "increase":
-                display(Markdown(f"$z_{{crit}} = +{{{self.crit_values['positive']}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}$"))
+                display(Markdown(f"$z_{{crit}} = +{{{self.crit_values['positive']}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}$<br><br>"))
             elif self.tails == 1 and self.crit_values["direction"] == "decrease":
-                display(Markdown(f"$z_{{crit}} = {{{self.crit_values['negative']}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}$"))
+                display(Markdown(f"$z_{{crit}} = {{{self.crit_values['negative']}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}$<br><br>"))
             else:
                 return ValueError("tails error in writing results")
             # determine significance
+            display(Markdown("The results: <br><br>"))
             if self.significance:
-                print(f"reject the null hypothesis, results are significant, z = {self.obt}, p < {self.alpha}, d = {self.effect_size}")
+                display(Markdown(f"reject the null hypothesis, results are significant, z = {self.obt}, p < {self.alpha}, d = {self.effect_size}<br><br>"))
             elif not self.significance:
-                print(f"fail to reject the null hypothesis, results not significant, z = {self.obt}, p > {self.alpha}, d = {self.effect_size}")
+                display(Markdown(f"fail to reject the null hypothesis, results not significant, z = {self.obt}, p > {self.alpha}, d = {self.effect_size}<br><br>"))
             else:
                 return ValueError("significance boolean error in writing results")
         elif self.test in ["one-way ANOVA", "repeated-measures ANOVA"]:
@@ -325,13 +328,33 @@ class RandomData():
 
             # calculate the standard error
             # TODO double check the work here to make sure it is accurate
-            sd = round(self.df['A'].std(ddof = 0), 2)
+            sd = self.pop_sd # round(self.df['A'].std(ddof = 0), 2)
             n = len(self.df['A'])
             sem = round(sd/(round(math.sqrt(n),2)),2)
             self.obt = round((self.means[0] - self.null) / sem, 2)
             self.effect_size = round((self.means[0] - self.null) / sd, 2)
 
             # TODO add a way to determine environment so output can display in terminal or notebook
+            # New output formatted for quarto render to html and screen reader
+            display(Markdown(f"""Calculate the standard error <br>
+                            $$\\sigma_M = \\frac{{\\sigma}}{{\\sqrt{{N}}}}$$ <br>
+                            $$\\sigma_M = \\frac{{{sd}}}{{\\sqrt{n}}}$$ <br>
+                            $$\\sigma_M = \\frac{{{sd}}}{{{round(math.sqrt(n),2)}}}$$ <br>
+                            $$\\sigma_M = {{{sem}}}$$ <br><br>
+                            Calculate $z_{{obt}}$ <br>
+                            $$z_{{obt}} = {{\\frac{{M - \\mu}}{{\\sigma_M}}}}$$ <br>
+                            $$z_{{obt}} = \\frac{{{self.means[0]} - {self.null}}}{{{sem}}}$$ <br>
+                            $$z_{{obt}} = \\frac{{{self.means[0] - self.null}}}{{{sem}}}$$ <br>
+                            $$z_{{obt}} = {{{self.obt}}}$$ <br><br>
+                            Calculate Cohen's d for effect size <br>
+                            $$d = \\frac{{M - \\mu}}{{\\sigma}}$$ <br>
+                            $$d = \\frac{{{self.means[0]} - {self.null}}}{{{sd}}}$$ <br>
+                            $$d = \\frac{{{self.means[0] - self.null}}}{{{sd}}}$$ <br>
+                            $$d = {{{self.effect_size}}}$$ <br><br>"""))
+            
+            
+            # old output version
+            '''
             # print calculations for the standard error
             display(Markdown("Calculating the standard error..."))
             display(Markdown(f"$\\sigma_M = \\frac{{\\sigma}}{{\\sqrt{{N}}}}$"))
@@ -339,6 +362,7 @@ class RandomData():
             display(Markdown(f"$\\sigma_M = \\frac{{{sd}}}{{{round(math.sqrt(n),2)}}}$"))
             display(Markdown(f"$\\sigma_M = {{{sem}}}$"))
             print() # blank space
+
             # print the caluclations for z_obt
             display(Markdown("calculating $z_{{obt}}$..."))
             display(Markdown(f"$z_{{obt}} = {{\\frac{{M - \\mu}}{{\\sigma_M}}}}$"))
@@ -353,6 +377,7 @@ class RandomData():
             display(Markdown(f"Cohen's d = $\\frac{{{self.means[0] - self.null}}}{{{sd}}}$"))
             display(Markdown(f"Cohen's d = ${{{self.effect_size}}}$"))
             print() # blank space
+            '''
 
             self.significance = self.final_decision()
             self.write_result()
@@ -396,7 +421,6 @@ class RandomData():
                             Cohen's $d = \\frac{{{self.means[0] - self.null}}}{{{self.std[0]}}}$ <br><br>
                             Cohen's $d = {{{self.effect_size}}}$ <br><br>
                             """))
-
 
             self.significance = self.final_decision()
             self.write_result()
