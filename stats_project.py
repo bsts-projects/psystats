@@ -43,10 +43,16 @@ class RandomData():
 
         # create data for each group and add it to the dataframe
         for group in range(self.groups):
-            mean = random.randint(10, 100)
-            sd = mean * random.uniform(0.05, 0.50)
-            self.pop_sd = round(sd, 2) # creating a variable to log the pop SD
+            mean = random.randint(10, 50)
+            sd = mean * random.uniform(0.10, 0.50)
+            self.pop_sd = round(sd) # creating a variable to log the pop SD
+            self.pop_mean = mean # variable to log the pop mean
             # generate the sample based on the above values
+
+            same_diff = random.randint(0,3)
+            if same_diff >= 1:
+                effect =  round(mean * random.uniform(0.10, 0.40))
+                mean +=  effect
             samples = np.random.normal(mean, sd, self.n)
 
             # round the data so it only includes whole numbers
@@ -75,7 +81,7 @@ class RandomData():
         #display(self.df.style.hide(axis="index"))
         
         if self.test == "z":
-            display(Markdown(f"Given the following data, is the mean of $Group_A$ {text} ${{{self.null}}}$?<br><br>Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$<br><br>"))
+            display(Markdown(f"Given the following data, is the mean of $Group_A$ {text} the population mean: $\\mu = {{{self.null}}}$?<br><br>Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$<br><br>"))
             display(self.df.style.hide(axis="index"))
             display(Markdown(f"""<br>The necessary summary statistics for these data<br>
                             $$M_A = {{{self.means[0]}}}$$
@@ -168,9 +174,9 @@ class RandomData():
             # determine significance
             display(Markdown("The results: <br><br>"))
             if self.significance:
-                display(Markdown(f"reject the null hypothesis, results are significant, z = {self.obt}, p < {self.alpha}, d = {self.effect_size}<br><br>"))
+                display(Markdown(f"reject the null hypothesis, results are significant, *z* = {self.obt}, *p* < {self.alpha}, *d* = {self.effect_size}<br><br>"))
             elif not self.significance:
-                display(Markdown(f"fail to reject the null hypothesis, results not significant, z = {self.obt}, p > {self.alpha}, d = {self.effect_size}<br><br>"))
+                display(Markdown(f"fail to reject the null hypothesis, results not significant, *z* = {self.obt}, *p* > {self.alpha}, *d* = {self.effect_size}<br><br>"))
             else:
                 return ValueError("significance boolean error in writing results")
         elif self.test in ["one-way ANOVA", "repeated-measures ANOVA"]:
@@ -185,11 +191,13 @@ class RandomData():
         
         
     def set_null_hypothesis(self):
-        # for one sample tests, sets a null hypothess between -3 to + 3 x the mean
-        if  self.test in ["one-sample t-test", "z"]:
+        # for one sample tests, sets a null hypothess between -2 to + 2 x the mean
+        if  self.test in ["one-sample t-test"]:
             mean = self.means[0]
-            multiplier = random.uniform(-3, 3)
+            multiplier = random.uniform(-2, 2)
             self.null = round(mean * multiplier)
+        elif self.test == "z":
+            self.null = self.pop_mean
         else:
             self.null = 0
         return self.null
@@ -276,7 +284,7 @@ class RandomData():
         elif self.test == "z":
             self.tails = random.choice([1, 2])
             if self.tails == 1:
-                crit = round(stats.norm.ppf(1 - self.alpha), 2) # type: ignore
+                crit = round(stats.norm.ppf(1 - self.alpha), 3) # type: ignore
             elif self.tails == 2:
                 crit = round(stats.norm.ppf(1 - self.alpha/2), 2) # type: ignore
             else: 
@@ -344,12 +352,12 @@ class RandomData():
                             Calculate $z_{{obt}}$ <br>
                             $$z_{{obt}} = {{\\frac{{M - \\mu}}{{\\sigma_M}}}}$$ <br>
                             $$z_{{obt}} = \\frac{{{self.means[0]} - {self.null}}}{{{sem}}}$$ <br>
-                            $$z_{{obt}} = \\frac{{{self.means[0] - self.null}}}{{{sem}}}$$ <br>
+                            $$z_{{obt}} = \\frac{{{round(self.means[0] - self.null, 2)}}}{{{sem}}}$$ <br>
                             $$z_{{obt}} = {{{self.obt}}}$$ <br><br>
                             Calculate Cohen's d for effect size <br>
                             $$d = \\frac{{M - \\mu}}{{\\sigma}}$$ <br>
                             $$d = \\frac{{{self.means[0]} - {self.null}}}{{{sd}}}$$ <br>
-                            $$d = \\frac{{{self.means[0] - self.null}}}{{{sd}}}$$ <br>
+                            $$d = \\frac{{{round(self.means[0] - self.null, 2)}}}{{{sd}}}$$ <br>
                             $$d = {{{self.effect_size}}}$$ <br><br>"""))
             
             
