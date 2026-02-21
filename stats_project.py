@@ -41,12 +41,12 @@ class RandomData():
         # list of letters for group labels
         letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
+        self.pop_mean = random.randint(10, 50)
+        self.pop_sd = round(self.pop_mean * random.uniform(0.10, 0.40))
         # create data for each group and add it to the dataframe
         for group in range(self.groups):
-            mean = random.randint(10, 50)
-            sd = mean * random.uniform(0.10, 0.50)
-            self.pop_sd = round(sd) # creating a variable to log the pop SD
-            self.pop_mean = mean # variable to log the pop mean
+            mean = self.pop_mean #random.randint(10, 50)
+            sd = self.pop_sd
             # generate the sample based on the above values
 
             same_diff = random.randint(0,3)
@@ -81,7 +81,7 @@ class RandomData():
         #display(self.df.style.hide(axis="index"))
         
         if self.test == "z":
-            display(Markdown(f"Given the following data, is the mean of $Group_A$ {text} the population mean: $\\mu = {{{self.null}}}$?<br><br>Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$<br><br>"))
+            display(Markdown(f"Given the following data, is the mean of $Group_A$ {text} the population mean: $\\mu = {{{self.null}}}$? <br><br>Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$<br><br>"))
             display(self.df.style.hide(axis="index"))
             display(Markdown(f"""<br>The necessary summary statistics for these data<br>
                             $$M_A = {{{self.means[0]}}}$$
@@ -92,32 +92,42 @@ class RandomData():
             display(Markdown(f"Given the following data, is the mean of $Group_A$ {text} ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$ <br><br>"))
             #display(Markdown(self.df.to_markdown(index=False)))
             display(self.df.style.hide(axis="index"))
-            display(Markdown(f"""<br><br>
-                                $M_A = {{{self.means[0]}}}$<br><br>
-                                $s^2 = {{{self.var[0]}}}$<br><br>
-                                $n = {{{len(self.df['A'])}}}$<br><br>
+            display(Markdown(f"""<br> The necessary summary statistics for these data<br>
+                                $$M_A = {{{self.means[0]}}}$$
+                                $$s^2 = {{{self.var[0]}}}$$
+                                $$n = {{{len(self.df['A'])}}}$$<br><br>
                                 """))
         elif self.test == "independent-samples t-test":
-            display(Markdown(f"Given the following between-subjects data, is the mean of $Group_A$ {text} the mean of $Group_B$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
-            display(Markdown(f"$M_A = {{{self.means[0]}}}, M_B = {{{self.means[1]}}}$"))
-            display(Markdown(f"$SS_A = {{{self.ss[0]}}}, SS_B = {{{self.ss[1]}}}$"))
-            display(Markdown(f"$ n_A = {{{len(self.df['A'])}}}, n_B = {{{len(self.df['B'])}}}$"))
+            display(Markdown(f"Given the following between-subjects data, is the mean of $Group_A$ {text} the mean of $Group_B$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$<br><br>"))
+            display(self.df.style.hide(axis="index"))
+            display(Markdown(f"""<br> The necessary summary Statistis for these data:<br>
+                             $$M_A = {{{self.means[0]}}}, M_B = {{{self.means[1]}}}$$
+                             $$SS_A = {{{self.ss[0]}}}, SS_B = {{{self.ss[1]}}}$$
+                             $$n_A = {{{len(self.df['A'])}}}, n_B = {{{len(self.df['B'])}}}$$<br><br>
+                             """))
         elif self.test == "dependent-samples t-test":
-            display(Markdown(f"Given the following within-subjects data, is $M_D$ {text} ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$"))
-            display(Markdown(f"$M_A = {{{self.means[0]}}}, M_B = {{{self.means[1]}}}$"))
-            display(Markdown(f"$ n = {{{len(self.df['A'])}}}$"))
+            display(Markdown(f"Given the following within-subjects data, is $M_D$ {text} ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$<br><br>"))
+            display(self.df.style.hide(axis="index"))
+            display(Markdown(f"""<br>Summary statistics for these data:<br>
+                             $$M_A = {{{self.means[0]}}}, M_B = {{{self.means[1]}}}$$
+                             $$n = {{{len(self.df['A'])}}}$$ <br><br>
+                             """))
         elif self.test == "one-way ANOVA":
-            display(Markdown(f"Given the following between-subjects data, use a one-way ANOVA with $\\alpha = {{{self.alpha}}}$"))
-            display(Markdown(f"$G = {{{self.g}}}, \\Sigma X^2 = {{{self.sum_squared_scores}}}, k = {{{self.groups}}}, N = {{{self.groups * self.n}}}$"))
+            display(Markdown(f"Given the following between-subjects data, use a one-way ANOVA with $\\alpha = {{{self.alpha}}}$<br><br>"))
+            display(self.df.style.hide(axis="index"))
+            display(Markdown(f"""
+                             $$G = {{{self.g}}}, \\Sigma X^2 = {{{self.sum_squared_scores}}}, k = {{{self.groups}}}, N = {{{self.groups * self.n}}}$$
+                             """))
             letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
             for group in range(self.groups):
-                display(Markdown(f"$T_{{{letters[group]}}} = {{{self.sums[group]}}}, SS_{{{letters[group]}}} = {{{self.ss[group]}}}$"))   
+                display(Markdown(f"$$T_{{{letters[group]}}} = {{{self.sums[group]}}}, SS_{{{letters[group]}}} = {{{self.ss[group]}}}$$"))   
         elif self.test == "repeated-measures ANOVA":
             display(Markdown(f"Given the following within-subjects data, use a repeated-measures ANOVA with $\\alpha = {{{self.alpha}}}$"))
-            display(Markdown(f"$G = {{{self.g}}}, \\Sigma X^2 = {{{self.sum_squared_scores}}}, k = {{{self.groups}}}, N = {{{self.groups * self.n}}}$"))
+            display(self.df.style.hide(axis="index"))
+            display(Markdown(f"$$G = {{{self.g}}}, \\Sigma X^2 = {{{self.sum_squared_scores}}}, k = {{{self.groups}}}, N = {{{self.groups * self.n}}}$$<br><br>"))
             letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
             for group in range(self.groups):
-                display(Markdown(f"$T_{{{letters[group]}}} = {{{self.sums[group]}}}, SS_{{{letters[group]}}} = {{{self.ss[group]}}}$"))  
+                display(Markdown(f"$$T_{{{letters[group]}}} = {{{self.sums[group]}}}, SS_{{{letters[group]}}} = {{{self.ss[group]}}}$$<br><br>"))  
         else:
             return ValueError("test-type specification error in question geneneration")
        
@@ -144,6 +154,7 @@ class RandomData():
     def write_result(self):
         # TODO add more elaborate functionality for the results
         if self.test in ["independent-samples t-test", "one-sample t-test", "dependent-samples t-test"]:
+            display(Markdown("The decision criteria: <br><br>"))
             # print the critical value for the test
             if self.tails == 2:
                 display(Markdown(f"$t_{{crit}} = \\pm{{{self.crit_values['positive']}}}, \\alpha_{{two-tailed}} = {{{self.alpha}}}, df = {{{self.crit_values['degf']}}}$<br><br>"))
@@ -153,11 +164,12 @@ class RandomData():
                 display(Markdown(f"$t_{{crit}} = {{{self.crit_values['negative']}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}, df = {{{self.crit_values['degf']}}}$<br><br>"))
             else:
                 return ValueError("tails error in writing results")
+            display(Markdown("The results: <br><br>")) 
             # determine significance
             if self.significance:
-                print(f"reject the null hypothesis, results are significant, t({self.crit_values['degf']}) = {self.obt}, p < {self.alpha}, d = {self.effect_size}<br><br>")
+                display(Markdown(f"reject the null hypothesis, results are significant, *t*({self.crit_values['degf']}) = {self.obt}, *p* < {self.alpha}, *d* = {self.effect_size}<br><br>"))
             elif not self.significance:
-                print(f"fail to reject the null hypothesis, results not significant, t({self.crit_values['degf']}) = {self.obt}, p > {self.alpha}, d = {self.effect_size}<br><br>")
+                display(Markdown(f"fail to reject the null hypothesis, results not significant, *t*({self.crit_values['degf']}) = {self.obt}, *p* > {self.alpha}, *d* = {self.effect_size}<br><br>"))
             else:
                 return ValueError("significance boolean error in writing results")
         elif self.test == "z":
@@ -191,12 +203,7 @@ class RandomData():
         
         
     def set_null_hypothesis(self):
-        # for one sample tests, sets a null hypothess between -2 to + 2 x the mean
-        if  self.test in ["one-sample t-test"]:
-            mean = self.means[0]
-            multiplier = random.uniform(-2, 2)
-            self.null = round(mean * multiplier)
-        elif self.test == "z":
+        if self.test in ["z", "one-sample t-test"]:
             self.null = self.pop_mean
         else:
             self.null = 0
@@ -359,33 +366,6 @@ class RandomData():
                             $$d = \\frac{{{self.means[0]} - {self.null}}}{{{sd}}}$$ <br>
                             $$d = \\frac{{{round(self.means[0] - self.null, 2)}}}{{{sd}}}$$ <br>
                             $$d = {{{self.effect_size}}}$$ <br><br>"""))
-            
-            
-            # old output version
-            '''
-            # print calculations for the standard error
-            display(Markdown("Calculating the standard error..."))
-            display(Markdown(f"$\\sigma_M = \\frac{{\\sigma}}{{\\sqrt{{N}}}}$"))
-            display(Markdown(f"$\\sigma_M = \\frac{{{sd}}}{{\\sqrt{n}}}$"))
-            display(Markdown(f"$\\sigma_M = \\frac{{{sd}}}{{{round(math.sqrt(n),2)}}}$"))
-            display(Markdown(f"$\\sigma_M = {{{sem}}}$"))
-            print() # blank space
-
-            # print the caluclations for z_obt
-            display(Markdown("calculating $z_{{obt}}$..."))
-            display(Markdown(f"$z_{{obt}} = {{\\frac{{M - \\mu}}{{\\sigma_M}}}}$"))
-            display(Markdown(f"$z_{{obt}} = \\frac{{{self.means[0]} - {self.null}}}{{{sem}}}$"))
-            display(Markdown(f"$z_{{obt}} = \\frac{{{self.means[0] - self.null}}}{{{sem}}}$"))
-            display(Markdown(f"$z_{{obt}} = {{{self.obt}}}$"))
-            print() # blank space
-            # print calculations for cohen's d
-            display(Markdown("calculating Cohen's d..."))
-            display(Markdown("Cohen's d = $\\frac{{M - \\mu}}{{\\sigma}}$"))
-            display(Markdown(f"Cohen's d = $\\frac{{{self.means[0]} - {self.null}}}{{{sd}}}$"))
-            display(Markdown(f"Cohen's d = $\\frac{{{self.means[0] - self.null}}}{{{sd}}}$"))
-            display(Markdown(f"Cohen's d = ${{{self.effect_size}}}$"))
-            print() # blank space
-            '''
 
             self.significance = self.final_decision()
             self.write_result()
@@ -413,21 +393,21 @@ class RandomData():
 
             # print the caluclations for the standard error
             # TODO add a way to determine environment so output can display in terminal or notebook
-            display(Markdown(f"""calculating the standard error <br><br>
-                            $s_M = \\sqrt{{\\frac{{s^2}}{{n}}}}$ <br><br>
-                            $s_M = \\sqrt{{\\frac{{{self.var[0]}}}{{{self.n}}}}}$ <br><br>
-                            $s_M = \\sqrt{{{round((self.var[0]/self.n),2)}}}$ <br><br>
-                            $s_M = {{{sem}}}$ <br><br>
-                            calculating $t_{{obt}}$ <br><br>
-                            $t_{{obt}} = {{\\frac{{M - \\mu}}{{s_M}}}}$ <br><br>
-                            $t_{{obt}} = \\frac{{{self.means[0]} - {self.null}}}{{{sem}}}$ <br><br>
-                            $t_{{obt}} = \\frac{{{self.means[0] - self.null}}}{{{sem}}}$ <br><br>
-                            $t_{{obt}} = {{{self.obt}}}$ <br><br>
-                            calculating Cohen's d <br><br>
-                            Cohen's $d = \\frac{{M - \\mu}}{{s}}$ <br><br>
-                            Cohen's $d = \\frac{{{self.means[0]} - {self.null}}}{{{self.std[0]}}}$ <br><br>
-                            Cohen's $d = \\frac{{{self.means[0] - self.null}}}{{{self.std[0]}}}$ <br><br>
-                            Cohen's $d = {{{self.effect_size}}}$ <br><br>
+            display(Markdown(f"""Calculate the standard error <br>
+                            $$s_M = \\sqrt{{\\frac{{s^2}}{{n}}}}$$ <br>
+                            $$s_M = \\sqrt{{\\frac{{{self.var[0]}}}{{{self.n}}}}}$$ <br>
+                            $$s_M = \\sqrt{{{round((self.var[0]/self.n),2)}}}$$ <br>
+                            $$s_M = {{{sem}}}$$ <br><br>
+                            calculate $t_{{obt}}$ <br>
+                            $$t_{{obt}} = {{\\frac{{M - \\mu}}{{s_M}}}}$$ <br>
+                            $$t_{{obt}} = \\frac{{{self.means[0]} - {self.null}}}{{{sem}}}$$ <br>
+                            $$t_{{obt}} = \\frac{{{round(self.means[0] - self.null, 2)}}}{{{sem}}}$$ <br>
+                            $$t_{{obt}} = {{{self.obt}}}$$ <br><br>
+                            calculate Cohen's d <br>
+                            $$d = \\frac{{M - \\mu}}{{s}}$$ <br>
+                            $$d = \\frac{{{self.means[0]} - {self.null}}}{{{self.std[0]}}}$$ <br>
+                            $$d = \\frac{{{round(self.means[0] - self.null, 2)}}}{{{self.std[0]}}}$$ <br>
+                            $$d = {{{self.effect_size}}}$$ <br><br>
                             """))
 
             self.significance = self.final_decision()
@@ -457,32 +437,34 @@ class RandomData():
 
             # TODO adapt to display in the terminal or a notebook
             # display the caluclations for the pooled variance
-            print("calculating the pooled variance...")
-            display(Markdown("$s_p^2 = {{\\frac{{SS_A + SS_B}}{{df_A + df_B}}}}$"))
-            display(Markdown(f"$s_p^2 = {{\\frac{{{self.ss[0]} + {self.ss[1]}}}{{{self.n - 1} + {self.n - 1}}}}}$"))
-            display(Markdown(f"$s_p^2 = \\frac{{{round(self.ss[0] + self.ss[1],2)}}}{{{(self.n - 1) + (self.n - 1)}}}$"))
-            display(Markdown(f"$s_p^2 = {{{pooled_var}}}$"))
+            display(Markdown(f"""Calculate the pooled variance: <br>
+                            $$s_p^2 = {{\\frac{{SS_A + SS_B}}{{df_A + df_B}}}}$$ <br>
+                            $$s_p^2 = {{\\frac{{{self.ss[0]} + {self.ss[1]}}}{{{self.n - 1} + {self.n - 1}}}}}$$ <br>
+                            $$s_p^2 = \\frac{{{round(self.ss[0] + self.ss[1],2)}}}{{{(self.n - 1) + (self.n - 1)}}}$$ <br>
+                            $$s_p^2 = {{{pooled_var}}}$$ <br><br>
+                            """))
             # display the calculations for the estimated standard error
-            print("calculating the estimated standard error of the difference between means...")
-            display(Markdown("$s_{{(M_A - M_B)}} = \\sqrt{{\\frac{{s_p^2}}{{n_1}} + \\frac{{s_p^2}}{{n_1}}}}$"))
-            display(Markdown(f"$s_{{(M_A - M_B)}} = \\sqrt{{\\frac{{{pooled_var}}}{{{self.n}}} + \\frac{{{pooled_var}}}{{{self.n}}}}}$"))
-            display(Markdown(f"$s_{{(M_A - M_B)}} = \\sqrt{{{round(pooled_var/self.n, 2)} + {round(pooled_var/self.n, 2)}}}$"))
-            display(Markdown(f"$s_{{(M_A - M_B)}} = \\sqrt{{{round(pooled_var/self.n, 2) + round(pooled_var/self.n, 2)}}}$"))
-            display(Markdown(f"$s_{{(M_A - M_B)}} = {{{sem}}}$"))
+            display(Markdown(f"""Calculate the estimated error of the difference between means: $s_{{(M_A - M_B)}}$ <br>
+                            $$s_{{(M_A - M_B)}} = \\sqrt{{\\frac{{s_p^2}}{{n_1}} + \\frac{{s_p^2}}{{n_1}}}}$$ <br>
+                            $$s_{{(M_A - M_B)}} = \\sqrt{{\\frac{{{pooled_var}}}{{{self.n}}} + \\frac{{{pooled_var}}}{{{self.n}}}}}$$ <br>
+                            $$s_{{(M_A - M_B)}} = \\sqrt{{{round(pooled_var/self.n, 2)} + {round(pooled_var/self.n, 2)}}}$$ <br>
+                            $$s_{{(M_A - M_B)}} = \\sqrt{{{round(pooled_var/self.n, 2) + round(pooled_var/self.n, 2)}}}$$ <br>
+                            $$s_{{(M_A - M_B)}} = {{{sem}}}$$ <br><br>
+                            """))
             # display the caluclations for t_obt
-            display(Markdown("calculating $t_{{obt}}$..."))
-            display(Markdown(f"$t_{{obt}} = {{\\frac{{(M_A - M_B) - (\\mu_A - \\mu_B)}}{{s_{{(M_A - M_B)}}}}}}$"))
-            display(Markdown(f"$t_{{obt}} = \\frac{{({self.means[0]} - {self.means[1]}) - {{{self.null}}}}}{{{sem}}}$")) 
-            display(Markdown(f"$t_{{obt}} = \\frac{{{round(self.means[0] - self.means[1] - self.null, 2)}}}{{{sem}}}$"))
-            display(Markdown(f"$t_{{obt}} = {{{self.obt}}}$"))
-            print() # blank space
+            display(Markdown(f"""Calculate $t_{{obt}}$ <br>
+                            $$t_{{obt}} = {{\\frac{{(M_A - M_B) - (\\mu_A - \\mu_B)}}{{s_{{(M_A - M_B)}}}}}}$$ <br>
+                            $$t_{{obt}} = \\frac{{({self.means[0]} - {self.means[1]}) - {{{self.null}}}}}{{{sem}}}$$ <br>
+                            $$t_{{obt}} = \\frac{{{round(self.means[0] - self.means[1] - self.null, 2)}}}{{{sem}}}$$ <br>
+                            $$t_{{obt}} = {{{self.obt}}}$$ <br><br>
+                            """))
             # print calculations for cohen's d
-            display(Markdown("calculating Cohen's d..."))
-            display(Markdown("Cohen's d = $\\frac{{M_A - M_B}}{{\\sqrt{{{s_p^2}}}}}$"))
-            display(Markdown(f"Cohen's d = $\\frac{{({self.means[0]} - {self.means[1]})}}{{{{{{\\sqrt{{{pooled_var}}}}}}}}}$"))
-            display(Markdown(f"Cohen's d = $\\frac{{({self.means[0] - self.means[1]})}}{{{round(math.sqrt(pooled_var),2)}}}$"))
-            display(Markdown(f"Cohen's d = ${{{self.effect_size}}}$"))
-            print() # blank space
+            display(Markdown(f"""Calculate Cohen's *d*  <br>
+                            $$d = \\frac{{M_A - M_B}}{{\\sqrt{{s_p^2}}}}$$ <br>
+                            $$d = \\frac{{({self.means[0]} - {self.means[1]})}}{{{{{{\\sqrt{{{pooled_var}}}}}}}}}$$ <br>
+                            $$d = \\frac{{({self.means[0] - self.means[1]})}}{{{round(math.sqrt(pooled_var),2)}}}$$ <br>
+                            $$d = {{{self.effect_size}}}$$ <br><br>
+                            """))
 
             self.significance = self.final_decision()
             self.write_result()
@@ -508,61 +490,66 @@ class RandomData():
             self.df['D'] = self.df['B'] - self.df['A']
             
             # print the dataframe with the difference scores
-            display(Markdown("Calculating the difference scores $D = X_B - X_A$"))
-            print(self.df.to_string(index = False))
-            print() # blank space
+            display(Markdown("Calculating the difference scores $D = X_B - X_A$ <br>"))
+            display(self.df.style.hide(axis="index"))
+
             # Calculate the Mean of the Difference Scores
             sum_d = self.df['D'].sum()
             n = len(self.df['D'])
             mean_d = round(sum_d/n, 2)
-            display(Markdown("Calculating the Mean of the Difference Scores..."))
-            display(Markdown("$M_D = \\frac{{\\Sigma D}}{{n}}$"))
-            display(Markdown(f"$M_D = \\frac{{{sum_d}}}{{{n}}}$"))
-            display(Markdown(f"$M_D = {{{mean_d}}}$"))
-            print() # blank space
+            display(Markdown(f"""<br>Calculate the Mean of the Difference Scores
+                            $$M_D = \\frac{{\\Sigma D}}{{n}}$$ <br>
+                            $$M_D = \\frac{{{sum_d}}}{{{n}}}$$ <br>
+                            $$M_D = {{{mean_d}}}$$ <br><br>
+                            """))
+  
             # calculate the SS for the difference scores
             self.df['D^2'] = self.df['D'].apply(lambda x: x ** 2)
             sum_sqared_scores = self.df['D^2'].sum()
             ss = round(sum_sqared_scores - round((sum_d ** 2)/n, 2), 2)
             # print the dataframe with the squared difference scores
-            display(Markdown("Calculating the sum of the squared deviations..."))
-            print(self.df.to_string(index = False))
-            display(Markdown("$ SS_D = \\Sigma D^2 - \\frac{{(\\Sigma D)^2}}{{n}}$"))
-            display(Markdown(f"$ SS_D = {{{sum_sqared_scores}}} - \\frac{{{sum_d ** 2}}}{{{n}}}$"))
-            display(Markdown(f"$ SS_D = {{{sum_sqared_scores}}} - {{{round((sum_d ** 2)/n, 2)}}}$"))
-            display(Markdown(f"$ SS_D = {{{ss}}}$"))
-            print() # blank space
+            display(self.df.style.hide(axis="index"))
+            display(Markdown(f"""<br>Calculate *SS* of the difference scores <br>
+                             $$SS_D = \\Sigma D^2 - \\frac{{(\\Sigma D)^2}}{{n}}$$ <br>
+                             $$SS_D = {{{sum_sqared_scores}}} - \\frac{{{sum_d ** 2}}}{{{n}}}$$ <br>
+                             $$SS_D = {{{sum_sqared_scores}}} - {{{round((sum_d ** 2)/n, 2)}}}$$ <br>
+                             $$SS_D = {{{ss}}}$$ <br><br>
+                             """))
+            
             # calculate the variance    
             variance = round(ss / (n - 1), 2)
-            display(Markdown("$ s^2 = \\frac{{SS_D}}{{df}}$")) 
-            display(Markdown(f"$ s^2 = \\frac{{{ss}}}{{{n - 1}}}$"))   
-            display(Markdown(f"$ s^2 = \\frac{{{round(ss/(n - 1), 2)}}}$"))
-            display(Markdown(f"$ s^2 = {{{variance}}}$"))  
-            print() # blank space
+            display(Markdown(f"""Calculate the variance of the difference scores <br>
+                             $$s_D^2 = \\frac{{SS_D}}{{df}}$$ <br>
+                             $$s_D^2 = \\frac{{{ss}}}{{{n - 1}}}$$ <br>
+                             $$s_D^2 = {{{variance}}}$$ <br><br>
+                            """))
+
             # Calculate the estimated standard error
             sem = round(math.sqrt(variance/n), 2)
-            display(Markdown("Calculating the estimated standard error..."))
-            display(Markdown("$ s_{M_D} = \\sqrt{{\\frac{{s^2}}{{n}}}}$"))
-            display(Markdown(f"$ s_{{M_D}} = \\sqrt{{\\frac{{{variance}}}{{{n}}}}}$"))
-            display(Markdown(f"$ s_{{M_D}} = \\sqrt{{{round(variance/n, 2)}}}$"))
-            display(Markdown(f"$ s_{{M_D}} = {{{sem}}}$"))
-            print() # blank space
+            display(Markdown(f"""Calculate the estimated standard error of the difference scores <br>
+                             $$s_{{M_D}} = \\sqrt{{\\frac{{s^2}}{{n}}}}$$ <br>
+                             $$s_{{M_D}} = \\sqrt{{\\frac{{{variance}}}{{{n}}}}}$$ <br>
+                             $$s_{{M_D}} = \\sqrt{{{round(variance/n, 2)}}}$$ <br>
+                             $$s_{{M_D}} = {{{sem}}}$$ <br><br>
+                            """))
+
             # caclulate the t-statistic
             self.obt = round((mean_d - self.null) / sem, 2)
-            display(Markdown("calculating $t_{{obt}}$..."))
-            display(Markdown("$t_{{obt}} = {{\\frac{{M_D - \\mu_D}}{{s_{M_D}}}}}$"))
-            display(Markdown(f"$t_{{obt}} = \\frac{{{mean_d} - {self.null}}}{{{sem}}}$"))
-            display(Markdown(f"$t_{{obt}} = \\frac{{{mean_d - self.null}}}{{{sem}}}$"))
-            display(Markdown(f"$t_{{obt}} = {{{self.obt}}}$"))
-            print() # blank space
+            display(Markdown(f"""Calculate $t_{{obt}}$ <br>
+                             $$t_{{obt}} = {{\\frac{{M_D - \\mu_D}}{{s_{{M_D}}}}}}$$ <br>
+                             $$t_{{obt}} = \\frac{{{mean_d} - {self.null}}}{{{sem}}}$$ <br>
+                             $$t_{{obt}} = \\frac{{{mean_d - self.null}}}{{{sem}}}$$ <br>
+                             $$t_{{obt}} = {{{self.obt}}}$$ <br><br>
+                            """))
+
             # print calculations for cohen's d
             self.effect_size = round(mean_d / round(math.sqrt(variance),2), 2)
-            display(Markdown("calculating Cohen's d..."))
-            display(Markdown("Cohen's d = $\\frac{{M_D}}{{\\sqrt{{s^2}}}}$"))
-            display(Markdown(f"Cohen's d = $\\frac{{{mean_d}}}{{{{{{\\sqrt{{{variance}}}}}}}}}$"))
-            display(Markdown(f"Cohen's d = $\\frac{{{mean_d}}}{{{round(math.sqrt(variance),2)}}}$"))
-            display(Markdown(f"Cohen's d = ${{{self.effect_size}}}$"))
-            print() # blank space
+            display(Markdown(f"""Calculating Cohen's *d* <br>
+                             $$d = \\frac{{M_D}}{{\\sqrt{{s^2}}}}$$ <br>
+                             $$d = \\frac{{{mean_d}}}{{{{{{\\sqrt{{{variance}}}}}}}}}$$ <br>
+                             $$d = \\frac{{{mean_d}}}{{{round(math.sqrt(variance),2)}}}$$ <br>
+                             $$d = {{{self.effect_size}}}$$ <br><br>
+                            """))
 
             self.significance = self.final_decision()
             self.write_result()
