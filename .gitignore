@@ -1,2 +1,4 @@
 *.html
 __pycache__/
+html_files_for_BS/
+html_files_no_embedding/
