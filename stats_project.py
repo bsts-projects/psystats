@@ -42,7 +42,7 @@ class RandomData():
         letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
         self.pop_mean = random.randint(10, 50)
-        self.pop_sd = round(self.pop_mean * random.uniform(0.10, 0.40))
+        self.pop_sd = round(self.pop_mean * random.uniform(0.10, 0.30))
         # create data for each group and add it to the dataframe
         for group in range(self.groups):
             mean = self.pop_mean #random.randint(10, 50)
@@ -51,7 +51,7 @@ class RandomData():
 
             same_diff = random.randint(0,3)
             if same_diff >= 1:
-                effect =  round(mean * random.uniform(0.10, 0.40))
+                effect =  round(mean * random.uniform(0.10, 0.50))
                 mean +=  effect
             samples = np.random.normal(mean, sd, self.n)
 
@@ -107,7 +107,7 @@ class RandomData():
                              """))
         elif self.test == "dependent-samples t-test":
             display(Markdown(f"Given the following within-subjects data, is $M_D$ {text} ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$<br><br>"))
-            display(self.df.style.hide(axis="index"))
+            display(self.df) #.style.hide(axis="index"))
             display(Markdown(f"""<br>Summary statistics for these data:<br>
                              $$M_A = {{{self.means[0]}}}, M_B = {{{self.means[1]}}}$$
                              $$n = {{{len(self.df['A'])}}}$$ <br><br>
@@ -464,7 +464,7 @@ class RandomData():
             display(Markdown(f"""Calculate Cohen's *d*  <br>
                             $$d = \\frac{{M_A - M_B}}{{\\sqrt{{s_p^2}}}}$$ <br>
                             $$d = \\frac{{({self.means[0]} - {self.means[1]})}}{{{{{{\\sqrt{{{pooled_var}}}}}}}}}$$ <br>
-                            $$d = \\frac{{({self.means[0] - self.means[1]})}}{{{round(math.sqrt(pooled_var),2)}}}$$ <br>
+                            $$d = \\frac{{({round(self.means[0] - self.means[1], 2)})}}{{{round(math.sqrt(pooled_var),2)}}}$$ <br>
                             $$d = {{{self.effect_size}}}$$ <br><br>
                             """))
 
@@ -493,7 +493,7 @@ class RandomData():
             
             # print the dataframe with the difference scores
             display(Markdown("Calculating the difference scores $D = X_B - X_A$ <br>"))
-            display(self.df.style.hide(axis="index"))
+            display(self.df) #.style.hide(axis="index"))
 
             # Calculate the Mean of the Difference Scores
             sum_d = self.df['D'].sum()
@@ -510,7 +510,7 @@ class RandomData():
             sum_sqared_scores = self.df['D^2'].sum()
             ss = round(sum_sqared_scores - round((sum_d ** 2)/n, 2), 2)
             # print the dataframe with the squared difference scores
-            display(self.df.style.hide(axis="index"))
+            display(self.df) #.style.hide(axis="index"))
             display(Markdown(f"""<br>Calculate *SS* of the difference scores <br>
                              $$SS_D = \\Sigma D^2 - \\frac{{(\\Sigma D)^2}}{{n}}$$ <br>
                              $$SS_D = {{{sum_sqared_scores}}} - \\frac{{{sum_d ** 2}}}{{{n}}}$$ <br>
@@ -540,7 +540,7 @@ class RandomData():
             display(Markdown(f"""Calculate $t_{{obt}}$ <br>
                              $$t_{{obt}} = {{\\frac{{M_D - \\mu_D}}{{s_{{M_D}}}}}}$$ <br>
                              $$t_{{obt}} = \\frac{{{mean_d} - {self.null}}}{{{sem}}}$$ <br>
-                             $$t_{{obt}} = \\frac{{{mean_d - self.null}}}{{{sem}}}$$ <br>
+                             $$t_{{obt}} = \\frac{{{round(mean_d - self.null, 2)}}}{{{sem}}}$$ <br>
                              $$t_{{obt}} = {{{self.obt}}}$$ <br><br>
                             """))
 
