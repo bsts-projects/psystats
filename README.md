@@ -28,4 +28,15 @@ When rendering the documents the yaml header option `embed-resources:` should be
 ## Functionality to add
 * correlation
 * regression
+* two-factor ANOVA
+* Post-hoc testing for ANOVA
+* Alt-text for figures.  Can the alt- and descriptive-text be auto generated based on the matplotlib input?
 
+## Future directions
+* seperate defining question from displaying the results
+    * consider adding: `class Question:` that will hold the question (this might not be necessary)
+    * consider adding: `class Assignment:` to hold a collection of question objects.  
+        * will output a formatted assignment and it's answer key
+* add functionality to specify some details when creating the question such as the distribution
+    * add common standardized distributions as options
+* expand the text of the question, inlcude a list of common variables
