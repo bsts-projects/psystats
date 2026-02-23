@@ -1,4 +1,4 @@
-# Sample Problems for an Undergraduate Statistics in Psychology Course
+# Sample Problem Generator for an Undergraduate Statistics in Psychology Course
 
 An ongoing project to create a series of juypter notebooks that can be used to randomly generate sample problems and their worked solutions using python
 
