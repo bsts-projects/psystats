@@ -5,3 +5,4 @@ html_files_no_embedding/
 ds-t-test_doc_files/
 is-t-test_doc_files/
 os-t-test_doc_files/
+!example_output_DS_t-test.html
