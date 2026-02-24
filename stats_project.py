@@ -79,6 +79,12 @@ class RandomData():
             return ValueError("tails error for question generation")    
 
         #display(self.df.style.hide(axis="index"))
+
+        if self.test in ["dependent-samples t-test", "repeated-measures ANOVA"]:
+            id_col = list(range(1, self.n + 1))
+            self.df.insert(loc = 0, column = "ID", value = id_col)
+        else:
+            pass
         
         if self.test == "z":
             display(Markdown(f"Given the following data, is the mean of $Group_A$ {text} the population mean: $\\mu = {{{self.null}}}$? <br><br>Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$<br><br>"))
