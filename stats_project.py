@@ -107,7 +107,8 @@ class RandomData():
                              """))
         elif self.test == "dependent-samples t-test":
             display(Markdown(f"Given the following within-subjects data, is $M_D$ {text} ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$<br><br>"))
-            display(self.df) #.style.hide(axis="index"))
+            #self.df.index.name = 'ID'
+            display(self.df.style.hide(axis="index"))
             display(Markdown(f"""<br>Summary statistics for these data:<br>
                              $$M_A = {{{self.means[0]}}}, M_B = {{{self.means[1]}}}$$
                              $$n = {{{len(self.df['A'])}}}$$ <br><br>
@@ -493,7 +494,7 @@ class RandomData():
             
             # print the dataframe with the difference scores
             display(Markdown("Calculating the difference scores $D = X_B - X_A$ <br>"))
-            display(self.df) #.style.hide(axis="index"))
+            display(self.df.style.hide(axis="index"))
 
             # Calculate the Mean of the Difference Scores
             sum_d = self.df['D'].sum()
@@ -510,7 +511,7 @@ class RandomData():
             sum_sqared_scores = self.df['D^2'].sum()
             ss = round(sum_sqared_scores - round((sum_d ** 2)/n, 2), 2)
             # print the dataframe with the squared difference scores
-            display(self.df) #.style.hide(axis="index"))
+            display(self.df.style.hide(axis="index"))
             display(Markdown(f"""<br>Calculate *SS* of the difference scores <br>
                              $$SS_D = \\Sigma D^2 - \\frac{{(\\Sigma D)^2}}{{n}}$$ <br>
                              $$SS_D = {{{sum_sqared_scores}}} - \\frac{{{sum_d ** 2}}}{{{n}}}$$ <br>
