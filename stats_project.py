@@ -644,8 +644,6 @@ class RandomData():
                 df_subjects = self.n - 1
                 df_error = df_within - df_subjects
                 
-                print("Stage 2 Calculations:")
-                print("partitioning the degrees of freedom...")
 
                 display(Markdown(f"""Stage 2 Calculations: <br><br>
                     Partition the Degrees of Freedom <br>
@@ -655,12 +653,20 @@ class RandomData():
                     $$df_{{error}} = df_{{within}} - df_{{subjects}}$$ <br>
                     $$df_{{error}} = {{{df_within}}} - {{{df_subjects}}}$$ <br>
                     $$df_{{error}} = {{{df_error}}}$$ <br><br>
+                """))
+
+                display(Markdown(f"""
+                    Partition the Sum of Squares <br>
+                    $$$$ <br>
+                    $$$$ <br>
+                    $$$$ <br><br>
+                    $$$$ <br>
+                    $$$$ <br>
+                    $$$$ <br><br>
                     $$$$ <br>
                     $$$$ <br>
                     $$$$ <br><br>
                 """))
-
-                print("partitioning the sum of squares...")
                 
                 self.df["P"] = self.df.sum(axis = 1)
                 print(self.df)
