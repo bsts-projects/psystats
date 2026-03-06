@@ -594,25 +594,19 @@ class RandomData():
 
             print() # blank space
             if test == "repeated-measures":
-                display(Markdown("""Stage 1 Calculations: <br><br>
-                                 Calculate the Degrees of Freedom"""))
-
-            print("calculating the degrees of freedom...")
-    
-            display(Markdown(f"$df_{{total}} = N - 1$"))
-            display(Markdown(f"$df_{{total}} = {{{big_n}}} - 1$"))
-            display(Markdown(f"$df_{{total}} = {{{df_total}}}$"))
-            print() # blank space
-
-            display(Markdown(f"$df_{{between}} = k - 1 $"))
-            display(Markdown(f"$df_{{between}} = {{{self.groups}}} - 1 $"))
-            display(Markdown(f"$df_{{between}} = {{{df_between}}}$"))
-            print() # blank space
-
-            display(Markdown(f"$df_{{within}} = N - K $"))
-            display(Markdown(f"$df_{{within}} = {{{big_n}}} - {{{self.groups}}} $"))
-            display(Markdown(f"$df_{{within}} = {{{df_within}}}$"))
-            print() # blank space
+                display(Markdown("""Stage 1 Calculations: <br><br>"""))
+            
+            display(Markdown(f"""Calculate the Degrees of Freedom <br>
+                    $$df_{{total}} = N - 1$$ <br>
+                    $$df_{{total}} = {{{big_n}}} - 1$$ <br>
+                    $$df_{{total}} = {{{df_total}}}$$ <br><br>
+                    $$df_{{between}} = k - 1$$ <br>
+                    $$df_{{between}} = {{{self.groups}}} - 1$$ <br>
+                    $$df_{{between}} = {{{df_between}}}$$ <br><br>
+                    $$df_{{within}} = N - K$$ <br>
+                    $$df_{{within}} = {{{big_n}}} - {{{self.groups}}}$$ <br>
+                    $$df_{{within}} = {{{df_within}}}$$ <br><br>
+                """))
 
             # sum of squares
             ss_total = self.sum_squared_scores - round(((self.g**2)/big_n), 2)
@@ -621,33 +615,29 @@ class RandomData():
                 ss_within += self.ss[group]
             ss_between = ss_total - ss_within
 
-            print("calulating the sum of squares...")
-            display(Markdown(f"$ SS_{{total}} = \\Sigma X^2 - \\frac{{G^2}}{{N}} $"))
-            display(Markdown(f"$ SS_{{total}} = {{{self.sum_squared_scores}}} - \\frac{{{self.g}^2}}{{{big_n}}} $"))
-            display(Markdown(f"$ SS_{{total}} = {{{self.sum_squared_scores}}} - \\frac{{{self.g**2}}}{{{big_n}}} $"))
-            display(Markdown(f"$ SS_{{total}} = {{{self.sum_squared_scores}}} - {{{round(((self.g**2)/big_n), 2)}}} $"))
-            display(Markdown(f"$ SS_{{total}} = {{{round(ss_total, 2)}}} $"))
-            print() # blank space
-
-            display(Markdown(f"$ SS_{{within}} = \\Sigma SS_{{inside\\_each\\_condition}} $"))
             values = ""
             for group in range(self.groups):
                 if group == 0:
                     values += f"{self.ss[group]}"
                 else:
                     values += f" + {self.ss[group]}"
-            display(Markdown(f"$ SS_{{within}} = {{{values}}}$"))
-            display(Markdown(f"$ SS_{{within}} = {{{round(ss_within, 2)}}}$"))
-            print() # blank space
-
-            display(Markdown(f"$ SS_{{between}} = SS_{{total}} - SS_{{within}} $"))
-            display(Markdown(f"$ SS_{{between}} = {{{round(ss_total, 2)}}} - {{{round(ss_within, 2)}}} $"))
-            display(Markdown(f"$ SS_{{between}} = {{{round(ss_between, 2)}}} $"))
-            print() # blank space
-
-            display(Markdown("note: the other way to calculate $SS_{{betwen}}$ is:"))
-            display(Markdown("$ SS_{{between}} = \\Sigma{{\\frac{{T^2}}{{n}}}} - \\frac{{G^2}}{{N}} $"))
-            print() # blank space
+            
+            #TODO consider writing methods to take the values below to display each piece seperately.
+            display(Markdown(f"""Calculate the Sum of Squares <br>
+                    $$SS_{{total}} = \\Sigma X^2 - \\frac{{G^2}}{{N}}$$ <br>
+                    $$SS_{{total}} = {{{self.sum_squared_scores}}} - \\frac{{{self.g}^2}}{{{big_n}}}$$ <br>
+                    $$SS_{{total}} = {{{self.sum_squared_scores}}} - \\frac{{{self.g**2}}}{{{big_n}}}$$ <br>
+                    $$SS_{{total}} = {{{self.sum_squared_scores}}} - {{{round(((self.g**2)/big_n), 2)}}}$$ <br>
+                    $$SS_{{total}} = {{{round(ss_total, 2)}}}$$ <br><br>
+                    $$SS_{{within}} = \\Sigma SS_{{inside\\_each\\_condition}}$$ <br>
+                    $$SS_{{within}} = {{{values}}}$$ <br>
+                    $$SS_{{within}} = {{{round(ss_within, 2)}}}$$ <br><br>
+                    $$SS_{{between}} = SS_{{total}} - SS_{{within}}$$ <br>
+                    $$SS_{{between}} = {{{round(ss_total, 2)}}} - {{{round(ss_within, 2)}}}$$ <br>
+                    $$SS_{{between}} = {{{round(ss_between, 2)}}}$$ <br><br>
+                    note: the other way to calculate $SS_{{betwen}}$ is: <br>
+                    $$SS_{{between}} = \\Sigma{{\\frac{{T^2}}{{n}}}} - \\frac{{G^2}}{{N}}$$ <br><br>
+                """))
 
             if self.test == "repeated-measures ANOVA":
                 # degrees of freedom
@@ -657,17 +647,19 @@ class RandomData():
                 print("Stage 2 Calculations:")
                 print("partitioning the degrees of freedom...")
 
-                display(Markdown(f"$df_{{subjects}} = n - 1 $"))
-                display(Markdown(f"$df_{{subjects}} = {{{self.n}}} - 1 $"))
-                display(Markdown(f"$df_{{subjects}} = {{{df_subjects}}}$"))
-                print() # blank space
+                display(Markdown(f"""Stage 2 Calculations: <br><br>
+                    Partition the Degrees of Freedom <br>
+                    $$df_{{subjects}} = n - 1$$ <br>
+                    $$df_{{subjects}} = {{{self.n}}} - 1$$ <br>
+                    $$df_{{subjects}} = {{{df_subjects}}}$$ <br><br>
+                    $$df_{{error}} = df_{{within}} - df_{{subjects}}$$ <br>
+                    $$df_{{error}} = {{{df_within}}} - {{{df_subjects}}}$$ <br>
+                    $$df_{{error}} = {{{df_error}}}$$ <br><br>
+                    $$$$ <br>
+                    $$$$ <br>
+                    $$$$ <br><br>
+                """))
 
-                display(Markdown(f"$df_{{error}} = df_{{within}} - df_{{subjects}} $"))
-                display(Markdown(f"$df_{{error}} = {{{df_within}}} - {{{df_subjects}}} $"))
-                display(Markdown(f"$df_{{error}} = {{{df_error}}} $"))
-                print() # blank space
-
-                # sum of squares
                 print("partitioning the sum of squares...")
                 
                 self.df["P"] = self.df.sum(axis = 1)

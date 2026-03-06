@@ -2,6 +2,7 @@
 __pycache__/
 html_files_for_BS/
 html_files_no_embedding/
+old_notebook_versions/
 ds-t-test_doc_files/
 is-t-test_doc_files/
 os-t-test_doc_files/

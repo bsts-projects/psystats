@@ -1,0 +1,68 @@
+---
+title: Hypothesis Testing with Independent-Samples *t*-tests
+subtitle: PSY 241
+format: 
+  html:
+    html-math-method: mathjax
+    code-fold: true
+    axe:
+      output: console
+    self-contained-math: true
+    embed-resources: true
+jupyter: python3
+---
+
+```{python}
+import importlib
+import stats_project 
+import random
+
+# This is to clear cache and reload after edits to the .py file
+importlib.reload(stats_project)
+from stats_project import RandomData 
+```
+
+# Problem 1
+
+```{python}
+#| echo: false
+#| output: asis
+sample_size = random.randint(5,15)
+RandomData(groups = 2, n = sample_size).independent_samples_t_test()
+```
+
+# Problem 2
+
+```{python}
+#| echo: false
+#| output: asis
+sample_size = random.randint(5,15)
+RandomData(groups = 2, n = sample_size).independent_samples_t_test()
+```
+
+# Problem 3
+
+```{python}
+#| echo: false
+#| output: asis
+sample_size = random.randint(5,15)
+RandomData(groups = 2, n = sample_size).independent_samples_t_test()
+```
+
+# Problem 4
+
+```{python}
+#| echo: false
+#| output: asis
+sample_size = random.randint(5,15)
+RandomData(groups = 2, n = sample_size).independent_samples_t_test()
+```
+
+# Problem 5
+
+```{python}
+#| echo: false
+#| output: asis
+sample_size = random.randint(5,15)
+RandomData(groups = 2, n = sample_size).independent_samples_t_test()
+```
