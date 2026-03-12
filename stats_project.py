@@ -122,19 +122,19 @@ class RandomData():
         elif self.test == "one-way ANOVA":
             display(Markdown(f"Given the following between-subjects data, use a one-way ANOVA with $\\alpha = {{{self.alpha}}}$<br><br>"))
             display(self.df.style.hide(axis="index"))
-            display(Markdown(f"""
-                             $$G = {{{self.g}}}, \\Sigma X^2 = {{{self.sum_squared_scores}}}, k = {{{self.groups}}}, N = {{{self.groups * self.n}}}$$
+            display(Markdown(f"""<br>Summary statistics for these data:<br>
+                             $G = {{{self.g}}} \\quad \\Sigma{{X^2}} = {{{self.sum_squared_scores}}} \\quad k = {{{self.groups}}} \\quad N = {{{self.groups * self.n}}}$ <br>
                              """))
             letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            for group in range(self.groups):
-                display(Markdown(f"$$T_{{{letters[group]}}} = {{{self.sums[group]}}}, SS_{{{letters[group]}}} = {{{self.ss[group]}}}$$"))   
+            for group in range(self.groups): # output into a table because the loop seems to onlky work if there is text to start?
+                display(Markdown(f"$T_{{{letters[group]}}} = {{{self.sums[group]}}} \\quad SS_{{{letters[group]}}} = {{{self.ss[group]}}}$ <br>"))   
         elif self.test == "repeated-measures ANOVA":
             display(Markdown(f"Given the following within-subjects data, use a repeated-measures ANOVA with $\\alpha = {{{self.alpha}}}$"))
             display(self.df.style.hide(axis="index"))
-            display(Markdown(f"$$G = {{{self.g}}}, \\Sigma X^2 = {{{self.sum_squared_scores}}}, k = {{{self.groups}}}, N = {{{self.groups * self.n}}}$$<br><br>"))
+            display(Markdown(f"$G = {{{self.g}}} \\quad \\Sigma X^2 = {{{self.sum_squared_scores}}} \\quad k = {{{self.groups}}} \\quad N = {{{self.groups * self.n}}}$ <br>"))
             letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
             for group in range(self.groups):
-                display(Markdown(f"$$T_{{{letters[group]}}} = {{{self.sums[group]}}}, SS_{{{letters[group]}}} = {{{self.ss[group]}}}$$<br><br>"))  
+                display(Markdown(f"$T_{{{letters[group]}}} = {{{self.sums[group]}}} \\quad SS_{{{letters[group]}}} = {{{self.ss[group]}}}$ <br>"))  
         else:
             return ValueError("test-type specification error in question geneneration")
        
@@ -654,23 +654,10 @@ class RandomData():
                     $$df_{{error}} = {{{df_within}}} - {{{df_subjects}}}$$ <br>
                     $$df_{{error}} = {{{df_error}}}$$ <br><br>
                 """))
-
-                display(Markdown(f"""
-                    Partition the Sum of Squares <br>
-                    $$$$ <br>
-                    $$$$ <br>
-                    $$$$ <br><br>
-                    $$$$ <br>
-                    $$$$ <br>
-                    $$$$ <br><br>
-                    $$$$ <br>
-                    $$$$ <br>
-                    $$$$ <br><br>
-                """))
                 
-                self.df["P"] = self.df.sum(axis = 1)
-                print(self.df)
-                print() # blank space
+                self.df["P"] = self.df.drop(columns=['ID']).sum(axis = 1)
+                display(self.df.style.hide(axis="index"))
+                print()
 
                 p_sums = [] # holder for the P sums for displaying below
                 p_squared = [] # holds the squared partipant sums (P^2)
@@ -685,91 +672,87 @@ class RandomData():
                 ss_subjects = round(sum_quotients, 2) - round(((self.g**2)/big_n), 2)
                 ss_error = ss_within - ss_subjects
 
-                display(Markdown(f"$SS_{{subjects}} = \\Sigma{{\\frac{{P^2}}{{k}}}} - \\frac{{G^2}}{{N}} $"))
+                display(Markdown(f"$$SS_{{subjects}} = \\Sigma{{\\frac{{P^2}}{{k}}}} - \\frac{{G^2}}{{N}}$$ <br>"))
                 temp_text = ""
                 for p in p_sums:
                     temp_text += f" + \\frac{{{p}^2}}{{{self.groups}}}"
-                display(Markdown(f"$SS_{{subjects}} = {{{temp_text[3:]}}} - \\frac{{{self.g}^2}}{{{big_n}}}$"))
+                display(Markdown(f"$$SS_{{subjects}} = {{{temp_text[3:]}}} - \\frac{{{self.g}^2}}{{{big_n}}}$$ <br>"))
                 temp_text = ""
                 for p in p_squared:
                     temp_text += f" + \\frac{{{p}}}{{{self.groups}}}"
-                display(Markdown(f"$SS_{{subjects}} = {{{temp_text[3:]}}} - \\frac{{{self.g**2}}}{{{big_n}}}$"))
+                display(Markdown(f"$$SS_{{subjects}} = {{{temp_text[3:]}}} - \\frac{{{self.g**2}}}{{{big_n}}}$$ <br>"))
                 temp_text = ""
                 for p in quotients:
                     temp_text += f" + {{{p}}}"
-                display(Markdown(f"$SS_{{subjects}} = {{{temp_text[3:]}}} - {{{round(((self.g**2)/big_n), 2)}}}$"))
-                display(Markdown(f"$SS_{{subjects}} = {{{round(sum_quotients,2)}}} - {{{round(((self.g**2)/big_n), 2)}}}$")) 
-                display(Markdown(f"$SS_{{subjects}} = {{{round(ss_subjects,2)}}}$"))     
-                print() # blank space
 
-                display(Markdown(f"$SS_{{error}} = SS_{{within}} - SS_{{subjects}} $"))
-                display(Markdown(f"$SS_{{error}} = {{{round(ss_within,2)}}} - {{{round(ss_subjects,2)}}}$"))
-                display(Markdown(f"$SS_{{error}} = {{{round(ss_error,2)}}}$"))
-                print() # blank space
-
+                display(Markdown(f"""$$SS_{{subjects}} = {{{temp_text[3:]}}} - {{{round(((self.g**2)/big_n), 2)}}}$$ <br>
+                    $$SS_{{subjects}} = {{{round(sum_quotients,2)}}} - {{{round(((self.g**2)/big_n), 2)}}}$$ <br>
+                    $$SS_{{subjects}} = {{{round(ss_subjects,2)}}}$$ <br><br>
+                    $$SS_{{error}} = SS_{{within}} - SS_{{subjects}}$$ <br>
+                    $$SS_{{error}} = {{{round(ss_within,2)}}} - {{{round(ss_subjects,2)}}}$$ <br>
+                    $$SS_{{error}} = {{{round(ss_error,2)}}}$$ <br><br>
+                """))
 
             # mean squares
             ms_between = round(round(ss_between, 2)/df_between, 2)
             ms_within = round(round(ss_within, 2)/df_within, 2)
-            
 
-            print("calculating the mean squares...")
-            display(Markdown(f"$ MS_{{between}} = \\frac{{SS_{{between}}}}{{df_{{between}}}} $"))
-            display(Markdown(f"$ MS_{{between}} = \\frac{{{round(ss_between, 2)}}}{{{df_between}}} $"))
-            display(Markdown(f"$ MS_{{between}} = {{{round(ms_between, 2)}}} $"))
-            print() # blank space
+            display(Markdown(f"""Calculate the Mean Squares <br>
+                $$MS_{{between}} = \\frac{{SS_{{between}}}}{{df_{{between}}}}$$ <br>
+                $$MS_{{between}} = \\frac{{{round(ss_between, 2)}}}{{{df_between}}}$$ <br>
+                $$MS_{{between}} = {{{round(ms_between, 2)}}}$$ <br><br>
+            """))
 
             if self.test == "one-way ANOVA":
-                display(Markdown(f"$ MS_{{within}} = \\frac{{SS_{{within}}}}{{df_{{within}}}} $"))
-                display(Markdown(f"$ MS_{{within}} = \\frac{{{round(ss_within, 2)}}}{{{df_within}}} $"))
-                display(Markdown(f"$ MS_{{within}} = {{{round(ms_within, 2)}}} $"))
-                print() # blank space
+                display(Markdown(f"""$$MS_{{within}} = \\frac{{SS_{{within}}}}{{df_{{within}}}}$$ <br>
+                    $$MS_{{within}} = \\frac{{{round(ss_within, 2)}}}{{{df_within}}}$$ <br>
+                    $$MS_{{within}} = {{{round(ms_within, 2)}}}$$ <br><br>
+                """))
                 
                 # F value
                 self.obt = round(ms_between/ms_within, 2)
 
-                print("calculating the f ratio...")
-                display(Markdown(f"$ F_{{obt}} = \\frac{{MS_{{between}}}}{{MS_{{within}}}} $"))
-                display(Markdown(f"$ F_{{obt}} = \\frac{{{round(ms_between,2)}}}{{{round(ms_within,2)}}} $"))
-                display(Markdown(f"$ F_{{obt}} = {{{round(self.obt, 2)}}} $"))
-                print() # blank space
+                display(Markdown(f"""Calculate the *F*-Ratio <br>
+                    $$F_{{obt}} = \\frac{{MS_{{between}}}}{{MS_{{within}}}}$$ <br>
+                    $$F_{{obt}} = \\frac{{{round(ms_between,2)}}}{{{round(ms_within,2)}}}$$ <br>
+                    $$F_{{obt}} = {{{round(self.obt, 2)}}}$$ <br><br>
+                """))
 
                 # effect size
                 self.effect_size = round(round(ss_between, 2)/round(ss_total, 2), 2)
                 
-                print("calculating eta squared...")
-                display(Markdown(f"$ \\eta^2 = \\frac{{SS{{between}}}}{{SS_{{total}}}} $"))
-                display(Markdown(f"$ \\eta^2 = \\frac{{{round(ss_between, 2)}}}{{{round(ss_total, 2)}}} $"))
-                display(Markdown(f"$ \\eta^2 = {{{round(self.effect_size, 2)}}} $"))
-                print() # blank space
-
+                display(Markdown(f"""Calculate $\\eta^2$ <br>
+                    $$\\eta^2 = \\frac{{SS{{between}}}}{{SS_{{total}}}}$$ <br>
+                    $$\\eta^2 = \\frac{{{round(ss_between, 2)}}}{{{round(ss_total, 2)}}}$$ <br>
+                    $$\\eta^2 = {{{round(self.effect_size, 2)}}}$$ <br><br>
+                """))
 
             elif test == "repeated-measures":
                 ms_error = round(round(ss_error,2)/df_error, 2) # type: ignore
 
-                display(Markdown(f"$ MS_{{error}} = \\frac{{SS_{{error}}}}{{df_{{error}}}} $"))
-                display(Markdown(f"$ MS_{{error}} = \\frac{{{round(ss_error, 2)}}}{{{df_error}}} $")) # type: ignore
-                display(Markdown(f"$ MS_{{error}} = {{{round(ms_error, 2)}}} $"))
-                print() # blank space
+                display(Markdown(f"""$$MS_{{error}} = \\frac{{SS_{{error}}}}{{df_{{error}}}}$$ <br>
+                    $$MS_{{error}} = \\frac{{{round(ss_error, 2)}}}{{{df_error}}}$$ <br> 
+                    $$MS_{{error}} = {{{round(ms_error, 2)}}}$$ <br><br>
+                """)) # type: ignore
 
                 # F value
                 self.obt = round(ms_between/ms_error, 2)
 
-                print("calculating the f ratio...")
-                display(Markdown(f"$ F_{{obt}} = \\frac{{MS_{{between}}}}{{MS_{{error}}}} $"))
-                display(Markdown(f"$ F_{{obt}} = \\frac{{{round(ms_between,2)}}}{{{round(ms_error,2)}}} $"))
-                display(Markdown(f"$ F_{{obt}} = {{{round(self.obt, 2)}}} $"))
-                print() # blank space
+                display(Markdown(f"""Calculate the *F*-Ratio <br>
+                    $$F_{{obt}} = \\frac{{MS_{{between}}}}{{MS_{{error}}}}$$ <br>
+                    $$F_{{obt}} = \\frac{{{round(ms_between,2)}}}{{{round(ms_error,2)}}}$$ <br>
+                    $$F_{{obt}} = {{{round(self.obt, 2)}}}$$ <br><br>
+                """))
 
                 # effect size
                 self.effect_size = round(round(ss_between, 2)/(round(ss_total, 2) - round(ss_subjects, 2)), 2) # type: ignore
                 
-                print("calculating partial eta squared...")
-                display(Markdown(f"$ \\eta_p^2 = \\frac{{SS{{between}}}}{{SS_{{total}} - SS_{{subjects}}}} $"))
-                display(Markdown(f"$ \\eta_p^2 = \\frac{{{round(ss_between, 2)}}}{{{{{round(ss_total, 2)}}} - {{{round(ss_subjects, 2)}}}}} $")) # type: ignore
-                display(Markdown(f"$ \\eta_p^2 = \\frac{{{round(ss_between, 2)}}}{{{round(ss_total, 2) - round(ss_subjects, 2)}}} $")) # type: ignore
-                display(Markdown(f"$ \\eta_p^2 = {{{round(self.effect_size, 2)}}} $"))
-                print() # blank space
+                display(Markdown(f"""Calculate $\\eta^2$ <br>
+                    $$\\eta_p^2 = \\frac{{SS{{between}}}}{{SS_{{total}} - SS_{{subjects}}}}$$ <br>
+                    $$\\eta_p^2 = \\frac{{{round(ss_between, 2)}}}{{{{{round(ss_total, 2)}}} - {{{round(ss_subjects, 2)}}}}}$$ <br>
+                    $$\\eta_p^2 = \\frac{{{round(ss_between, 2)}}}{{{round(ss_total, 2) - round(ss_subjects, 2)}}}$$ <br> 
+                    $$\\eta_p^2 = {{{round(self.effect_size, 2)}}}$$ <br><br>
+                """)) # type: ignore               
 
             else:
                 raise ValueError("test accepts: 'one-way', 'repeated-measures'")
