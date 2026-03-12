@@ -92,7 +92,7 @@ class RandomData():
             display(Markdown(f"""<br>The necessary summary statistics for these data<br>
                             $$M_A = {{{self.means[0]}}}$$
                             $${{\\sigma}} = {{{self.pop_sd}}}$$
-                            $$n = {{{len(self.df['A'])}}}$$<br><br>
+                            $$n = {{{len(self.df['A'])}}}$$<br>
                             """)) #${{\\sigma_A}} = {{{round(self.df['A'].std(ddof = 0), 2)}}}$<br><br>
         elif self.test == "one-sample t-test":
             display(Markdown(f"Given the following data, is the mean of $Group_A$ {text} ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$ <br><br>"))
@@ -101,7 +101,7 @@ class RandomData():
             display(Markdown(f"""<br> The necessary summary statistics for these data<br>
                                 $$M_A = {{{self.means[0]}}}$$
                                 $$s^2 = {{{self.var[0]}}}$$
-                                $$n = {{{len(self.df['A'])}}}$$<br><br>
+                                $$n = {{{len(self.df['A'])}}}$$<br>
                                 """))
         elif self.test == "independent-samples t-test":
             display(Markdown(f"Given the following between-subjects data, is the mean of $Group_A$ {text} the mean of $Group_B$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$<br><br>"))
@@ -109,7 +109,7 @@ class RandomData():
             display(Markdown(f"""<br> The necessary summary Statistis for these data:<br>
                              $$M_A = {{{self.means[0]}}}, M_B = {{{self.means[1]}}}$$
                              $$SS_A = {{{self.ss[0]}}}, SS_B = {{{self.ss[1]}}}$$
-                             $$n_A = {{{len(self.df['A'])}}}, n_B = {{{len(self.df['B'])}}}$$<br><br>
+                             $$n_A = {{{len(self.df['A'])}}}, n_B = {{{len(self.df['B'])}}}$$<br>
                              """))
         elif self.test == "dependent-samples t-test":
             display(Markdown(f"Given the following within-subjects data, is $M_D$ {text} ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$<br><br>"))
@@ -117,7 +117,7 @@ class RandomData():
             display(self.df.style.hide(axis="index"))
             display(Markdown(f"""<br>Summary statistics for these data:<br>
                              $$M_A = {{{self.means[0]}}}, M_B = {{{self.means[1]}}}$$
-                             $$n = {{{len(self.df['A'])}}}$$ <br><br>
+                             $$n = {{{len(self.df['A'])}}}$$ <br>
                              """))
         elif self.test == "one-way ANOVA":
             display(Markdown(f"Given the following between-subjects data, use a one-way ANOVA with $\\alpha = {{{self.alpha}}}$<br><br>"))
@@ -217,6 +217,45 @@ class RandomData():
         else:
             self.null = 0
         return self.null
+
+
+    def write_hypotheses(self):
+        # set the symbols for the hypotheses based on one/two tailed and direction of effect
+        if self.tails == 2:
+            alt_operation = "\\ne"
+            null_operation = "="
+        elif self.tails == 1:
+            if self.crit_values["direction"] == "increase" :
+                alt_operation = "\\gt"
+                null_operation = "\\leq"
+            elif self.crit_values["direction"] == "decrease":
+                alt_operation = "\\lt"
+                null_operation = "\\geq"
+            else:
+                return ValueError("direction error for generating question")
+        else:
+            return ValueError("tails error when writing hypotheses")
+
+        # use display and markdown to write the null and alternative hypotheses    
+        if self.test in ["one-sample t-test", "z"]:
+            display(Markdown(f"""State the Hypotheses <br>
+                            $$H_0: \\mu {null_operation} {self.null}$$
+                            $$H_1: \\mu {alt_operation} {self.null}$$ <br>
+                            """))
+        elif self.test == "independent-samples t-test":  
+            display(Markdown(f"""State the Hypotheses <br>
+                            $$H_0: \\mu_A - \\mu_B {null_operation} 0$$
+                            $$H_1: \\mu_A - \\mu_B {alt_operation} 0$$ <br>
+                            """))
+        elif self.test == "dependent-samples t-test":
+            display(Markdown(f"""State the Hypotheses <br>
+                            $$H_0: \\mu_D {null_operation} {self.null}$$
+                            $$H_1: \\mu_D {alt_operation} {self.null}$$ <br>
+                            """))
+        elif self.test in ["one-way ANOVA", "repeated-measures ANOVA"]:
+            pass
+        else:
+            return ValueError("test specification error in method to write the hypotheses")
 
 
     def sum_of_squares(self):  # calculating the values presented in the problem.
@@ -394,6 +433,7 @@ class RandomData():
             self.set_null_hypothesis()
             self.critical_value()
             self.generate_question()
+            self.write_hypotheses()
 
             # calculate the standard error
             sem = round(math.sqrt(round((self.var[0]/self.n),2)),2)
@@ -437,6 +477,7 @@ class RandomData():
             self.set_null_hypothesis()
             self.critical_value()
             self.generate_question()
+            self.write_hypotheses()
             
             # primary calculations
             pooled_var = round(((self.ss[0] + self.ss[1]) / ((self.n - 1) + (self.n - 1))), 2)
@@ -493,6 +534,7 @@ class RandomData():
             self.set_null_hypothesis()
             self.critical_value()
             self.generate_question()
+            self.write_hypotheses()
 
             # primary calculations
             # need to gather the difference scores
@@ -583,6 +625,7 @@ class RandomData():
             self.set_null_hypothesis()
             self.critical_value()
             self.generate_question()
+            self.write_hypotheses()
 
             # Primary Calculations
             big_n = self.groups * self.n
