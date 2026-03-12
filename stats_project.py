@@ -174,9 +174,9 @@ class RandomData():
             display(Markdown("The results: <br><br>")) 
             # determine significance
             if self.significance:
-                display(Markdown(f"reject the null hypothesis, results are significant, *t*({self.crit_values['degf']}) = {self.obt}, *p* < {self.alpha}, *d* = {self.effect_size}<br><br>"))
+                display(Markdown(f"reject the null hypothesis, results are significant, <br> *t*({self.crit_values['degf']}) = {self.obt}, *p* < {self.alpha}, *d* = {self.effect_size}<br><br>"))
             elif not self.significance:
-                display(Markdown(f"fail to reject the null hypothesis, results not significant, *t*({self.crit_values['degf']}) = {self.obt}, *p* > {self.alpha}, *d* = {self.effect_size}<br><br>"))
+                display(Markdown(f"fail to reject the null hypothesis, results not significant, <br> *t*({self.crit_values['degf']}) = {self.obt}, *p* > {self.alpha}, *d* = {self.effect_size}<br><br>"))
             else:
                 return ValueError("significance boolean error in writing results")
         elif self.test == "z":
@@ -193,9 +193,9 @@ class RandomData():
             # determine significance
             display(Markdown("The results: <br><br>"))
             if self.significance:
-                display(Markdown(f"reject the null hypothesis, results are significant, *z* = {self.obt}, *p* < {self.alpha}, *d* = {self.effect_size}<br><br>"))
+                display(Markdown(f"reject the null hypothesis, results are significant, <br> *z* = {self.obt}, *p* < {self.alpha}, *d* = {self.effect_size}<br><br>"))
             elif not self.significance:
-                display(Markdown(f"fail to reject the null hypothesis, results not significant, *z* = {self.obt}, *p* > {self.alpha}, *d* = {self.effect_size}<br><br>"))
+                display(Markdown(f"fail to reject the null hypothesis, results not significant, <br> *z* = {self.obt}, *p* > {self.alpha}, *d* = {self.effect_size}<br><br>"))
             else:
                 return ValueError("significance boolean error in writing results")
         elif self.test in ["one-way ANOVA", "repeated-measures ANOVA"]:
@@ -203,9 +203,9 @@ class RandomData():
             display(Markdown(f"$F_{{crit}} = {{{self.crit_values['positive']}}}, \\alpha = {{{self.alpha}}}$ <br><br>"))
             display(Markdown("The results: <br><br>"))
             if self.significance:
-                display(Markdown(f"reject the null hypothesis, results are significant, $F({{{self.crit_values['degf_n']}}}, {{{self.crit_values['degf_d']}}}) = {{{self.obt}}}, p < {{{self.alpha}}}, \\eta^2 = {{{self.effect_size}}}$"))
+                display(Markdown(f"reject the null hypothesis, results are significant, <br> $F({{{self.crit_values['degf_n']}}}, {{{self.crit_values['degf_d']}}}) = {{{self.obt}}}, p < {{{self.alpha}}}, \\eta^2 = {{{self.effect_size}}}$"))
             elif not self.significance:
-                display(Markdown(f"fail to reject the null hypothesis, results not significant, $F({{{self.crit_values['degf_n']}}}, {{{self.crit_values['degf_d']}}}) = {{{self.obt}}}, p > {{{self.alpha}}}, \\eta^2 = {{{self.effect_size}}}$"))
+                display(Markdown(f"fail to reject the null hypothesis, results not significant, <br> $F({{{self.crit_values['degf_n']}}}, {{{self.crit_values['degf_d']}}}) = {{{self.obt}}}, p > {{{self.alpha}}}, \\eta^2 = {{{self.effect_size}}}$"))
 
         else:
             return ValueError("test specificaion error when writing results")
@@ -388,6 +388,7 @@ class RandomData():
             self.set_null_hypothesis()
             self.critical_value()
             self.generate_question()
+            self.write_hypotheses()
 
             # calculate the standard error
             # TODO double check the work here to make sure it is accurate
