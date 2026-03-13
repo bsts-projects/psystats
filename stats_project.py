@@ -131,7 +131,9 @@ class RandomData():
         elif self.test == "repeated-measures ANOVA":
             display(Markdown(f"Given the following within-subjects data, use a repeated-measures ANOVA with $\\alpha = {{{self.alpha}}}$"))
             display(self.df.style.hide(axis="index"))
-            display(Markdown(f"$G = {{{self.g}}} \\quad \\Sigma X^2 = {{{self.sum_squared_scores}}} \\quad k = {{{self.groups}}} \\quad N = {{{self.groups * self.n}}}$ <br>"))
+            display(Markdown(f"""<br>Summary statistics for these data:<br>
+                             $G = {{{self.g}}} \\quad \\Sigma X^2 = {{{self.sum_squared_scores}}} \\quad k = {{{self.groups}}} \\quad N = {{{self.groups * self.n}}}$ <br>
+                             """))
             letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
             for group in range(self.groups):
                 display(Markdown(f"$T_{{{letters[group]}}} = {{{self.sums[group]}}} \\quad SS_{{{letters[group]}}} = {{{self.ss[group]}}}$ <br>"))  
@@ -161,16 +163,6 @@ class RandomData():
     def write_result(self):
         # TODO add more elaborate functionality for the results
         if self.test in ["independent-samples t-test", "one-sample t-test", "dependent-samples t-test"]:
-            display(Markdown("The decision criteria: <br><br>"))
-            # print the critical value for the test
-            if self.tails == 2:
-                display(Markdown(f"$t_{{crit}} = \\pm{{{self.crit_values['positive']}}}, \\alpha_{{two-tailed}} = {{{self.alpha}}}, df = {{{self.crit_values['degf']}}}$<br><br>"))
-            elif self.tails == 1 and self.crit_values["direction"] == "increase":
-                display(Markdown(f"$t_{{crit}} = +{{{self.crit_values['positive']}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}, df = {{{self.crit_values['degf']}}}$<br><br>"))
-            elif self.tails == 1 and self.crit_values["direction"] == "decrease":
-                display(Markdown(f"$t_{{crit}} = {{{self.crit_values['negative']}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}, df = {{{self.crit_values['degf']}}}$<br><br>"))
-            else:
-                return ValueError("tails error in writing results")
             display(Markdown("The results: <br><br>")) 
             # determine significance
             if self.significance:
@@ -180,16 +172,6 @@ class RandomData():
             else:
                 return ValueError("significance boolean error in writing results")
         elif self.test == "z":
-            # print the critical value of t
-            display(Markdown("The decision criteria: <br><br>"))
-            if self.tails == 2:
-                display(Markdown(f"$z_{{crit}} = \\pm{{{self.crit_values['positive']}}}, \\alpha_{{two-tailed}} = {{{self.alpha}}}$<br><br>"))
-            elif self.tails == 1 and self.crit_values["direction"] == "increase":
-                display(Markdown(f"$z_{{crit}} = +{{{self.crit_values['positive']}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}$<br><br>"))
-            elif self.tails == 1 and self.crit_values["direction"] == "decrease":
-                display(Markdown(f"$z_{{crit}} = {{{self.crit_values['negative']}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}$<br><br>"))
-            else:
-                return ValueError("tails error in writing results")
             # determine significance
             display(Markdown("The results: <br><br>"))
             if self.significance:
@@ -199,17 +181,45 @@ class RandomData():
             else:
                 return ValueError("significance boolean error in writing results")
         elif self.test in ["one-way ANOVA", "repeated-measures ANOVA"]:
-            display(Markdown("The decision criteria: <br><br>"))
-            display(Markdown(f"$F_{{crit}} = {{{self.crit_values['positive']}}}, \\alpha = {{{self.alpha}}}$ <br><br>"))
             display(Markdown("The results: <br><br>"))
             if self.significance:
                 display(Markdown(f"reject the null hypothesis, results are significant, <br> $F({{{self.crit_values['degf_n']}}}, {{{self.crit_values['degf_d']}}}) = {{{self.obt}}}, p < {{{self.alpha}}}, \\eta^2 = {{{self.effect_size}}}$"))
             elif not self.significance:
                 display(Markdown(f"fail to reject the null hypothesis, results not significant, <br> $F({{{self.crit_values['degf_n']}}}, {{{self.crit_values['degf_d']}}}) = {{{self.obt}}}, p > {{{self.alpha}}}, \\eta^2 = {{{self.effect_size}}}$"))
-
         else:
             return ValueError("test specificaion error when writing results")
-        
+
+
+    def write_decision_criteria(self):
+        # TODO add more elaborate functionality for the results
+        if self.test in ["independent-samples t-test", "one-sample t-test", "dependent-samples t-test"]:
+            display(Markdown("<br>The decision criteria: <br><br>"))
+            # print the critical value for the test
+            if self.tails == 2:
+                display(Markdown(f"$t_{{crit}} = \\pm{{{self.crit_values['positive']}}}, \\alpha_{{two-tailed}} = {{{self.alpha}}}, df = {{{self.crit_values['degf']}}}$<br><br>"))
+            elif self.tails == 1 and self.crit_values["direction"] == "increase":
+                display(Markdown(f"$t_{{crit}} = +{{{self.crit_values['positive']}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}, df = {{{self.crit_values['degf']}}}$<br><br>"))
+            elif self.tails == 1 and self.crit_values["direction"] == "decrease":
+                display(Markdown(f"$t_{{crit}} = {{{self.crit_values['negative']}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}, df = {{{self.crit_values['degf']}}}$<br><br>"))
+            else:
+                return ValueError("tails error in writing results")
+        elif self.test == "z":
+            # print the critical value of t
+            display(Markdown("<br>The decision criteria: <br><br>"))
+            if self.tails == 2:
+                display(Markdown(f"$z_{{crit}} = \\pm{{{self.crit_values['positive']}}}, \\alpha_{{two-tailed}} = {{{self.alpha}}}$<br><br>"))
+            elif self.tails == 1 and self.crit_values["direction"] == "increase":
+                display(Markdown(f"$z_{{crit}} = +{{{self.crit_values['positive']}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}$<br><br>"))
+            elif self.tails == 1 and self.crit_values["direction"] == "decrease":
+                display(Markdown(f"$z_{{crit}} = {{{self.crit_values['negative']}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}$<br><br>"))
+            else:
+                return ValueError("tails error in writing results")
+        elif self.test in ["one-way ANOVA", "repeated-measures ANOVA"]:
+            display(Markdown("<br> The decision criteria: <br><br>"))
+            display(Markdown(f"$F_{{crit}} = {{{self.crit_values['positive']}}}, \\alpha = {{{self.alpha}}}$ <br><br>"))
+        else:
+            return ValueError("test specificaion error when writing results")
+
         
     def set_null_hypothesis(self):
         if self.test in ["z", "one-sample t-test"]:
@@ -389,6 +399,7 @@ class RandomData():
             self.critical_value()
             self.generate_question()
             self.write_hypotheses()
+            self.write_decision_criteria()
 
             # calculate the standard error
             # TODO double check the work here to make sure it is accurate
@@ -435,6 +446,7 @@ class RandomData():
             self.critical_value()
             self.generate_question()
             self.write_hypotheses()
+            self.write_decision_criteria()
 
             # calculate the standard error
             sem = round(math.sqrt(round((self.var[0]/self.n),2)),2)
@@ -479,6 +491,7 @@ class RandomData():
             self.critical_value()
             self.generate_question()
             self.write_hypotheses()
+            self.write_decision_criteria()
             
             # primary calculations
             pooled_var = round(((self.ss[0] + self.ss[1]) / ((self.n - 1) + (self.n - 1))), 2)
@@ -536,6 +549,7 @@ class RandomData():
             self.critical_value()
             self.generate_question()
             self.write_hypotheses()
+            self.write_decision_criteria()
 
             # primary calculations
             # need to gather the difference scores
@@ -559,8 +573,16 @@ class RandomData():
             self.df['D^2'] = self.df['D'].apply(lambda x: x ** 2)
             sum_sqared_scores = self.df['D^2'].sum()
             ss = round(sum_sqared_scores - round((sum_d ** 2)/n, 2), 2)
+            
             # print the dataframe with the squared difference scores
+            display(Markdown("Create a column for the squared difference scores $D^2$"))
             display(self.df.style.hide(axis="index"))
+
+            # summary stats for the difference scores
+            display(Markdown(f"""<br>New Summary statistics for the difference scores:<br>
+                             $$M_D = {{{mean_d}}}, \\quad \\Sigma{{D}} = {{{sum_d}}}, \\quad \\Sigma{{D^2}} = {{{sum_sqared_scores}}}$$ <br>
+                             """))
+
             display(Markdown(f"""<br>Calculate *SS* of the difference scores <br>
                              $$SS_D = \\Sigma D^2 - \\frac{{(\\Sigma D)^2}}{{n}}$$ <br>
                              $$SS_D = {{{sum_sqared_scores}}} - \\frac{{{sum_d ** 2}}}{{{n}}}$$ <br>
@@ -627,6 +649,7 @@ class RandomData():
             self.critical_value()
             self.generate_question()
             self.write_hypotheses()
+            self.write_decision_criteria()
 
             # Primary Calculations
             big_n = self.groups * self.n
@@ -699,6 +722,7 @@ class RandomData():
                     $$df_{{error}} = {{{df_error}}}$$ <br><br>
                 """))
                 
+                display(Markdown("Calculate person sums and add a new column (*P*)"))
                 self.df["P"] = self.df.drop(columns=['ID']).sum(axis = 1)
                 display(self.df.style.hide(axis="index"))
                 print()
