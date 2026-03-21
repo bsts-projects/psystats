@@ -1,0 +1,29 @@
+---
+title: Two-Factor ANOVA
+subtitle: Practice Problems for PSY 241
+author: Guenther, Benjamin A.
+format: 
+  revealjs:
+    incremental: false
+    html-math-method: mathjax
+    self-contained-math: true
+    embed-resources: true
+jupyter: python3
+---
+
+```{python}
+import importlib
+import stats_project 
+import random
+
+# This is to clear cache and reload after edits to the .py file
+importlib.reload(stats_project)
+from stats_project import FactorialData
+```
+
+## Problem 1 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+FactorialData(design = (2, 3), group_n = 10).factorial_ANOVA()
+```

@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import random, math
+import itertools
 from scipy import stats
 from IPython.display import Markdown, display
 
@@ -40,9 +41,10 @@ class RandomData():
         df = pd.DataFrame()
         # list of letters for group labels
         letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
+        
         self.pop_mean = random.randint(10, 50)
         self.pop_sd = round(self.pop_mean * random.uniform(0.10, 0.30))
+            
         # create data for each group and add it to the dataframe
         for group in range(self.groups):
             mean = self.pop_mean #random.randint(10, 50)
@@ -65,7 +67,6 @@ class RandomData():
 
     def generate_question(self):
         # determine the test type
-
         if self.tails == 2:
             text = "significantly different from"
         elif self.tails == 1:
@@ -78,13 +79,10 @@ class RandomData():
         else:
             return ValueError("tails error for question generation")    
 
-        #display(self.df.style.hide(axis="index"))
-
+        # add ID column for repeated measures data
         if self.test in ["dependent-samples t-test", "repeated-measures ANOVA"]:
             id_col = list(range(1, self.n + 1))
             self.df.insert(loc = 0, column = "ID", value = id_col)
-        else:
-            pass
         
         if self.test == "z":
             display(Markdown(f"Given the following data, is the mean of $Group_A$ {text} the population mean: $\\mu = {{{self.null}}}$? <br><br>Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$<br><br>"))
@@ -93,10 +91,9 @@ class RandomData():
                             $$M_A = {{{self.means[0]}}}$$
                             $${{\\sigma}} = {{{self.pop_sd}}}$$
                             $$n = {{{len(self.df['A'])}}}$$<br>
-                            """)) #${{\\sigma_A}} = {{{round(self.df['A'].std(ddof = 0), 2)}}}$<br><br>
+                            """)) 
         elif self.test == "one-sample t-test":
             display(Markdown(f"Given the following data, is the mean of $Group_A$ {text} ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$ <br><br>"))
-            #display(Markdown(self.df.to_markdown(index=False)))
             display(self.df.style.hide(axis="index"))
             display(Markdown(f"""<br> The necessary summary statistics for these data<br>
                                 $$M_A = {{{self.means[0]}}}$$
@@ -113,7 +110,6 @@ class RandomData():
                              """))
         elif self.test == "dependent-samples t-test":
             display(Markdown(f"Given the following within-subjects data, is $M_D$ {text} ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$<br><br>"))
-            #self.df.index.name = 'ID'
             display(self.df.style.hide(axis="index"))
             display(Markdown(f"""<br>Summary statistics for these data:<br>
                              $$M_A = {{{self.means[0]}}}, M_B = {{{self.means[1]}}}$$
@@ -137,6 +133,10 @@ class RandomData():
             letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
             for group in range(self.groups):
                 display(Markdown(f"$T_{{{letters[group]}}} = {{{self.sums[group]}}} \\quad SS_{{{letters[group]}}} = {{{self.ss[group]}}}$ <br>"))  
+        elif self.test == "factorial_ANOVA":
+            display(Markdown(f"Given the following data, use a use a 2-Factor ANOVA with $\\alpha = {{{self.alpha}}}$ to test to analyze the following data"))
+            #TODO create the summary data table for the factorial ANOVA
+            #TODO manage and display the necessay summary statistics in addtion to those presented in the table.
         else:
             return ValueError("test-type specification error in question geneneration")
        
@@ -345,7 +345,6 @@ class RandomData():
                 return ValueError("crit not determined")
             self.crit_values = {"positive": crit, "negative": -crit, "degf": degf}
 
-        # TODO manually specify crit values for z scores.  or figure out why the math is incorrect
         elif self.test == "z":
             self.tails = random.choice([1, 2])
             if self.tails == 1:
@@ -370,7 +369,9 @@ class RandomData():
             crit = round(stats.f.ppf(q = (1 - self.alpha), dfn = degf_b, dfd = degf_e), 2) # type: ignore
             self.crit_values = {"positive": crit, "degf_d": degf_e, "degf_n": degf_b}
 
-
+        elif self.test == "factorial_ANOVA":
+            # create a dict to hold all the factorial data here
+            pass
         else:
             raise ValueError("incorrect test specification - degrees of freedom")
 
@@ -828,3 +829,221 @@ class RandomData():
             self.significance = self.final_decision()
             self.write_result()
             print() # blank space
+
+"""
+    def generate_factorial_data(self, design: tuple):
+        # 1. Define Factors and Levels
+        factor_a = [f'A{level+1}' for level in range(design[0])]
+        factor_b = [f'B{level+1}' for level in range(design[1])]
+        n = self.n # Number of samples per combination
+
+        # 2. Generate all combinations (e.g., 2x3 = 6 combinations)
+        combinations = list(itertools.product(factor_a, factor_b))
+
+        # 3. Define distribution parameters for each combination
+        # Mean, StdDev for each (A1B1, A1B2, A1B3, A2B1, A2B2, A2B3)
+        parameters = []
+        for condition in combinations:
+            mean = self.pop_mean
+            sd = self.pop_sd
+            same_diff = random.randint(0,3)
+            if same_diff >= 1:
+                effect =  round(mean * random.uniform(0.10, 0.50))
+                mean +=  effect
+            parameters.append((mean, sd))
+
+        # 4. Generate data
+        data = []
+        for i, (a, b) in enumerate(combinations):
+            # Draw random samples from normal distribution using params[i]
+            values = np.random.normal(loc=parameters[i][0], scale=parameters[i][1], size=n).astype(int)
+            for val in values:
+                data.append({'Factor_A': a, 'Factor_B': b, 'X': val})
+
+        # 5. Create DataFrame
+        df = pd.DataFrame(data)
+
+        return df
+
+
+    def factorial_ANOVA(self, design: tuple):
+        self.factorial_data = {}
+        self.test = "factorial_ANOVA"
+        self.df = self.generate_factorial_data(design)
+
+        
+        # Overall Values
+        grand_sum = self.df['X'].sum()
+        grand_n = self.df['X'].count()
+        self.df['sum_squared'] = self.df['X'].apply(lambda x: x ** 2)
+        grand_sum_squared = self.df['sum_squared'].sum()
+        grand_ss = round(grand_sum_squared - round((grand_sum ** 2)/grand_n, 2),2)
+        
+
+        # Factor A
+        sums_factor_a = self.df.groupby('Factor_A')['X'].sum()
+        sum_sq_fa = self.df.groupby('Factor_A')['sum_squared'].sum()
+        n_factor_a = self.df.groupby('Factor_A')['X'].count()
+        self.factorial_data["factor_A"] = [(x,y,z) for (x,y,z) in zip()]
+
+        ss_fa = []
+        for sum, ss, n in zip(sums_factor_a, sum_sq_fa, n_factor_a):
+            ss_vals = ss - round((sum ** 2)/n, 2)
+            ss_fa.append(round(ss_vals, 2))
+
+        # Factor B
+        sums_factor_b = self.df.groupby('Factor_B')['X'].sum()
+        sum_sq_fb = self.df.groupby('Factor_B')['sum_squared'].sum()
+        n_factor_b = self.df.groupby('Factor_B')['X'].count()
+        
+        ss_fb = []
+        for sum, ss, n in zip(sums_factor_b, sum_sq_fb, n_factor_b):
+            ss_vals = ss - round((sum ** 2)/n, 2)
+            ss_fb.append(round(ss_vals, 2))
+
+        print(grand_ss, ss_fa, ss_fb)
+"""
+
+class FactorialData:
+    def __init__(self, design: tuple, group_n: int):
+        self.n = group_n
+        self.base = RandomData(n = group_n)
+        self.design = design
+        self.df = self.generate_factorial_data()
+        self.summary = {}
+
+
+    def generate_factorial_data(self):
+        # 1. Define Factors and Levels
+        factor_a = [f'A{level+1}' for level in range(self.design[0])]
+        factor_b = [f'B{level+1}' for level in range(self.design[1])]
+        n = self.base.n # Number of samples per combination
+
+        # 2. Generate all combinations (e.g., 2x3 = 6 combinations)
+        conditions = list(itertools.product(factor_a, factor_b))
+        self.condition_list = []
+        for a in factor_a:
+            for b in factor_b:
+                self.condition_list.append(f"{a}{b}")
+        
+        # 3. Define distribution parameters for each combination
+        # Mean, StdDev for each (A1B1, A1B2, A1B3, A2B1, A2B2, A2B3)
+        parameters = []
+        for condition in conditions:
+            mean = self.base.pop_mean
+            sd = self.base.pop_sd
+            same_diff = random.randint(0,3)
+            if same_diff >= 1:
+                effect =  round(mean * random.uniform(0.10, 0.50))
+                mean +=  effect
+            parameters.append((mean, sd))
+
+        # 4. Generate data
+        data = []
+        for i, (a, b) in enumerate(conditions):
+            # Draw random samples from normal distribution using params[i]
+            values = np.random.normal(loc=parameters[i][0], scale=parameters[i][1], size=n).astype(int)
+            for val in values:
+                data.append({'Factor_A': a, 'Factor_B': b, 'X': val})
+
+        # 5. Create DataFrame
+        df = pd.DataFrame(data)
+
+        return df
+
+
+    def combined_values(self):
+        grand_sum = self.df['X'].sum()
+        grand_n = self.df['X'].count()
+        self.df['sum_squared'] = self.df['X'].apply(lambda x: x ** 2)
+        grand_sum_squared = self.df['sum_squared'].sum()
+        grand_ss = round(grand_sum_squared - round((grand_sum ** 2)/grand_n, 2),2)
+        self.summary.update({"grand_ss": grand_ss, 
+                             "total_n": grand_n, 
+                             "grand_sum_scores": grand_sum,
+                             "grand_sum_squared_scores": grand_sum_squared})
+
+
+    def factor_values(self):
+        for factor in ["Factor_A", "Factor_B"]:
+            self.summary.update({
+                f"x_sums_{factor}": [i for i in self.df.groupby(factor)['X'].sum()],
+                f"x_sq_sum_{factor}": [i for i in self.df.groupby(factor)['sum_squared'].sum()],
+                f"n_{factor}": [i for i in self.df.groupby(factor)['X'].count()]
+            })
+            means = []
+            ss_values = []
+            for sum, ss, n in zip(self.summary[f"x_sums_{factor}"], self.summary[f"x_sq_sum_{factor}"], self.summary[f"n_{factor}"]):
+                ss_vals = ss - round((sum ** 2)/n, 2)
+                ss_values.append(round(ss_vals, 2))
+                means.append(round(sum / n, 2))
+            self.summary[f"ss_values_{factor}"] = ss_values
+            self.summary[f"means_{factor}"] = means
+
+
+    
+    def summary_by_group(self):
+        t = [i for i in self.df.groupby(['Factor_A', 'Factor_B'])['X'].sum()]
+        sum_sqs = [i for i in self.df.groupby(['Factor_A', 'Factor_B'])['sum_squared'].sum()]
+        ns = [i for i in self.df.groupby(['Factor_A', 'Factor_B'])['X'].count()]
+        ss_values = []
+        means = []
+        for sum, ss, n in zip(t, sum_sqs, ns):
+            ss_vals = ss - round((sum ** 2)/n, 2)
+            ss_values.append(round(ss_vals, 2))
+            means.append(round(sum / n, 2))
+
+        group_totals = {f'T_{level}': t for level, t in zip(self.condition_list, t)}
+        #group_sums = {f'sum_sq_{level}': ss for level, ss in zip(self.condition_list, sum_sqs)}
+        group_ns = {f'n_{level}': n for level, n in zip(self.condition_list, ns)}
+        group_ss = {f'SS_{level}': ss for level, ss in zip(self.condition_list, ss_values)}
+        group_means = {f'M_{level}': m for level, m in zip(self.condition_list, means)}
+
+        # This is a working display of all of the summary data for each individual condition.  It's commented out to work on reformatting into a table for display
+        """
+        for condition in self.condition_list:
+            display(Markdown(f"$T_{{{condition}}} = {{{group_totals[f"T_{condition}"]}}} \\quad M_{{{condition}}} = {{{group_means[f"M_{condition}"]}}}\\quad SS_{{{condition}}} = {{{group_ss[f"SS_{condition}"]}}} \\quad n_{{{condition}}} = {{{group_ns[f"n_{condition}"]}}}$ <br>"))    
+        """
+        
+
+        
+
+    def collapse_by_factor(self, factor: str):
+        levels = [f"{factor[-1]}_{i + 1}" for i in range(len(self.summary[f'n_{factor}']))]
+        for i, level in enumerate(levels):
+            display(Markdown(f"$T_{{{level}}} = {{{self.summary[f"x_sums_{factor}"][i]}}} \\quad M_{{{level}}} = {{{self.summary[f"means_{factor}"][i]}}}\\quad SS_{{{level}}} = {{{self.summary[f"ss_values_{factor}"][i]}}} \\quad n_{{{level}}} = {{{self.summary[f"n_{factor}"][i]}}}$ <br>")) 
+
+
+    
+    def partition_ss(self):
+        for factor in ["Factor_A", "Factor_B"]:
+            levels = [f"{factor[-1]}_{i + 1}" for i in range(len(self.summary[f'n_{factor}']))]
+            for i, level in enumerate(levels):
+                pass
+
+
+
+    def factorial_ANOVA(self):
+        self.factorial_data = {}
+        self.test = "factorial_ANOVA"
+        self.combined_values()
+        self.factor_values()
+
+
+        display(Markdown("Full Group Summary Data"))
+        self.summary_by_group()
+
+        display(Markdown("Factor A Summary Data"))
+        self.collapse_by_factor("Factor_A")
+
+        display(Markdown("Factor B Summary Data"))
+        self.collapse_by_factor("Factor_B")
+
+        
+        
+
+
+if __name__ in "__main__":
+    #RandomData(n = 2).factorial_ANOVA((2,3))
+    FactorialData(design = (2, 3), group_n = 2).factorial_ANOVA()
+
