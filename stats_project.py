@@ -968,6 +968,7 @@ class FactorialData:
     def factor_values(self):
         for factor in ["Factor_A", "Factor_B"]:
             self.summary.update({
+                f"levels_{factor}": len(self.df.groupby(factor)['X'].count()),
                 f"x_sums_{factor}": [i for i in self.df.groupby(factor)['X'].sum()],
                 f"x_sq_sum_{factor}": [i for i in self.df.groupby(factor)['sum_squared'].sum()],
                 f"n_{factor}": [i for i in self.df.groupby(factor)['X'].count()]
@@ -980,7 +981,6 @@ class FactorialData:
                 means.append(round(sum / n, 2))
             self.summary[f"ss_values_{factor}"] = ss_values
             self.summary[f"means_{factor}"] = means
-
 
     
     def summary_by_group(self):
@@ -1000,14 +1000,13 @@ class FactorialData:
         self.group_ss = {f'SS_{level}': ss for level, ss in zip(self.condition_list, ss_values)}
         group_means = {f'M_{level}': m for level, m in zip(self.condition_list, means)}
 
-        # This is a working display of all of the summary data for each individual condition.  It's commented out to work on reformatting into a table for display
-        """
+        #TODO format into a table for problem display
         for condition in self.condition_list:
-            display(Markdown(f"$T_{{{condition}}} = {{{group_totals[f"T_{condition}"]}}} \\quad M_{{{condition}}} = {{{group_means[f"M_{condition}"]}}}\\quad SS_{{{condition}}} = {{{group_ss[f"SS_{condition}"]}}} \\quad n_{{{condition}}} = {{{group_ns[f"n_{condition}"]}}}$ <br>"))    
-        """
+            display(Markdown(f"$T_{{{condition}}} = {{{group_totals[f"T_{condition}"]}}} \\quad M_{{{condition}}} = {{{group_means[f"M_{condition}"]}}}\\quad SS_{{{condition}}} = {{{self.group_ss[f"SS_{condition}"]}}} \\quad n_{{{condition}}} = {{{group_ns[f"n_{condition}"]}}}$ <br>"))    
+        
     
-
     def stage_1_ss(self):
+        display(Markdown("Stage 1 SS calculations"))
         # sum of squares
         ss_total = self.summary['grand_sum_squared_scores'] - round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)
         ss_within = 0
@@ -1027,30 +1026,55 @@ class FactorialData:
         
         #TODO consider writing methods to take the values below to display each piece seperately.
         display(Markdown(f"""Calculate the Sum of Squares <br>
-                $$SS_{{total}} = \\Sigma X^2 - \\frac{{G^2}}{{N}}$$ <br>
-                $$SS_{{total}} = {{{self.summary['grand_sum_squared_scores']}}} - \\frac{{{self.summary["grand_sum_scores"]}^2}}{{{self.summary["total_n"]}}}$$ <br>
-                $$SS_{{total}} = {{{self.summary['grand_sum_squared_scores']}}} - \\frac{{{self.summary["grand_sum_scores"] ** 2}}}{{{self.summary["total_n"]}}}$$ <br>
-                $$SS_{{total}} = {{{self.summary['grand_sum_squared_scores']}}} - {{{round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)}}}$$ <br>
-                $$SS_{{total}} = {{{round(ss_total, 2)}}}$$ <br><br>
-                $$SS_{{within}} = \\Sigma SS_{{inside\\_each\\_condition}}$$ <br>
-                $$SS_{{within}} = {{{display_values}}}$$ <br>
-                $$SS_{{within}} = {{{round(ss_within, 2)}}}$$ <br><br>
-                $$SS_{{between}} = SS_{{total}} - SS_{{within}}$$ <br>
-                $$SS_{{between}} = {{{round(ss_total, 2)}}} - {{{round(ss_within, 2)}}}$$ <br>
-                $$SS_{{between}} = {{{round(ss_between, 2)}}}$$ <br><br>
+                $SS_{{total}} = \\Sigma X^2 - \\frac{{G^2}}{{N}}$ <br>
+                $SS_{{total}} = {{{self.summary['grand_sum_squared_scores']}}} - \\frac{{{self.summary["grand_sum_scores"]}^2}}{{{self.summary["total_n"]}}}$ <br>
+                $SS_{{total}} = {{{self.summary['grand_sum_squared_scores']}}} - \\frac{{{self.summary["grand_sum_scores"] ** 2}}}{{{self.summary["total_n"]}}}$ <br>
+                $SS_{{total}} = {{{self.summary['grand_sum_squared_scores']}}} - {{{round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)}}}$ <br>
+                $SS_{{total}} = {{{round(ss_total, 2)}}}$ <br><br>
+                $SS_{{within}} = \\Sigma SS_{{inside\\_each\\_condition}}$ <br>
+                $SS_{{within}} = {{{display_values}}}$ <br>
+                $SS_{{within}} = {{{round(ss_within, 2)}}}$ <br><br>
+                $SS_{{between}} = SS_{{total}} - SS_{{within}}$ <br>
+                $SS_{{between}} = {{{round(ss_total, 2)}}} - {{{round(ss_within, 2)}}}$ <br>
+                $SS_{{between}} = {{{round(ss_between, 2)}}}$ <br><br>
                 note: the other way to calculate $SS_{{betwen}}$ is: <br>
-                $$SS_{{between}} = \\Sigma{{\\frac{{T^2}}{{n}}}} - \\frac{{G^2}}{{N}}$$ <br><br>
+                $SS_{{between}} = \\Sigma{{\\frac{{T^2}}{{n}}}} - \\frac{{G^2}}{{N}}$ <br><br>
             """))
-
         
 
+    def stage_1_df(self):
+        big_n = self.summary["total_n"]
+        df_total = big_n - 1
+        conditions = len(self.condition_list)
+        df_between = conditions - 1
+        df_within = big_n - conditions
+        display(Markdown(f"""Calculate the Degrees of Freedom <br>
+                    $$df_{{total}} = N - 1$$ <br>
+                    $$df_{{total}} = {{{big_n}}} - 1$$ <br>
+                    $$df_{{total}} = {{{df_total}}}$$ <br><br>
+                    $$df_{{between}} = k - 1$$ <br>
+                    $$df_{{between}} = {{{conditions}}} - 1$$ <br>
+                    $$df_{{between}} = {{{df_between}}}$$ <br><br>
+                    $$df_{{within}} = N - K$$ <br>
+                    $$df_{{within}} = {{{big_n}}} - {{{conditions}}}$$ <br>
+                    $$df_{{within}} = {{{df_within}}}$$ <br><br>
+                """))
+        self.final_calculations.update({
+            "df_total": df_total,
+            "df_between": df_between,
+            "df_within": df_within
+        })
+
+        
     def collapse_by_factor(self, factor: str):
         levels = [f"{factor[-1]}_{i + 1}" for i in range(len(self.summary[f'n_{factor}']))]
         for i, level in enumerate(levels):
-            display(Markdown(f"$T_{{{level}}} = {{{self.summary[f"x_sums_{factor}"][i]}}} \\quad M_{{{level}}} = {{{self.summary[f"means_{factor}"][i]}}}\\quad SS_{{{level}}} = {{{self.summary[f"ss_values_{factor}"][i]}}} \\quad n_{{{level}}} = {{{self.summary[f"n_{factor}"][i]}}}$ <br>")) 
+            display(Markdown(f"$T_{{{level}}} = {{{self.summary[f"x_sums_{factor}"][i]}}}  \\quad n_{{{level}}} = {{{self.summary[f"n_{factor}"][i]}}}$ <br>")) 
+            # unused display calculations: \\quad M_{{{level}}} = {{{self.summary[f"means_{factor}"][i]}}}\\quad SS_{{{level}}} = {{{self.summary[f"ss_values_{factor}"][i]}}}
 
 
     def partition_ss(self):
+        display(Markdown("Partition the SS"))
         for factor in ["Factor_A", "Factor_B"]:
             levels = [f"{factor[-1]}_{i + 1}" for i in range(len(self.summary[f'n_{factor}']))]
             display(Markdown(f"Calculate $SS_{{{factor}}}$ <br>"))
@@ -1101,6 +1125,63 @@ class FactorialData:
         display(Markdown(f"$SS_{{AxB}} = {{{ss_interaction}}}$ <br>"))
 
 
+    def partition_df(self):
+        levels_a = self.summary["levels_Factor_A"]
+        levels_b = self.summary["levels_Factor_B"]
+        
+        df_a = levels_a - 1
+        df_b = levels_b - 1
+        df_axb = self.final_calculations["df_between"] - df_a - df_b
+
+        display(Markdown(f"""Partition the Degrees of Freedom <br>
+                    $$df_{{Factor_A}} = k_{{Factor_A}} - 1$$ <br>
+                    $$df_{{Factor_A}} = {{{levels_a}}} - 1$$ <br>
+                    $$df_{{Factor_A}} = {{{df_a}}}$$ <br><br>
+                    $$df_{{Factor_b}} = k_{{Factor_B}} - 1$$ <br>
+                    $$df_{{Factor_A}} = {{{levels_b}}} - 1$$ <br>
+                    $$df_{{Factor_A}} = {{{df_b}}}$$ <br><br>
+                    $$df_{{AxB}} = df_{{Between}} -df_{{Factor_A}} - df_{{Factor_B}}$$ <br>
+                    $$df_{{AxB}} = {{{self.final_calculations["df_between"]}}} - {{{df_a}}} - {{{df_b}}}$$ <br>
+                    $$df_{{AxB}} = {{{df_axb}}}$$ <br><br>
+                """))
+        
+        self.final_calculations.update({
+            "df_a": df_a,
+            "df_b": df_b,
+            "df_axb": df_axb
+        })
+        
+    
+    def mean_squares(self):
+        ms_within = round(self.final_calculations["SS_Within"] / self.final_calculations["df_within"], 2)
+        ms_a = round(self.final_calculations["SS_Factor_A"] / self.final_calculations["df_a"], 2)
+        ms_b = round(self.final_calculations["SS_Factor_B"] / self.final_calculations["df_b"], 2)
+        ms_axb = round(self.final_calculations["SS_AxB"] / self.final_calculations["df_axb"], 2)
+
+        self.final_calculations.update({
+            "ms_within": ms_within,
+            "ms_a": ms_a,
+            "ms_b": ms_b,
+            "ms_axb": ms_axb
+        })
+
+
+    def display_ms(self, factor: str):
+        display(Markdown())
+
+
+    def f_ratios(self):
+        f_a = round(self.final_calculations["ms_a"] / self.final_calculations["ms_within"], 2)
+        f_b = round(self.final_calculations["ms_b"] / self.final_calculations["ms_within"], 2)
+        f_axb = round(self.final_calculations["ms_axb"] / self.final_calculations["ms_within"], 2)
+
+        self.final_calculations.update({
+            "f_a": f_a,
+            "f_b": f_b,
+            "f_axb": f_axb
+        })
+
+
     def factorial_ANOVA(self):
         self.factorial_data = {}
         self.test = "factorial_ANOVA"
@@ -1111,17 +1192,21 @@ class FactorialData:
         display(Markdown("Full Group Summary Data"))
         self.summary_by_group()
 
+        display(Markdown("Stage 1 Calculations"))
+        self.stage_1_df()
+        self.stage_1_ss()
+
         display(Markdown("Factor A Summary Data"))
         self.collapse_by_factor("Factor_A")
 
         display(Markdown("Factor B Summary Data"))
         self.collapse_by_factor("Factor_B")
 
-        display(Markdown("Stage 1 SS"))
-        self.stage_1_ss()
 
-        display(Markdown("Partition the SS"))
+        display(Markdown("Stage 2 Calculations"))
+        self.partition_df()
         self.partition_ss()
+
 
         
         
