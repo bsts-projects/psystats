@@ -1073,9 +1073,9 @@ class FactorialData:
             # unused display calculations: \\quad M_{{{level}}} = {{{self.summary[f"means_{factor}"][i]}}}\\quad SS_{{{level}}} = {{{self.summary[f"ss_values_{factor}"][i]}}}
 
 
-    def partition_ss(self):
-        display(Markdown("Partition the SS"))
-        for factor in ["Factor_A", "Factor_B"]:
+    def partition_ss(self, factor: str):
+        display(Markdown(f"Partition the SS for ${factor}$"))
+        if factor in ["Factor_A", "Factor_B"]:
             levels = [f"{factor[-1]}_{i + 1}" for i in range(len(self.summary[f'n_{factor}']))]
             display(Markdown(f"Calculate $SS_{{{factor}}}$ <br>"))
             display(Markdown(f"$\\Sigma{{\\frac{{{{SS_{{{factor}}}}}^2}}{{n_{{{factor}}}}}}} - \\frac{{G^2}}{{N}}$ <br>"))
@@ -1115,17 +1115,18 @@ class FactorialData:
             result -= round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)
             self.final_calculations[f"SS_{factor}"] = round(result, 2)
             display(Markdown(f"$SS_{{{factor}}} = {{{round(result, 2)}}}$"))
-            
-        ss_interaction = round(self.final_calculations["SS_Between"] - self.final_calculations["SS_Factor_A"] - self.final_calculations["SS_Factor_B"], 2)
-        self.final_calculations["SS_AxB"] = ss_interaction
-        # The Interaction
-        display(Markdown(f"Calculate $SS_{{AxB}}$ <br>"))
-        display(Markdown("$SS_{{AxB}} = SS_{{Between}} - SS_{{Factor_A}} - SS_{{Factor_B}}$<br>"))
-        display(Markdown(f"$SS_{{AxB}} = {{{self.final_calculations["SS_Between"]}}} - {{{self.final_calculations["SS_Factor_A"]}}} - {{{self.final_calculations["SS_Factor_B"]}}}$ <br>"))
-        display(Markdown(f"$SS_{{AxB}} = {{{ss_interaction}}}$ <br>"))
+
+        else:    
+            ss_interaction = round(self.final_calculations["SS_Between"] - self.final_calculations["SS_Factor_A"] - self.final_calculations["SS_Factor_B"], 2)
+            self.final_calculations["SS_AxB"] = ss_interaction
+            # The Interaction
+            display(Markdown(f"Calculate $SS_{{AxB}}$ <br>"))
+            display(Markdown("$SS_{{AxB}} = SS_{{Between}} - SS_{{Factor_A}} - SS_{{Factor_B}}$<br>"))
+            display(Markdown(f"$SS_{{AxB}} = {{{self.final_calculations["SS_Between"]}}} - {{{self.final_calculations["SS_Factor_A"]}}} - {{{self.final_calculations["SS_Factor_B"]}}}$ <br>"))
+            display(Markdown(f"$SS_{{AxB}} = {{{ss_interaction}}}$ <br>"))
 
 
-    def partition_df(self):
+    def partition_df(self, factor: str):
         levels_a = self.summary["levels_Factor_A"]
         levels_b = self.summary["levels_Factor_B"]
         
@@ -1133,53 +1134,72 @@ class FactorialData:
         df_b = levels_b - 1
         df_axb = self.final_calculations["df_between"] - df_a - df_b
 
-        display(Markdown(f"""Partition the Degrees of Freedom <br>
-                    $$df_{{Factor_A}} = k_{{Factor_A}} - 1$$ <br>
-                    $$df_{{Factor_A}} = {{{levels_a}}} - 1$$ <br>
-                    $$df_{{Factor_A}} = {{{df_a}}}$$ <br><br>
-                    $$df_{{Factor_b}} = k_{{Factor_B}} - 1$$ <br>
-                    $$df_{{Factor_A}} = {{{levels_b}}} - 1$$ <br>
-                    $$df_{{Factor_A}} = {{{df_b}}}$$ <br><br>
-                    $$df_{{AxB}} = df_{{Between}} -df_{{Factor_A}} - df_{{Factor_B}}$$ <br>
-                    $$df_{{AxB}} = {{{self.final_calculations["df_between"]}}} - {{{df_a}}} - {{{df_b}}}$$ <br>
-                    $$df_{{AxB}} = {{{df_axb}}}$$ <br><br>
-                """))
-        
         self.final_calculations.update({
-            "df_a": df_a,
-            "df_b": df_b,
-            "df_axb": df_axb
+            "df_Factor_A": df_a,
+            "df_Factor_B": df_b,
+            "df_AxB": df_axb
         })
+
+        if factor in ["Factor_A", "Factor_B"]:
+            display(Markdown(f"""partition df for ${factor}$ <br>
+                             $$df_{{{factor}}} = k_{{{factor}}} - 1$$ <br>
+                             $$df_{{{factor}}} = {{{self.summary[f"levels_{factor}"]}}} - 1$$ <br>
+                             $$df_{{{factor}}} = {{{self.final_calculations[f"df_{factor}"]}}}$$ <br>"""))
+
+        else:
+            display(Markdown(f"""Partition df for the interaction <br>
+                            $$df_{{AxB}} = df_{{Between}} -df_{{Factor_A}} - df_{{Factor_B}}$$ <br>
+                            $$df_{{AxB}} = {{{self.final_calculations["df_between"]}}} - {{{df_a}}} - {{{df_b}}}$$ <br>
+                            $$df_{{AxB}} = {{{df_axb}}}$$ <br><br>
+                             """))
         
     
     def mean_squares(self):
         ms_within = round(self.final_calculations["SS_Within"] / self.final_calculations["df_within"], 2)
-        ms_a = round(self.final_calculations["SS_Factor_A"] / self.final_calculations["df_a"], 2)
-        ms_b = round(self.final_calculations["SS_Factor_B"] / self.final_calculations["df_b"], 2)
-        ms_axb = round(self.final_calculations["SS_AxB"] / self.final_calculations["df_axb"], 2)
+        ms_a = round(self.final_calculations["SS_Factor_A"] / self.final_calculations["df_Factor_A"], 2)
+        ms_b = round(self.final_calculations["SS_Factor_B"] / self.final_calculations["df_Factor_B"], 2)
+        ms_axb = round(self.final_calculations["SS_AxB"] / self.final_calculations["df_AxB"], 2)
 
         self.final_calculations.update({
             "ms_within": ms_within,
-            "ms_a": ms_a,
-            "ms_b": ms_b,
-            "ms_axb": ms_axb
+            "ms_Factor_A": ms_a,
+            "ms_Factor_B": ms_b,
+            "ms_AxB": ms_axb
         })
 
 
     def display_ms(self, factor: str):
-        display(Markdown())
+        ss = self.final_calculations[f"SS_{factor}"]
+        df = self.final_calculations[f"df_{factor}"]
+        ms = self.final_calculations[f"ms_{factor}"]
+        display(Markdown(f"""Mean Squares for ${{{factor}}}$ <br>
+                        $$MS_{{{factor}}} = \\frac{{SS_{{{factor}}}}}{{df_{{{factor}}}}}$$<br> 
+                        $$MS_{{{factor}}} = \\frac{{{ss}}}{{{df}}}$$ <br>
+                        $$MS_{{{factor}}} = {{{ms}}}$$<br>
+                         """))
 
 
     def f_ratios(self):
-        f_a = round(self.final_calculations["ms_a"] / self.final_calculations["ms_within"], 2)
-        f_b = round(self.final_calculations["ms_b"] / self.final_calculations["ms_within"], 2)
-        f_axb = round(self.final_calculations["ms_axb"] / self.final_calculations["ms_within"], 2)
+        f_a = round(self.final_calculations["ms_Factor_A"] / self.final_calculations["ms_within"], 2)
+        f_b = round(self.final_calculations["ms_Factor_B"] / self.final_calculations["ms_within"], 2)
+        f_axb = round(self.final_calculations["ms_AxB"] / self.final_calculations["ms_within"], 2)
 
         self.final_calculations.update({
-            "f_a": f_a,
-            "f_b": f_b,
-            "f_axb": f_axb
+            "f_Factor_A": f_a,
+            "f_Factor_B": f_b,
+            "f_AxB": f_axb
         })
+
+
+    def display_f_ratios(self, factor: str):
+        numerator = self.final_calculations[f"ms_{factor}"]
+        denominator = self.final_calculations["ms_within"]
+        f_ratio = self.final_calculations[f"f_{factor}"]
+        display(Markdown(f"""Calculate the F-Ratio for ${{{factor}}}$ <br>
+                        $$F_{{{factor}}} = \\frac{{MS_{{{factor}}}}}{{MS_{{Within}}}}$$ <br>
+                        $$F_{{{factor}}} = \\frac{{{numerator}}}{{{denominator}}}$$ <br>
+                        $$F_{{{factor}}} = {{{f_ratio}}}$$ <br>
+                        """))
 
 
     def factorial_ANOVA(self):
@@ -1196,23 +1216,27 @@ class FactorialData:
         self.stage_1_df()
         self.stage_1_ss()
 
-        display(Markdown("Factor A Summary Data"))
-        self.collapse_by_factor("Factor_A")
-
-        display(Markdown("Factor B Summary Data"))
-        self.collapse_by_factor("Factor_B")
-
-
         display(Markdown("Stage 2 Calculations"))
-        self.partition_df()
-        self.partition_ss()
+
+        
+        for i, factor in enumerate(["Factor_A", "Factor_B", "AxB"]):
+            if not "AxB":
+                self.collapse_by_factor(factor)
+
+            #TODO need to rearrange all this or precalculate teh partitioned ss seperate from the display function
+            self.partition_df(factor)
+            self.partition_ss(factor)
+            self.mean_squares()
+            self.f_ratios()
+            self.display_ms(factor)
+            self.display_f_ratios(factor)
+
 
 
         
         
 
 
-if __name__ in "__main__":
-    #RandomData(n = 2).factorial_ANOVA((2,3))
-    FactorialData(design = (2, 3), group_n = 2).factorial_ANOVA()
+#if __name__ in "__main__":
+    # FactorialData(design = (2, 3), group_n = 2).factorial_ANOVA()
 
