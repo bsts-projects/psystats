@@ -1073,12 +1073,67 @@ class FactorialData:
             # unused display calculations: \\quad M_{{{level}}} = {{{self.summary[f"means_{factor}"][i]}}}\\quad SS_{{{level}}} = {{{self.summary[f"ss_values_{factor}"][i]}}}
 
 
-    def partition_ss(self, factor: str):
+    def partition_ss(self):
+        #display(Markdown(f"Partition the SS for ${factor}$"))
+        for factor in ["Factor_A", "Factor_B"]:
+            levels = [f"{factor[-1]}_{i + 1}" for i in range(len(self.summary[f'n_{factor}']))]
+            """
+            display(Markdown(f"Calculate $SS_{{{factor}}}$ <br>"))
+            display(Markdown(f"$\\Sigma{{\\frac{{{{SS_{{{factor}}}}}^2}}{{n_{{{factor}}}}}}} - \\frac{{G^2}}{{N}}$ <br>"))
+            equation_text = ""
+            for i, level in enumerate(levels):
+                if i == 0:
+                    equation_text += f"\\frac{{{{{self.summary[f"x_sums_{factor}"][i]}}}^2}}{{{self.summary[f"n_{factor}"][i]}}}"
+                else:
+                    equation_text += f" + \\frac{{{{{self.summary[f"x_sums_{factor}"][i]}}}^2}}{{{self.summary[f"n_{factor}"][i]}}}"
+            display(Markdown(f"$SS_{{{factor}}} = {{{equation_text}}} - \\frac{{{{{self.summary["grand_sum_scores"]}}}^2}}{{{self.summary["total_n"]}}}$"))
+            
+            # step 2 in the calculations display the squared values in the numerator
+            equation_text = ""
+            for i, level in enumerate(levels):
+                if i == 0:
+                    equation_text += f"\\frac{{{{{self.summary[f"x_sums_{factor}"][i] ** 2}}}}}{{{self.summary[f"n_{factor}"][i]}}}"
+                else:
+                    equation_text += f" + \\frac{{{{{self.summary[f"x_sums_{factor}"][i] ** 2}}}}}{{{self.summary[f"n_{factor}"][i]}}}"
+            display(Markdown(f"$SS_{{{factor}}} = {{{equation_text}}} - \\frac{{{{{self.summary["grand_sum_scores"] ** 2}}}}}{{{self.summary["total_n"]}}}$"))
+            
+            # step 3 in the calculations display results of division
+            equation_text = ""
+            for i, level in enumerate(levels):
+                if i == 0:
+                    equation_text += f"{{{round((self.summary[f"x_sums_{factor}"][i] ** 2) / self.summary[f"n_{factor}"][i], 2)}}}"
+                else:
+                    equation_text += f" + {{{round((self.summary[f"x_sums_{factor}"][i] ** 2) / self.summary[f"n_{factor}"][i], 2)}}}"
+            display(Markdown(f"$SS_{{{factor}}} = {{{equation_text}}} - {{{round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)}}}$"))
+            """
+            # step 4 sum the factor components
+            result = 0
+            for i, level in enumerate(levels):
+                result += round((self.summary[f"x_sums_{factor}"][i] ** 2) / self.summary[f"n_{factor}"][i], 2)
+            #display(Markdown(f"$SS_{{{factor}}} = {{{round(result, 2)}}} - {{{round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)}}}$"))
+
+            # step 5 subtract the component from the full data
+            result -= round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)
+            self.final_calculations[f"SS_{factor}"] = round(result, 2)
+            #display(Markdown(f"$SS_{{{factor}}} = {{{round(result, 2)}}}$"))
+
+        # the interaction
+        ss_interaction = round(self.final_calculations["SS_Between"] - self.final_calculations["SS_Factor_A"] - self.final_calculations["SS_Factor_B"], 2)
+        self.final_calculations["SS_AxB"] = ss_interaction
+            # The Interaction
+        """
+                display(Markdown(f"Calculate $SS_{{AxB}}$ <br>"))
+                display(Markdown("$SS_{{AxB}} = SS_{{Between}} - SS_{{Factor_A}} - SS_{{Factor_B}}$<br>"))
+                display(Markdown(f"$SS_{{AxB}} = {{{self.final_calculations["SS_Between"]}}} - {{{self.final_calculations["SS_Factor_A"]}}} - {{{self.final_calculations["SS_Factor_B"]}}}$ <br>"))
+                display(Markdown(f"$SS_{{AxB}} = {{{ss_interaction}}}$ <br>"))
+                """
+
+    def display_ss(self, factor: str):
         display(Markdown(f"Partition the SS for ${factor}$"))
         if factor in ["Factor_A", "Factor_B"]:
             levels = [f"{factor[-1]}_{i + 1}" for i in range(len(self.summary[f'n_{factor}']))]
             display(Markdown(f"Calculate $SS_{{{factor}}}$ <br>"))
-            display(Markdown(f"$\\Sigma{{\\frac{{{{SS_{{{factor}}}}}^2}}{{n_{{{factor}}}}}}} - \\frac{{G^2}}{{N}}$ <br>"))
+            display(Markdown(f"$\\Sigma{{\\frac{{{{T_{{{factor}}}}}^2}}{{n_{{{factor}}}}}}} - \\frac{{G^2}}{{N}}$ <br>"))
             equation_text = ""
             for i, level in enumerate(levels):
                 if i == 0:
@@ -1112,21 +1167,15 @@ class FactorialData:
             display(Markdown(f"$SS_{{{factor}}} = {{{round(result, 2)}}} - {{{round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)}}}$"))
 
             # step 5 subtract the component from the full data
-            result -= round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)
-            self.final_calculations[f"SS_{factor}"] = round(result, 2)
-            display(Markdown(f"$SS_{{{factor}}} = {{{round(result, 2)}}}$"))
-
-        else:    
-            ss_interaction = round(self.final_calculations["SS_Between"] - self.final_calculations["SS_Factor_A"] - self.final_calculations["SS_Factor_B"], 2)
-            self.final_calculations["SS_AxB"] = ss_interaction
-            # The Interaction
+            display(Markdown(f"$SS_{{{factor}}} = {{{round(self.final_calculations[f"SS_{factor}"], 2)}}}$"))
+        else:
             display(Markdown(f"Calculate $SS_{{AxB}}$ <br>"))
             display(Markdown("$SS_{{AxB}} = SS_{{Between}} - SS_{{Factor_A}} - SS_{{Factor_B}}$<br>"))
             display(Markdown(f"$SS_{{AxB}} = {{{self.final_calculations["SS_Between"]}}} - {{{self.final_calculations["SS_Factor_A"]}}} - {{{self.final_calculations["SS_Factor_B"]}}}$ <br>"))
-            display(Markdown(f"$SS_{{AxB}} = {{{ss_interaction}}}$ <br>"))
+            display(Markdown(f"$SS_{{AxB}} = {{{self.final_calculations["SS_AxB"]}}}$ <br>"))
 
 
-    def partition_df(self, factor: str):
+    def partition_df(self):
         levels_a = self.summary["levels_Factor_A"]
         levels_b = self.summary["levels_Factor_B"]
         
@@ -1140,6 +1189,8 @@ class FactorialData:
             "df_AxB": df_axb
         })
 
+
+    def display_df(self, factor: str):
         if factor in ["Factor_A", "Factor_B"]:
             display(Markdown(f"""partition df for ${factor}$ <br>
                              $$df_{{{factor}}} = k_{{{factor}}} - 1$$ <br>
@@ -1149,8 +1200,8 @@ class FactorialData:
         else:
             display(Markdown(f"""Partition df for the interaction <br>
                             $$df_{{AxB}} = df_{{Between}} -df_{{Factor_A}} - df_{{Factor_B}}$$ <br>
-                            $$df_{{AxB}} = {{{self.final_calculations["df_between"]}}} - {{{df_a}}} - {{{df_b}}}$$ <br>
-                            $$df_{{AxB}} = {{{df_axb}}}$$ <br><br>
+                            $$df_{{AxB}} = {{{self.final_calculations["df_between"]}}} - {{{self.final_calculations["df_Factor_A"]}}} - {{{self.final_calculations["df_Factor_B"]}}}$$ <br>
+                            $$df_{{AxB}} = {{{self.final_calculations["df_AxB"]}}}$$ <br><br>
                              """))
         
     
@@ -1217,17 +1268,18 @@ class FactorialData:
         self.stage_1_ss()
 
         display(Markdown("Stage 2 Calculations"))
-
+        self.partition_df()
+        self.partition_ss()
+        self.mean_squares()
+        self.f_ratios()
         
         for i, factor in enumerate(["Factor_A", "Factor_B", "AxB"]):
             if not "AxB":
                 self.collapse_by_factor(factor)
 
             #TODO need to rearrange all this or precalculate teh partitioned ss seperate from the display function
-            self.partition_df(factor)
-            self.partition_ss(factor)
-            self.mean_squares()
-            self.f_ratios()
+            self.display_df(factor)
+            self.display_ss(factor)
             self.display_ms(factor)
             self.display_f_ratios(factor)
 
