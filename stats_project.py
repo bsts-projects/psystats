@@ -911,6 +911,7 @@ class FactorialData:
         self.design = design
         self.df = self.generate_factorial_data()
         self.summary = {}
+        self.final_calculations = {}
 
 
     def generate_factorial_data(self):
@@ -996,7 +997,7 @@ class FactorialData:
         group_totals = {f'T_{level}': t for level, t in zip(self.condition_list, t)}
         #group_sums = {f'sum_sq_{level}': ss for level, ss in zip(self.condition_list, sum_sqs)}
         group_ns = {f'n_{level}': n for level, n in zip(self.condition_list, ns)}
-        group_ss = {f'SS_{level}': ss for level, ss in zip(self.condition_list, ss_values)}
+        self.group_ss = {f'SS_{level}': ss for level, ss in zip(self.condition_list, ss_values)}
         group_means = {f'M_{level}': m for level, m in zip(self.condition_list, means)}
 
         # This is a working display of all of the summary data for each individual condition.  It's commented out to work on reformatting into a table for display
@@ -1004,7 +1005,42 @@ class FactorialData:
         for condition in self.condition_list:
             display(Markdown(f"$T_{{{condition}}} = {{{group_totals[f"T_{condition}"]}}} \\quad M_{{{condition}}} = {{{group_means[f"M_{condition}"]}}}\\quad SS_{{{condition}}} = {{{group_ss[f"SS_{condition}"]}}} \\quad n_{{{condition}}} = {{{group_ns[f"n_{condition}"]}}}$ <br>"))    
         """
+    
+
+    def stage_1_ss(self):
+        # sum of squares
+        ss_total = self.summary['grand_sum_squared_scores'] - round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)
+        ss_within = 0
+        display_values = ""
+        for i, value in enumerate(self.group_ss.values()):
+            ss_within += value
+            if i == 0:
+                display_values += f"{value}"
+            else:
+                display_values += f" + {value}"
+        ss_between = ss_total - ss_within
+        self.final_calculations.update({
+            "SS_Total": round(ss_total, 2),
+            "SS_Between": round(ss_between, 2),
+            "SS_Within": round(ss_within, 2)
+        })
         
+        #TODO consider writing methods to take the values below to display each piece seperately.
+        display(Markdown(f"""Calculate the Sum of Squares <br>
+                $$SS_{{total}} = \\Sigma X^2 - \\frac{{G^2}}{{N}}$$ <br>
+                $$SS_{{total}} = {{{self.summary['grand_sum_squared_scores']}}} - \\frac{{{self.summary["grand_sum_scores"]}^2}}{{{self.summary["total_n"]}}}$$ <br>
+                $$SS_{{total}} = {{{self.summary['grand_sum_squared_scores']}}} - \\frac{{{self.summary["grand_sum_scores"] ** 2}}}{{{self.summary["total_n"]}}}$$ <br>
+                $$SS_{{total}} = {{{self.summary['grand_sum_squared_scores']}}} - {{{round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)}}}$$ <br>
+                $$SS_{{total}} = {{{round(ss_total, 2)}}}$$ <br><br>
+                $$SS_{{within}} = \\Sigma SS_{{inside\\_each\\_condition}}$$ <br>
+                $$SS_{{within}} = {{{display_values}}}$$ <br>
+                $$SS_{{within}} = {{{round(ss_within, 2)}}}$$ <br><br>
+                $$SS_{{between}} = SS_{{total}} - SS_{{within}}$$ <br>
+                $$SS_{{between}} = {{{round(ss_total, 2)}}} - {{{round(ss_within, 2)}}}$$ <br>
+                $$SS_{{between}} = {{{round(ss_between, 2)}}}$$ <br><br>
+                note: the other way to calculate $SS_{{betwen}}$ is: <br>
+                $$SS_{{between}} = \\Sigma{{\\frac{{T^2}}{{n}}}} - \\frac{{G^2}}{{N}}$$ <br><br>
+            """))
 
         
 
@@ -1014,13 +1050,55 @@ class FactorialData:
             display(Markdown(f"$T_{{{level}}} = {{{self.summary[f"x_sums_{factor}"][i]}}} \\quad M_{{{level}}} = {{{self.summary[f"means_{factor}"][i]}}}\\quad SS_{{{level}}} = {{{self.summary[f"ss_values_{factor}"][i]}}} \\quad n_{{{level}}} = {{{self.summary[f"n_{factor}"][i]}}}$ <br>")) 
 
 
-    
     def partition_ss(self):
         for factor in ["Factor_A", "Factor_B"]:
             levels = [f"{factor[-1]}_{i + 1}" for i in range(len(self.summary[f'n_{factor}']))]
+            display(Markdown(f"Calculate $SS_{{{factor}}}$ <br>"))
+            display(Markdown(f"$\\Sigma{{\\frac{{{{SS_{{{factor}}}}}^2}}{{n_{{{factor}}}}}}} - \\frac{{G^2}}{{N}}$ <br>"))
+            equation_text = ""
             for i, level in enumerate(levels):
-                pass
+                if i == 0:
+                    equation_text += f"\\frac{{{{{self.summary[f"x_sums_{factor}"][i]}}}^2}}{{{self.summary[f"n_{factor}"][i]}}}"
+                else:
+                    equation_text += f" + \\frac{{{{{self.summary[f"x_sums_{factor}"][i]}}}^2}}{{{self.summary[f"n_{factor}"][i]}}}"
+            display(Markdown(f"$SS_{{{factor}}} = {{{equation_text}}} - \\frac{{{{{self.summary["grand_sum_scores"]}}}^2}}{{{self.summary["total_n"]}}}$"))
+            
+            # step 2 in the calculations display the squared values in the numerator
+            equation_text = ""
+            for i, level in enumerate(levels):
+                if i == 0:
+                    equation_text += f"\\frac{{{{{self.summary[f"x_sums_{factor}"][i] ** 2}}}}}{{{self.summary[f"n_{factor}"][i]}}}"
+                else:
+                    equation_text += f" + \\frac{{{{{self.summary[f"x_sums_{factor}"][i] ** 2}}}}}{{{self.summary[f"n_{factor}"][i]}}}"
+            display(Markdown(f"$SS_{{{factor}}} = {{{equation_text}}} - \\frac{{{{{self.summary["grand_sum_scores"] ** 2}}}}}{{{self.summary["total_n"]}}}$"))
+            
+            # step 3 in the calculations display results of division
+            equation_text = ""
+            for i, level in enumerate(levels):
+                if i == 0:
+                    equation_text += f"{{{round((self.summary[f"x_sums_{factor}"][i] ** 2) / self.summary[f"n_{factor}"][i], 2)}}}"
+                else:
+                    equation_text += f" + {{{round((self.summary[f"x_sums_{factor}"][i] ** 2) / self.summary[f"n_{factor}"][i], 2)}}}"
+            display(Markdown(f"$SS_{{{factor}}} = {{{equation_text}}} - {{{round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)}}}$"))
 
+            # step 4 sum the factor components
+            result = 0
+            for i, level in enumerate(levels):
+                result += round((self.summary[f"x_sums_{factor}"][i] ** 2) / self.summary[f"n_{factor}"][i], 2)
+            display(Markdown(f"$SS_{{{factor}}} = {{{round(result, 2)}}} - {{{round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)}}}$"))
+
+            # step 5 subtract the component from the full data
+            result -= round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)
+            self.final_calculations[f"SS_{factor}"] = round(result, 2)
+            display(Markdown(f"$SS_{{{factor}}} = {{{round(result, 2)}}}$"))
+            
+        ss_interaction = round(self.final_calculations["SS_Between"] - self.final_calculations["SS_Factor_A"] - self.final_calculations["SS_Factor_B"], 2)
+        self.final_calculations["SS_AxB"] = ss_interaction
+        # The Interaction
+        display(Markdown(f"Calculate $SS_{{AxB}}$ <br>"))
+        display(Markdown("$SS_{{AxB}} = SS_{{Between}} - SS_{{Factor_A}} - SS_{{Factor_B}}$<br>"))
+        display(Markdown(f"$SS_{{AxB}} = {{{self.final_calculations["SS_Between"]}}} - {{{self.final_calculations["SS_Factor_A"]}}} - {{{self.final_calculations["SS_Factor_B"]}}}$ <br>"))
+        display(Markdown(f"$SS_{{AxB}} = {{{ss_interaction}}}$ <br>"))
 
 
     def factorial_ANOVA(self):
@@ -1038,6 +1116,12 @@ class FactorialData:
 
         display(Markdown("Factor B Summary Data"))
         self.collapse_by_factor("Factor_B")
+
+        display(Markdown("Stage 1 SS"))
+        self.stage_1_ss()
+
+        display(Markdown("Partition the SS"))
+        self.partition_ss()
 
         
         
