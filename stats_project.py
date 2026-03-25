@@ -65,6 +65,18 @@ class RandomData():
         return df
     
 
+    def set_test(self, test: str):
+        # method to to be called from within the factorial class to set value
+        self.test = test
+        self.tails = 1
+        self.crit_values["direction"] = "increase"
+
+
+    def set_crit_values(self, value, degf_n: int, degf_d: int):
+        # method to to be called from within the factorial class to set value
+        self.crit_values = {"positive": value, "degf_d": degf_d, "degf_n": degf_n}
+
+
     def generate_question(self):
         # determine the test type
         if self.tails == 2:
@@ -214,7 +226,7 @@ class RandomData():
                 display(Markdown(f"$z_{{crit}} = {{{self.crit_values['negative']}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}$<br><br>"))
             else:
                 return ValueError("tails error in writing results")
-        elif self.test in ["one-way ANOVA", "repeated-measures ANOVA"]:
+        elif self.test in ["one-way ANOVA", "repeated-measures ANOVA", "factorial_ANOVA"]:
             display(Markdown("<br> The decision criteria: <br><br>"))
             display(Markdown(f"$F_{{crit}} = {{{self.crit_values['positive']}}}, \\alpha = {{{self.alpha}}}$ <br><br>"))
         else:
@@ -368,12 +380,6 @@ class RandomData():
             self.tails = 1
             crit = round(stats.f.ppf(q = (1 - self.alpha), dfn = degf_b, dfd = degf_e), 2) # type: ignore
             self.crit_values = {"positive": crit, "degf_d": degf_e, "degf_n": degf_b}
-
-        elif self.test == "factorial_ANOVA":
-            # create a dict to hold all the factorial data here
-            pass
-        else:
-            raise ValueError("incorrect test specification - degrees of freedom")
 
         # add a direction for one-tailed tests 
         if self.test in ["one-way ANOVA", "repeated-measures ANOVA"]:
@@ -1077,56 +1083,18 @@ class FactorialData:
         #display(Markdown(f"Partition the SS for ${factor}$"))
         for factor in ["Factor_A", "Factor_B"]:
             levels = [f"{factor[-1]}_{i + 1}" for i in range(len(self.summary[f'n_{factor}']))]
-            """
-            display(Markdown(f"Calculate $SS_{{{factor}}}$ <br>"))
-            display(Markdown(f"$\\Sigma{{\\frac{{{{SS_{{{factor}}}}}^2}}{{n_{{{factor}}}}}}} - \\frac{{G^2}}{{N}}$ <br>"))
-            equation_text = ""
-            for i, level in enumerate(levels):
-                if i == 0:
-                    equation_text += f"\\frac{{{{{self.summary[f"x_sums_{factor}"][i]}}}^2}}{{{self.summary[f"n_{factor}"][i]}}}"
-                else:
-                    equation_text += f" + \\frac{{{{{self.summary[f"x_sums_{factor}"][i]}}}^2}}{{{self.summary[f"n_{factor}"][i]}}}"
-            display(Markdown(f"$SS_{{{factor}}} = {{{equation_text}}} - \\frac{{{{{self.summary["grand_sum_scores"]}}}^2}}{{{self.summary["total_n"]}}}$"))
-            
-            # step 2 in the calculations display the squared values in the numerator
-            equation_text = ""
-            for i, level in enumerate(levels):
-                if i == 0:
-                    equation_text += f"\\frac{{{{{self.summary[f"x_sums_{factor}"][i] ** 2}}}}}{{{self.summary[f"n_{factor}"][i]}}}"
-                else:
-                    equation_text += f" + \\frac{{{{{self.summary[f"x_sums_{factor}"][i] ** 2}}}}}{{{self.summary[f"n_{factor}"][i]}}}"
-            display(Markdown(f"$SS_{{{factor}}} = {{{equation_text}}} - \\frac{{{{{self.summary["grand_sum_scores"] ** 2}}}}}{{{self.summary["total_n"]}}}$"))
-            
-            # step 3 in the calculations display results of division
-            equation_text = ""
-            for i, level in enumerate(levels):
-                if i == 0:
-                    equation_text += f"{{{round((self.summary[f"x_sums_{factor}"][i] ** 2) / self.summary[f"n_{factor}"][i], 2)}}}"
-                else:
-                    equation_text += f" + {{{round((self.summary[f"x_sums_{factor}"][i] ** 2) / self.summary[f"n_{factor}"][i], 2)}}}"
-            display(Markdown(f"$SS_{{{factor}}} = {{{equation_text}}} - {{{round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)}}}$"))
-            """
             # step 4 sum the factor components
             result = 0
             for i, level in enumerate(levels):
                 result += round((self.summary[f"x_sums_{factor}"][i] ** 2) / self.summary[f"n_{factor}"][i], 2)
-            #display(Markdown(f"$SS_{{{factor}}} = {{{round(result, 2)}}} - {{{round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)}}}$"))
-
             # step 5 subtract the component from the full data
             result -= round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)
-            self.final_calculations[f"SS_{factor}"] = round(result, 2)
-            #display(Markdown(f"$SS_{{{factor}}} = {{{round(result, 2)}}}$"))
+            self.final_calculations[f"SS_{factor}"] = round(result, 2)   
 
         # the interaction
         ss_interaction = round(self.final_calculations["SS_Between"] - self.final_calculations["SS_Factor_A"] - self.final_calculations["SS_Factor_B"], 2)
         self.final_calculations["SS_AxB"] = ss_interaction
-            # The Interaction
-        """
-                display(Markdown(f"Calculate $SS_{{AxB}}$ <br>"))
-                display(Markdown("$SS_{{AxB}} = SS_{{Between}} - SS_{{Factor_A}} - SS_{{Factor_B}}$<br>"))
-                display(Markdown(f"$SS_{{AxB}} = {{{self.final_calculations["SS_Between"]}}} - {{{self.final_calculations["SS_Factor_A"]}}} - {{{self.final_calculations["SS_Factor_B"]}}}$ <br>"))
-                display(Markdown(f"$SS_{{AxB}} = {{{ss_interaction}}}$ <br>"))
-                """
+  
 
     def display_ss(self, factor: str):
         display(Markdown(f"Partition the SS for ${factor}$"))
@@ -1253,12 +1221,22 @@ class FactorialData:
                         """))
 
 
+    def test_crit_values(self, factor: str):
+            degf_d = self.final_calculations["df_within"]
+            degf_n = self.final_calculations[f"df_{factor}"]
+            crit = round(stats.f.ppf(q = (1 - self.base.alpha), dfn = degf_n, dfd = degf_d), 2) # type: ignore
+            self.base.set_crit_values(crit, degf_n = degf_n, degf_d = degf_d)
+
+
     def factorial_ANOVA(self):
+        self.base.set_test("factorial_ANOVA")
         self.factorial_data = {}
-        self.test = "factorial_ANOVA"
+        #self.test = "factorial_ANOVA"
         self.combined_values()
         self.factor_values()
 
+        self.base.generate_question()
+        self.base.set_null_hypothesis()
 
         display(Markdown("Full Group Summary Data"))
         self.summary_by_group()
@@ -1274,8 +1252,14 @@ class FactorialData:
         self.f_ratios()
         
         for i, factor in enumerate(["Factor_A", "Factor_B", "AxB"]):
+            display(Markdown(f"Hypothesis test for ${factor}$"))
+
             if not "AxB":
                 self.collapse_by_factor(factor)
+
+            self.test_crit_values(factor)
+            # self.base.write_hypotheses() - needs to be set up
+            self.base.write_decision_criteria()
 
             #TODO need to rearrange all this or precalculate teh partitioned ss seperate from the display function
             self.display_df(factor)
