@@ -74,7 +74,7 @@ class RandomData():
 
     def set_crit_values(self, value, degf_n: int, degf_d: int):
         # method to to be called from within the factorial class to set value
-        self.crit_values = {"positive": value, "degf_d": degf_d, "degf_n": degf_n}
+        self.crit_values.update({"positive": value, "degf_d": degf_d, "degf_n": degf_n})
 
 
     def generate_question(self):
@@ -152,7 +152,11 @@ class RandomData():
         else:
             return ValueError("test-type specification error in question geneneration")
        
-        
+
+    def set_obt_value(self, value):
+        self.obt = value
+
+
     def final_decision(self):
         if self.tails == 2:
             if self.obt > self.crit_values["positive"] or self.obt < self.crit_values["negative"]:
@@ -192,12 +196,12 @@ class RandomData():
                 display(Markdown(f"fail to reject the null hypothesis, results not significant, <br> *z* = {self.obt}, *p* > {self.alpha}, *d* = {self.effect_size}<br><br>"))
             else:
                 return ValueError("significance boolean error in writing results")
-        elif self.test in ["one-way ANOVA", "repeated-measures ANOVA"]:
+        elif self.test in ["one-way ANOVA", "repeated-measures ANOVA", "factorial_ANOVA"]:
             display(Markdown("The results: <br><br>"))
             if self.significance:
-                display(Markdown(f"reject the null hypothesis, results are significant, <br> $F({{{self.crit_values['degf_n']}}}, {{{self.crit_values['degf_d']}}}) = {{{self.obt}}}, p < {{{self.alpha}}}, \\eta^2 = {{{self.effect_size}}}$"))
+                display(Markdown(f"reject the null hypothesis, results are significant, <br><br> $F({{{self.crit_values['degf_n']}}}, {{{self.crit_values['degf_d']}}}) = {{{self.obt}}}, p < {{{self.alpha}}}, \\eta^2 = {{{self.effect_size}}}$"))
             elif not self.significance:
-                display(Markdown(f"fail to reject the null hypothesis, results not significant, <br> $F({{{self.crit_values['degf_n']}}}, {{{self.crit_values['degf_d']}}}) = {{{self.obt}}}, p > {{{self.alpha}}}, \\eta^2 = {{{self.effect_size}}}$"))
+                display(Markdown(f"fail to reject the null hypothesis, results not significant, <br><br> $F({{{self.crit_values['degf_n']}}}, {{{self.crit_values['degf_d']}}}) = {{{self.obt}}}, p > {{{self.alpha}}}, \\eta^2 = {{{self.effect_size}}}$"))
         else:
             return ValueError("test specificaion error when writing results")
 
@@ -1031,20 +1035,20 @@ class FactorialData:
         })
         
         #TODO consider writing methods to take the values below to display each piece seperately.
-        display(Markdown(f"""Calculate the Sum of Squares <br>
-                $SS_{{total}} = \\Sigma X^2 - \\frac{{G^2}}{{N}}$ <br>
-                $SS_{{total}} = {{{self.summary['grand_sum_squared_scores']}}} - \\frac{{{self.summary["grand_sum_scores"]}^2}}{{{self.summary["total_n"]}}}$ <br>
-                $SS_{{total}} = {{{self.summary['grand_sum_squared_scores']}}} - \\frac{{{self.summary["grand_sum_scores"] ** 2}}}{{{self.summary["total_n"]}}}$ <br>
-                $SS_{{total}} = {{{self.summary['grand_sum_squared_scores']}}} - {{{round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)}}}$ <br>
-                $SS_{{total}} = {{{round(ss_total, 2)}}}$ <br><br>
-                $SS_{{within}} = \\Sigma SS_{{inside\\_each\\_condition}}$ <br>
-                $SS_{{within}} = {{{display_values}}}$ <br>
-                $SS_{{within}} = {{{round(ss_within, 2)}}}$ <br><br>
-                $SS_{{between}} = SS_{{total}} - SS_{{within}}$ <br>
-                $SS_{{between}} = {{{round(ss_total, 2)}}} - {{{round(ss_within, 2)}}}$ <br>
-                $SS_{{between}} = {{{round(ss_between, 2)}}}$ <br><br>
-                note: the other way to calculate $SS_{{betwen}}$ is: <br>
-                $SS_{{between}} = \\Sigma{{\\frac{{T^2}}{{n}}}} - \\frac{{G^2}}{{N}}$ <br><br>
+        display(Markdown(f"""Calculate the Sum of Squares <br><br>
+                $SS_{{total}} = \\Sigma X^2 - \\frac{{G^2}}{{N}}$ <br><br>
+                $SS_{{total}} = {{{self.summary['grand_sum_squared_scores']}}} - \\frac{{{self.summary["grand_sum_scores"]}^2}}{{{self.summary["total_n"]}}}$ <br><br>
+                $SS_{{total}} = {{{self.summary['grand_sum_squared_scores']}}} - \\frac{{{self.summary["grand_sum_scores"] ** 2}}}{{{self.summary["total_n"]}}}$ <br><br>
+                $SS_{{total}} = {{{self.summary['grand_sum_squared_scores']}}} - {{{round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)}}}$ <br><br>
+                $SS_{{total}} = {{{round(ss_total, 2)}}}$ <br><br><br>
+                $SS_{{within}} = \\Sigma SS_{{inside\\_each\\_condition}}$ <br><br>
+                $SS_{{within}} = {{{display_values}}}$ <br><br>
+                $SS_{{within}} = {{{round(ss_within, 2)}}}$ <br><br><br>
+                $SS_{{between}} = SS_{{total}} - SS_{{within}}$ <br><br>
+                $SS_{{between}} = {{{round(ss_total, 2)}}} - {{{round(ss_within, 2)}}}$ <br><br>
+                $SS_{{between}} = {{{round(ss_between, 2)}}}$ <br><br><br>
+                note: the other way to calculate $SS_{{betwen}}$ is: <br><br>
+                $SS_{{between}} = \\Sigma{{\\frac{{T^2}}{{n}}}} - \\frac{{G^2}}{{N}}$ <br><br><br>
             """))
         
 
@@ -1054,16 +1058,16 @@ class FactorialData:
         conditions = len(self.condition_list)
         df_between = conditions - 1
         df_within = big_n - conditions
-        display(Markdown(f"""Calculate the Degrees of Freedom <br>
-                    $$df_{{total}} = N - 1$$ <br>
-                    $$df_{{total}} = {{{big_n}}} - 1$$ <br>
-                    $$df_{{total}} = {{{df_total}}}$$ <br><br>
-                    $$df_{{between}} = k - 1$$ <br>
-                    $$df_{{between}} = {{{conditions}}} - 1$$ <br>
-                    $$df_{{between}} = {{{df_between}}}$$ <br><br>
-                    $$df_{{within}} = N - K$$ <br>
-                    $$df_{{within}} = {{{big_n}}} - {{{conditions}}}$$ <br>
-                    $$df_{{within}} = {{{df_within}}}$$ <br><br>
+        display(Markdown(f"""Calculate the Degrees of Freedom <br><br>
+                    $df_{{total}} = N - 1$ <br><br>
+                    $df_{{total}} = {{{big_n}}} - 1$ <br><br>
+                    $df_{{total}} = {{{df_total}}}$ <br><br><br>
+                    $df_{{between}} = k - 1$ <br><br>
+                    $df_{{between}} = {{{conditions}}} - 1$ <br><br>
+                    $df_{{between}} = {{{df_between}}}$ <br><br><br>
+                    $df_{{within}} = N - K$ <br><br>
+                    $df_{{within}} = {{{big_n}}} - {{{conditions}}}$ <br><br>
+                    $df_{{within}} = {{{df_within}}}$ <br><br><br>
                 """))
         self.final_calculations.update({
             "df_total": df_total,
@@ -1074,6 +1078,7 @@ class FactorialData:
         
     def collapse_by_factor(self, factor: str):
         levels = [f"{factor[-1]}_{i + 1}" for i in range(len(self.summary[f'n_{factor}']))]
+        display(Markdown(f"Summary Data for {factor} <br>"))
         for i, level in enumerate(levels):
             display(Markdown(f"$T_{{{level}}} = {{{self.summary[f"x_sums_{factor}"][i]}}}  \\quad n_{{{level}}} = {{{self.summary[f"n_{factor}"][i]}}}$ <br>")) 
             # unused display calculations: \\quad M_{{{level}}} = {{{self.summary[f"means_{factor}"][i]}}}\\quad SS_{{{level}}} = {{{self.summary[f"ss_values_{factor}"][i]}}}
@@ -1100,15 +1105,15 @@ class FactorialData:
         display(Markdown(f"Partition the SS for ${factor}$"))
         if factor in ["Factor_A", "Factor_B"]:
             levels = [f"{factor[-1]}_{i + 1}" for i in range(len(self.summary[f'n_{factor}']))]
-            display(Markdown(f"Calculate $SS_{{{factor}}}$ <br>"))
-            display(Markdown(f"$\\Sigma{{\\frac{{{{T_{{{factor}}}}}^2}}{{n_{{{factor}}}}}}} - \\frac{{G^2}}{{N}}$ <br>"))
+            display(Markdown(f"Calculate $SS_{{{factor}}}$ <br><br>"))
+            display(Markdown(f"$\\Sigma{{\\frac{{{{T_{{{factor}}}}}^2}}{{n_{{{factor}}}}}}} - \\frac{{G^2}}{{N}}$ <br><br>"))
             equation_text = ""
             for i, level in enumerate(levels):
                 if i == 0:
                     equation_text += f"\\frac{{{{{self.summary[f"x_sums_{factor}"][i]}}}^2}}{{{self.summary[f"n_{factor}"][i]}}}"
                 else:
                     equation_text += f" + \\frac{{{{{self.summary[f"x_sums_{factor}"][i]}}}^2}}{{{self.summary[f"n_{factor}"][i]}}}"
-            display(Markdown(f"$SS_{{{factor}}} = {{{equation_text}}} - \\frac{{{{{self.summary["grand_sum_scores"]}}}^2}}{{{self.summary["total_n"]}}}$"))
+            display(Markdown(f"$SS_{{{factor}}} = {{{equation_text}}} - \\frac{{{{{self.summary["grand_sum_scores"]}}}^2}}{{{self.summary["total_n"]}}}$ <br>"))
             
             # step 2 in the calculations display the squared values in the numerator
             equation_text = ""
@@ -1126,16 +1131,16 @@ class FactorialData:
                     equation_text += f"{{{round((self.summary[f"x_sums_{factor}"][i] ** 2) / self.summary[f"n_{factor}"][i], 2)}}}"
                 else:
                     equation_text += f" + {{{round((self.summary[f"x_sums_{factor}"][i] ** 2) / self.summary[f"n_{factor}"][i], 2)}}}"
-            display(Markdown(f"$SS_{{{factor}}} = {{{equation_text}}} - {{{round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)}}}$"))
+            display(Markdown(f"$SS_{{{factor}}} = {{{equation_text}}} - {{{round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)}}}$ <br>"))
 
             # step 4 sum the factor components
             result = 0
             for i, level in enumerate(levels):
                 result += round((self.summary[f"x_sums_{factor}"][i] ** 2) / self.summary[f"n_{factor}"][i], 2)
-            display(Markdown(f"$SS_{{{factor}}} = {{{round(result, 2)}}} - {{{round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)}}}$"))
+            display(Markdown(f"$SS_{{{factor}}} = {{{round(result, 2)}}} - {{{round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)}}}$ <br>"))
 
             # step 5 subtract the component from the full data
-            display(Markdown(f"$SS_{{{factor}}} = {{{round(self.final_calculations[f"SS_{factor}"], 2)}}}$"))
+            display(Markdown(f"$SS_{{{factor}}} = {{{round(self.final_calculations[f"SS_{factor}"], 2)}}}$ <br>"))
         else:
             display(Markdown(f"Calculate $SS_{{AxB}}$ <br>"))
             display(Markdown("$SS_{{AxB}} = SS_{{Between}} - SS_{{Factor_A}} - SS_{{Factor_B}}$<br>"))
@@ -1160,16 +1165,16 @@ class FactorialData:
 
     def display_df(self, factor: str):
         if factor in ["Factor_A", "Factor_B"]:
-            display(Markdown(f"""partition df for ${factor}$ <br>
-                             $$df_{{{factor}}} = k_{{{factor}}} - 1$$ <br>
-                             $$df_{{{factor}}} = {{{self.summary[f"levels_{factor}"]}}} - 1$$ <br>
-                             $$df_{{{factor}}} = {{{self.final_calculations[f"df_{factor}"]}}}$$ <br>"""))
+            display(Markdown(f"""partition df for ${factor}$ <br><br>
+                             $df_{{{factor}}} = k_{{{factor}}} - 1$ <br><br>
+                             $df_{{{factor}}} = {{{self.summary[f"levels_{factor}"]}}} - 1$ <br><br>
+                             $df_{{{factor}}} = {{{self.final_calculations[f"df_{factor}"]}}}$ <br><br>"""))
 
         else:
-            display(Markdown(f"""Partition df for the interaction <br>
-                            $$df_{{AxB}} = df_{{Between}} -df_{{Factor_A}} - df_{{Factor_B}}$$ <br>
-                            $$df_{{AxB}} = {{{self.final_calculations["df_between"]}}} - {{{self.final_calculations["df_Factor_A"]}}} - {{{self.final_calculations["df_Factor_B"]}}}$$ <br>
-                            $$df_{{AxB}} = {{{self.final_calculations["df_AxB"]}}}$$ <br><br>
+            display(Markdown(f"""Partition df for the interaction <br><br>
+                            $df_{{AxB}} = df_{{Between}} -df_{{Factor_A}} - df_{{Factor_B}}$ <br><br>
+                            $df_{{AxB}} = {{{self.final_calculations["df_between"]}}} - {{{self.final_calculations["df_Factor_A"]}}} - {{{self.final_calculations["df_Factor_B"]}}}$ <br><br>
+                            $df_{{AxB}} = {{{self.final_calculations["df_AxB"]}}}$ <br><br><br>
                              """))
         
     
@@ -1191,10 +1196,10 @@ class FactorialData:
         ss = self.final_calculations[f"SS_{factor}"]
         df = self.final_calculations[f"df_{factor}"]
         ms = self.final_calculations[f"ms_{factor}"]
-        display(Markdown(f"""Mean Squares for ${{{factor}}}$ <br>
-                        $$MS_{{{factor}}} = \\frac{{SS_{{{factor}}}}}{{df_{{{factor}}}}}$$<br> 
-                        $$MS_{{{factor}}} = \\frac{{{ss}}}{{{df}}}$$ <br>
-                        $$MS_{{{factor}}} = {{{ms}}}$$<br>
+        display(Markdown(f"""Mean Squares for ${{{factor}}}$ <br><br>
+                        $MS_{{{factor}}} = \\frac{{SS_{{{factor}}}}}{{df_{{{factor}}}}}$<br> <br>
+                        $MS_{{{factor}}} = \\frac{{{ss}}}{{{df}}}$ <br><br>
+                        $MS_{{{factor}}} = {{{ms}}}$<br><br>
                          """))
 
 
@@ -1214,10 +1219,11 @@ class FactorialData:
         numerator = self.final_calculations[f"ms_{factor}"]
         denominator = self.final_calculations["ms_within"]
         f_ratio = self.final_calculations[f"f_{factor}"]
-        display(Markdown(f"""Calculate the F-Ratio for ${{{factor}}}$ <br>
-                        $$F_{{{factor}}} = \\frac{{MS_{{{factor}}}}}{{MS_{{Within}}}}$$ <br>
-                        $$F_{{{factor}}} = \\frac{{{numerator}}}{{{denominator}}}$$ <br>
-                        $$F_{{{factor}}} = {{{f_ratio}}}$$ <br>
+        self.base.set_obt_value(f_ratio)
+        display(Markdown(f"""Calculate the F-Ratio for ${{{factor}}}$ <br><br>
+                        $F_{{{factor}}} = \\frac{{MS_{{{factor}}}}}{{MS_{{Within}}}}$ <br><br>
+                        $F_{{{factor}}} = \\frac{{{numerator}}}{{{denominator}}}$ <br><br>
+                        $F_{{{factor}}} = {{{f_ratio}}}$ <br><br>
                         """))
 
 
@@ -1231,7 +1237,6 @@ class FactorialData:
     def factorial_ANOVA(self):
         self.base.set_test("factorial_ANOVA")
         self.factorial_data = {}
-        #self.test = "factorial_ANOVA"
         self.combined_values()
         self.factor_values()
 
@@ -1251,24 +1256,26 @@ class FactorialData:
         self.mean_squares()
         self.f_ratios()
         
-        for i, factor in enumerate(["Factor_A", "Factor_B", "AxB"]):
-            display(Markdown(f"Hypothesis test for ${factor}$"))
+        for factor in ["Factor_A", "Factor_B", "AxB"]:
+            display(Markdown(f"<br>Hypothesis test for ${factor}$<br>"))
 
-            if not "AxB":
+            if factor != "AxB":
                 self.collapse_by_factor(factor)
 
             self.test_crit_values(factor)
-            # self.base.write_hypotheses() - needs to be set up
+            # self.base.write_hypotheses() - needs to be set up for all ANOVA types
+            
+
+            self.display_df(factor)
             self.base.write_decision_criteria()
 
-            #TODO need to rearrange all this or precalculate teh partitioned ss seperate from the display function
-            self.display_df(factor)
             self.display_ss(factor)
             self.display_ms(factor)
             self.display_f_ratios(factor)
 
-
-
+            # Methods from base that need to be modified
+            self.base.significance = self.base.final_decision()
+            self.base.write_result()
         
         
 
