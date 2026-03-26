@@ -279,7 +279,15 @@ class RandomData():
                             $$H_1: \\mu_D {alt_operation} {self.null}$$ <br>
                             """))
         elif self.test in ["one-way ANOVA", "repeated-measures ANOVA"]:
-            pass
+            letters = "ABCDEFGJIJKLMNOPQRSTUVWXYZ"
+            text = ""
+            for group in range(self.groups):
+                if group == 0:
+                    text += f"\\mu_{letters[group]}"
+                else:
+                    text += f" = \\mu_{letters[group]}"
+            display(Markdown(f"<br> State the Hypotheses <br> $H_0: {text}$ <br> $H_1:$ At least one mean is different <br>"))
+
         else:
             return ValueError("test specification error in method to write the hypotheses")
 
@@ -829,7 +837,7 @@ class RandomData():
                 display(Markdown(f"""Calculate $\\eta^2$ <br>
                     $$\\eta_p^2 = \\frac{{SS{{between}}}}{{SS_{{total}} - SS_{{subjects}}}}$$ <br>
                     $$\\eta_p^2 = \\frac{{{round(ss_between, 2)}}}{{{{{round(ss_total, 2)}}} - {{{round(ss_subjects, 2)}}}}}$$ <br>
-                    $$\\eta_p^2 = \\frac{{{round(ss_between, 2)}}}{{{round(ss_total, 2) - round(ss_subjects, 2)}}}$$ <br> 
+                    $$\\eta_p^2 = \\frac{{{round(ss_between, 2)}}}{{{round(round(ss_total, 2) - round(ss_subjects, 2),2)}}}$$ <br> 
                     $$\\eta_p^2 = {{{round(self.effect_size, 2)}}}$$ <br><br>
                 """)) # type: ignore               
 
@@ -840,79 +848,6 @@ class RandomData():
             self.write_result()
             print() # blank space
 
-"""
-    def generate_factorial_data(self, design: tuple):
-        # 1. Define Factors and Levels
-        factor_a = [f'A{level+1}' for level in range(design[0])]
-        factor_b = [f'B{level+1}' for level in range(design[1])]
-        n = self.n # Number of samples per combination
-
-        # 2. Generate all combinations (e.g., 2x3 = 6 combinations)
-        combinations = list(itertools.product(factor_a, factor_b))
-
-        # 3. Define distribution parameters for each combination
-        # Mean, StdDev for each (A1B1, A1B2, A1B3, A2B1, A2B2, A2B3)
-        parameters = []
-        for condition in combinations:
-            mean = self.pop_mean
-            sd = self.pop_sd
-            same_diff = random.randint(0,3)
-            if same_diff >= 1:
-                effect =  round(mean * random.uniform(0.10, 0.50))
-                mean +=  effect
-            parameters.append((mean, sd))
-
-        # 4. Generate data
-        data = []
-        for i, (a, b) in enumerate(combinations):
-            # Draw random samples from normal distribution using params[i]
-            values = np.random.normal(loc=parameters[i][0], scale=parameters[i][1], size=n).astype(int)
-            for val in values:
-                data.append({'Factor_A': a, 'Factor_B': b, 'X': val})
-
-        # 5. Create DataFrame
-        df = pd.DataFrame(data)
-
-        return df
-
-
-    def factorial_ANOVA(self, design: tuple):
-        self.factorial_data = {}
-        self.test = "factorial_ANOVA"
-        self.df = self.generate_factorial_data(design)
-
-        
-        # Overall Values
-        grand_sum = self.df['X'].sum()
-        grand_n = self.df['X'].count()
-        self.df['sum_squared'] = self.df['X'].apply(lambda x: x ** 2)
-        grand_sum_squared = self.df['sum_squared'].sum()
-        grand_ss = round(grand_sum_squared - round((grand_sum ** 2)/grand_n, 2),2)
-        
-
-        # Factor A
-        sums_factor_a = self.df.groupby('Factor_A')['X'].sum()
-        sum_sq_fa = self.df.groupby('Factor_A')['sum_squared'].sum()
-        n_factor_a = self.df.groupby('Factor_A')['X'].count()
-        self.factorial_data["factor_A"] = [(x,y,z) for (x,y,z) in zip()]
-
-        ss_fa = []
-        for sum, ss, n in zip(sums_factor_a, sum_sq_fa, n_factor_a):
-            ss_vals = ss - round((sum ** 2)/n, 2)
-            ss_fa.append(round(ss_vals, 2))
-
-        # Factor B
-        sums_factor_b = self.df.groupby('Factor_B')['X'].sum()
-        sum_sq_fb = self.df.groupby('Factor_B')['sum_squared'].sum()
-        n_factor_b = self.df.groupby('Factor_B')['X'].count()
-        
-        ss_fb = []
-        for sum, ss, n in zip(sums_factor_b, sum_sq_fb, n_factor_b):
-            ss_vals = ss - round((sum ** 2)/n, 2)
-            ss_fb.append(round(ss_vals, 2))
-
-        print(grand_ss, ss_fa, ss_fb)
-"""
 
 class FactorialData:
     def __init__(self, design: tuple, group_n: int):
@@ -1234,6 +1169,25 @@ class FactorialData:
             self.base.set_crit_values(crit, degf_n = degf_n, degf_d = degf_d)
 
 
+    def write_factor_hypotheses(self, factor: str):
+        if factor in ["Factor_A", "Factor_B"]:
+            levels = self.summary[f"levels_{factor}"]
+            if levels == 2:
+                display(Markdown("State the Hypotheses <br> $H_0: \\mu_1 = \\mu_2$ <br> $H_1: \\mu_1 \\ne \\mu_2$ <br>"))
+            else:
+                text = ""
+                for i in range(levels):
+                    if i == 0:
+                        text += f"\\mu_{i+1}"
+                    else:
+                        text += f" = \\mu_{i+1}"
+                display(Markdown(f"<br> State the Hypotheses <br> $H_0: {text}$ <br> $H_1:$ At least one mean is different <br>"))
+        elif factor == "AxB":
+            display(Markdown(f"<br> State the Hypotheses <br> $H_0:$ There is no AxB interation <br> $H_1:$ There is an AxB interaction <br>"))
+        else:
+            raise ValueError("factor level specification error when writing hypotheses")
+
+
     def factorial_ANOVA(self):
         self.base.set_test("factorial_ANOVA")
         self.factorial_data = {}
@@ -1257,13 +1211,14 @@ class FactorialData:
         self.f_ratios()
         
         for factor in ["Factor_A", "Factor_B", "AxB"]:
-            display(Markdown(f"<br>Hypothesis test for ${factor}$<br>"))
-
             if factor != "AxB":
+                display(Markdown(f"<br>Hypothesis test for ${factor}$<br>"))
                 self.collapse_by_factor(factor)
+            else:
+                display(Markdown(f"<br>Hypothesis test for the ${factor}$ interaction <br>"))
 
             self.test_crit_values(factor)
-            # self.base.write_hypotheses() - needs to be set up for all ANOVA types
+            self.write_factor_hypotheses(factor)
             
 
             self.display_df(factor)
@@ -1273,9 +1228,11 @@ class FactorialData:
             self.display_ms(factor)
             self.display_f_ratios(factor)
 
-            # Methods from base that need to be modified
             self.base.significance = self.base.final_decision()
             self.base.write_result()
+
+            #TODO need to add effect size measure
+            #TODO check and adjust formatting for output document.  line spacing needs adjustment
         
         
 
