@@ -974,7 +974,7 @@ class FactorialData:
         })
         
         #TODO consider writing methods to take the values below to display each piece seperately.
-        display(Markdown(f"""Calculate the Sum of Squares: $SS_{{total}}, SS_{{within}}, \\text{{ and }} SS_{{betwee }}$ <br><br> 
+        display(Markdown(f"""Calculate the Sum of Squares: $SS_{{total}}, SS_{{within}}, \\text{{ and }} SS_{{between}}$ <br><br> 
                 $SS_{{total}} = \\Sigma X^2 - \\frac{{G^2}}{{N}}$ <br><br>
                 $SS_{{total}} = {{{self.summary['grand_sum_squared_scores']}}} - \\frac{{{self.summary["grand_sum_scores"]}^2}}{{{self.summary["total_n"]}}}$ <br><br>
                 $SS_{{total}} = {{{self.summary['grand_sum_squared_scores']}}} - \\frac{{{self.summary["grand_sum_scores"] ** 2}}}{{{self.summary["total_n"]}}}$ <br><br>
