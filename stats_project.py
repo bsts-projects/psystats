@@ -8,7 +8,7 @@ from IPython.display import Markdown, display
 class RandomData():
     def __init__(self, groups = 1, n = 10, distribution = "normal"):
         self.groups = groups
-        self.n = n # TODO add option for unequal sample sizes.
+        self.n = n 
         self.df = self.generate_data()
         self.ss = self.sum_of_squares()
         self.means = self.group_means()
@@ -29,7 +29,6 @@ class RandomData():
             self.distribution = distribution 
         else:
             raise ValueError("only the normal distribution is currently supported")
-            # TODO add the ability to generate data from other distribuions
 
 
     def set_alpha(self):
@@ -181,7 +180,6 @@ class RandomData():
     
 
     def write_result(self):
-        # TODO add more elaborate functionality for the results
         if self.test in ["independent-samples t-test", "one-sample t-test", "dependent-samples t-test"]:
             display(Markdown("The results: <br><br>")) 
             # determine significance
@@ -212,7 +210,6 @@ class RandomData():
 
 
     def write_decision_criteria(self):
-        # TODO add more elaborate functionality for the results
         if self.test in ["independent-samples t-test", "one-sample t-test", "dependent-samples t-test"]:
             display(Markdown("<br>The decision criteria: <br><br>"))
             # print the critical value for the test
@@ -426,14 +423,12 @@ class RandomData():
             self.write_decision_criteria()
 
             # calculate the standard error
-            # TODO double check the work here to make sure it is accurate
             sd = self.pop_sd # round(self.df['A'].std(ddof = 0), 2)
             n = len(self.df['A'])
             sem = round(sd/(round(math.sqrt(n),2)),2)
             self.obt = round((self.means[0] - self.null) / sem, 2)
             self.effect_size = round((self.means[0] - self.null) / sd, 2)
 
-            # TODO add a way to determine environment so output can display in terminal or notebook
             # New output formatted for quarto render to html and screen reader
             display(Markdown(f"""Calculate the standard error <br>
                             $$\\sigma_M = \\frac{{\\sigma}}{{\\sqrt{{N}}}}$$ <br>
@@ -478,7 +473,6 @@ class RandomData():
             self.effect_size = round((self.means[0] - self.null) / self.std[0], 2)
 
             # print the caluclations for the standard error
-            # TODO add a way to determine environment so output can display in terminal or notebook
             display(Markdown(f"""Calculate the standard error <br>
                             $$s_M = \\sqrt{{\\frac{{s^2}}{{n}}}}$$ <br>
                             $$s_M = \\sqrt{{\\frac{{{self.var[0]}}}{{{self.n}}}}}$$ <br>
@@ -523,7 +517,6 @@ class RandomData():
             self.obt = round(((self.means[0] - self.means[1]) - self.null) / sem, 2)
             self.effect_size = round(((self.means[0] - self.means[1])) / round(math.sqrt(pooled_var),2), 2)
 
-            # TODO adapt to display in the terminal or a notebook
             # display the caluclations for the pooled variance
             display(Markdown(f"""Calculate the pooled variance: <br>
                             $$s_p^2 = {{\\frac{{SS_A + SS_B}}{{df_A + df_B}}}}$$ <br>
@@ -713,7 +706,6 @@ class RandomData():
                 else:
                     values += f" + {self.ss[group]}"
             
-            #TODO consider writing methods to take the values below to display each piece seperately.
             display(Markdown(f"""Calculate the Sum of Squares <br>
                     $$SS_{{total}} = \\Sigma X^2 - \\frac{{G^2}}{{N}}$$ <br>
                     $$SS_{{total}} = {{{self.sum_squared_scores}}} - \\frac{{{self.g}^2}}{{{big_n}}}$$ <br>
@@ -973,7 +965,6 @@ class FactorialData:
             "SS_Within": round(ss_within, 2)
         })
         
-        #TODO consider writing methods to take the values below to display each piece seperately.
         display(Markdown(f"""Calculate the Sum of Squares: $SS_{{total}}, SS_{{within}}, \\text{{ and }} SS_{{between}}$ <br><br> 
                 $SS_{{total}} = \\Sigma X^2 - \\frac{{G^2}}{{N}}$ <br><br>
                 $SS_{{total}} = {{{self.summary['grand_sum_squared_scores']}}} - \\frac{{{self.summary["grand_sum_scores"]}^2}}{{{self.summary["total_n"]}}}$ <br><br>
@@ -1192,7 +1183,6 @@ class FactorialData:
             raise ValueError("factor level specification error when writing hypotheses")
 
 
-
     def effect_size(self, factor: str):
         if factor == "Factor_A":
             numerator = self.final_calculations["SS_Factor_A"]
@@ -1237,7 +1227,7 @@ class FactorialData:
         self.stage_1_df()
         self.stage_1_ss()
 
-        #display(Markdown("Stage 2 ANOVA Calculations <br>"))
+        # Stage 2 Calculations are presented organized by factor instead of by step
         self.partition_df()
         self.partition_ss()
         self.mean_squares()
@@ -1266,7 +1256,6 @@ class FactorialData:
 
             self.base.significance = self.base.final_decision()
             self.base.write_result()
-            # TODO need to add effect size measures to base object for writing the result
         
     
 
