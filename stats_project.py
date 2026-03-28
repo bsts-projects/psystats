@@ -1243,7 +1243,6 @@ class FactorialData:
             self.test_crit_values(factor)
             self.write_factor_hypotheses(factor)
             
-
             self.display_df(factor)
             self.base.write_decision_criteria()
 

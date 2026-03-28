@@ -15,6 +15,7 @@ Each document will produces 30 practice problems in a .html slideshow rendered w
 * 11 - Dependent-Samples_t-Tests.qmd: *dependent-samples t-tests*
 * 12 - one-way_ANOVA.qmd: *one-way ANOVA*
 * 13 - repeated-measures_ANOVA: *repeated-measures ANOVA*
+* 14 - factorial_ANOVA: *two-factor ANOVA*
 
 ## Title II Updates in the immediate queue
 * ~~One-Way ANOVA~~
@@ -27,7 +28,7 @@ Each document will produces 30 practice problems in a .html slideshow rendered w
 ## Functionality to add
 * correlation
 * regression
-* two-factor ANOVA
+* ~~two-factor ANOVA~~
 * Post-hoc testing for ANOVA
 * Alt-text for figures.  Can the alt- and descriptive-text be auto generated based on the matplotlib input?
 * ~~include specifying the hypotheses for NHST (null and alternative)~~

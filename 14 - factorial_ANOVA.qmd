@@ -25,5 +25,5 @@ from stats_project import FactorialData
 ```{python}
 #| echo: false
 #| output: asis
-FactorialData(design = (2, 3), group_n = 10).factorial_ANOVA()
+FactorialData(design = (3, 3), group_n = 10).factorial_ANOVA()
 ```
