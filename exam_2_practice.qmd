@@ -1,7 +1,7 @@
 ---
 title: Practice for Exam 2
 subtitle: PSY 241 - Spring 2026
-date: 2026-04-02
+date: 2026-03-31
 author: Guenther, Benjamin A.
 format: 
   revealjs:

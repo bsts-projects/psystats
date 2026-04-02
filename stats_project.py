@@ -349,9 +349,12 @@ class RandomData():
 
     def critical_value(self):
         # calculate the degrees of freedom based on the type of test used
+        roll = random.randint(0, 5)
+        self.tails = 1 if roll == 0 else 2
+
         if self.test == "independent-samples t-test":
             degf = (self.n - 1) + (self.n - 1)
-            self.tails = random.choice([1, 2])
+            #self.tails = random.choice([1, 2, 3, 4, 5])
             if self.tails == 1:
                 crit = round(stats.t.ppf(1 - self.alpha, degf), 2) # type: ignore
             elif self.tails == 2:
@@ -362,7 +365,7 @@ class RandomData():
 
         elif self.test == "one-sample t-test" or self.test == "dependent-samples t-test":
             degf = self.n - 1
-            self.tails = random.choice([1, 2])
+            #self.tails = random.choice([1, 2])
             if self.tails == 1:
                 crit = round(stats.t.ppf(1 - self.alpha, degf), 2) # type: ignore
             elif self.tails == 2:
@@ -372,7 +375,7 @@ class RandomData():
             self.crit_values = {"positive": crit, "negative": -crit, "degf": degf}
 
         elif self.test == "z":
-            self.tails = random.choice([1, 2])
+            #self.tails = random.choice([1, 2])
             if self.tails == 1:
                 crit = round(stats.norm.ppf(1 - self.alpha), 3) # type: ignore
             elif self.tails == 2:
