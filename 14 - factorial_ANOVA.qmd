@@ -1,0 +1,322 @@
+---
+title: Two-Factor ANOVA
+subtitle: Practice Problems for PSY 241
+author: Guenther, Benjamin A.
+format: 
+  revealjs:
+    incremental: false
+    html-math-method: mathjax
+    self-contained-math: true
+    embed-resources: true
+jupyter: python3
+---
+
+```{python}
+import importlib
+import stats_project 
+import random
+
+# This is to clear cache and reload after edits to the .py file
+importlib.reload(stats_project)
+from stats_project import FactorialData
+```
+
+## Problem 1 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 2 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 3 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 4 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 5 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 6 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 7 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 8 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 9 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 10 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 11 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 12 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 13 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 14 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 15 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 16 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 17 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 18 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 19 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 20 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 21 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 22 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 23 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 24 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 25 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 26 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 27 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 28 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 29 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+## Problem 30 {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```

@@ -1,13 +1,14 @@
 import numpy as np
 import pandas as pd
 import random, math
+import itertools
 from scipy import stats
 from IPython.display import Markdown, display
 
 class RandomData():
     def __init__(self, groups = 1, n = 10, distribution = "normal"):
         self.groups = groups
-        self.n = n # TODO add option for unequal sample sizes.
+        self.n = n 
         self.df = self.generate_data()
         self.ss = self.sum_of_squares()
         self.means = self.group_means()
@@ -28,7 +29,6 @@ class RandomData():
             self.distribution = distribution 
         else:
             raise ValueError("only the normal distribution is currently supported")
-            # TODO add the ability to generate data from other distribuions
 
 
     def set_alpha(self):
@@ -40,9 +40,10 @@ class RandomData():
         df = pd.DataFrame()
         # list of letters for group labels
         letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
+        
         self.pop_mean = random.randint(10, 50)
         self.pop_sd = round(self.pop_mean * random.uniform(0.10, 0.30))
+            
         # create data for each group and add it to the dataframe
         for group in range(self.groups):
             mean = self.pop_mean #random.randint(10, 50)
@@ -63,9 +64,20 @@ class RandomData():
         return df
     
 
+    def set_test(self, test: str):
+        # method to to be called from within the factorial class to set value
+        self.test = test
+        self.tails = 1
+        self.crit_values["direction"] = "increase"
+
+
+    def set_crit_values(self, value, degf_n: int, degf_d: int):
+        # method to to be called from within the factorial class to set value
+        self.crit_values.update({"positive": value, "degf_d": degf_d, "degf_n": degf_n})
+
+
     def generate_question(self):
         # determine the test type
-
         if self.tails == 2:
             text = "significantly different from"
         elif self.tails == 1:
@@ -78,13 +90,10 @@ class RandomData():
         else:
             return ValueError("tails error for question generation")    
 
-        #display(self.df.style.hide(axis="index"))
-
+        # add ID column for repeated measures data
         if self.test in ["dependent-samples t-test", "repeated-measures ANOVA"]:
             id_col = list(range(1, self.n + 1))
             self.df.insert(loc = 0, column = "ID", value = id_col)
-        else:
-            pass
         
         if self.test == "z":
             display(Markdown(f"Given the following data, is the mean of $Group_A$ {text} the population mean: $\\mu = {{{self.null}}}$? <br><br>Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$<br><br>"))
@@ -93,10 +102,9 @@ class RandomData():
                             $$M_A = {{{self.means[0]}}}$$
                             $${{\\sigma}} = {{{self.pop_sd}}}$$
                             $$n = {{{len(self.df['A'])}}}$$<br>
-                            """)) #${{\\sigma_A}} = {{{round(self.df['A'].std(ddof = 0), 2)}}}$<br><br>
+                            """)) 
         elif self.test == "one-sample t-test":
             display(Markdown(f"Given the following data, is the mean of $Group_A$ {text} ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$ <br><br>"))
-            #display(Markdown(self.df.to_markdown(index=False)))
             display(self.df.style.hide(axis="index"))
             display(Markdown(f"""<br> The necessary summary statistics for these data<br>
                                 $$M_A = {{{self.means[0]}}}$$
@@ -113,7 +121,6 @@ class RandomData():
                              """))
         elif self.test == "dependent-samples t-test":
             display(Markdown(f"Given the following within-subjects data, is $M_D$ {text} ${{{self.null}}}$?  Use a ${{{self.tails}}}$ tailed-test with $\\alpha = {{{self.alpha}}}$<br><br>"))
-            #self.df.index.name = 'ID'
             display(self.df.style.hide(axis="index"))
             display(Markdown(f"""<br>Summary statistics for these data:<br>
                              $$M_A = {{{self.means[0]}}}, M_B = {{{self.means[1]}}}$$
@@ -137,10 +144,22 @@ class RandomData():
             letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
             for group in range(self.groups):
                 display(Markdown(f"$T_{{{letters[group]}}} = {{{self.sums[group]}}} \\quad SS_{{{letters[group]}}} = {{{self.ss[group]}}}$ <br>"))  
+        elif self.test == "factorial_ANOVA":
+            display(Markdown(f"Given the following data, use a use a 2-Factor ANOVA with $\\alpha = {{{self.alpha}}}$ to analyze the following data<br><br>"))
+            #TODO create the summary data table for the factorial ANOVA
+            #TODO manage and display the necessay summary statistics in addtion to those presented in the table.
         else:
             return ValueError("test-type specification error in question geneneration")
        
-        
+
+    def set_obt_value(self, value):
+        self.obt = value
+
+
+    def set_effect_size(self, value):
+        self.effect_size = value
+
+
     def final_decision(self):
         if self.tails == 2:
             if self.obt > self.crit_values["positive"] or self.obt < self.crit_values["negative"]:
@@ -161,7 +180,6 @@ class RandomData():
     
 
     def write_result(self):
-        # TODO add more elaborate functionality for the results
         if self.test in ["independent-samples t-test", "one-sample t-test", "dependent-samples t-test"]:
             display(Markdown("The results: <br><br>")) 
             # determine significance
@@ -180,18 +198,18 @@ class RandomData():
                 display(Markdown(f"fail to reject the null hypothesis, results not significant, <br> *z* = {self.obt}, *p* > {self.alpha}, *d* = {self.effect_size}<br><br>"))
             else:
                 return ValueError("significance boolean error in writing results")
-        elif self.test in ["one-way ANOVA", "repeated-measures ANOVA"]:
+        elif self.test in ["one-way ANOVA", "repeated-measures ANOVA", "factorial_ANOVA"]:
+            measure = "\\eta^2" if self.test == "one-way ANOVA" else "\\eta_p^2"
             display(Markdown("The results: <br><br>"))
             if self.significance:
-                display(Markdown(f"reject the null hypothesis, results are significant, <br> $F({{{self.crit_values['degf_n']}}}, {{{self.crit_values['degf_d']}}}) = {{{self.obt}}}, p < {{{self.alpha}}}, \\eta^2 = {{{self.effect_size}}}$"))
+                display(Markdown(f"reject the null hypothesis, results are significant, <br><br> $F({{{self.crit_values['degf_n']}}}, {{{self.crit_values['degf_d']}}}) = {{{self.obt}}}, p < {{{self.alpha}}}, {measure} = {{{self.effect_size}}}$"))
             elif not self.significance:
-                display(Markdown(f"fail to reject the null hypothesis, results not significant, <br> $F({{{self.crit_values['degf_n']}}}, {{{self.crit_values['degf_d']}}}) = {{{self.obt}}}, p > {{{self.alpha}}}, \\eta^2 = {{{self.effect_size}}}$"))
+                display(Markdown(f"fail to reject the null hypothesis, results not significant, <br><br> $F({{{self.crit_values['degf_n']}}}, {{{self.crit_values['degf_d']}}}) = {{{self.obt}}}, p > {{{self.alpha}}}, {measure} = {{{self.effect_size}}}$"))
         else:
             return ValueError("test specificaion error when writing results")
 
 
     def write_decision_criteria(self):
-        # TODO add more elaborate functionality for the results
         if self.test in ["independent-samples t-test", "one-sample t-test", "dependent-samples t-test"]:
             display(Markdown("<br>The decision criteria: <br><br>"))
             # print the critical value for the test
@@ -214,7 +232,7 @@ class RandomData():
                 display(Markdown(f"$z_{{crit}} = {{{self.crit_values['negative']}}}, \\alpha_{{one-tailed}} = {{{self.alpha}}}$<br><br>"))
             else:
                 return ValueError("tails error in writing results")
-        elif self.test in ["one-way ANOVA", "repeated-measures ANOVA"]:
+        elif self.test in ["one-way ANOVA", "repeated-measures ANOVA", "factorial_ANOVA"]:
             display(Markdown("<br> The decision criteria: <br><br>"))
             display(Markdown(f"$F_{{crit}} = {{{self.crit_values['positive']}}}, \\alpha = {{{self.alpha}}}$ <br><br>"))
         else:
@@ -263,7 +281,15 @@ class RandomData():
                             $$H_1: \\mu_D {alt_operation} {self.null}$$ <br>
                             """))
         elif self.test in ["one-way ANOVA", "repeated-measures ANOVA"]:
-            pass
+            letters = "ABCDEFGJIJKLMNOPQRSTUVWXYZ"
+            text = ""
+            for group in range(self.groups):
+                if group == 0:
+                    text += f"\\mu_{letters[group]}"
+                else:
+                    text += f" = \\mu_{letters[group]}"
+            display(Markdown(f"<br> State the Hypotheses <br> $H_0: {text}$ <br> $H_1:$ At least one mean is different <br>"))
+
         else:
             return ValueError("test specification error in method to write the hypotheses")
 
@@ -323,9 +349,12 @@ class RandomData():
 
     def critical_value(self):
         # calculate the degrees of freedom based on the type of test used
+        roll = random.randint(0, 5)
+        self.tails = 1 if roll == 0 else 2
+
         if self.test == "independent-samples t-test":
             degf = (self.n - 1) + (self.n - 1)
-            self.tails = random.choice([1, 2])
+            #self.tails = random.choice([1, 2, 3, 4, 5])
             if self.tails == 1:
                 crit = round(stats.t.ppf(1 - self.alpha, degf), 2) # type: ignore
             elif self.tails == 2:
@@ -336,7 +365,7 @@ class RandomData():
 
         elif self.test == "one-sample t-test" or self.test == "dependent-samples t-test":
             degf = self.n - 1
-            self.tails = random.choice([1, 2])
+            #self.tails = random.choice([1, 2])
             if self.tails == 1:
                 crit = round(stats.t.ppf(1 - self.alpha, degf), 2) # type: ignore
             elif self.tails == 2:
@@ -345,9 +374,8 @@ class RandomData():
                 return ValueError("crit not determined")
             self.crit_values = {"positive": crit, "negative": -crit, "degf": degf}
 
-        # TODO manually specify crit values for z scores.  or figure out why the math is incorrect
         elif self.test == "z":
-            self.tails = random.choice([1, 2])
+            #self.tails = random.choice([1, 2])
             if self.tails == 1:
                 crit = round(stats.norm.ppf(1 - self.alpha), 3) # type: ignore
             elif self.tails == 2:
@@ -369,10 +397,6 @@ class RandomData():
             self.tails = 1
             crit = round(stats.f.ppf(q = (1 - self.alpha), dfn = degf_b, dfd = degf_e), 2) # type: ignore
             self.crit_values = {"positive": crit, "degf_d": degf_e, "degf_n": degf_b}
-
-
-        else:
-            raise ValueError("incorrect test specification - degrees of freedom")
 
         # add a direction for one-tailed tests 
         if self.test in ["one-way ANOVA", "repeated-measures ANOVA"]:
@@ -402,14 +426,12 @@ class RandomData():
             self.write_decision_criteria()
 
             # calculate the standard error
-            # TODO double check the work here to make sure it is accurate
             sd = self.pop_sd # round(self.df['A'].std(ddof = 0), 2)
             n = len(self.df['A'])
             sem = round(sd/(round(math.sqrt(n),2)),2)
             self.obt = round((self.means[0] - self.null) / sem, 2)
             self.effect_size = round((self.means[0] - self.null) / sd, 2)
 
-            # TODO add a way to determine environment so output can display in terminal or notebook
             # New output formatted for quarto render to html and screen reader
             display(Markdown(f"""Calculate the standard error <br>
                             $$\\sigma_M = \\frac{{\\sigma}}{{\\sqrt{{N}}}}$$ <br>
@@ -454,7 +476,6 @@ class RandomData():
             self.effect_size = round((self.means[0] - self.null) / self.std[0], 2)
 
             # print the caluclations for the standard error
-            # TODO add a way to determine environment so output can display in terminal or notebook
             display(Markdown(f"""Calculate the standard error <br>
                             $$s_M = \\sqrt{{\\frac{{s^2}}{{n}}}}$$ <br>
                             $$s_M = \\sqrt{{\\frac{{{self.var[0]}}}{{{self.n}}}}}$$ <br>
@@ -499,7 +520,6 @@ class RandomData():
             self.obt = round(((self.means[0] - self.means[1]) - self.null) / sem, 2)
             self.effect_size = round(((self.means[0] - self.means[1])) / round(math.sqrt(pooled_var),2), 2)
 
-            # TODO adapt to display in the terminal or a notebook
             # display the caluclations for the pooled variance
             display(Markdown(f"""Calculate the pooled variance: <br>
                             $$s_p^2 = {{\\frac{{SS_A + SS_B}}{{df_A + df_B}}}}$$ <br>
@@ -689,7 +709,6 @@ class RandomData():
                 else:
                     values += f" + {self.ss[group]}"
             
-            #TODO consider writing methods to take the values below to display each piece seperately.
             display(Markdown(f"""Calculate the Sum of Squares <br>
                     $$SS_{{total}} = \\Sigma X^2 - \\frac{{G^2}}{{N}}$$ <br>
                     $$SS_{{total}} = {{{self.sum_squared_scores}}} - \\frac{{{self.g}^2}}{{{big_n}}}$$ <br>
@@ -818,7 +837,7 @@ class RandomData():
                 display(Markdown(f"""Calculate $\\eta^2$ <br>
                     $$\\eta_p^2 = \\frac{{SS{{between}}}}{{SS_{{total}} - SS_{{subjects}}}}$$ <br>
                     $$\\eta_p^2 = \\frac{{{round(ss_between, 2)}}}{{{{{round(ss_total, 2)}}} - {{{round(ss_subjects, 2)}}}}}$$ <br>
-                    $$\\eta_p^2 = \\frac{{{round(ss_between, 2)}}}{{{round(ss_total, 2) - round(ss_subjects, 2)}}}$$ <br> 
+                    $$\\eta_p^2 = \\frac{{{round(ss_between, 2)}}}{{{round(round(ss_total, 2) - round(ss_subjects, 2),2)}}}$$ <br> 
                     $$\\eta_p^2 = {{{round(self.effect_size, 2)}}}$$ <br><br>
                 """)) # type: ignore               
 
@@ -828,3 +847,420 @@ class RandomData():
             self.significance = self.final_decision()
             self.write_result()
             print() # blank space
+
+
+class FactorialData:
+    def __init__(self, design: tuple, group_n: int):
+        self.n = group_n
+        self.base = RandomData(n = group_n)
+        self.design = design
+        self.df = self.generate_factorial_data()
+        self.summary = {}
+        self.final_calculations = {}
+
+
+    def generate_factorial_data(self):
+        # 1. Define Factors and Levels
+        factor_a = [f'A{level+1}' for level in range(self.design[0])]
+        factor_b = [f'B{level+1}' for level in range(self.design[1])]
+        n = self.base.n # Number of samples per combination
+
+        # 2. Generate all combinations (e.g., 2x3 = 6 combinations)
+        conditions = list(itertools.product(factor_a, factor_b))
+        self.condition_list = []
+        for a in factor_a:
+            for b in factor_b:
+                self.condition_list.append(f"{a}{b}")
+        
+        # 3. Define distribution parameters for each combination
+        # Mean, StdDev for each (A1B1, A1B2, A1B3, A2B1, A2B2, A2B3)
+        parameters = []
+        for condition in conditions:
+            mean = self.base.pop_mean
+            sd = self.base.pop_sd
+            same_diff = random.randint(0,3)
+            if same_diff >= 1:
+                effect =  round(mean * random.uniform(0.10, 0.50))
+                mean +=  effect
+            parameters.append((mean, sd))
+
+        # 4. Generate data
+        data = []
+        for i, (a, b) in enumerate(conditions):
+            # Draw random samples from normal distribution using params[i]
+            values = np.random.normal(loc=parameters[i][0], scale=parameters[i][1], size=n).astype(int)
+            for val in values:
+                data.append({'Factor_A': a, 'Factor_B': b, 'X': val})
+
+        # 5. Create DataFrame
+        df = pd.DataFrame(data)
+
+        return df
+
+
+    def combined_values(self):
+        grand_sum = self.df['X'].sum()
+        grand_n = self.df['X'].count()
+        self.df['sum_squared'] = self.df['X'].apply(lambda x: x ** 2)
+        grand_sum_squared = self.df['sum_squared'].sum()
+        grand_ss = round(grand_sum_squared - round((grand_sum ** 2)/grand_n, 2),2)
+        self.summary.update({"grand_ss": grand_ss, 
+                             "total_n": grand_n, 
+                             "grand_sum_scores": grand_sum,
+                             "grand_sum_squared_scores": grand_sum_squared})
+
+
+    def factor_values(self):
+        for factor in ["Factor_A", "Factor_B"]:
+            self.summary.update({
+                f"levels_{factor}": len(self.df.groupby(factor)['X'].count()),
+                f"x_sums_{factor}": [i for i in self.df.groupby(factor)['X'].sum()],
+                f"x_sq_sum_{factor}": [i for i in self.df.groupby(factor)['sum_squared'].sum()],
+                f"n_{factor}": [i for i in self.df.groupby(factor)['X'].count()]
+            })
+            means = []
+            ss_values = []
+            for sum, ss, n in zip(self.summary[f"x_sums_{factor}"], self.summary[f"x_sq_sum_{factor}"], self.summary[f"n_{factor}"]):
+                ss_vals = ss - round((sum ** 2)/n, 2)
+                ss_values.append(round(ss_vals, 2))
+                means.append(round(sum / n, 2))
+            self.summary[f"ss_values_{factor}"] = ss_values
+            self.summary[f"means_{factor}"] = means
+
+    
+    def summary_by_group(self):
+        t = [i for i in self.df.groupby(['Factor_A', 'Factor_B'])['X'].sum()]
+        sum_sqs = [i for i in self.df.groupby(['Factor_A', 'Factor_B'])['sum_squared'].sum()]
+        ns = [i for i in self.df.groupby(['Factor_A', 'Factor_B'])['X'].count()]
+        ss_values = []
+        means = []
+        for sum, ss, n in zip(t, sum_sqs, ns):
+            ss_vals = ss - round((sum ** 2)/n, 2)
+            ss_values.append(round(ss_vals, 2))
+            means.append(round(sum / n, 2))
+
+        group_totals = {f'T_{level}': t for level, t in zip(self.condition_list, t)}
+        #group_sums = {f'sum_sq_{level}': ss for level, ss in zip(self.condition_list, sum_sqs)}
+        group_ns = {f'n_{level}': n for level, n in zip(self.condition_list, ns)}
+        self.group_ss = {f'SS_{level}': ss for level, ss in zip(self.condition_list, ss_values)}
+        group_means = {f'M_{level}': m for level, m in zip(self.condition_list, means)}
+
+        #TODO format into a table for problem display
+        for condition in self.condition_list:
+            display(Markdown(f"$T_{{{condition}}} = {{{group_totals[f"T_{condition}"]}}} \\quad M_{{{condition}}} = {{{group_means[f"M_{condition}"]}}}\\quad SS_{{{condition}}} = {{{self.group_ss[f"SS_{condition}"]}}} \\quad n_{{{condition}}} = {{{group_ns[f"n_{condition}"]}}}$ <br>"))    
+        
+    
+    def stage_1_ss(self):
+        # sum of squares
+        ss_total = self.summary['grand_sum_squared_scores'] - round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)
+        ss_within = 0
+        display_values = ""
+        for i, value in enumerate(self.group_ss.values()):
+            ss_within += value
+            if i == 0:
+                display_values += f"{value}"
+            else:
+                display_values += f" + {value}"
+        ss_between = ss_total - ss_within
+        self.final_calculations.update({
+            "SS_Total": round(ss_total, 2),
+            "SS_Between": round(ss_between, 2),
+            "SS_Within": round(ss_within, 2)
+        })
+        
+        display(Markdown(f"""Calculate the Sum of Squares: $SS_{{total}}, SS_{{within}}, \\text{{ and }} SS_{{between}}$ <br><br> 
+                $SS_{{total}} = \\Sigma X^2 - \\frac{{G^2}}{{N}}$ <br><br>
+                $SS_{{total}} = {{{self.summary['grand_sum_squared_scores']}}} - \\frac{{{self.summary["grand_sum_scores"]}^2}}{{{self.summary["total_n"]}}}$ <br><br>
+                $SS_{{total}} = {{{self.summary['grand_sum_squared_scores']}}} - \\frac{{{self.summary["grand_sum_scores"] ** 2}}}{{{self.summary["total_n"]}}}$ <br><br>
+                $SS_{{total}} = {{{self.summary['grand_sum_squared_scores']}}} - {{{round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)}}}$ <br><br>
+                $SS_{{total}} = {{{round(ss_total, 2)}}}$ <br><br><br>
+                $SS_{{within}} = \\Sigma SS_{{inside\\_each\\_condition}}$ <br><br>
+                $SS_{{within}} = {{{display_values}}}$ <br><br>
+                $SS_{{within}} = {{{round(ss_within, 2)}}}$ <br><br><br>
+                $SS_{{between}} = SS_{{total}} - SS_{{within}}$ <br><br>
+                $SS_{{between}} = {{{round(ss_total, 2)}}} - {{{round(ss_within, 2)}}}$ <br><br>
+                $SS_{{between}} = {{{round(ss_between, 2)}}}$ <br><br><br>
+                note: the other way to calculate $SS_{{betwen}}$ is: <br><br>
+                $SS_{{between}} = \\Sigma{{\\frac{{T^2}}{{n}}}} - \\frac{{G^2}}{{N}}$ <br><br><br>
+            """))
+        
+
+    def stage_1_df(self):
+        big_n = self.summary["total_n"]
+        df_total = big_n - 1
+        conditions = len(self.condition_list)
+        df_between = conditions - 1
+        df_within = big_n - conditions
+        display(Markdown(f"""<br>Calculate the Degrees of Freedom: $df_{{total}}, df_{{within}}, \\text{{ and }} df_{{between}}$ <br><br>
+                    $df_{{total}} = N - 1$ <br><br>
+                    $df_{{total}} = {{{big_n}}} - 1$ <br><br>
+                    $df_{{total}} = {{{df_total}}}$ <br><br><br>
+                    $df_{{between}} = k - 1$ <br><br>
+                    $df_{{between}} = {{{conditions}}} - 1$ <br><br>
+                    $df_{{between}} = {{{df_between}}}$ <br><br><br>
+                    $df_{{within}} = N - K$ <br><br>
+                    $df_{{within}} = {{{big_n}}} - {{{conditions}}}$ <br><br>
+                    $df_{{within}} = {{{df_within}}}$ <br><br><br>
+                """))
+        self.final_calculations.update({
+            "df_total": df_total,
+            "df_between": df_between,
+            "df_within": df_within
+        })
+
+        
+    def collapse_by_factor(self, factor: str):
+        levels = [f"{factor[-1]}_{i + 1}" for i in range(len(self.summary[f'n_{factor}']))]
+        display(Markdown(f"Summary Data for {factor} <br>"))
+        for i, level in enumerate(levels):
+            display(Markdown(f"$T_{{{level}}} = {{{self.summary[f"x_sums_{factor}"][i]}}}  \\quad n_{{{level}}} = {{{self.summary[f"n_{factor}"][i]}}}$ <br>")) 
+            # unused display calculations: \\quad M_{{{level}}} = {{{self.summary[f"means_{factor}"][i]}}}\\quad SS_{{{level}}} = {{{self.summary[f"ss_values_{factor}"][i]}}}
+
+
+    def partition_ss(self):
+        #display(Markdown(f"Partition the SS for ${factor}$"))
+        for factor in ["Factor_A", "Factor_B"]:
+            levels = [f"{factor[-1]}_{i + 1}" for i in range(len(self.summary[f'n_{factor}']))]
+            # step 4 sum the factor components
+            result = 0
+            for i, level in enumerate(levels):
+                result += round((self.summary[f"x_sums_{factor}"][i] ** 2) / self.summary[f"n_{factor}"][i], 2)
+            # step 5 subtract the component from the full data
+            result -= round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)
+            self.final_calculations[f"SS_{factor}"] = round(result, 2)   
+
+        # the interaction
+        ss_interaction = round(self.final_calculations["SS_Between"] - self.final_calculations["SS_Factor_A"] - self.final_calculations["SS_Factor_B"], 2)
+        self.final_calculations["SS_AxB"] = ss_interaction
+  
+
+    def display_ss(self, factor: str):
+        display(Markdown(f"Partition the SS for ${factor}$<br><br>"))
+        if factor in ["Factor_A", "Factor_B"]:
+            levels = [f"{factor[-1]}_{i + 1}" for i in range(len(self.summary[f'n_{factor}']))]
+            display(Markdown(f"Calculate $SS_{{{factor}}}$ <br><br>"))
+            display(Markdown(f"$\\Sigma{{\\frac{{{{T_{{{factor}}}}}^2}}{{n_{{{factor}}}}}}} - \\frac{{G^2}}{{N}}$ <br><br>"))
+            equation_text = ""
+            for i, level in enumerate(levels):
+                if i == 0:
+                    equation_text += f"\\frac{{{{{self.summary[f"x_sums_{factor}"][i]}}}^2}}{{{self.summary[f"n_{factor}"][i]}}}"
+                else:
+                    equation_text += f" + \\frac{{{{{self.summary[f"x_sums_{factor}"][i]}}}^2}}{{{self.summary[f"n_{factor}"][i]}}}"
+            display(Markdown(f"$SS_{{{factor}}} = {{{equation_text}}} - \\frac{{{{{self.summary["grand_sum_scores"]}}}^2}}{{{self.summary["total_n"]}}}$ <br><br>"))
+            
+            # step 2 in the calculations display the squared values in the numerator
+            equation_text = ""
+            for i, level in enumerate(levels):
+                if i == 0:
+                    equation_text += f"\\frac{{{{{self.summary[f"x_sums_{factor}"][i] ** 2}}}}}{{{self.summary[f"n_{factor}"][i]}}}"
+                else:
+                    equation_text += f" + \\frac{{{{{self.summary[f"x_sums_{factor}"][i] ** 2}}}}}{{{self.summary[f"n_{factor}"][i]}}}"
+            display(Markdown(f"$SS_{{{factor}}} = {{{equation_text}}} - \\frac{{{{{self.summary["grand_sum_scores"] ** 2}}}}}{{{self.summary["total_n"]}}}$<br><br>"))
+            
+            # step 3 in the calculations display results of division
+            equation_text = ""
+            for i, level in enumerate(levels):
+                if i == 0:
+                    equation_text += f"{{{round((self.summary[f"x_sums_{factor}"][i] ** 2) / self.summary[f"n_{factor}"][i], 2)}}}"
+                else:
+                    equation_text += f" + {{{round((self.summary[f"x_sums_{factor}"][i] ** 2) / self.summary[f"n_{factor}"][i], 2)}}}"
+            display(Markdown(f"$SS_{{{factor}}} = {{{equation_text}}} - {{{round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)}}}$ <br><br>"))
+
+            # step 4 sum the factor components
+            result = 0
+            for i, level in enumerate(levels):
+                result += round((self.summary[f"x_sums_{factor}"][i] ** 2) / self.summary[f"n_{factor}"][i], 2)
+            display(Markdown(f"$SS_{{{factor}}} = {{{round(result, 2)}}} - {{{round((self.summary["grand_sum_scores"] ** 2) / self.summary["total_n"], 2)}}}$ <br><br>"))
+
+            # step 5 subtract the component from the full data
+            display(Markdown(f"$SS_{{{factor}}} = {{{round(self.final_calculations[f"SS_{factor}"], 2)}}}$ <br><br>"))
+        else:
+            display(Markdown(f"Calculate $SS_{{AxB}}$ <br><br>"))
+            display(Markdown("$SS_{{AxB}} = SS_{{Between}} - SS_{{Factor_A}} - SS_{{Factor_B}}$<br><br>"))
+            display(Markdown(f"$SS_{{AxB}} = {{{self.final_calculations["SS_Between"]}}} - {{{self.final_calculations["SS_Factor_A"]}}} - {{{self.final_calculations["SS_Factor_B"]}}}$ <br><br>"))
+            display(Markdown(f"$SS_{{AxB}} = {{{self.final_calculations["SS_AxB"]}}}$ <br><br>"))
+
+
+    def partition_df(self):
+        levels_a = self.summary["levels_Factor_A"]
+        levels_b = self.summary["levels_Factor_B"]
+        
+        df_a = levels_a - 1
+        df_b = levels_b - 1
+        df_axb = self.final_calculations["df_between"] - df_a - df_b
+
+        self.final_calculations.update({
+            "df_Factor_A": df_a,
+            "df_Factor_B": df_b,
+            "df_AxB": df_axb
+        })
+
+
+    def display_df(self, factor: str):
+        if factor in ["Factor_A", "Factor_B"]:
+            display(Markdown(f"""<br>partition df for ${factor}$ <br><br>
+                             $df_{{{factor}}} = k_{{{factor}}} - 1$ <br><br>
+                             $df_{{{factor}}} = {{{self.summary[f"levels_{factor}"]}}} - 1$ <br><br>
+                             $df_{{{factor}}} = {{{self.final_calculations[f"df_{factor}"]}}}$ <br><br>"""))
+
+        else:
+            display(Markdown(f"""<br>Partition df for the interaction <br><br>
+                            $df_{{AxB}} = df_{{Between}} -df_{{Factor_A}} - df_{{Factor_B}}$ <br><br>
+                            $df_{{AxB}} = {{{self.final_calculations["df_between"]}}} - {{{self.final_calculations["df_Factor_A"]}}} - {{{self.final_calculations["df_Factor_B"]}}}$ <br><br>
+                            $df_{{AxB}} = {{{self.final_calculations["df_AxB"]}}}$ <br><br><br>
+                             """))
+        
+    
+    def mean_squares(self):
+        ms_within = round(self.final_calculations["SS_Within"] / self.final_calculations["df_within"], 2)
+        ms_a = round(self.final_calculations["SS_Factor_A"] / self.final_calculations["df_Factor_A"], 2)
+        ms_b = round(self.final_calculations["SS_Factor_B"] / self.final_calculations["df_Factor_B"], 2)
+        ms_axb = round(self.final_calculations["SS_AxB"] / self.final_calculations["df_AxB"], 2)
+
+        self.final_calculations.update({
+            "ms_within": ms_within,
+            "ms_Factor_A": ms_a,
+            "ms_Factor_B": ms_b,
+            "ms_AxB": ms_axb
+        })
+
+
+    def display_ms(self, factor: str):
+        ss = self.final_calculations[f"SS_{factor}"]
+        df = self.final_calculations[f"df_{factor}"]
+        ms = self.final_calculations[f"ms_{factor}"]
+        display(Markdown(f"""Mean Squares for ${{{factor}}}$ <br><br>
+                        $MS_{{{factor}}} = \\frac{{SS_{{{factor}}}}}{{df_{{{factor}}}}}$<br> <br>
+                        $MS_{{{factor}}} = \\frac{{{ss}}}{{{df}}}$ <br><br>
+                        $MS_{{{factor}}} = {{{ms}}}$<br><br>
+                         """))
+
+
+    def f_ratios(self):
+        f_a = round(self.final_calculations["ms_Factor_A"] / self.final_calculations["ms_within"], 2)
+        f_b = round(self.final_calculations["ms_Factor_B"] / self.final_calculations["ms_within"], 2)
+        f_axb = round(self.final_calculations["ms_AxB"] / self.final_calculations["ms_within"], 2)
+
+        self.final_calculations.update({
+            "f_Factor_A": f_a,
+            "f_Factor_B": f_b,
+            "f_AxB": f_axb
+        })
+
+
+    def display_f_ratios(self, factor: str):
+        numerator = self.final_calculations[f"ms_{factor}"]
+        denominator = self.final_calculations["ms_within"]
+        f_ratio = self.final_calculations[f"f_{factor}"]
+        self.base.set_obt_value(f_ratio)
+        display(Markdown(f"""Calculate the F-Ratio for ${{{factor}}}$ <br><br>
+                        $F_{{{factor}}} = \\frac{{MS_{{{factor}}}}}{{MS_{{Within}}}}$ <br><br>
+                        $F_{{{factor}}} = \\frac{{{numerator}}}{{{denominator}}}$ <br><br>
+                        $F_{{{factor}}} = {{{f_ratio}}}$ <br><br>
+                        """))
+
+
+    def test_crit_values(self, factor: str):
+            degf_d = self.final_calculations["df_within"]
+            degf_n = self.final_calculations[f"df_{factor}"]
+            crit = round(stats.f.ppf(q = (1 - self.base.alpha), dfn = degf_n, dfd = degf_d), 2) # type: ignore
+            self.base.set_crit_values(crit, degf_n = degf_n, degf_d = degf_d)
+
+
+    def write_factor_hypotheses(self, factor: str):
+        if factor in ["Factor_A", "Factor_B"]:
+            levels = self.summary[f"levels_{factor}"]
+            if levels == 2:
+                display(Markdown("<br> State the Hypotheses <br> $H_0: \\mu_1 = \\mu_2$ <br> $H_1: \\mu_1 \\ne \\mu_2$ <br>"))
+            else:
+                text = ""
+                for i in range(levels):
+                    if i == 0:
+                        text += f"\\mu_{i+1}"
+                    else:
+                        text += f" = \\mu_{i+1}"
+                display(Markdown(f"<br> State the Hypotheses <br> $H_0: {text}$ <br> $H_1:$ At least one mean is different <br>"))
+        elif factor == "AxB":
+            display(Markdown(f"<br> State the Hypotheses <br> $H_0:$ There is no AxB interation <br> $H_1:$ There is an AxB interaction <br>"))
+        else:
+            raise ValueError("factor level specification error when writing hypotheses")
+
+
+    def effect_size(self, factor: str):
+        if factor == "Factor_A":
+            numerator = self.final_calculations["SS_Factor_A"]
+            denominator = round(self.final_calculations["SS_Total"] - self.final_calculations["SS_Factor_B"] - self.final_calculations["SS_AxB"],2)
+            effect = round(numerator/denominator, 2)
+            display(Markdown("<br>$\\eta_p^2 = \\frac{{SS_{{Factor_A}}}}{{SS_{{Total}} - SS_{{Factor_B}} - SS_{{AxB}}}}$<br>"))
+            display(Markdown(f"<br>$\\eta_p^2 = \\frac{{{numerator}}}{{{{{self.final_calculations["SS_Total"]}}} - {{{self.final_calculations["SS_Factor_B"]}}} - {{{self.final_calculations["SS_AxB"]}}}}}$<br>"))
+        elif factor == "Factor_B":
+            numerator = self.final_calculations["SS_Factor_B"]
+            denominator = round(self.final_calculations["SS_Total"] - self.final_calculations["SS_Factor_A"] - self.final_calculations["SS_AxB"],2)
+            effect = round(numerator/denominator, 2)
+            display(Markdown("<br>$\\eta_p^2 = \\frac{{SS_{{Factor_B}}}}{{SS_{{Total}} - SS_{{Factor_A}} - SS_{{AxB}}}}$<br>"))
+            display(Markdown(f"<br>$\\eta_p^2 = \\frac{{{numerator}}}{{{{{self.final_calculations["SS_Total"]}}} - {{{self.final_calculations["SS_Factor_A"]}}} - {{{self.final_calculations["SS_AxB"]}}}}}$<br>"))
+        elif factor == "AxB":
+            numerator = self.final_calculations["SS_AxB"]
+            denominator = round(self.final_calculations["SS_Total"] - self.final_calculations["SS_Factor_A"] - self.final_calculations["SS_Factor_B"],2)
+            effect = round(numerator/denominator, 2)
+            display(Markdown("<br>$\\eta_p^2 = \\frac{{SS_{{AxB}}}}{{SS_{{Total}} - SS_{{Factor_A}} - SS_{{Factor_B}}}}$<br>"))
+            display(Markdown(f"<br>$\\eta_p^2 = \\frac{{{numerator}}}{{{{{self.final_calculations["SS_Total"]}}} - {{{self.final_calculations["SS_Factor_A"]}}} - {{{self.final_calculations["SS_Factor_B"]}}}}}$<br>"))
+        else:
+            raise ValueError("factor specification error in effect_size method")
+        
+        display(Markdown(f"<br>$\\eta_p^2 = \\frac{{{numerator}}}{{{denominator}}}$<br>"))
+        display(Markdown(f"<br>$\\eta_p^2 = {{{effect}}}$<br><br>"))
+        self.final_calculations[f"effect_{factor}"] = effect
+        self.base.set_effect_size(effect)
+
+
+    def factorial_ANOVA(self):
+        self.base.set_test("factorial_ANOVA")
+        self.factorial_data = {}
+        self.combined_values()
+        self.factor_values()
+
+        self.base.generate_question()
+        self.base.set_null_hypothesis()
+
+        display(Markdown("<br> Full Group Summary Data <br>"))
+        self.summary_by_group()
+
+        display(Markdown("<br> Stage 1 ANOVA Calculations <br>"))
+        self.stage_1_df()
+        self.stage_1_ss()
+
+        # Stage 2 Calculations are presented organized by factor instead of by step
+        self.partition_df()
+        self.partition_ss()
+        self.mean_squares()
+        self.f_ratios()
+        
+        for factor in ["Factor_A", "Factor_B", "AxB"]:
+            if factor != "AxB":
+                display(Markdown(f"<br><br>Stage 2 calculations for ${factor}$<br><br>"))
+                self.collapse_by_factor(factor)
+            else:
+                display(Markdown(f"<br><br> Stage 2 calculations for the ${factor}$ interaction <br><br>"))
+
+            self.test_crit_values(factor)
+            self.write_factor_hypotheses(factor)
+            
+            self.display_df(factor)
+            self.base.write_decision_criteria()
+
+            self.display_ss(factor)
+            self.display_ms(factor)
+            self.display_f_ratios(factor)
+
+            display(Markdown(f"<br> Calculate $\\eta_p^2 \\text{{ for }} {factor}$ <br>"))
+            self.effect_size(factor)
+
+            self.base.significance = self.base.final_decision()
+            self.base.write_result()
+        
+    
+
+#if __name__ in "__main__":
+    # FactorialData(design = (2, 3), group_n = 2).factorial_ANOVA()
+

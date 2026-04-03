@@ -8,3 +8,7 @@ is-t-test_doc_files/
 os-t-test_doc_files/
 !example_output_DS_t-test.html
 .DS_Store
+/.quarto/
+**/*.quarto_ipynb
+14 - factorial_ANOVA_files/
+.vscode/
