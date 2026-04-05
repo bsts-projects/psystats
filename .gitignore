@@ -12,3 +12,4 @@ os-t-test_doc_files/
 **/*.quarto_ipynb
 14 - factorial_ANOVA_files/
 .vscode/
+!index.html

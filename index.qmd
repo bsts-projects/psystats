@@ -1,0 +1,82 @@
+---
+title: Practice Problem Generator
+subtitle: Statistics in Psychology
+author: Guenther, Benjamin A.
+format: 
+  revealjs:
+    incremental: false
+    html-math-method: mathjax
+    self-contained-math: true
+    embed-resources: true
+jupyter: python3
+---
+
+```{python}
+import importlib
+import stats_project 
+import random
+
+# This is to clear cache and reload after edits to the .py file
+importlib.reload(stats_project)
+from stats_project import RandomData, FactorialData
+```
+
+## Hypothesis Testing with *z*-scores {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+sample_size = random.randint(5,15)
+RandomData(groups = 1, n = sample_size).z_test()
+```
+
+## One-Sample *t*-test {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+sample_size = random.randint(5,15)
+RandomData(groups = 1, n = sample_size).one_sample_t_test()
+```
+
+## Independent-Samples *t*-test {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+sample_size = random.randint(5,15)
+RandomData(groups = 2, n = sample_size).independent_samples_t_test()
+```
+
+## Dependent-Samples *t*-test {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+sample_size = random.randint(5,15)
+RandomData(groups = 2, n = sample_size).dependent_samples_t_test()
+```
+
+## One-Way ANOVA {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+n_groups = random.randint(3,5)
+sample_size = random.randint(5,15)
+RandomData(groups = n_groups, n = sample_size).anova(test = "one-way")
+```
+
+## Repeated-Measures ANOVA {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+n_groups = random.randint(3,5)
+sample_size = random.randint(5,15)
+RandomData(groups = n_groups, n = sample_size).anova(test = "repeated-measures")
+```
+
+## Two-Factor ANOVA {.scrollable}
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
