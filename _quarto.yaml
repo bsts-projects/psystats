@@ -1,0 +1,11 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Practice Problem Generator"
+  site-url: "https://bsts-projects.github.io/pystats"
+  
+format:
+  revealjs: 
+    theme: default

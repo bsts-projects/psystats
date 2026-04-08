@@ -4,10 +4,11 @@ subtitle: Statistics in Psychology
 author: Guenther, Benjamin A.
 format: 
   revealjs:
-    incremental: false
     html-math-method: mathjax
-    self-contained-math: true
-    embed-resources: true
+    smaller: true
+project:
+  type: website
+  output-dir: docs
 jupyter: python3
 ---
 
