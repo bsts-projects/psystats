@@ -12,7 +12,7 @@ listing:
     - Sample_Document.qmd
     - README.md
     - 08 - Hypothesis_Test_z-Scores.qmd
-    - 09 - Single-Sample_t_Tests.qmd
+    - 09 - Single-Sample_t-Tests.qmd
     - 10 - Independent-Samples_t-Tests.qmd
     - 11 - Dependent-Samples_t-Tests.qmd
     - 12 - one-way_ANOVA.qmd
