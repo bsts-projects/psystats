@@ -2,6 +2,7 @@ project:
   type: website
   output-dir: docs
   render:
+    - index.qmd
     - Sample_Document.qmd
     - 08 - Hypothesis_Test_z-Scores.qmd
     - 09 - Single-Sample_t_Tests.qmd
