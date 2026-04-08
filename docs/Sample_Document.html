@@ -144,159 +144,155 @@ Guenther, Benjamin A.
 </section>
 <section id="hypothesis-testing-with-z-scores" class="slide level2 scrollable">
 <h2>Hypothesis Testing with <em>z</em>-scores</h2>
-<p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from the population mean: <span class="math inline">\(\mu = {32}\)</span>? <br><br>Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.01}\)</span><br><br></p>
+<p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from the population mean: <span class="math inline">\(\mu = {29}\)</span>? <br><br>Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.05}\)</span><br><br></p>
 <style type="text/css">
 </style>
 
-<table id="T_43ef3" class="caption-top">
+<table id="T_95526" class="caption-top">
 <thead>
 <tr class="header">
-<th id="T_43ef3_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
+<th id="T_95526_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_43ef3_row0_col0" class="data row0 col0">27</td>
+<td id="T_95526_row0_col0" class="data row0 col0">58</td>
 </tr>
 <tr class="even">
-<td id="T_43ef3_row1_col0" class="data row1 col0">41</td>
+<td id="T_95526_row1_col0" class="data row1 col0">52</td>
 </tr>
 <tr class="odd">
-<td id="T_43ef3_row2_col0" class="data row2 col0">48</td>
+<td id="T_95526_row2_col0" class="data row2 col0">37</td>
 </tr>
 <tr class="even">
-<td id="T_43ef3_row3_col0" class="data row3 col0">25</td>
+<td id="T_95526_row3_col0" class="data row3 col0">40</td>
 </tr>
 <tr class="odd">
-<td id="T_43ef3_row4_col0" class="data row4 col0">34</td>
+<td id="T_95526_row4_col0" class="data row4 col0">32</td>
 </tr>
 <tr class="even">
-<td id="T_43ef3_row5_col0" class="data row5 col0">27</td>
+<td id="T_95526_row5_col0" class="data row5 col0">30</td>
 </tr>
 <tr class="odd">
-<td id="T_43ef3_row6_col0" class="data row6 col0">51</td>
+<td id="T_95526_row6_col0" class="data row6 col0">41</td>
 </tr>
 <tr class="even">
-<td id="T_43ef3_row7_col0" class="data row7 col0">40</td>
+<td id="T_95526_row7_col0" class="data row7 col0">36</td>
 </tr>
 <tr class="odd">
-<td id="T_43ef3_row8_col0" class="data row8 col0">37</td>
-</tr>
-<tr class="even">
-<td id="T_43ef3_row9_col0" class="data row9 col0">45</td>
+<td id="T_95526_row8_col0" class="data row8 col0">36</td>
 </tr>
 </tbody>
 </table>
-<p><br>The necessary summary statistics for these data<br> <span class="math display">\[M_A = {37.5}\]</span> <span class="math display">\[{\sigma} = {8}\]</span> <span class="math display">\[n = {10}\]</span><br></p>
-<p>State the Hypotheses <br> <span class="math display">\[H_0: \mu = 32\]</span> <span class="math display">\[H_1: \mu \ne 32\]</span> <br></p>
-<p><br>The decision criteria: <br><br> <span class="math inline">\(z_{crit} = \pm{2.58}, \alpha_{two-tailed} = {0.01}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[\sigma_M = \frac{\sigma}{\sqrt{N}}\]</span> <br> <span class="math display">\[\sigma_M = \frac{8}{\sqrt{10}}\]</span> <br> <span class="math display">\[\sigma_M = \frac{8}{3.16}\]</span> <br> <span class="math display">\[\sigma_M = {2.53}\]</span> <br><br> Calculate <span class="math inline">\(z_{obt}\)</span> <br> <span class="math display">\[z_{obt} = {\frac{M - \mu}{\sigma_M}}\]</span> <br> <span class="math display">\[z_{obt} = \frac{37.5 - 32}{2.53}\]</span> <br> <span class="math display">\[z_{obt} = \frac{5.5}{2.53}\]</span> <br> <span class="math display">\[z_{obt} = {2.17}\]</span> <br><br> Calculate Cohen’s d for effect size <br> <span class="math display">\[d = \frac{M - \mu}{\sigma}\]</span> <br> <span class="math display">\[d = \frac{37.5 - 32}{8}\]</span> <br> <span class="math display">\[d = \frac{5.5}{8}\]</span> <br> <span class="math display">\[d = {0.69}\]</span> <br><br> The results: <br><br> fail to reject the null hypothesis, results not significant, <br> <em>z</em> = 2.17, <em>p</em> &gt; 0.01, <em>d</em> = 0.69<br><br></p>
+<p><br>The necessary summary statistics for these data<br> <span class="math display">\[M_A = {40.22}\]</span> <span class="math display">\[{\sigma} = {8}\]</span> <span class="math display">\[n = {9}\]</span><br></p>
+<p>State the Hypotheses <br> <span class="math display">\[H_0: \mu = 29\]</span> <span class="math display">\[H_1: \mu \ne 29\]</span> <br></p>
+<p><br>The decision criteria: <br><br> <span class="math inline">\(z_{crit} = \pm{1.96}, \alpha_{two-tailed} = {0.05}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[\sigma_M = \frac{\sigma}{\sqrt{N}}\]</span> <br> <span class="math display">\[\sigma_M = \frac{8}{\sqrt{9}}\]</span> <br> <span class="math display">\[\sigma_M = \frac{8}{3.0}\]</span> <br> <span class="math display">\[\sigma_M = {2.67}\]</span> <br><br> Calculate <span class="math inline">\(z_{obt}\)</span> <br> <span class="math display">\[z_{obt} = {\frac{M - \mu}{\sigma_M}}\]</span> <br> <span class="math display">\[z_{obt} = \frac{40.22 - 29}{2.67}\]</span> <br> <span class="math display">\[z_{obt} = \frac{11.22}{2.67}\]</span> <br> <span class="math display">\[z_{obt} = {4.2}\]</span> <br><br> Calculate Cohen’s d for effect size <br> <span class="math display">\[d = \frac{M - \mu}{\sigma}\]</span> <br> <span class="math display">\[d = \frac{40.22 - 29}{8}\]</span> <br> <span class="math display">\[d = \frac{11.22}{8}\]</span> <br> <span class="math display">\[d = {1.4}\]</span> <br><br> The results: <br><br> reject the null hypothesis, results are significant, <br> <em>z</em> = 4.2, <em>p</em> &lt; 0.05, <em>d</em> = 1.4<br><br></p>
 </section>
 <section id="one-sample-t-test" class="slide level2 scrollable">
 <h2>One-Sample <em>t</em>-test</h2>
-<p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from <span class="math inline">\({45}\)</span>? Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.01}\)</span> <br><br></p>
+<p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from <span class="math inline">\({26}\)</span>? Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.01}\)</span> <br><br></p>
 <style type="text/css">
 </style>
 
-<table id="T_6217b" class="caption-top">
+<table id="T_53991" class="caption-top">
 <thead>
 <tr class="header">
-<th id="T_6217b_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
+<th id="T_53991_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_6217b_row0_col0" class="data row0 col0">54</td>
+<td id="T_53991_row0_col0" class="data row0 col0">41</td>
 </tr>
 <tr class="even">
-<td id="T_6217b_row1_col0" class="data row1 col0">51</td>
+<td id="T_53991_row1_col0" class="data row1 col0">39</td>
 </tr>
 <tr class="odd">
-<td id="T_6217b_row2_col0" class="data row2 col0">61</td>
+<td id="T_53991_row2_col0" class="data row2 col0">17</td>
 </tr>
 <tr class="even">
-<td id="T_6217b_row3_col0" class="data row3 col0">59</td>
+<td id="T_53991_row3_col0" class="data row3 col0">24</td>
 </tr>
 <tr class="odd">
-<td id="T_6217b_row4_col0" class="data row4 col0">51</td>
+<td id="T_53991_row4_col0" class="data row4 col0">51</td>
 </tr>
 <tr class="even">
-<td id="T_6217b_row5_col0" class="data row5 col0">47</td>
+<td id="T_53991_row5_col0" class="data row5 col0">30</td>
 </tr>
 <tr class="odd">
-<td id="T_6217b_row6_col0" class="data row6 col0">56</td>
+<td id="T_53991_row6_col0" class="data row6 col0">31</td>
 </tr>
 <tr class="even">
-<td id="T_6217b_row7_col0" class="data row7 col0">67</td>
+<td id="T_53991_row7_col0" class="data row7 col0">27</td>
 </tr>
 <tr class="odd">
-<td id="T_6217b_row8_col0" class="data row8 col0">37</td>
+<td id="T_53991_row8_col0" class="data row8 col0">27</td>
+</tr>
+<tr class="even">
+<td id="T_53991_row9_col0" class="data row9 col0">30</td>
+</tr>
+<tr class="odd">
+<td id="T_53991_row10_col0" class="data row10 col0">30</td>
+</tr>
+<tr class="even">
+<td id="T_53991_row11_col0" class="data row11 col0">30</td>
+</tr>
+<tr class="odd">
+<td id="T_53991_row12_col0" class="data row12 col0">30</td>
+</tr>
+<tr class="even">
+<td id="T_53991_row13_col0" class="data row13 col0">40</td>
 </tr>
 </tbody>
 </table>
-<p><br> The necessary summary statistics for these data<br> <span class="math display">\[M_A = {53.67}\]</span> <span class="math display">\[s^2 = {75.25}\]</span> <span class="math display">\[n = {9}\]</span><br></p>
-<p>State the Hypotheses <br> <span class="math display">\[H_0: \mu = 45\]</span> <span class="math display">\[H_1: \mu \ne 45\]</span> <br></p>
-<p><br>The decision criteria: <br><br> <span class="math inline">\(t_{crit} = \pm{3.36}, \alpha_{two-tailed} = {0.01}, df = {8}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[s_M = \sqrt{\frac{s^2}{n}}\]</span> <br> <span class="math display">\[s_M = \sqrt{\frac{75.25}{9}}\]</span> <br> <span class="math display">\[s_M = \sqrt{8.36}\]</span> <br> <span class="math display">\[s_M = {2.89}\]</span> <br><br> calculate <span class="math inline">\(t_{obt}\)</span> <br> <span class="math display">\[t_{obt} = {\frac{M - \mu}{s_M}}\]</span> <br> <span class="math display">\[t_{obt} = \frac{53.67 - 45}{2.89}\]</span> <br> <span class="math display">\[t_{obt} = \frac{8.67}{2.89}\]</span> <br> <span class="math display">\[t_{obt} = {3.0}\]</span> <br><br> calculate Cohen’s d <br> <span class="math display">\[d = \frac{M - \mu}{s}\]</span> <br> <span class="math display">\[d = \frac{53.67 - 45}{8.67}\]</span> <br> <span class="math display">\[d = \frac{8.67}{8.67}\]</span> <br> <span class="math display">\[d = {1.0}\]</span> <br><br></p>
-<p>The results: <br><br> fail to reject the null hypothesis, results not significant, <br> <em>t</em>(8) = 3.0, <em>p</em> &gt; 0.01, <em>d</em> = 1.0<br><br></p>
+<p><br> The necessary summary statistics for these data<br> <span class="math display">\[M_A = {31.93}\]</span> <span class="math display">\[s^2 = {70.38}\]</span> <span class="math display">\[n = {14}\]</span><br></p>
+<p>State the Hypotheses <br> <span class="math display">\[H_0: \mu = 26\]</span> <span class="math display">\[H_1: \mu \ne 26\]</span> <br></p>
+<p><br>The decision criteria: <br><br> <span class="math inline">\(t_{crit} = \pm{3.01}, \alpha_{two-tailed} = {0.01}, df = {13}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[s_M = \sqrt{\frac{s^2}{n}}\]</span> <br> <span class="math display">\[s_M = \sqrt{\frac{70.38}{14}}\]</span> <br> <span class="math display">\[s_M = \sqrt{5.03}\]</span> <br> <span class="math display">\[s_M = {2.24}\]</span> <br><br> calculate <span class="math inline">\(t_{obt}\)</span> <br> <span class="math display">\[t_{obt} = {\frac{M - \mu}{s_M}}\]</span> <br> <span class="math display">\[t_{obt} = \frac{31.93 - 26}{2.24}\]</span> <br> <span class="math display">\[t_{obt} = \frac{5.93}{2.24}\]</span> <br> <span class="math display">\[t_{obt} = {2.65}\]</span> <br><br> calculate Cohen’s d <br> <span class="math display">\[d = \frac{M - \mu}{s}\]</span> <br> <span class="math display">\[d = \frac{31.93 - 26}{8.39}\]</span> <br> <span class="math display">\[d = \frac{5.93}{8.39}\]</span> <br> <span class="math display">\[d = {0.71}\]</span> <br><br></p>
+<p>The results: <br><br> fail to reject the null hypothesis, results not significant, <br> <em>t</em>(13) = 2.65, <em>p</em> &gt; 0.01, <em>d</em> = 0.71<br><br></p>
 </section>
 <section id="independent-samples-t-test" class="slide level2 scrollable">
 <h2>Independent-Samples <em>t</em>-test</h2>
-<p>Given the following between-subjects data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from the mean of <span class="math inline">\(Group_B\)</span>? Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.01}\)</span><br><br></p>
+<p>Given the following between-subjects data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from the mean of <span class="math inline">\(Group_B\)</span>? Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.05}\)</span><br><br></p>
 <style type="text/css">
 </style>
 
-<table id="T_76660" class="caption-top">
+<table id="T_c7f58" class="caption-top">
 <thead>
 <tr class="header">
-<th id="T_76660_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
-<th id="T_76660_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">B</th>
+<th id="T_c7f58_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
+<th id="T_c7f58_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">B</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_76660_row0_col0" class="data row0 col0">39</td>
-<td id="T_76660_row0_col1" class="data row0 col1">47</td>
+<td id="T_c7f58_row0_col0" class="data row0 col0">23</td>
+<td id="T_c7f58_row0_col1" class="data row0 col1">17</td>
 </tr>
 <tr class="even">
-<td id="T_76660_row1_col0" class="data row1 col0">30</td>
-<td id="T_76660_row1_col1" class="data row1 col1">62</td>
+<td id="T_c7f58_row1_col0" class="data row1 col0">25</td>
+<td id="T_c7f58_row1_col1" class="data row1 col1">26</td>
 </tr>
 <tr class="odd">
-<td id="T_76660_row2_col0" class="data row2 col0">38</td>
-<td id="T_76660_row2_col1" class="data row2 col1">50</td>
+<td id="T_c7f58_row2_col0" class="data row2 col0">28</td>
+<td id="T_c7f58_row2_col1" class="data row2 col1">28</td>
 </tr>
 <tr class="even">
-<td id="T_76660_row3_col0" class="data row3 col0">35</td>
-<td id="T_76660_row3_col1" class="data row3 col1">58</td>
+<td id="T_c7f58_row3_col0" class="data row3 col0">23</td>
+<td id="T_c7f58_row3_col1" class="data row3 col1">16</td>
 </tr>
 <tr class="odd">
-<td id="T_76660_row4_col0" class="data row4 col0">41</td>
-<td id="T_76660_row4_col1" class="data row4 col1">56</td>
-</tr>
-<tr class="even">
-<td id="T_76660_row5_col0" class="data row5 col0">34</td>
-<td id="T_76660_row5_col1" class="data row5 col1">60</td>
-</tr>
-<tr class="odd">
-<td id="T_76660_row6_col0" class="data row6 col0">41</td>
-<td id="T_76660_row6_col1" class="data row6 col1">54</td>
-</tr>
-<tr class="even">
-<td id="T_76660_row7_col0" class="data row7 col0">36</td>
-<td id="T_76660_row7_col1" class="data row7 col1">56</td>
-</tr>
-<tr class="odd">
-<td id="T_76660_row8_col0" class="data row8 col0">35</td>
-<td id="T_76660_row8_col1" class="data row8 col1">58</td>
+<td id="T_c7f58_row4_col0" class="data row4 col0">23</td>
+<td id="T_c7f58_row4_col1" class="data row4 col1">19</td>
 </tr>
 </tbody>
 </table>
-<p><br> The necessary summary Statistis for these data:<br> <span class="math display">\[M_A = {36.56}, M_B = {55.67}\]</span> <span class="math display">\[SS_A = {102.22}, SS_B = {180.0}\]</span> <span class="math display">\[n_A = {9}, n_B = {9}\]</span><br></p>
+<p><br> The necessary summary Statistis for these data:<br> <span class="math display">\[M_A = {24.4}, M_B = {21.2}\]</span> <span class="math display">\[SS_A = {19.2}, SS_B = {118.8}\]</span> <span class="math display">\[n_A = {5}, n_B = {5}\]</span><br></p>
 <p>State the Hypotheses <br> <span class="math display">\[H_0: \mu_A - \mu_B = 0\]</span> <span class="math display">\[H_1: \mu_A - \mu_B \ne 0\]</span> <br></p>
-<p><br>The decision criteria: <br><br> <span class="math inline">\(t_{crit} = \pm{2.92}, \alpha_{two-tailed} = {0.01}, df = {16}\)</span><br><br> Calculate the pooled variance: <br> <span class="math display">\[s_p^2 = {\frac{SS_A + SS_B}{df_A + df_B}}\]</span> <br> <span class="math display">\[s_p^2 = {\frac{102.22 + 180.0}{8 + 8}}\]</span> <br> <span class="math display">\[s_p^2 = \frac{282.22}{16}\]</span> <br> <span class="math display">\[s_p^2 = {17.64}\]</span> <br><br></p>
-<p>Calculate the estimated error of the difference between means: <span class="math inline">\(s_{(M_A - M_B)}\)</span> <br> <span class="math display">\[s_{(M_A - M_B)} = \sqrt{\frac{s_p^2}{n_1} + \frac{s_p^2}{n_1}}\]</span> <br> <span class="math display">\[s_{(M_A - M_B)} = \sqrt{\frac{17.64}{9} + \frac{17.64}{9}}\]</span> <br> <span class="math display">\[s_{(M_A - M_B)} = \sqrt{1.96 + 1.96}\]</span> <br> <span class="math display">\[s_{(M_A - M_B)} = \sqrt{3.92}\]</span> <br> <span class="math display">\[s_{(M_A - M_B)} = {1.98}\]</span> <br><br></p>
-<p>Calculate <span class="math inline">\(t_{obt}\)</span> <br> <span class="math display">\[t_{obt} = {\frac{(M_A - M_B) - (\mu_A - \mu_B)}{s_{(M_A - M_B)}}}\]</span> <br> <span class="math display">\[t_{obt} = \frac{(36.56 - 55.67) - {0}}{1.98}\]</span> <br> <span class="math display">\[t_{obt} = \frac{-19.11}{1.98}\]</span> <br> <span class="math display">\[t_{obt} = {-9.65}\]</span> <br><br></p>
-<p>Calculate Cohen’s <em>d</em> <br> <span class="math display">\[d = \frac{M_A - M_B}{\sqrt{s_p^2}}\]</span> <br> <span class="math display">\[d = \frac{(36.56 - 55.67)}{{{\sqrt{17.64}}}}\]</span> <br> <span class="math display">\[d = \frac{(-19.11)}{4.2}\]</span> <br> <span class="math display">\[d = {-4.55}\]</span> <br><br></p>
-<p>The results: <br><br> reject the null hypothesis, results are significant, <br> <em>t</em>(16) = -9.65, <em>p</em> &lt; 0.01, <em>d</em> = -4.55<br><br></p>
+<p><br>The decision criteria: <br><br> <span class="math inline">\(t_{crit} = \pm{2.31}, \alpha_{two-tailed} = {0.05}, df = {8}\)</span><br><br> Calculate the pooled variance: <br> <span class="math display">\[s_p^2 = {\frac{SS_A + SS_B}{df_A + df_B}}\]</span> <br> <span class="math display">\[s_p^2 = {\frac{19.2 + 118.8}{4 + 4}}\]</span> <br> <span class="math display">\[s_p^2 = \frac{138.0}{8}\]</span> <br> <span class="math display">\[s_p^2 = {17.25}\]</span> <br><br></p>
+<p>Calculate the estimated error of the difference between means: <span class="math inline">\(s_{(M_A - M_B)}\)</span> <br> <span class="math display">\[s_{(M_A - M_B)} = \sqrt{\frac{s_p^2}{n_1} + \frac{s_p^2}{n_1}}\]</span> <br> <span class="math display">\[s_{(M_A - M_B)} = \sqrt{\frac{17.25}{5} + \frac{17.25}{5}}\]</span> <br> <span class="math display">\[s_{(M_A - M_B)} = \sqrt{3.45 + 3.45}\]</span> <br> <span class="math display">\[s_{(M_A - M_B)} = \sqrt{6.9}\]</span> <br> <span class="math display">\[s_{(M_A - M_B)} = {2.63}\]</span> <br><br></p>
+<p>Calculate <span class="math inline">\(t_{obt}\)</span> <br> <span class="math display">\[t_{obt} = {\frac{(M_A - M_B) - (\mu_A - \mu_B)}{s_{(M_A - M_B)}}}\]</span> <br> <span class="math display">\[t_{obt} = \frac{(24.4 - 21.2) - {0}}{2.63}\]</span> <br> <span class="math display">\[t_{obt} = \frac{3.2}{2.63}\]</span> <br> <span class="math display">\[t_{obt} = {1.22}\]</span> <br><br></p>
+<p>Calculate Cohen’s <em>d</em> <br> <span class="math display">\[d = \frac{M_A - M_B}{\sqrt{s_p^2}}\]</span> <br> <span class="math display">\[d = \frac{(24.4 - 21.2)}{{{\sqrt{17.25}}}}\]</span> <br> <span class="math display">\[d = \frac{(3.2)}{4.15}\]</span> <br> <span class="math display">\[d = {0.77}\]</span> <br><br></p>
+<p>The results: <br><br> fail to reject the null hypothesis, results not significant, <br> <em>t</em>(8) = 1.22, <em>p</em> &gt; 0.05, <em>d</em> = 0.77<br><br></p>
 </section>
 <section id="dependent-samples-t-test" class="slide level2 scrollable">
 <h2>Dependent-Samples <em>t</em>-test</h2>
@@ -304,330 +300,312 @@ Guenther, Benjamin A.
 <style type="text/css">
 </style>
 
-<table id="T_71552" class="caption-top">
+<table id="T_8caeb" class="caption-top">
 <thead>
 <tr class="header">
-<th id="T_71552_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">ID</th>
-<th id="T_71552_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">A</th>
-<th id="T_71552_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">B</th>
+<th id="T_8caeb_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">ID</th>
+<th id="T_8caeb_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">A</th>
+<th id="T_8caeb_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">B</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_71552_row0_col0" class="data row0 col0">1</td>
-<td id="T_71552_row0_col1" class="data row0 col1">59</td>
-<td id="T_71552_row0_col2" class="data row0 col2">40</td>
+<td id="T_8caeb_row0_col0" class="data row0 col0">1</td>
+<td id="T_8caeb_row0_col1" class="data row0 col1">32</td>
+<td id="T_8caeb_row0_col2" class="data row0 col2">19</td>
 </tr>
 <tr class="even">
-<td id="T_71552_row1_col0" class="data row1 col0">2</td>
-<td id="T_71552_row1_col1" class="data row1 col1">54</td>
-<td id="T_71552_row1_col2" class="data row1 col2">50</td>
+<td id="T_8caeb_row1_col0" class="data row1 col0">2</td>
+<td id="T_8caeb_row1_col1" class="data row1 col1">25</td>
+<td id="T_8caeb_row1_col2" class="data row1 col2">25</td>
 </tr>
 <tr class="odd">
-<td id="T_71552_row2_col0" class="data row2 col0">3</td>
-<td id="T_71552_row2_col1" class="data row2 col1">49</td>
-<td id="T_71552_row2_col2" class="data row2 col2">52</td>
+<td id="T_8caeb_row2_col0" class="data row2 col0">3</td>
+<td id="T_8caeb_row2_col1" class="data row2 col1">22</td>
+<td id="T_8caeb_row2_col2" class="data row2 col2">23</td>
 </tr>
 <tr class="even">
-<td id="T_71552_row3_col0" class="data row3 col0">4</td>
-<td id="T_71552_row3_col1" class="data row3 col1">59</td>
-<td id="T_71552_row3_col2" class="data row3 col2">41</td>
+<td id="T_8caeb_row3_col0" class="data row3 col0">4</td>
+<td id="T_8caeb_row3_col1" class="data row3 col1">19</td>
+<td id="T_8caeb_row3_col2" class="data row3 col2">26</td>
 </tr>
 <tr class="odd">
-<td id="T_71552_row4_col0" class="data row4 col0">5</td>
-<td id="T_71552_row4_col1" class="data row4 col1">56</td>
-<td id="T_71552_row4_col2" class="data row4 col2">43</td>
+<td id="T_8caeb_row4_col0" class="data row4 col0">5</td>
+<td id="T_8caeb_row4_col1" class="data row4 col1">28</td>
+<td id="T_8caeb_row4_col2" class="data row4 col2">14</td>
 </tr>
 <tr class="even">
-<td id="T_71552_row5_col0" class="data row5 col0">6</td>
-<td id="T_71552_row5_col1" class="data row5 col1">62</td>
-<td id="T_71552_row5_col2" class="data row5 col2">54</td>
+<td id="T_8caeb_row5_col0" class="data row5 col0">6</td>
+<td id="T_8caeb_row5_col1" class="data row5 col1">43</td>
+<td id="T_8caeb_row5_col2" class="data row5 col2">39</td>
 </tr>
 <tr class="odd">
-<td id="T_71552_row6_col0" class="data row6 col0">7</td>
-<td id="T_71552_row6_col1" class="data row6 col1">54</td>
-<td id="T_71552_row6_col2" class="data row6 col2">48</td>
+<td id="T_8caeb_row6_col0" class="data row6 col0">7</td>
+<td id="T_8caeb_row6_col1" class="data row6 col1">41</td>
+<td id="T_8caeb_row6_col2" class="data row6 col2">30</td>
 </tr>
 <tr class="even">
-<td id="T_71552_row7_col0" class="data row7 col0">8</td>
-<td id="T_71552_row7_col1" class="data row7 col1">52</td>
-<td id="T_71552_row7_col2" class="data row7 col2">41</td>
+<td id="T_8caeb_row7_col0" class="data row7 col0">8</td>
+<td id="T_8caeb_row7_col1" class="data row7 col1">28</td>
+<td id="T_8caeb_row7_col2" class="data row7 col2">40</td>
 </tr>
 <tr class="odd">
-<td id="T_71552_row8_col0" class="data row8 col0">9</td>
-<td id="T_71552_row8_col1" class="data row8 col1">59</td>
-<td id="T_71552_row8_col2" class="data row8 col2">42</td>
+<td id="T_8caeb_row8_col0" class="data row8 col0">9</td>
+<td id="T_8caeb_row8_col1" class="data row8 col1">19</td>
+<td id="T_8caeb_row8_col2" class="data row8 col2">41</td>
 </tr>
 <tr class="even">
-<td id="T_71552_row9_col0" class="data row9 col0">10</td>
-<td id="T_71552_row9_col1" class="data row9 col1">55</td>
-<td id="T_71552_row9_col2" class="data row9 col2">39</td>
+<td id="T_8caeb_row9_col0" class="data row9 col0">10</td>
+<td id="T_8caeb_row9_col1" class="data row9 col1">21</td>
+<td id="T_8caeb_row9_col2" class="data row9 col2">19</td>
 </tr>
 <tr class="odd">
-<td id="T_71552_row10_col0" class="data row10 col0">11</td>
-<td id="T_71552_row10_col1" class="data row10 col1">52</td>
-<td id="T_71552_row10_col2" class="data row10 col2">42</td>
+<td id="T_8caeb_row10_col0" class="data row10 col0">11</td>
+<td id="T_8caeb_row10_col1" class="data row10 col1">24</td>
+<td id="T_8caeb_row10_col2" class="data row10 col2">24</td>
 </tr>
 <tr class="even">
-<td id="T_71552_row11_col0" class="data row11 col0">12</td>
-<td id="T_71552_row11_col1" class="data row11 col1">60</td>
-<td id="T_71552_row11_col2" class="data row11 col2">50</td>
+<td id="T_8caeb_row11_col0" class="data row11 col0">12</td>
+<td id="T_8caeb_row11_col1" class="data row11 col1">29</td>
+<td id="T_8caeb_row11_col2" class="data row11 col2">19</td>
 </tr>
 <tr class="odd">
-<td id="T_71552_row12_col0" class="data row12 col0">13</td>
-<td id="T_71552_row12_col1" class="data row12 col1">47</td>
-<td id="T_71552_row12_col2" class="data row12 col2">50</td>
+<td id="T_8caeb_row12_col0" class="data row12 col0">13</td>
+<td id="T_8caeb_row12_col1" class="data row12 col1">20</td>
+<td id="T_8caeb_row12_col2" class="data row12 col2">17</td>
 </tr>
 <tr class="even">
-<td id="T_71552_row13_col0" class="data row13 col0">14</td>
-<td id="T_71552_row13_col1" class="data row13 col1">48</td>
-<td id="T_71552_row13_col2" class="data row13 col2">39</td>
-</tr>
-<tr class="odd">
-<td id="T_71552_row14_col0" class="data row14 col0">15</td>
-<td id="T_71552_row14_col1" class="data row14 col1">49</td>
-<td id="T_71552_row14_col2" class="data row14 col2">46</td>
+<td id="T_8caeb_row13_col0" class="data row13 col0">14</td>
+<td id="T_8caeb_row13_col1" class="data row13 col1">27</td>
+<td id="T_8caeb_row13_col2" class="data row13 col2">31</td>
 </tr>
 </tbody>
 </table>
-<p><br>Summary statistics for these data:<br> <span class="math display">\[M_A = {54.33}, M_B = {45.13}\]</span> <span class="math display">\[n = {15}\]</span> <br></p>
+<p><br>Summary statistics for these data:<br> <span class="math display">\[M_A = {27.0}, M_B = {26.21}\]</span> <span class="math display">\[n = {14}\]</span> <br></p>
 <p>State the Hypotheses <br> <span class="math display">\[H_0: \mu_D = 0\]</span> <span class="math display">\[H_1: \mu_D \ne 0\]</span> <br></p>
-<p><br>The decision criteria: <br><br> <span class="math inline">\(t_{crit} = \pm{2.14}, \alpha_{two-tailed} = {0.05}, df = {14}\)</span><br><br> Calculating the difference scores <span class="math inline">\(D = X_B - X_A\)</span> <br></p>
+<p><br>The decision criteria: <br><br> <span class="math inline">\(t_{crit} = \pm{2.16}, \alpha_{two-tailed} = {0.05}, df = {13}\)</span><br><br> Calculating the difference scores <span class="math inline">\(D = X_B - X_A\)</span> <br></p>
 <style type="text/css">
 </style>
 
-<table id="T_202fd" class="caption-top">
+<table id="T_a7ca9" class="caption-top">
 <thead>
 <tr class="header">
-<th id="T_202fd_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">ID</th>
-<th id="T_202fd_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">A</th>
-<th id="T_202fd_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">B</th>
-<th id="T_202fd_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">D</th>
+<th id="T_a7ca9_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">ID</th>
+<th id="T_a7ca9_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">A</th>
+<th id="T_a7ca9_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">B</th>
+<th id="T_a7ca9_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">D</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_202fd_row0_col0" class="data row0 col0">1</td>
-<td id="T_202fd_row0_col1" class="data row0 col1">59</td>
-<td id="T_202fd_row0_col2" class="data row0 col2">40</td>
-<td id="T_202fd_row0_col3" class="data row0 col3">-19</td>
+<td id="T_a7ca9_row0_col0" class="data row0 col0">1</td>
+<td id="T_a7ca9_row0_col1" class="data row0 col1">32</td>
+<td id="T_a7ca9_row0_col2" class="data row0 col2">19</td>
+<td id="T_a7ca9_row0_col3" class="data row0 col3">-13</td>
 </tr>
 <tr class="even">
-<td id="T_202fd_row1_col0" class="data row1 col0">2</td>
-<td id="T_202fd_row1_col1" class="data row1 col1">54</td>
-<td id="T_202fd_row1_col2" class="data row1 col2">50</td>
-<td id="T_202fd_row1_col3" class="data row1 col3">-4</td>
+<td id="T_a7ca9_row1_col0" class="data row1 col0">2</td>
+<td id="T_a7ca9_row1_col1" class="data row1 col1">25</td>
+<td id="T_a7ca9_row1_col2" class="data row1 col2">25</td>
+<td id="T_a7ca9_row1_col3" class="data row1 col3">0</td>
 </tr>
 <tr class="odd">
-<td id="T_202fd_row2_col0" class="data row2 col0">3</td>
-<td id="T_202fd_row2_col1" class="data row2 col1">49</td>
-<td id="T_202fd_row2_col2" class="data row2 col2">52</td>
-<td id="T_202fd_row2_col3" class="data row2 col3">3</td>
+<td id="T_a7ca9_row2_col0" class="data row2 col0">3</td>
+<td id="T_a7ca9_row2_col1" class="data row2 col1">22</td>
+<td id="T_a7ca9_row2_col2" class="data row2 col2">23</td>
+<td id="T_a7ca9_row2_col3" class="data row2 col3">1</td>
 </tr>
 <tr class="even">
-<td id="T_202fd_row3_col0" class="data row3 col0">4</td>
-<td id="T_202fd_row3_col1" class="data row3 col1">59</td>
-<td id="T_202fd_row3_col2" class="data row3 col2">41</td>
-<td id="T_202fd_row3_col3" class="data row3 col3">-18</td>
+<td id="T_a7ca9_row3_col0" class="data row3 col0">4</td>
+<td id="T_a7ca9_row3_col1" class="data row3 col1">19</td>
+<td id="T_a7ca9_row3_col2" class="data row3 col2">26</td>
+<td id="T_a7ca9_row3_col3" class="data row3 col3">7</td>
 </tr>
 <tr class="odd">
-<td id="T_202fd_row4_col0" class="data row4 col0">5</td>
-<td id="T_202fd_row4_col1" class="data row4 col1">56</td>
-<td id="T_202fd_row4_col2" class="data row4 col2">43</td>
-<td id="T_202fd_row4_col3" class="data row4 col3">-13</td>
+<td id="T_a7ca9_row4_col0" class="data row4 col0">5</td>
+<td id="T_a7ca9_row4_col1" class="data row4 col1">28</td>
+<td id="T_a7ca9_row4_col2" class="data row4 col2">14</td>
+<td id="T_a7ca9_row4_col3" class="data row4 col3">-14</td>
 </tr>
 <tr class="even">
-<td id="T_202fd_row5_col0" class="data row5 col0">6</td>
-<td id="T_202fd_row5_col1" class="data row5 col1">62</td>
-<td id="T_202fd_row5_col2" class="data row5 col2">54</td>
-<td id="T_202fd_row5_col3" class="data row5 col3">-8</td>
+<td id="T_a7ca9_row5_col0" class="data row5 col0">6</td>
+<td id="T_a7ca9_row5_col1" class="data row5 col1">43</td>
+<td id="T_a7ca9_row5_col2" class="data row5 col2">39</td>
+<td id="T_a7ca9_row5_col3" class="data row5 col3">-4</td>
 </tr>
 <tr class="odd">
-<td id="T_202fd_row6_col0" class="data row6 col0">7</td>
-<td id="T_202fd_row6_col1" class="data row6 col1">54</td>
-<td id="T_202fd_row6_col2" class="data row6 col2">48</td>
-<td id="T_202fd_row6_col3" class="data row6 col3">-6</td>
+<td id="T_a7ca9_row6_col0" class="data row6 col0">7</td>
+<td id="T_a7ca9_row6_col1" class="data row6 col1">41</td>
+<td id="T_a7ca9_row6_col2" class="data row6 col2">30</td>
+<td id="T_a7ca9_row6_col3" class="data row6 col3">-11</td>
 </tr>
 <tr class="even">
-<td id="T_202fd_row7_col0" class="data row7 col0">8</td>
-<td id="T_202fd_row7_col1" class="data row7 col1">52</td>
-<td id="T_202fd_row7_col2" class="data row7 col2">41</td>
-<td id="T_202fd_row7_col3" class="data row7 col3">-11</td>
+<td id="T_a7ca9_row7_col0" class="data row7 col0">8</td>
+<td id="T_a7ca9_row7_col1" class="data row7 col1">28</td>
+<td id="T_a7ca9_row7_col2" class="data row7 col2">40</td>
+<td id="T_a7ca9_row7_col3" class="data row7 col3">12</td>
 </tr>
 <tr class="odd">
-<td id="T_202fd_row8_col0" class="data row8 col0">9</td>
-<td id="T_202fd_row8_col1" class="data row8 col1">59</td>
-<td id="T_202fd_row8_col2" class="data row8 col2">42</td>
-<td id="T_202fd_row8_col3" class="data row8 col3">-17</td>
+<td id="T_a7ca9_row8_col0" class="data row8 col0">9</td>
+<td id="T_a7ca9_row8_col1" class="data row8 col1">19</td>
+<td id="T_a7ca9_row8_col2" class="data row8 col2">41</td>
+<td id="T_a7ca9_row8_col3" class="data row8 col3">22</td>
 </tr>
 <tr class="even">
-<td id="T_202fd_row9_col0" class="data row9 col0">10</td>
-<td id="T_202fd_row9_col1" class="data row9 col1">55</td>
-<td id="T_202fd_row9_col2" class="data row9 col2">39</td>
-<td id="T_202fd_row9_col3" class="data row9 col3">-16</td>
+<td id="T_a7ca9_row9_col0" class="data row9 col0">10</td>
+<td id="T_a7ca9_row9_col1" class="data row9 col1">21</td>
+<td id="T_a7ca9_row9_col2" class="data row9 col2">19</td>
+<td id="T_a7ca9_row9_col3" class="data row9 col3">-2</td>
 </tr>
 <tr class="odd">
-<td id="T_202fd_row10_col0" class="data row10 col0">11</td>
-<td id="T_202fd_row10_col1" class="data row10 col1">52</td>
-<td id="T_202fd_row10_col2" class="data row10 col2">42</td>
-<td id="T_202fd_row10_col3" class="data row10 col3">-10</td>
+<td id="T_a7ca9_row10_col0" class="data row10 col0">11</td>
+<td id="T_a7ca9_row10_col1" class="data row10 col1">24</td>
+<td id="T_a7ca9_row10_col2" class="data row10 col2">24</td>
+<td id="T_a7ca9_row10_col3" class="data row10 col3">0</td>
 </tr>
 <tr class="even">
-<td id="T_202fd_row11_col0" class="data row11 col0">12</td>
-<td id="T_202fd_row11_col1" class="data row11 col1">60</td>
-<td id="T_202fd_row11_col2" class="data row11 col2">50</td>
-<td id="T_202fd_row11_col3" class="data row11 col3">-10</td>
+<td id="T_a7ca9_row11_col0" class="data row11 col0">12</td>
+<td id="T_a7ca9_row11_col1" class="data row11 col1">29</td>
+<td id="T_a7ca9_row11_col2" class="data row11 col2">19</td>
+<td id="T_a7ca9_row11_col3" class="data row11 col3">-10</td>
 </tr>
 <tr class="odd">
-<td id="T_202fd_row12_col0" class="data row12 col0">13</td>
-<td id="T_202fd_row12_col1" class="data row12 col1">47</td>
-<td id="T_202fd_row12_col2" class="data row12 col2">50</td>
-<td id="T_202fd_row12_col3" class="data row12 col3">3</td>
+<td id="T_a7ca9_row12_col0" class="data row12 col0">13</td>
+<td id="T_a7ca9_row12_col1" class="data row12 col1">20</td>
+<td id="T_a7ca9_row12_col2" class="data row12 col2">17</td>
+<td id="T_a7ca9_row12_col3" class="data row12 col3">-3</td>
 </tr>
 <tr class="even">
-<td id="T_202fd_row13_col0" class="data row13 col0">14</td>
-<td id="T_202fd_row13_col1" class="data row13 col1">48</td>
-<td id="T_202fd_row13_col2" class="data row13 col2">39</td>
-<td id="T_202fd_row13_col3" class="data row13 col3">-9</td>
-</tr>
-<tr class="odd">
-<td id="T_202fd_row14_col0" class="data row14 col0">15</td>
-<td id="T_202fd_row14_col1" class="data row14 col1">49</td>
-<td id="T_202fd_row14_col2" class="data row14 col2">46</td>
-<td id="T_202fd_row14_col3" class="data row14 col3">-3</td>
+<td id="T_a7ca9_row13_col0" class="data row13 col0">14</td>
+<td id="T_a7ca9_row13_col1" class="data row13 col1">27</td>
+<td id="T_a7ca9_row13_col2" class="data row13 col2">31</td>
+<td id="T_a7ca9_row13_col3" class="data row13 col3">4</td>
 </tr>
 </tbody>
 </table>
-<p><br>Calculate the Mean of the Difference Scores <span class="math display">\[M_D = \frac{\Sigma D}{n}\]</span> <br> <span class="math display">\[M_D = \frac{-138}{15}\]</span> <br> <span class="math display">\[M_D = {-9.2}\]</span> <br><br></p>
+<p><br>Calculate the Mean of the Difference Scores <span class="math display">\[M_D = \frac{\Sigma D}{n}\]</span> <br> <span class="math display">\[M_D = \frac{-11}{14}\]</span> <br> <span class="math display">\[M_D = {-0.79}\]</span> <br><br></p>
 <p>Create a column for the squared difference scores <span class="math inline">\(D^2\)</span></p>
 <style type="text/css">
 </style>
 
-<table id="T_1eada" class="caption-top">
+<table id="T_303b3" class="caption-top">
 <thead>
 <tr class="header">
-<th id="T_1eada_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">ID</th>
-<th id="T_1eada_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">A</th>
-<th id="T_1eada_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">B</th>
-<th id="T_1eada_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">D</th>
-<th id="T_1eada_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">D^2</th>
+<th id="T_303b3_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">ID</th>
+<th id="T_303b3_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">A</th>
+<th id="T_303b3_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">B</th>
+<th id="T_303b3_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">D</th>
+<th id="T_303b3_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">D^2</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_1eada_row0_col0" class="data row0 col0">1</td>
-<td id="T_1eada_row0_col1" class="data row0 col1">59</td>
-<td id="T_1eada_row0_col2" class="data row0 col2">40</td>
-<td id="T_1eada_row0_col3" class="data row0 col3">-19</td>
-<td id="T_1eada_row0_col4" class="data row0 col4">361</td>
+<td id="T_303b3_row0_col0" class="data row0 col0">1</td>
+<td id="T_303b3_row0_col1" class="data row0 col1">32</td>
+<td id="T_303b3_row0_col2" class="data row0 col2">19</td>
+<td id="T_303b3_row0_col3" class="data row0 col3">-13</td>
+<td id="T_303b3_row0_col4" class="data row0 col4">169</td>
 </tr>
 <tr class="even">
-<td id="T_1eada_row1_col0" class="data row1 col0">2</td>
-<td id="T_1eada_row1_col1" class="data row1 col1">54</td>
-<td id="T_1eada_row1_col2" class="data row1 col2">50</td>
-<td id="T_1eada_row1_col3" class="data row1 col3">-4</td>
-<td id="T_1eada_row1_col4" class="data row1 col4">16</td>
+<td id="T_303b3_row1_col0" class="data row1 col0">2</td>
+<td id="T_303b3_row1_col1" class="data row1 col1">25</td>
+<td id="T_303b3_row1_col2" class="data row1 col2">25</td>
+<td id="T_303b3_row1_col3" class="data row1 col3">0</td>
+<td id="T_303b3_row1_col4" class="data row1 col4">0</td>
 </tr>
 <tr class="odd">
-<td id="T_1eada_row2_col0" class="data row2 col0">3</td>
-<td id="T_1eada_row2_col1" class="data row2 col1">49</td>
-<td id="T_1eada_row2_col2" class="data row2 col2">52</td>
-<td id="T_1eada_row2_col3" class="data row2 col3">3</td>
-<td id="T_1eada_row2_col4" class="data row2 col4">9</td>
+<td id="T_303b3_row2_col0" class="data row2 col0">3</td>
+<td id="T_303b3_row2_col1" class="data row2 col1">22</td>
+<td id="T_303b3_row2_col2" class="data row2 col2">23</td>
+<td id="T_303b3_row2_col3" class="data row2 col3">1</td>
+<td id="T_303b3_row2_col4" class="data row2 col4">1</td>
 </tr>
 <tr class="even">
-<td id="T_1eada_row3_col0" class="data row3 col0">4</td>
-<td id="T_1eada_row3_col1" class="data row3 col1">59</td>
-<td id="T_1eada_row3_col2" class="data row3 col2">41</td>
-<td id="T_1eada_row3_col3" class="data row3 col3">-18</td>
-<td id="T_1eada_row3_col4" class="data row3 col4">324</td>
+<td id="T_303b3_row3_col0" class="data row3 col0">4</td>
+<td id="T_303b3_row3_col1" class="data row3 col1">19</td>
+<td id="T_303b3_row3_col2" class="data row3 col2">26</td>
+<td id="T_303b3_row3_col3" class="data row3 col3">7</td>
+<td id="T_303b3_row3_col4" class="data row3 col4">49</td>
 </tr>
 <tr class="odd">
-<td id="T_1eada_row4_col0" class="data row4 col0">5</td>
-<td id="T_1eada_row4_col1" class="data row4 col1">56</td>
-<td id="T_1eada_row4_col2" class="data row4 col2">43</td>
-<td id="T_1eada_row4_col3" class="data row4 col3">-13</td>
-<td id="T_1eada_row4_col4" class="data row4 col4">169</td>
+<td id="T_303b3_row4_col0" class="data row4 col0">5</td>
+<td id="T_303b3_row4_col1" class="data row4 col1">28</td>
+<td id="T_303b3_row4_col2" class="data row4 col2">14</td>
+<td id="T_303b3_row4_col3" class="data row4 col3">-14</td>
+<td id="T_303b3_row4_col4" class="data row4 col4">196</td>
 </tr>
 <tr class="even">
-<td id="T_1eada_row5_col0" class="data row5 col0">6</td>
-<td id="T_1eada_row5_col1" class="data row5 col1">62</td>
-<td id="T_1eada_row5_col2" class="data row5 col2">54</td>
-<td id="T_1eada_row5_col3" class="data row5 col3">-8</td>
-<td id="T_1eada_row5_col4" class="data row5 col4">64</td>
+<td id="T_303b3_row5_col0" class="data row5 col0">6</td>
+<td id="T_303b3_row5_col1" class="data row5 col1">43</td>
+<td id="T_303b3_row5_col2" class="data row5 col2">39</td>
+<td id="T_303b3_row5_col3" class="data row5 col3">-4</td>
+<td id="T_303b3_row5_col4" class="data row5 col4">16</td>
 </tr>
 <tr class="odd">
-<td id="T_1eada_row6_col0" class="data row6 col0">7</td>
-<td id="T_1eada_row6_col1" class="data row6 col1">54</td>
-<td id="T_1eada_row6_col2" class="data row6 col2">48</td>
-<td id="T_1eada_row6_col3" class="data row6 col3">-6</td>
-<td id="T_1eada_row6_col4" class="data row6 col4">36</td>
+<td id="T_303b3_row6_col0" class="data row6 col0">7</td>
+<td id="T_303b3_row6_col1" class="data row6 col1">41</td>
+<td id="T_303b3_row6_col2" class="data row6 col2">30</td>
+<td id="T_303b3_row6_col3" class="data row6 col3">-11</td>
+<td id="T_303b3_row6_col4" class="data row6 col4">121</td>
 </tr>
 <tr class="even">
-<td id="T_1eada_row7_col0" class="data row7 col0">8</td>
-<td id="T_1eada_row7_col1" class="data row7 col1">52</td>
-<td id="T_1eada_row7_col2" class="data row7 col2">41</td>
-<td id="T_1eada_row7_col3" class="data row7 col3">-11</td>
-<td id="T_1eada_row7_col4" class="data row7 col4">121</td>
+<td id="T_303b3_row7_col0" class="data row7 col0">8</td>
+<td id="T_303b3_row7_col1" class="data row7 col1">28</td>
+<td id="T_303b3_row7_col2" class="data row7 col2">40</td>
+<td id="T_303b3_row7_col3" class="data row7 col3">12</td>
+<td id="T_303b3_row7_col4" class="data row7 col4">144</td>
 </tr>
 <tr class="odd">
-<td id="T_1eada_row8_col0" class="data row8 col0">9</td>
-<td id="T_1eada_row8_col1" class="data row8 col1">59</td>
-<td id="T_1eada_row8_col2" class="data row8 col2">42</td>
-<td id="T_1eada_row8_col3" class="data row8 col3">-17</td>
-<td id="T_1eada_row8_col4" class="data row8 col4">289</td>
+<td id="T_303b3_row8_col0" class="data row8 col0">9</td>
+<td id="T_303b3_row8_col1" class="data row8 col1">19</td>
+<td id="T_303b3_row8_col2" class="data row8 col2">41</td>
+<td id="T_303b3_row8_col3" class="data row8 col3">22</td>
+<td id="T_303b3_row8_col4" class="data row8 col4">484</td>
 </tr>
 <tr class="even">
-<td id="T_1eada_row9_col0" class="data row9 col0">10</td>
-<td id="T_1eada_row9_col1" class="data row9 col1">55</td>
-<td id="T_1eada_row9_col2" class="data row9 col2">39</td>
-<td id="T_1eada_row9_col3" class="data row9 col3">-16</td>
-<td id="T_1eada_row9_col4" class="data row9 col4">256</td>
+<td id="T_303b3_row9_col0" class="data row9 col0">10</td>
+<td id="T_303b3_row9_col1" class="data row9 col1">21</td>
+<td id="T_303b3_row9_col2" class="data row9 col2">19</td>
+<td id="T_303b3_row9_col3" class="data row9 col3">-2</td>
+<td id="T_303b3_row9_col4" class="data row9 col4">4</td>
 </tr>
 <tr class="odd">
-<td id="T_1eada_row10_col0" class="data row10 col0">11</td>
-<td id="T_1eada_row10_col1" class="data row10 col1">52</td>
-<td id="T_1eada_row10_col2" class="data row10 col2">42</td>
-<td id="T_1eada_row10_col3" class="data row10 col3">-10</td>
-<td id="T_1eada_row10_col4" class="data row10 col4">100</td>
+<td id="T_303b3_row10_col0" class="data row10 col0">11</td>
+<td id="T_303b3_row10_col1" class="data row10 col1">24</td>
+<td id="T_303b3_row10_col2" class="data row10 col2">24</td>
+<td id="T_303b3_row10_col3" class="data row10 col3">0</td>
+<td id="T_303b3_row10_col4" class="data row10 col4">0</td>
 </tr>
 <tr class="even">
-<td id="T_1eada_row11_col0" class="data row11 col0">12</td>
-<td id="T_1eada_row11_col1" class="data row11 col1">60</td>
-<td id="T_1eada_row11_col2" class="data row11 col2">50</td>
-<td id="T_1eada_row11_col3" class="data row11 col3">-10</td>
-<td id="T_1eada_row11_col4" class="data row11 col4">100</td>
+<td id="T_303b3_row11_col0" class="data row11 col0">12</td>
+<td id="T_303b3_row11_col1" class="data row11 col1">29</td>
+<td id="T_303b3_row11_col2" class="data row11 col2">19</td>
+<td id="T_303b3_row11_col3" class="data row11 col3">-10</td>
+<td id="T_303b3_row11_col4" class="data row11 col4">100</td>
 </tr>
 <tr class="odd">
-<td id="T_1eada_row12_col0" class="data row12 col0">13</td>
-<td id="T_1eada_row12_col1" class="data row12 col1">47</td>
-<td id="T_1eada_row12_col2" class="data row12 col2">50</td>
-<td id="T_1eada_row12_col3" class="data row12 col3">3</td>
-<td id="T_1eada_row12_col4" class="data row12 col4">9</td>
+<td id="T_303b3_row12_col0" class="data row12 col0">13</td>
+<td id="T_303b3_row12_col1" class="data row12 col1">20</td>
+<td id="T_303b3_row12_col2" class="data row12 col2">17</td>
+<td id="T_303b3_row12_col3" class="data row12 col3">-3</td>
+<td id="T_303b3_row12_col4" class="data row12 col4">9</td>
 </tr>
 <tr class="even">
-<td id="T_1eada_row13_col0" class="data row13 col0">14</td>
-<td id="T_1eada_row13_col1" class="data row13 col1">48</td>
-<td id="T_1eada_row13_col2" class="data row13 col2">39</td>
-<td id="T_1eada_row13_col3" class="data row13 col3">-9</td>
-<td id="T_1eada_row13_col4" class="data row13 col4">81</td>
-</tr>
-<tr class="odd">
-<td id="T_1eada_row14_col0" class="data row14 col0">15</td>
-<td id="T_1eada_row14_col1" class="data row14 col1">49</td>
-<td id="T_1eada_row14_col2" class="data row14 col2">46</td>
-<td id="T_1eada_row14_col3" class="data row14 col3">-3</td>
-<td id="T_1eada_row14_col4" class="data row14 col4">9</td>
+<td id="T_303b3_row13_col0" class="data row13 col0">14</td>
+<td id="T_303b3_row13_col1" class="data row13 col1">27</td>
+<td id="T_303b3_row13_col2" class="data row13 col2">31</td>
+<td id="T_303b3_row13_col3" class="data row13 col3">4</td>
+<td id="T_303b3_row13_col4" class="data row13 col4">16</td>
 </tr>
 </tbody>
 </table>
-<p><br>New Summary statistics for the difference scores:<br> <span class="math display">\[M_D = {-9.2}, \quad \Sigma{D} = {-138}, \quad \Sigma{D^2} = {1944}\]</span> <br></p>
-<p><br>Calculate <em>SS</em> of the difference scores <br> <span class="math display">\[SS_D = \Sigma D^2 - \frac{(\Sigma D)^2}{n}\]</span> <br> <span class="math display">\[SS_D = {1944} - \frac{19044}{15}\]</span> <br> <span class="math display">\[SS_D = {1944} - {1269.6}\]</span> <br> <span class="math display">\[SS_D = {674.4}\]</span> <br><br></p>
-<p>Calculate the variance of the difference scores <br> <span class="math display">\[s_D^2 = \frac{SS_D}{df}\]</span> <br> <span class="math display">\[s_D^2 = \frac{674.4}{14}\]</span> <br> <span class="math display">\[s_D^2 = {48.17}\]</span> <br><br></p>
-<p>Calculate the estimated standard error of the difference scores <br> <span class="math display">\[s_{M_D} = \sqrt{\frac{s^2}{n}}\]</span> <br> <span class="math display">\[s_{M_D} = \sqrt{\frac{48.17}{15}}\]</span> <br> <span class="math display">\[s_{M_D} = \sqrt{3.21}\]</span> <br> <span class="math display">\[s_{M_D} = {1.79}\]</span> <br><br></p>
-<p>Calculate <span class="math inline">\(t_{obt}\)</span> <br> <span class="math display">\[t_{obt} = {\frac{M_D - \mu_D}{s_{M_D}}}\]</span> <br> <span class="math display">\[t_{obt} = \frac{-9.2 - 0}{1.79}\]</span> <br> <span class="math display">\[t_{obt} = \frac{-9.2}{1.79}\]</span> <br> <span class="math display">\[t_{obt} = {-5.14}\]</span> <br><br></p>
-<p>Calculating Cohen’s <em>d</em> <br> <span class="math display">\[d = \frac{M_D}{\sqrt{s^2}}\]</span> <br> <span class="math display">\[d = \frac{-9.2}{{{\sqrt{48.17}}}}\]</span> <br> <span class="math display">\[d = \frac{-9.2}{6.94}\]</span> <br> <span class="math display">\[d = {-1.33}\]</span> <br><br></p>
-<p>The results: <br><br> reject the null hypothesis, results are significant, <br> <em>t</em>(14) = -5.14, <em>p</em> &lt; 0.05, <em>d</em> = -1.33<br><br></p>
+<p><br>New Summary statistics for the difference scores:<br> <span class="math display">\[M_D = {-0.79}, \quad \Sigma{D} = {-11}, \quad \Sigma{D^2} = {1309}\]</span> <br></p>
+<p><br>Calculate <em>SS</em> of the difference scores <br> <span class="math display">\[SS_D = \Sigma D^2 - \frac{(\Sigma D)^2}{n}\]</span> <br> <span class="math display">\[SS_D = {1309} - \frac{121}{14}\]</span> <br> <span class="math display">\[SS_D = {1309} - {8.64}\]</span> <br> <span class="math display">\[SS_D = {1300.36}\]</span> <br><br></p>
+<p>Calculate the variance of the difference scores <br> <span class="math display">\[s_D^2 = \frac{SS_D}{df}\]</span> <br> <span class="math display">\[s_D^2 = \frac{1300.36}{13}\]</span> <br> <span class="math display">\[s_D^2 = {100.03}\]</span> <br><br></p>
+<p>Calculate the estimated standard error of the difference scores <br> <span class="math display">\[s_{M_D} = \sqrt{\frac{s^2}{n}}\]</span> <br> <span class="math display">\[s_{M_D} = \sqrt{\frac{100.03}{14}}\]</span> <br> <span class="math display">\[s_{M_D} = \sqrt{7.14}\]</span> <br> <span class="math display">\[s_{M_D} = {2.67}\]</span> <br><br></p>
+<p>Calculate <span class="math inline">\(t_{obt}\)</span> <br> <span class="math display">\[t_{obt} = {\frac{M_D - \mu_D}{s_{M_D}}}\]</span> <br> <span class="math display">\[t_{obt} = \frac{-0.79 - 0}{2.67}\]</span> <br> <span class="math display">\[t_{obt} = \frac{-0.79}{2.67}\]</span> <br> <span class="math display">\[t_{obt} = {-0.3}\]</span> <br><br></p>
+<p>Calculating Cohen’s <em>d</em> <br> <span class="math display">\[d = \frac{M_D}{\sqrt{s^2}}\]</span> <br> <span class="math display">\[d = \frac{-0.79}{{{\sqrt{100.03}}}}\]</span> <br> <span class="math display">\[d = \frac{-0.79}{10.0}\]</span> <br> <span class="math display">\[d = {-0.08}\]</span> <br><br></p>
+<p>The results: <br><br> fail to reject the null hypothesis, results not significant, <br> <em>t</em>(13) = -0.3, <em>p</em> &gt; 0.05, <em>d</em> = -0.08<br><br></p>
 </section>
 <section id="one-way-anova" class="slide level2 scrollable">
 <h2>One-Way ANOVA</h2>
@@ -635,289 +613,245 @@ Guenther, Benjamin A.
 <style type="text/css">
 </style>
 
-<table id="T_1ee6e" class="caption-top">
+<table id="T_a6d0d" class="caption-top">
 <thead>
 <tr class="header">
-<th id="T_1ee6e_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
-<th id="T_1ee6e_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">B</th>
-<th id="T_1ee6e_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">C</th>
-<th id="T_1ee6e_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">D</th>
-<th id="T_1ee6e_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">E</th>
+<th id="T_a6d0d_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
+<th id="T_a6d0d_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">B</th>
+<th id="T_a6d0d_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">C</th>
+<th id="T_a6d0d_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">D</th>
+<th id="T_a6d0d_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">E</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_1ee6e_row0_col0" class="data row0 col0">48</td>
-<td id="T_1ee6e_row0_col1" class="data row0 col1">68</td>
-<td id="T_1ee6e_row0_col2" class="data row0 col2">41</td>
-<td id="T_1ee6e_row0_col3" class="data row0 col3">48</td>
-<td id="T_1ee6e_row0_col4" class="data row0 col4">37</td>
+<td id="T_a6d0d_row0_col0" class="data row0 col0">29</td>
+<td id="T_a6d0d_row0_col1" class="data row0 col1">39</td>
+<td id="T_a6d0d_row0_col2" class="data row0 col2">18</td>
+<td id="T_a6d0d_row0_col3" class="data row0 col3">18</td>
+<td id="T_a6d0d_row0_col4" class="data row0 col4">30</td>
 </tr>
 <tr class="even">
-<td id="T_1ee6e_row1_col0" class="data row1 col0">63</td>
-<td id="T_1ee6e_row1_col1" class="data row1 col1">67</td>
-<td id="T_1ee6e_row1_col2" class="data row1 col2">34</td>
-<td id="T_1ee6e_row1_col3" class="data row1 col3">58</td>
-<td id="T_1ee6e_row1_col4" class="data row1 col4">54</td>
+<td id="T_a6d0d_row1_col0" class="data row1 col0">25</td>
+<td id="T_a6d0d_row1_col1" class="data row1 col1">45</td>
+<td id="T_a6d0d_row1_col2" class="data row1 col2">22</td>
+<td id="T_a6d0d_row1_col3" class="data row1 col3">23</td>
+<td id="T_a6d0d_row1_col4" class="data row1 col4">32</td>
 </tr>
 <tr class="odd">
-<td id="T_1ee6e_row2_col0" class="data row2 col0">56</td>
-<td id="T_1ee6e_row2_col1" class="data row2 col1">69</td>
-<td id="T_1ee6e_row2_col2" class="data row2 col2">55</td>
-<td id="T_1ee6e_row2_col3" class="data row2 col3">46</td>
-<td id="T_1ee6e_row2_col4" class="data row2 col4">48</td>
+<td id="T_a6d0d_row2_col0" class="data row2 col0">27</td>
+<td id="T_a6d0d_row2_col1" class="data row2 col1">39</td>
+<td id="T_a6d0d_row2_col2" class="data row2 col2">23</td>
+<td id="T_a6d0d_row2_col3" class="data row2 col3">24</td>
+<td id="T_a6d0d_row2_col4" class="data row2 col4">37</td>
 </tr>
 <tr class="even">
-<td id="T_1ee6e_row3_col0" class="data row3 col0">48</td>
-<td id="T_1ee6e_row3_col1" class="data row3 col1">60</td>
-<td id="T_1ee6e_row3_col2" class="data row3 col2">27</td>
-<td id="T_1ee6e_row3_col3" class="data row3 col3">68</td>
-<td id="T_1ee6e_row3_col4" class="data row3 col4">52</td>
+<td id="T_a6d0d_row3_col0" class="data row3 col0">36</td>
+<td id="T_a6d0d_row3_col1" class="data row3 col1">39</td>
+<td id="T_a6d0d_row3_col2" class="data row3 col2">21</td>
+<td id="T_a6d0d_row3_col3" class="data row3 col3">27</td>
+<td id="T_a6d0d_row3_col4" class="data row3 col4">20</td>
 </tr>
 <tr class="odd">
-<td id="T_1ee6e_row4_col0" class="data row4 col0">47</td>
-<td id="T_1ee6e_row4_col1" class="data row4 col1">61</td>
-<td id="T_1ee6e_row4_col2" class="data row4 col2">42</td>
-<td id="T_1ee6e_row4_col3" class="data row4 col3">46</td>
-<td id="T_1ee6e_row4_col4" class="data row4 col4">58</td>
-</tr>
-<tr class="even">
-<td id="T_1ee6e_row5_col0" class="data row5 col0">38</td>
-<td id="T_1ee6e_row5_col1" class="data row5 col1">67</td>
-<td id="T_1ee6e_row5_col2" class="data row5 col2">36</td>
-<td id="T_1ee6e_row5_col3" class="data row5 col3">54</td>
-<td id="T_1ee6e_row5_col4" class="data row5 col4">38</td>
-</tr>
-<tr class="odd">
-<td id="T_1ee6e_row6_col0" class="data row6 col0">52</td>
-<td id="T_1ee6e_row6_col1" class="data row6 col1">61</td>
-<td id="T_1ee6e_row6_col2" class="data row6 col2">50</td>
-<td id="T_1ee6e_row6_col3" class="data row6 col3">54</td>
-<td id="T_1ee6e_row6_col4" class="data row6 col4">37</td>
-</tr>
-<tr class="even">
-<td id="T_1ee6e_row7_col0" class="data row7 col0">41</td>
-<td id="T_1ee6e_row7_col1" class="data row7 col1">55</td>
-<td id="T_1ee6e_row7_col2" class="data row7 col2">36</td>
-<td id="T_1ee6e_row7_col3" class="data row7 col3">67</td>
-<td id="T_1ee6e_row7_col4" class="data row7 col4">46</td>
-</tr>
-<tr class="odd">
-<td id="T_1ee6e_row8_col0" class="data row8 col0">45</td>
-<td id="T_1ee6e_row8_col1" class="data row8 col1">67</td>
-<td id="T_1ee6e_row8_col2" class="data row8 col2">39</td>
-<td id="T_1ee6e_row8_col3" class="data row8 col3">50</td>
-<td id="T_1ee6e_row8_col4" class="data row8 col4">44</td>
-</tr>
-<tr class="even">
-<td id="T_1ee6e_row9_col0" class="data row9 col0">47</td>
-<td id="T_1ee6e_row9_col1" class="data row9 col1">52</td>
-<td id="T_1ee6e_row9_col2" class="data row9 col2">37</td>
-<td id="T_1ee6e_row9_col3" class="data row9 col3">39</td>
-<td id="T_1ee6e_row9_col4" class="data row9 col4">42</td>
-</tr>
-<tr class="odd">
-<td id="T_1ee6e_row10_col0" class="data row10 col0">44</td>
-<td id="T_1ee6e_row10_col1" class="data row10 col1">60</td>
-<td id="T_1ee6e_row10_col2" class="data row10 col2">65</td>
-<td id="T_1ee6e_row10_col3" class="data row10 col3">48</td>
-<td id="T_1ee6e_row10_col4" class="data row10 col4">31</td>
-</tr>
-<tr class="even">
-<td id="T_1ee6e_row11_col0" class="data row11 col0">51</td>
-<td id="T_1ee6e_row11_col1" class="data row11 col1">62</td>
-<td id="T_1ee6e_row11_col2" class="data row11 col2">56</td>
-<td id="T_1ee6e_row11_col3" class="data row11 col3">53</td>
-<td id="T_1ee6e_row11_col4" class="data row11 col4">57</td>
+<td id="T_a6d0d_row4_col0" class="data row4 col0">37</td>
+<td id="T_a6d0d_row4_col1" class="data row4 col1">41</td>
+<td id="T_a6d0d_row4_col2" class="data row4 col2">19</td>
+<td id="T_a6d0d_row4_col3" class="data row4 col3">29</td>
+<td id="T_a6d0d_row4_col4" class="data row4 col4">28</td>
 </tr>
 </tbody>
 </table>
-<p><br>Summary statistics for these data:<br> <span class="math inline">\(G = {3022} \quad \Sigma{X^2} = {158762} \quad k = {5} \quad N = {60}\)</span> <br></p>
-<p><span class="math inline">\(T_{A} = {580} \quad SS_{A} = {488.67}\)</span> <br> <span class="math inline">\(T_{B} = {749} \quad SS_{B} = {316.92}\)</span> <br> <span class="math inline">\(T_{C} = {518} \quad SS_{C} = {1337.67}\)</span> <br> <span class="math inline">\(T_{D} = {631} \quad SS_{D} = {798.92}\)</span> <br> <span class="math inline">\(T_{E} = {544} \quad SS_{E} = {834.67}\)</span> <br> <br> State the Hypotheses <br> <span class="math inline">\(H_0: \mu_A = \mu_B = \mu_C = \mu_D = \mu_E\)</span> <br> <span class="math inline">\(H_1:\)</span> At least one mean is different <br> <br> The decision criteria: <br><br> <span class="math inline">\(F_{crit} = {2.54}, \alpha = {0.05}\)</span> <br><br></p>
-<p>Calculate the Degrees of Freedom <br> <span class="math display">\[df_{total} = N - 1\]</span> <br> <span class="math display">\[df_{total} = {60} - 1\]</span> <br> <span class="math display">\[df_{total} = {59}\]</span> <br><br> <span class="math display">\[df_{between} = k - 1\]</span> <br> <span class="math display">\[df_{between} = {5} - 1\]</span> <br> <span class="math display">\[df_{between} = {4}\]</span> <br><br> <span class="math display">\[df_{within} = N - K\]</span> <br> <span class="math display">\[df_{within} = {60} - {5}\]</span> <br> <span class="math display">\[df_{within} = {55}\]</span> <br><br></p>
-<p>Calculate the Sum of Squares <br> <span class="math display">\[SS_{total} = \Sigma X^2 - \frac{G^2}{N}\]</span> <br> <span class="math display">\[SS_{total} = {158762} - \frac{3022^2}{60}\]</span> <br> <span class="math display">\[SS_{total} = {158762} - \frac{9132484}{60}\]</span> <br> <span class="math display">\[SS_{total} = {158762} - {152208.07}\]</span> <br> <span class="math display">\[SS_{total} = {6553.93}\]</span> <br><br> <span class="math display">\[SS_{within} = \Sigma SS_{inside\_each\_condition}\]</span> <br> <span class="math display">\[SS_{within} = {488.67 + 316.92 + 1337.67 + 798.92 + 834.67}\]</span> <br> <span class="math display">\[SS_{within} = {3776.85}\]</span> <br><br> <span class="math display">\[SS_{between} = SS_{total} - SS_{within}\]</span> <br> <span class="math display">\[SS_{between} = {6553.93} - {3776.85}\]</span> <br> <span class="math display">\[SS_{between} = {2777.08}\]</span> <br><br> note: the other way to calculate <span class="math inline">\(SS_{betwen}\)</span> is: <br> <span class="math display">\[SS_{between} = \Sigma{\frac{T^2}{n}} - \frac{G^2}{N}\]</span> <br><br></p>
-<p>Calculate the Mean Squares <br> <span class="math display">\[MS_{between} = \frac{SS_{between}}{df_{between}}\]</span> <br> <span class="math display">\[MS_{between} = \frac{2777.08}{4}\]</span> <br> <span class="math display">\[MS_{between} = {694.27}\]</span> <br><br></p>
-<p><span class="math display">\[MS_{within} = \frac{SS_{within}}{df_{within}}\]</span> <br> <span class="math display">\[MS_{within} = \frac{3776.85}{55}\]</span> <br> <span class="math display">\[MS_{within} = {68.67}\]</span> <br><br></p>
-<p>Calculate the <em>F</em>-Ratio <br> <span class="math display">\[F_{obt} = \frac{MS_{between}}{MS_{within}}\]</span> <br> <span class="math display">\[F_{obt} = \frac{694.27}{68.67}\]</span> <br> <span class="math display">\[F_{obt} = {10.11}\]</span> <br><br></p>
-<p>Calculate <span class="math inline">\(\eta^2\)</span> <br> <span class="math display">\[\eta^2 = \frac{SS{between}}{SS_{total}}\]</span> <br> <span class="math display">\[\eta^2 = \frac{2777.08}{6553.93}\]</span> <br> <span class="math display">\[\eta^2 = {0.42}\]</span> <br><br></p>
-<p>The results: <br><br> reject the null hypothesis, results are significant, <br><br> <span class="math inline">\(F({4}, {55}) = {10.11}, p &lt; {0.05}, \eta^2 = {0.42}\)</span></p>
+<p><br>Summary statistics for these data:<br> <span class="math inline">\(G = {728} \quad \Sigma{X^2} = {22744} \quad k = {5} \quad N = {25}\)</span> <br></p>
+<p><span class="math inline">\(T_{A} = {154} \quad SS_{A} = {116.8}\)</span> <br> <span class="math inline">\(T_{B} = {203} \quad SS_{B} = {27.2}\)</span> <br> <span class="math inline">\(T_{C} = {103} \quad SS_{C} = {17.2}\)</span> <br> <span class="math inline">\(T_{D} = {121} \quad SS_{D} = {70.8}\)</span> <br> <span class="math inline">\(T_{E} = {147} \quad SS_{E} = {155.2}\)</span> <br> <br> State the Hypotheses <br> <span class="math inline">\(H_0: \mu_A = \mu_B = \mu_C = \mu_D = \mu_E\)</span> <br> <span class="math inline">\(H_1:\)</span> At least one mean is different <br> <br> The decision criteria: <br><br> <span class="math inline">\(F_{crit} = {2.87}, \alpha = {0.05}\)</span> <br><br></p>
+<p>Calculate the Degrees of Freedom <br> <span class="math display">\[df_{total} = N - 1\]</span> <br> <span class="math display">\[df_{total} = {25} - 1\]</span> <br> <span class="math display">\[df_{total} = {24}\]</span> <br><br> <span class="math display">\[df_{between} = k - 1\]</span> <br> <span class="math display">\[df_{between} = {5} - 1\]</span> <br> <span class="math display">\[df_{between} = {4}\]</span> <br><br> <span class="math display">\[df_{within} = N - K\]</span> <br> <span class="math display">\[df_{within} = {25} - {5}\]</span> <br> <span class="math display">\[df_{within} = {20}\]</span> <br><br></p>
+<p>Calculate the Sum of Squares <br> <span class="math display">\[SS_{total} = \Sigma X^2 - \frac{G^2}{N}\]</span> <br> <span class="math display">\[SS_{total} = {22744} - \frac{728^2}{25}\]</span> <br> <span class="math display">\[SS_{total} = {22744} - \frac{529984}{25}\]</span> <br> <span class="math display">\[SS_{total} = {22744} - {21199.36}\]</span> <br> <span class="math display">\[SS_{total} = {1544.64}\]</span> <br><br> <span class="math display">\[SS_{within} = \Sigma SS_{inside\_each\_condition}\]</span> <br> <span class="math display">\[SS_{within} = {116.8 + 27.2 + 17.2 + 70.8 + 155.2}\]</span> <br> <span class="math display">\[SS_{within} = {387.2}\]</span> <br><br> <span class="math display">\[SS_{between} = SS_{total} - SS_{within}\]</span> <br> <span class="math display">\[SS_{between} = {1544.64} - {387.2}\]</span> <br> <span class="math display">\[SS_{between} = {1157.44}\]</span> <br><br> note: the other way to calculate <span class="math inline">\(SS_{betwen}\)</span> is: <br> <span class="math display">\[SS_{between} = \Sigma{\frac{T^2}{n}} - \frac{G^2}{N}\]</span> <br><br></p>
+<p>Calculate the Mean Squares <br> <span class="math display">\[MS_{between} = \frac{SS_{between}}{df_{between}}\]</span> <br> <span class="math display">\[MS_{between} = \frac{1157.44}{4}\]</span> <br> <span class="math display">\[MS_{between} = {289.36}\]</span> <br><br></p>
+<p><span class="math display">\[MS_{within} = \frac{SS_{within}}{df_{within}}\]</span> <br> <span class="math display">\[MS_{within} = \frac{387.2}{20}\]</span> <br> <span class="math display">\[MS_{within} = {19.36}\]</span> <br><br></p>
+<p>Calculate the <em>F</em>-Ratio <br> <span class="math display">\[F_{obt} = \frac{MS_{between}}{MS_{within}}\]</span> <br> <span class="math display">\[F_{obt} = \frac{289.36}{19.36}\]</span> <br> <span class="math display">\[F_{obt} = {14.95}\]</span> <br><br></p>
+<p>Calculate <span class="math inline">\(\eta^2\)</span> <br> <span class="math display">\[\eta^2 = \frac{SS{between}}{SS_{total}}\]</span> <br> <span class="math display">\[\eta^2 = \frac{1157.44}{1544.64}\]</span> <br> <span class="math display">\[\eta^2 = {0.75}\]</span> <br><br></p>
+<p>The results: <br><br> reject the null hypothesis, results are significant, <br><br> <span class="math inline">\(F({4}, {20}) = {14.95}, p &lt; {0.05}, \eta^2 = {0.75}\)</span></p>
 </section>
 <section id="repeated-measures-anova" class="slide level2 scrollable">
 <h2>Repeated-Measures ANOVA</h2>
-<p>Given the following within-subjects data, use a repeated-measures ANOVA with <span class="math inline">\(\alpha = {0.01}\)</span></p>
+<p>Given the following within-subjects data, use a repeated-measures ANOVA with <span class="math inline">\(\alpha = {0.05}\)</span></p>
 <style type="text/css">
 </style>
 
-<table id="T_dc056" class="caption-top">
+<table id="T_c9e5e" class="caption-top">
 <thead>
 <tr class="header">
-<th id="T_dc056_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">ID</th>
-<th id="T_dc056_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">A</th>
-<th id="T_dc056_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">B</th>
-<th id="T_dc056_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">C</th>
+<th id="T_c9e5e_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">ID</th>
+<th id="T_c9e5e_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">A</th>
+<th id="T_c9e5e_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">B</th>
+<th id="T_c9e5e_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">C</th>
+<th id="T_c9e5e_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">D</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_dc056_row0_col0" class="data row0 col0">1</td>
-<td id="T_dc056_row0_col1" class="data row0 col1">26</td>
-<td id="T_dc056_row0_col2" class="data row0 col2">27</td>
-<td id="T_dc056_row0_col3" class="data row0 col3">27</td>
+<td id="T_c9e5e_row0_col0" class="data row0 col0">1</td>
+<td id="T_c9e5e_row0_col1" class="data row0 col1">43</td>
+<td id="T_c9e5e_row0_col2" class="data row0 col2">44</td>
+<td id="T_c9e5e_row0_col3" class="data row0 col3">42</td>
+<td id="T_c9e5e_row0_col4" class="data row0 col4">56</td>
 </tr>
 <tr class="even">
-<td id="T_dc056_row1_col0" class="data row1 col0">2</td>
-<td id="T_dc056_row1_col1" class="data row1 col1">23</td>
-<td id="T_dc056_row1_col2" class="data row1 col2">38</td>
-<td id="T_dc056_row1_col3" class="data row1 col3">25</td>
+<td id="T_c9e5e_row1_col0" class="data row1 col0">2</td>
+<td id="T_c9e5e_row1_col1" class="data row1 col1">30</td>
+<td id="T_c9e5e_row1_col2" class="data row1 col2">88</td>
+<td id="T_c9e5e_row1_col3" class="data row1 col3">59</td>
+<td id="T_c9e5e_row1_col4" class="data row1 col4">59</td>
 </tr>
 <tr class="odd">
-<td id="T_dc056_row2_col0" class="data row2 col0">3</td>
-<td id="T_dc056_row2_col1" class="data row2 col1">18</td>
-<td id="T_dc056_row2_col2" class="data row2 col2">26</td>
-<td id="T_dc056_row2_col3" class="data row2 col3">30</td>
+<td id="T_c9e5e_row2_col0" class="data row2 col0">3</td>
+<td id="T_c9e5e_row2_col1" class="data row2 col1">53</td>
+<td id="T_c9e5e_row2_col2" class="data row2 col2">69</td>
+<td id="T_c9e5e_row2_col3" class="data row2 col3">64</td>
+<td id="T_c9e5e_row2_col4" class="data row2 col4">40</td>
 </tr>
 <tr class="even">
-<td id="T_dc056_row3_col0" class="data row3 col0">4</td>
-<td id="T_dc056_row3_col1" class="data row3 col1">24</td>
-<td id="T_dc056_row3_col2" class="data row3 col2">29</td>
-<td id="T_dc056_row3_col3" class="data row3 col3">21</td>
+<td id="T_c9e5e_row3_col0" class="data row3 col0">4</td>
+<td id="T_c9e5e_row3_col1" class="data row3 col1">72</td>
+<td id="T_c9e5e_row3_col2" class="data row3 col2">55</td>
+<td id="T_c9e5e_row3_col3" class="data row3 col3">42</td>
+<td id="T_c9e5e_row3_col4" class="data row3 col4">74</td>
 </tr>
 <tr class="odd">
-<td id="T_dc056_row4_col0" class="data row4 col0">5</td>
-<td id="T_dc056_row4_col1" class="data row4 col1">19</td>
-<td id="T_dc056_row4_col2" class="data row4 col2">26</td>
-<td id="T_dc056_row4_col3" class="data row4 col3">40</td>
+<td id="T_c9e5e_row4_col0" class="data row4 col0">5</td>
+<td id="T_c9e5e_row4_col1" class="data row4 col1">61</td>
+<td id="T_c9e5e_row4_col2" class="data row4 col2">52</td>
+<td id="T_c9e5e_row4_col3" class="data row4 col3">45</td>
+<td id="T_c9e5e_row4_col4" class="data row4 col4">71</td>
 </tr>
 <tr class="even">
-<td id="T_dc056_row5_col0" class="data row5 col0">6</td>
-<td id="T_dc056_row5_col1" class="data row5 col1">22</td>
-<td id="T_dc056_row5_col2" class="data row5 col2">31</td>
-<td id="T_dc056_row5_col3" class="data row5 col3">19</td>
+<td id="T_c9e5e_row5_col0" class="data row5 col0">6</td>
+<td id="T_c9e5e_row5_col1" class="data row5 col1">58</td>
+<td id="T_c9e5e_row5_col2" class="data row5 col2">55</td>
+<td id="T_c9e5e_row5_col3" class="data row5 col3">49</td>
+<td id="T_c9e5e_row5_col4" class="data row5 col4">70</td>
 </tr>
 <tr class="odd">
-<td id="T_dc056_row6_col0" class="data row6 col0">7</td>
-<td id="T_dc056_row6_col1" class="data row6 col1">28</td>
-<td id="T_dc056_row6_col2" class="data row6 col2">30</td>
-<td id="T_dc056_row6_col3" class="data row6 col3">16</td>
+<td id="T_c9e5e_row6_col0" class="data row6 col0">7</td>
+<td id="T_c9e5e_row6_col1" class="data row6 col1">44</td>
+<td id="T_c9e5e_row6_col2" class="data row6 col2">58</td>
+<td id="T_c9e5e_row6_col3" class="data row6 col3">60</td>
+<td id="T_c9e5e_row6_col4" class="data row6 col4">49</td>
 </tr>
 <tr class="even">
-<td id="T_dc056_row7_col0" class="data row7 col0">8</td>
-<td id="T_dc056_row7_col1" class="data row7 col1">31</td>
-<td id="T_dc056_row7_col2" class="data row7 col2">30</td>
-<td id="T_dc056_row7_col3" class="data row7 col3">27</td>
-</tr>
-<tr class="odd">
-<td id="T_dc056_row8_col0" class="data row8 col0">9</td>
-<td id="T_dc056_row8_col1" class="data row8 col1">21</td>
-<td id="T_dc056_row8_col2" class="data row8 col2">24</td>
-<td id="T_dc056_row8_col3" class="data row8 col3">20</td>
+<td id="T_c9e5e_row7_col0" class="data row7 col0">8</td>
+<td id="T_c9e5e_row7_col1" class="data row7 col1">42</td>
+<td id="T_c9e5e_row7_col2" class="data row7 col2">59</td>
+<td id="T_c9e5e_row7_col3" class="data row7 col3">60</td>
+<td id="T_c9e5e_row7_col4" class="data row7 col4">46</td>
 </tr>
 </tbody>
 </table>
-<p><br>Summary statistics for these data:<br> <span class="math inline">\(G = {698} \quad \Sigma X^2 = {18880} \quad k = {3} \quad N = {27}\)</span> <br></p>
-<p><span class="math inline">\(T_{A} = {212} \quad SS_{A} = {142.22}\)</span> <br> <span class="math inline">\(T_{B} = {261} \quad SS_{B} = {134.0}\)</span> <br> <span class="math inline">\(T_{C} = {225} \quad SS_{C} = {416.0}\)</span> <br> <br> State the Hypotheses <br> <span class="math inline">\(H_0: \mu_A = \mu_B = \mu_C\)</span> <br> <span class="math inline">\(H_1:\)</span> At least one mean is different <br> <br> The decision criteria: <br><br> <span class="math inline">\(F_{crit} = {6.23}, \alpha = {0.01}\)</span> <br><br></p>
-<p>Stage 1 Calculations: <br><br> Calculate the Degrees of Freedom <br> <span class="math display">\[df_{total} = N - 1\]</span> <br> <span class="math display">\[df_{total} = {27} - 1\]</span> <br> <span class="math display">\[df_{total} = {26}\]</span> <br><br> <span class="math display">\[df_{between} = k - 1\]</span> <br> <span class="math display">\[df_{between} = {3} - 1\]</span> <br> <span class="math display">\[df_{between} = {2}\]</span> <br><br> <span class="math display">\[df_{within} = N - K\]</span> <br> <span class="math display">\[df_{within} = {27} - {3}\]</span> <br> <span class="math display">\[df_{within} = {24}\]</span> <br><br></p>
-<p>Calculate the Sum of Squares <br> <span class="math display">\[SS_{total} = \Sigma X^2 - \frac{G^2}{N}\]</span> <br> <span class="math display">\[SS_{total} = {18880} - \frac{698^2}{27}\]</span> <br> <span class="math display">\[SS_{total} = {18880} - \frac{487204}{27}\]</span> <br> <span class="math display">\[SS_{total} = {18880} - {18044.59}\]</span> <br> <span class="math display">\[SS_{total} = {835.41}\]</span> <br><br> <span class="math display">\[SS_{within} = \Sigma SS_{inside\_each\_condition}\]</span> <br> <span class="math display">\[SS_{within} = {142.22 + 134.0 + 416.0}\]</span> <br> <span class="math display">\[SS_{within} = {692.22}\]</span> <br><br> <span class="math display">\[SS_{between} = SS_{total} - SS_{within}\]</span> <br> <span class="math display">\[SS_{between} = {835.41} - {692.22}\]</span> <br> <span class="math display">\[SS_{between} = {143.19}\]</span> <br><br> note: the other way to calculate <span class="math inline">\(SS_{betwen}\)</span> is: <br> <span class="math display">\[SS_{between} = \Sigma{\frac{T^2}{n}} - \frac{G^2}{N}\]</span> <br><br></p>
-<p>Stage 2 Calculations: <br><br> Partition the Degrees of Freedom <br> <span class="math display">\[df_{subjects} = n - 1\]</span> <br> <span class="math display">\[df_{subjects} = {9} - 1\]</span> <br> <span class="math display">\[df_{subjects} = {8}\]</span> <br><br> <span class="math display">\[df_{error} = df_{within} - df_{subjects}\]</span> <br> <span class="math display">\[df_{error} = {24} - {8}\]</span> <br> <span class="math display">\[df_{error} = {16}\]</span> <br><br></p>
+<p><br>Summary statistics for these data:<br> <span class="math inline">\(G = {1769} \quad \Sigma X^2 = {102449} \quad k = {4} \quad N = {32}\)</span> <br></p>
+<p><span class="math inline">\(T_{A} = {403} \quad SS_{A} = {1225.88}\)</span> <br> <span class="math inline">\(T_{B} = {480} \quad SS_{B} = {1240.0}\)</span> <br> <span class="math inline">\(T_{C} = {421} \quad SS_{C} = {575.88}\)</span> <br> <span class="math inline">\(T_{D} = {465} \quad SS_{D} = {1122.88}\)</span> <br> <br> State the Hypotheses <br> <span class="math inline">\(H_0: \mu_A = \mu_B = \mu_C = \mu_D\)</span> <br> <span class="math inline">\(H_1:\)</span> At least one mean is different <br> <br> The decision criteria: <br><br> <span class="math inline">\(F_{crit} = {3.07}, \alpha = {0.05}\)</span> <br><br></p>
+<p>Stage 1 Calculations: <br><br> Calculate the Degrees of Freedom <br> <span class="math display">\[df_{total} = N - 1\]</span> <br> <span class="math display">\[df_{total} = {32} - 1\]</span> <br> <span class="math display">\[df_{total} = {31}\]</span> <br><br> <span class="math display">\[df_{between} = k - 1\]</span> <br> <span class="math display">\[df_{between} = {4} - 1\]</span> <br> <span class="math display">\[df_{between} = {3}\]</span> <br><br> <span class="math display">\[df_{within} = N - K\]</span> <br> <span class="math display">\[df_{within} = {32} - {4}\]</span> <br> <span class="math display">\[df_{within} = {28}\]</span> <br><br></p>
+<p>Calculate the Sum of Squares <br> <span class="math display">\[SS_{total} = \Sigma X^2 - \frac{G^2}{N}\]</span> <br> <span class="math display">\[SS_{total} = {102449} - \frac{1769^2}{32}\]</span> <br> <span class="math display">\[SS_{total} = {102449} - \frac{3129361}{32}\]</span> <br> <span class="math display">\[SS_{total} = {102449} - {97792.53}\]</span> <br> <span class="math display">\[SS_{total} = {4656.47}\]</span> <br><br> <span class="math display">\[SS_{within} = \Sigma SS_{inside\_each\_condition}\]</span> <br> <span class="math display">\[SS_{within} = {1225.88 + 1240.0 + 575.88 + 1122.88}\]</span> <br> <span class="math display">\[SS_{within} = {4164.64}\]</span> <br><br> <span class="math display">\[SS_{between} = SS_{total} - SS_{within}\]</span> <br> <span class="math display">\[SS_{between} = {4656.47} - {4164.64}\]</span> <br> <span class="math display">\[SS_{between} = {491.83}\]</span> <br><br> note: the other way to calculate <span class="math inline">\(SS_{betwen}\)</span> is: <br> <span class="math display">\[SS_{between} = \Sigma{\frac{T^2}{n}} - \frac{G^2}{N}\]</span> <br><br></p>
+<p>Stage 2 Calculations: <br><br> Partition the Degrees of Freedom <br> <span class="math display">\[df_{subjects} = n - 1\]</span> <br> <span class="math display">\[df_{subjects} = {8} - 1\]</span> <br> <span class="math display">\[df_{subjects} = {7}\]</span> <br><br> <span class="math display">\[df_{error} = df_{within} - df_{subjects}\]</span> <br> <span class="math display">\[df_{error} = {28} - {7}\]</span> <br> <span class="math display">\[df_{error} = {21}\]</span> <br><br></p>
 <p>Calculate person sums and add a new column (<em>P</em>)</p>
 <style type="text/css">
 </style>
 
-<table id="T_a10dc" class="caption-top">
+<table id="T_e8ac8" class="caption-top">
 <thead>
 <tr class="header">
-<th id="T_a10dc_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">ID</th>
-<th id="T_a10dc_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">A</th>
-<th id="T_a10dc_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">B</th>
-<th id="T_a10dc_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">C</th>
-<th id="T_a10dc_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">P</th>
+<th id="T_e8ac8_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">ID</th>
+<th id="T_e8ac8_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">A</th>
+<th id="T_e8ac8_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">B</th>
+<th id="T_e8ac8_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">C</th>
+<th id="T_e8ac8_level0_col4" class="col_heading level0 col4" data-quarto-table-cell-role="th">D</th>
+<th id="T_e8ac8_level0_col5" class="col_heading level0 col5" data-quarto-table-cell-role="th">P</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_a10dc_row0_col0" class="data row0 col0">1</td>
-<td id="T_a10dc_row0_col1" class="data row0 col1">26</td>
-<td id="T_a10dc_row0_col2" class="data row0 col2">27</td>
-<td id="T_a10dc_row0_col3" class="data row0 col3">27</td>
-<td id="T_a10dc_row0_col4" class="data row0 col4">80</td>
+<td id="T_e8ac8_row0_col0" class="data row0 col0">1</td>
+<td id="T_e8ac8_row0_col1" class="data row0 col1">43</td>
+<td id="T_e8ac8_row0_col2" class="data row0 col2">44</td>
+<td id="T_e8ac8_row0_col3" class="data row0 col3">42</td>
+<td id="T_e8ac8_row0_col4" class="data row0 col4">56</td>
+<td id="T_e8ac8_row0_col5" class="data row0 col5">185</td>
 </tr>
 <tr class="even">
-<td id="T_a10dc_row1_col0" class="data row1 col0">2</td>
-<td id="T_a10dc_row1_col1" class="data row1 col1">23</td>
-<td id="T_a10dc_row1_col2" class="data row1 col2">38</td>
-<td id="T_a10dc_row1_col3" class="data row1 col3">25</td>
-<td id="T_a10dc_row1_col4" class="data row1 col4">86</td>
+<td id="T_e8ac8_row1_col0" class="data row1 col0">2</td>
+<td id="T_e8ac8_row1_col1" class="data row1 col1">30</td>
+<td id="T_e8ac8_row1_col2" class="data row1 col2">88</td>
+<td id="T_e8ac8_row1_col3" class="data row1 col3">59</td>
+<td id="T_e8ac8_row1_col4" class="data row1 col4">59</td>
+<td id="T_e8ac8_row1_col5" class="data row1 col5">236</td>
 </tr>
 <tr class="odd">
-<td id="T_a10dc_row2_col0" class="data row2 col0">3</td>
-<td id="T_a10dc_row2_col1" class="data row2 col1">18</td>
-<td id="T_a10dc_row2_col2" class="data row2 col2">26</td>
-<td id="T_a10dc_row2_col3" class="data row2 col3">30</td>
-<td id="T_a10dc_row2_col4" class="data row2 col4">74</td>
+<td id="T_e8ac8_row2_col0" class="data row2 col0">3</td>
+<td id="T_e8ac8_row2_col1" class="data row2 col1">53</td>
+<td id="T_e8ac8_row2_col2" class="data row2 col2">69</td>
+<td id="T_e8ac8_row2_col3" class="data row2 col3">64</td>
+<td id="T_e8ac8_row2_col4" class="data row2 col4">40</td>
+<td id="T_e8ac8_row2_col5" class="data row2 col5">226</td>
 </tr>
 <tr class="even">
-<td id="T_a10dc_row3_col0" class="data row3 col0">4</td>
-<td id="T_a10dc_row3_col1" class="data row3 col1">24</td>
-<td id="T_a10dc_row3_col2" class="data row3 col2">29</td>
-<td id="T_a10dc_row3_col3" class="data row3 col3">21</td>
-<td id="T_a10dc_row3_col4" class="data row3 col4">74</td>
+<td id="T_e8ac8_row3_col0" class="data row3 col0">4</td>
+<td id="T_e8ac8_row3_col1" class="data row3 col1">72</td>
+<td id="T_e8ac8_row3_col2" class="data row3 col2">55</td>
+<td id="T_e8ac8_row3_col3" class="data row3 col3">42</td>
+<td id="T_e8ac8_row3_col4" class="data row3 col4">74</td>
+<td id="T_e8ac8_row3_col5" class="data row3 col5">243</td>
 </tr>
 <tr class="odd">
-<td id="T_a10dc_row4_col0" class="data row4 col0">5</td>
-<td id="T_a10dc_row4_col1" class="data row4 col1">19</td>
-<td id="T_a10dc_row4_col2" class="data row4 col2">26</td>
-<td id="T_a10dc_row4_col3" class="data row4 col3">40</td>
-<td id="T_a10dc_row4_col4" class="data row4 col4">85</td>
+<td id="T_e8ac8_row4_col0" class="data row4 col0">5</td>
+<td id="T_e8ac8_row4_col1" class="data row4 col1">61</td>
+<td id="T_e8ac8_row4_col2" class="data row4 col2">52</td>
+<td id="T_e8ac8_row4_col3" class="data row4 col3">45</td>
+<td id="T_e8ac8_row4_col4" class="data row4 col4">71</td>
+<td id="T_e8ac8_row4_col5" class="data row4 col5">229</td>
 </tr>
 <tr class="even">
-<td id="T_a10dc_row5_col0" class="data row5 col0">6</td>
-<td id="T_a10dc_row5_col1" class="data row5 col1">22</td>
-<td id="T_a10dc_row5_col2" class="data row5 col2">31</td>
-<td id="T_a10dc_row5_col3" class="data row5 col3">19</td>
-<td id="T_a10dc_row5_col4" class="data row5 col4">72</td>
+<td id="T_e8ac8_row5_col0" class="data row5 col0">6</td>
+<td id="T_e8ac8_row5_col1" class="data row5 col1">58</td>
+<td id="T_e8ac8_row5_col2" class="data row5 col2">55</td>
+<td id="T_e8ac8_row5_col3" class="data row5 col3">49</td>
+<td id="T_e8ac8_row5_col4" class="data row5 col4">70</td>
+<td id="T_e8ac8_row5_col5" class="data row5 col5">232</td>
 </tr>
 <tr class="odd">
-<td id="T_a10dc_row6_col0" class="data row6 col0">7</td>
-<td id="T_a10dc_row6_col1" class="data row6 col1">28</td>
-<td id="T_a10dc_row6_col2" class="data row6 col2">30</td>
-<td id="T_a10dc_row6_col3" class="data row6 col3">16</td>
-<td id="T_a10dc_row6_col4" class="data row6 col4">74</td>
+<td id="T_e8ac8_row6_col0" class="data row6 col0">7</td>
+<td id="T_e8ac8_row6_col1" class="data row6 col1">44</td>
+<td id="T_e8ac8_row6_col2" class="data row6 col2">58</td>
+<td id="T_e8ac8_row6_col3" class="data row6 col3">60</td>
+<td id="T_e8ac8_row6_col4" class="data row6 col4">49</td>
+<td id="T_e8ac8_row6_col5" class="data row6 col5">211</td>
 </tr>
 <tr class="even">
-<td id="T_a10dc_row7_col0" class="data row7 col0">8</td>
-<td id="T_a10dc_row7_col1" class="data row7 col1">31</td>
-<td id="T_a10dc_row7_col2" class="data row7 col2">30</td>
-<td id="T_a10dc_row7_col3" class="data row7 col3">27</td>
-<td id="T_a10dc_row7_col4" class="data row7 col4">88</td>
-</tr>
-<tr class="odd">
-<td id="T_a10dc_row8_col0" class="data row8 col0">9</td>
-<td id="T_a10dc_row8_col1" class="data row8 col1">21</td>
-<td id="T_a10dc_row8_col2" class="data row8 col2">24</td>
-<td id="T_a10dc_row8_col3" class="data row8 col3">20</td>
-<td id="T_a10dc_row8_col4" class="data row8 col4">65</td>
+<td id="T_e8ac8_row7_col0" class="data row7 col0">8</td>
+<td id="T_e8ac8_row7_col1" class="data row7 col1">42</td>
+<td id="T_e8ac8_row7_col2" class="data row7 col2">59</td>
+<td id="T_e8ac8_row7_col3" class="data row7 col3">60</td>
+<td id="T_e8ac8_row7_col4" class="data row7 col4">46</td>
+<td id="T_e8ac8_row7_col5" class="data row7 col5">207</td>
 </tr>
 </tbody>
 </table>
-<p><span class="math display">\[SS_{subjects} = \Sigma{\frac{P^2}{k}} - \frac{G^2}{N}\]</span> <br> <span class="math display">\[SS_{subjects} = {\frac{80^2}{3} + \frac{86^2}{3} + \frac{74^2}{3} + \frac{74^2}{3} + \frac{85^2}{3} + \frac{72^2}{3} + \frac{74^2}{3} + \frac{88^2}{3} + \frac{65^2}{3}} - \frac{698^2}{27}\]</span> <br> <span class="math display">\[SS_{subjects} = {\frac{6400}{3} + \frac{7396}{3} + \frac{5476}{3} + \frac{5476}{3} + \frac{7225}{3} + \frac{5184}{3} + \frac{5476}{3} + \frac{7744}{3} + \frac{4225}{3}} - \frac{487204}{27}\]</span> <br> <span class="math display">\[SS_{subjects} = {{2133.33} + {2465.33} + {1825.33} + {1825.33} + {2408.33} + {1728.0} + {1825.33} + {2581.33} + {1408.33}} - {18044.59}\]</span> <br> <span class="math display">\[SS_{subjects} = {18200.64} - {18044.59}\]</span> <br> <span class="math display">\[SS_{subjects} = {156.05}\]</span> <br><br> <span class="math display">\[SS_{error} = SS_{within} - SS_{subjects}\]</span> <br> <span class="math display">\[SS_{error} = {692.22} - {156.05}\]</span> <br> <span class="math display">\[SS_{error} = {536.17}\]</span> <br><br></p>
-<p>Calculate the Mean Squares <br> <span class="math display">\[MS_{between} = \frac{SS_{between}}{df_{between}}\]</span> <br> <span class="math display">\[MS_{between} = \frac{143.19}{2}\]</span> <br> <span class="math display">\[MS_{between} = {71.6}\]</span> <br><br></p>
-<p><span class="math display">\[MS_{error} = \frac{SS_{error}}{df_{error}}\]</span> <br> <span class="math display">\[MS_{error} = \frac{536.17}{16}\]</span> <br> <span class="math display">\[MS_{error} = {33.51}\]</span> <br><br></p>
-<p>Calculate the <em>F</em>-Ratio <br> <span class="math display">\[F_{obt} = \frac{MS_{between}}{MS_{error}}\]</span> <br> <span class="math display">\[F_{obt} = \frac{71.6}{33.51}\]</span> <br> <span class="math display">\[F_{obt} = {2.14}\]</span> <br><br></p>
-<p>Calculate <span class="math inline">\(\eta^2\)</span> <br> <span class="math display">\[\eta_p^2 = \frac{SS{between}}{SS_{total} - SS_{subjects}}\]</span> <br> <span class="math display">\[\eta_p^2 = \frac{143.19}{{835.41} - {156.05}}\]</span> <br> <span class="math display">\[\eta_p^2 = \frac{143.19}{679.36}\]</span> <br> <span class="math display">\[\eta_p^2 = {0.21}\]</span> <br><br></p>
-<p>The results: <br><br> fail to reject the null hypothesis, results not significant, <br><br> <span class="math inline">\(F({2}, {16}) = {2.14}, p &gt; {0.01}, \eta_p^2 = {0.21}\)</span></p>
+<p><span class="math display">\[SS_{subjects} = \Sigma{\frac{P^2}{k}} - \frac{G^2}{N}\]</span> <br> <span class="math display">\[SS_{subjects} = {\frac{185^2}{4} + \frac{236^2}{4} + \frac{226^2}{4} + \frac{243^2}{4} + \frac{229^2}{4} + \frac{232^2}{4} + \frac{211^2}{4} + \frac{207^2}{4}} - \frac{1769^2}{32}\]</span> <br> <span class="math display">\[SS_{subjects} = {\frac{34225}{4} + \frac{55696}{4} + \frac{51076}{4} + \frac{59049}{4} + \frac{52441}{4} + \frac{53824}{4} + \frac{44521}{4} + \frac{42849}{4}} - \frac{3129361}{32}\]</span> <br> <span class="math display">\[SS_{subjects} = {{8556.25} + {13924.0} + {12769.0} + {14762.25} + {13110.25} + {13456.0} + {11130.25} + {10712.25}} - {97792.53}\]</span> <br> <span class="math display">\[SS_{subjects} = {98420.25} - {97792.53}\]</span> <br> <span class="math display">\[SS_{subjects} = {627.72}\]</span> <br><br> <span class="math display">\[SS_{error} = SS_{within} - SS_{subjects}\]</span> <br> <span class="math display">\[SS_{error} = {4164.64} - {627.72}\]</span> <br> <span class="math display">\[SS_{error} = {3536.92}\]</span> <br><br></p>
+<p>Calculate the Mean Squares <br> <span class="math display">\[MS_{between} = \frac{SS_{between}}{df_{between}}\]</span> <br> <span class="math display">\[MS_{between} = \frac{491.83}{3}\]</span> <br> <span class="math display">\[MS_{between} = {163.94}\]</span> <br><br></p>
+<p><span class="math display">\[MS_{error} = \frac{SS_{error}}{df_{error}}\]</span> <br> <span class="math display">\[MS_{error} = \frac{3536.92}{21}\]</span> <br> <span class="math display">\[MS_{error} = {168.42}\]</span> <br><br></p>
+<p>Calculate the <em>F</em>-Ratio <br> <span class="math display">\[F_{obt} = \frac{MS_{between}}{MS_{error}}\]</span> <br> <span class="math display">\[F_{obt} = \frac{163.94}{168.42}\]</span> <br> <span class="math display">\[F_{obt} = {0.97}\]</span> <br><br></p>
+<p>Calculate <span class="math inline">\(\eta^2\)</span> <br> <span class="math display">\[\eta_p^2 = \frac{SS{between}}{SS_{total} - SS_{subjects}}\]</span> <br> <span class="math display">\[\eta_p^2 = \frac{491.83}{{4656.47} - {627.72}}\]</span> <br> <span class="math display">\[\eta_p^2 = \frac{491.83}{4028.75}\]</span> <br> <span class="math display">\[\eta_p^2 = {0.12}\]</span> <br><br></p>
+<p>The results: <br><br> fail to reject the null hypothesis, results not significant, <br><br> <span class="math inline">\(F({3}, {21}) = {0.97}, p &gt; {0.05}, \eta_p^2 = {0.12}\)</span></p>
 </section>
 <section id="two-factor-anova" class="slide level2 scrollable">
 <h2>Two-Factor ANOVA</h2>
-<p>Given the following data, use a use a 2-Factor ANOVA with <span class="math inline">\(\alpha = {0.01}\)</span> to analyze the following data<br><br> <br> Full Group Summary Data <br> <span class="math inline">\(T_{A1B1} = {267} \quad M_{A1B1} = {29.67}\quad SS_{A1B1} = {1924.0} \quad n_{A1B1} = {9}\)</span> <br> <span class="math inline">\(T_{A1B2} = {388} \quad M_{A1B2} = {43.11}\quad SS_{A1B2} = {886.89} \quad n_{A1B2} = {9}\)</span> <br> <span class="math inline">\(T_{A1B3} = {461} \quad M_{A1B3} = {51.22}\quad SS_{A1B3} = {223.56} \quad n_{A1B3} = {9}\)</span> <br> <span class="math inline">\(T_{A2B1} = {377} \quad M_{A2B1} = {41.89}\quad SS_{A2B1} = {416.89} \quad n_{A2B1} = {9}\)</span> <br> <span class="math inline">\(T_{A2B2} = {354} \quad M_{A2B2} = {39.33}\quad SS_{A2B2} = {644.0} \quad n_{A2B2} = {9}\)</span> <br> <span class="math inline">\(T_{A2B3} = {376} \quad M_{A2B3} = {41.78}\quad SS_{A2B3} = {1053.56} \quad n_{A2B3} = {9}\)</span> <br> <br> Stage 1 ANOVA Calculations <br> <br>Calculate the Degrees of Freedom: <span class="math inline">\(df_{total}, df_{within}, \text{ and } df_{between}\)</span> <br><br> <span class="math inline">\(df_{total} = N - 1\)</span> <br><br> <span class="math inline">\(df_{total} = {54} - 1\)</span> <br><br> <span class="math inline">\(df_{total} = {53}\)</span> <br><br><br> <span class="math inline">\(df_{between} = k - 1\)</span> <br><br> <span class="math inline">\(df_{between} = {6} - 1\)</span> <br><br> <span class="math inline">\(df_{between} = {5}\)</span> <br><br><br> <span class="math inline">\(df_{within} = N - K\)</span> <br><br> <span class="math inline">\(df_{within} = {54} - {6}\)</span> <br><br> <span class="math inline">\(df_{within} = {48}\)</span> <br><br><br></p>
-<p>Calculate the Sum of Squares: <span class="math inline">\(SS_{total}, SS_{within}, \text{ and } SS_{between}\)</span> <br><br> <span class="math inline">\(SS_{total} = \Sigma X^2 - \frac{G^2}{N}\)</span> <br><br> <span class="math inline">\(SS_{total} = {98835} - \frac{2223^2}{54}\)</span> <br><br> <span class="math inline">\(SS_{total} = {98835} - \frac{4941729}{54}\)</span> <br><br> <span class="math inline">\(SS_{total} = {98835} - {91513.5}\)</span> <br><br> <span class="math inline">\(SS_{total} = {7321.5}\)</span> <br><br><br> <span class="math inline">\(SS_{within} = \Sigma SS_{inside\_each\_condition}\)</span> <br><br> <span class="math inline">\(SS_{within} = {1924.0 + 886.89 + 223.56 + 416.89 + 644.0 + 1053.56}\)</span> <br><br> <span class="math inline">\(SS_{within} = {5148.9}\)</span> <br><br><br> <span class="math inline">\(SS_{between} = SS_{total} - SS_{within}\)</span> <br><br> <span class="math inline">\(SS_{between} = {7321.5} - {5148.9}\)</span> <br><br> <span class="math inline">\(SS_{between} = {2172.6}\)</span> <br><br><br> note: the other way to calculate <span class="math inline">\(SS_{betwen}\)</span> is: <br><br> <span class="math inline">\(SS_{between} = \Sigma{\frac{T^2}{n}} - \frac{G^2}{N}\)</span> <br><br><br></p>
-<p><br><br>Stage 2 calculations for <span class="math inline">\(Factor_A\)</span><br><br> Summary Data for Factor_A <br> <span class="math inline">\(T_{A_1} = {1116}  \quad n_{A_1} = {27}\)</span> <br> <span class="math inline">\(T_{A_2} = {1107}  \quad n_{A_2} = {27}\)</span> <br> <br> State the Hypotheses <br> <span class="math inline">\(H_0: \mu_1 = \mu_2\)</span> <br> <span class="math inline">\(H_1: \mu_1 \ne \mu_2\)</span> <br> <br>partition df for <span class="math inline">\(Factor_A\)</span> <br><br> <span class="math inline">\(df_{Factor_A} = k_{Factor_A} - 1\)</span> <br><br> <span class="math inline">\(df_{Factor_A} = {2} - 1\)</span> <br><br> <span class="math inline">\(df_{Factor_A} = {1}\)</span> <br><br> <br> The decision criteria: <br><br> <span class="math inline">\(F_{crit} = {7.19}, \alpha = {0.01}\)</span> <br><br> Partition the SS for <span class="math inline">\(Factor_A\)</span><br><br> Calculate <span class="math inline">\(SS_{Factor_A}\)</span> <br><br> <span class="math inline">\(\Sigma{\frac{{T_{Factor_A}}^2}{n_{Factor_A}}} - \frac{G^2}{N}\)</span> <br><br> <span class="math inline">\(SS_{Factor_A} = {\frac{{1116}^2}{27} + \frac{{1107}^2}{27}} - \frac{{2223}^2}{54}\)</span> <br><br> <span class="math inline">\(SS_{Factor_A} = {\frac{{1245456}}{27} + \frac{{1225449}}{27}} - \frac{{4941729}}{54}\)</span><br><br> <span class="math inline">\(SS_{Factor_A} = {{46128.0} + {45387.0}} - {91513.5}\)</span> <br><br> <span class="math inline">\(SS_{Factor_A} = {91515.0} - {91513.5}\)</span> <br><br> <span class="math inline">\(SS_{Factor_A} = {1.5}\)</span> <br><br> Mean Squares for <span class="math inline">\({Factor_A}\)</span> <br><br> <span class="math inline">\(MS_{Factor_A} = \frac{SS_{Factor_A}}{df_{Factor_A}}\)</span><br> <br> <span class="math inline">\(MS_{Factor_A} = \frac{1.5}{1}\)</span> <br><br> <span class="math inline">\(MS_{Factor_A} = {1.5}\)</span><br><br></p>
-<p>Calculate the F-Ratio for <span class="math inline">\({Factor_A}\)</span> <br><br> <span class="math inline">\(F_{Factor_A} = \frac{MS_{Factor_A}}{MS_{Within}}\)</span> <br><br> <span class="math inline">\(F_{Factor_A} = \frac{1.5}{107.27}\)</span> <br><br> <span class="math inline">\(F_{Factor_A} = {0.01}\)</span> <br><br></p>
-<p><br> Calculate <span class="math inline">\(\eta_p^2 \text{ for } Factor_A\)</span> <br> <br><span class="math inline">\(\eta_p^2 = \frac{{SS_{{Factor_A}}}}{{SS_{{Total}} - SS_{{Factor_B}} - SS_{{AxB}}}}\)</span><br> <br><span class="math inline">\(\eta_p^2 = \frac{1.5}{{7321.5} - {1034.78} - {1136.32}}\)</span><br> <br><span class="math inline">\(\eta_p^2 = \frac{1.5}{5150.4}\)</span><br> <br><span class="math inline">\(\eta_p^2 = {0.0}\)</span><br><br> The results: <br><br> fail to reject the null hypothesis, results not significant, <br><br> <span class="math inline">\(F({1}, {48}) = {0.01}, p &gt; {0.01}, \eta_p^2 = {0.0}\)</span> <br><br>Stage 2 calculations for <span class="math inline">\(Factor_B\)</span><br><br> Summary Data for Factor_B <br> <span class="math inline">\(T_{B_1} = {644}  \quad n_{B_1} = {18}\)</span> <br> <span class="math inline">\(T_{B_2} = {742}  \quad n_{B_2} = {18}\)</span> <br> <span class="math inline">\(T_{B_3} = {837}  \quad n_{B_3} = {18}\)</span> <br> <br> State the Hypotheses <br> <span class="math inline">\(H_0: \mu_1 = \mu_2 = \mu_3\)</span> <br> <span class="math inline">\(H_1:\)</span> At least one mean is different <br> <br>partition df for <span class="math inline">\(Factor_B\)</span> <br><br> <span class="math inline">\(df_{Factor_B} = k_{Factor_B} - 1\)</span> <br><br> <span class="math inline">\(df_{Factor_B} = {3} - 1\)</span> <br><br> <span class="math inline">\(df_{Factor_B} = {2}\)</span> <br><br> <br> The decision criteria: <br><br> <span class="math inline">\(F_{crit} = {5.08}, \alpha = {0.01}\)</span> <br><br> Partition the SS for <span class="math inline">\(Factor_B\)</span><br><br> Calculate <span class="math inline">\(SS_{Factor_B}\)</span> <br><br> <span class="math inline">\(\Sigma{\frac{{T_{Factor_B}}^2}{n_{Factor_B}}} - \frac{G^2}{N}\)</span> <br><br> <span class="math inline">\(SS_{Factor_B} = {\frac{{644}^2}{18} + \frac{{742}^2}{18} + \frac{{837}^2}{18}} - \frac{{2223}^2}{54}\)</span> <br><br> <span class="math inline">\(SS_{Factor_B} = {\frac{{414736}}{18} + \frac{{550564}}{18} + \frac{{700569}}{18}} - \frac{{4941729}}{54}\)</span><br><br> <span class="math inline">\(SS_{Factor_B} = {{23040.89} + {30586.89} + {38920.5}} - {91513.5}\)</span> <br><br> <span class="math inline">\(SS_{Factor_B} = {92548.28} - {91513.5}\)</span> <br><br> <span class="math inline">\(SS_{Factor_B} = {1034.78}\)</span> <br><br> Mean Squares for <span class="math inline">\({Factor_B}\)</span> <br><br> <span class="math inline">\(MS_{Factor_B} = \frac{SS_{Factor_B}}{df_{Factor_B}}\)</span><br> <br> <span class="math inline">\(MS_{Factor_B} = \frac{1034.78}{2}\)</span> <br><br> <span class="math inline">\(MS_{Factor_B} = {517.39}\)</span><br><br></p>
-<p>Calculate the F-Ratio for <span class="math inline">\({Factor_B}\)</span> <br><br> <span class="math inline">\(F_{Factor_B} = \frac{MS_{Factor_B}}{MS_{Within}}\)</span> <br><br> <span class="math inline">\(F_{Factor_B} = \frac{517.39}{107.27}\)</span> <br><br> <span class="math inline">\(F_{Factor_B} = {4.82}\)</span> <br><br></p>
-<p><br> Calculate <span class="math inline">\(\eta_p^2 \text{ for } Factor_B\)</span> <br> <br><span class="math inline">\(\eta_p^2 = \frac{{SS_{{Factor_B}}}}{{SS_{{Total}} - SS_{{Factor_A}} - SS_{{AxB}}}}\)</span><br> <br><span class="math inline">\(\eta_p^2 = \frac{1034.78}{{7321.5} - {1.5} - {1136.32}}\)</span><br> <br><span class="math inline">\(\eta_p^2 = \frac{1034.78}{6183.68}\)</span><br> <br><span class="math inline">\(\eta_p^2 = {0.17}\)</span><br><br> The results: <br><br> fail to reject the null hypothesis, results not significant, <br><br> <span class="math inline">\(F({2}, {48}) = {4.82}, p &gt; {0.01}, \eta_p^2 = {0.17}\)</span> <br><br> Stage 2 calculations for the <span class="math inline">\(AxB\)</span> interaction <br><br> <br> State the Hypotheses <br> <span class="math inline">\(H_0:\)</span> There is no AxB interation <br> <span class="math inline">\(H_1:\)</span> There is an AxB interaction <br> <br>Partition df for the interaction <br><br> <span class="math inline">\(df_{AxB} = df_{Between} -df_{Factor_A} - df_{Factor_B}\)</span> <br><br> <span class="math inline">\(df_{AxB} = {5} - {1} - {2}\)</span> <br><br> <span class="math inline">\(df_{AxB} = {2}\)</span> <br><br><br></p>
-<p><br> The decision criteria: <br><br> <span class="math inline">\(F_{crit} = {5.08}, \alpha = {0.01}\)</span> <br><br> Partition the SS for <span class="math inline">\(AxB\)</span><br><br> Calculate <span class="math inline">\(SS_{AxB}\)</span> <br><br> <span class="math inline">\(SS_{{AxB}} = SS_{{Between}} - SS_{{Factor_A}} - SS_{{Factor_B}}\)</span><br><br> <span class="math inline">\(SS_{AxB} = {2172.6} - {1.5} - {1034.78}\)</span> <br><br> <span class="math inline">\(SS_{AxB} = {1136.32}\)</span> <br><br> Mean Squares for <span class="math inline">\({AxB}\)</span> <br><br> <span class="math inline">\(MS_{AxB} = \frac{SS_{AxB}}{df_{AxB}}\)</span><br> <br> <span class="math inline">\(MS_{AxB} = \frac{1136.32}{2}\)</span> <br><br> <span class="math inline">\(MS_{AxB} = {568.16}\)</span><br><br></p>
-<p>Calculate the F-Ratio for <span class="math inline">\({AxB}\)</span> <br><br> <span class="math inline">\(F_{AxB} = \frac{MS_{AxB}}{MS_{Within}}\)</span> <br><br> <span class="math inline">\(F_{AxB} = \frac{568.16}{107.27}\)</span> <br><br> <span class="math inline">\(F_{AxB} = {5.3}\)</span> <br><br></p>
-<p><br> Calculate <span class="math inline">\(\eta_p^2 \text{ for } AxB\)</span> <br> <br><span class="math inline">\(\eta_p^2 = \frac{{SS_{{AxB}}}}{{SS_{{Total}} - SS_{{Factor_A}} - SS_{{Factor_B}}}}\)</span><br> <br><span class="math inline">\(\eta_p^2 = \frac{1136.32}{{7321.5} - {1.5} - {1034.78}}\)</span><br> <br><span class="math inline">\(\eta_p^2 = \frac{1136.32}{6285.22}\)</span><br> <br><span class="math inline">\(\eta_p^2 = {0.18}\)</span><br><br> The results: <br><br> reject the null hypothesis, results are significant, <br><br> <span class="math inline">\(F({2}, {48}) = {5.3}, p &lt; {0.01}, \eta_p^2 = {0.18}\)</span></p>
+<p>Given the following data, use a use a 2-Factor ANOVA with <span class="math inline">\(\alpha = {0.05}\)</span> to analyze the following data<br><br> <br> Full Group Summary Data <br> <span class="math inline">\(T_{A1B1} = {318} \quad M_{A1B1} = {21.2}\quad SS_{A1B1} = {92.4} \quad n_{A1B1} = {15}\)</span> <br> <span class="math inline">\(T_{A1B2} = {266} \quad M_{A1B2} = {17.73}\quad SS_{A1B2} = {90.93} \quad n_{A1B2} = {15}\)</span> <br> <span class="math inline">\(T_{A2B1} = {211} \quad M_{A2B1} = {14.07}\quad SS_{A2B1} = {138.93} \quad n_{A2B1} = {15}\)</span> <br> <span class="math inline">\(T_{A2B2} = {218} \quad M_{A2B2} = {14.53}\quad SS_{A2B2} = {119.73} \quad n_{A2B2} = {15}\)</span> <br> <span class="math inline">\(T_{A3B1} = {222} \quad M_{A3B1} = {14.8}\quad SS_{A3B1} = {94.4} \quad n_{A3B1} = {15}\)</span> <br> <span class="math inline">\(T_{A3B2} = {254} \quad M_{A3B2} = {16.93}\quad SS_{A3B2} = {200.93} \quad n_{A3B2} = {15}\)</span> <br> <br> Stage 1 ANOVA Calculations <br> <br>Calculate the Degrees of Freedom: <span class="math inline">\(df_{total}, df_{within}, \text{ and } df_{between}\)</span> <br><br> <span class="math inline">\(df_{total} = N - 1\)</span> <br><br> <span class="math inline">\(df_{total} = {90} - 1\)</span> <br><br> <span class="math inline">\(df_{total} = {89}\)</span> <br><br><br> <span class="math inline">\(df_{between} = k - 1\)</span> <br><br> <span class="math inline">\(df_{between} = {6} - 1\)</span> <br><br> <span class="math inline">\(df_{between} = {5}\)</span> <br><br><br> <span class="math inline">\(df_{within} = N - K\)</span> <br><br> <span class="math inline">\(df_{within} = {90} - {6}\)</span> <br><br> <span class="math inline">\(df_{within} = {84}\)</span> <br><br><br></p>
+<p>Calculate the Sum of Squares: <span class="math inline">\(SS_{total}, SS_{within}, \text{ and } SS_{between}\)</span> <br><br> <span class="math inline">\(SS_{total} = \Sigma X^2 - \frac{G^2}{N}\)</span> <br><br> <span class="math inline">\(SS_{total} = {25919} - \frac{1489^2}{90}\)</span> <br><br> <span class="math inline">\(SS_{total} = {25919} - \frac{2217121}{90}\)</span> <br><br> <span class="math inline">\(SS_{total} = {25919} - {24634.68}\)</span> <br><br> <span class="math inline">\(SS_{total} = {1284.32}\)</span> <br><br><br> <span class="math inline">\(SS_{within} = \Sigma SS_{inside\_each\_condition}\)</span> <br><br> <span class="math inline">\(SS_{within} = {92.4 + 90.93 + 138.93 + 119.73 + 94.4 + 200.93}\)</span> <br><br> <span class="math inline">\(SS_{within} = {737.32}\)</span> <br><br><br> <span class="math inline">\(SS_{between} = SS_{total} - SS_{within}\)</span> <br><br> <span class="math inline">\(SS_{between} = {1284.32} - {737.32}\)</span> <br><br> <span class="math inline">\(SS_{between} = {547.0}\)</span> <br><br><br> note: the other way to calculate <span class="math inline">\(SS_{betwen}\)</span> is: <br><br> <span class="math inline">\(SS_{between} = \Sigma{\frac{T^2}{n}} - \frac{G^2}{N}\)</span> <br><br><br></p>
+<p><br><br>Stage 2 calculations for <span class="math inline">\(Factor_A\)</span><br><br> Summary Data for Factor_A <br> <span class="math inline">\(T_{A_1} = {584}  \quad n_{A_1} = {30}\)</span> <br> <span class="math inline">\(T_{A_2} = {429}  \quad n_{A_2} = {30}\)</span> <br> <span class="math inline">\(T_{A_3} = {476}  \quad n_{A_3} = {30}\)</span> <br> <br> State the Hypotheses <br> <span class="math inline">\(H_0: \mu_1 = \mu_2 = \mu_3\)</span> <br> <span class="math inline">\(H_1:\)</span> At least one mean is different <br> <br>partition df for <span class="math inline">\(Factor_A\)</span> <br><br> <span class="math inline">\(df_{Factor_A} = k_{Factor_A} - 1\)</span> <br><br> <span class="math inline">\(df_{Factor_A} = {3} - 1\)</span> <br><br> <span class="math inline">\(df_{Factor_A} = {2}\)</span> <br><br> <br> The decision criteria: <br><br> <span class="math inline">\(F_{crit} = {3.11}, \alpha = {0.05}\)</span> <br><br> Partition the SS for <span class="math inline">\(Factor_A\)</span><br><br> Calculate <span class="math inline">\(SS_{Factor_A}\)</span> <br><br> <span class="math inline">\(\Sigma{\frac{{T_{Factor_A}}^2}{n_{Factor_A}}} - \frac{G^2}{N}\)</span> <br><br> <span class="math inline">\(SS_{Factor_A} = {\frac{{584}^2}{30} + \frac{{429}^2}{30} + \frac{{476}^2}{30}} - \frac{{1489}^2}{90}\)</span> <br><br> <span class="math inline">\(SS_{Factor_A} = {\frac{{341056}}{30} + \frac{{184041}}{30} + \frac{{226576}}{30}} - \frac{{2217121}}{90}\)</span><br><br> <span class="math inline">\(SS_{Factor_A} = {{11368.53} + {6134.7} + {7552.53}} - {24634.68}\)</span> <br><br> <span class="math inline">\(SS_{Factor_A} = {25055.76} - {24634.68}\)</span> <br><br> <span class="math inline">\(SS_{Factor_A} = {421.08}\)</span> <br><br> Mean Squares for <span class="math inline">\({Factor_A}\)</span> <br><br> <span class="math inline">\(MS_{Factor_A} = \frac{SS_{Factor_A}}{df_{Factor_A}}\)</span><br> <br> <span class="math inline">\(MS_{Factor_A} = \frac{421.08}{2}\)</span> <br><br> <span class="math inline">\(MS_{Factor_A} = {210.54}\)</span><br><br></p>
+<p>Calculate the F-Ratio for <span class="math inline">\({Factor_A}\)</span> <br><br> <span class="math inline">\(F_{Factor_A} = \frac{MS_{Factor_A}}{MS_{Within}}\)</span> <br><br> <span class="math inline">\(F_{Factor_A} = \frac{210.54}{8.78}\)</span> <br><br> <span class="math inline">\(F_{Factor_A} = {23.98}\)</span> <br><br></p>
+<p><br> Calculate <span class="math inline">\(\eta_p^2 \text{ for } Factor_A\)</span> <br> <br><span class="math inline">\(\eta_p^2 = \frac{{SS_{{Factor_A}}}}{{SS_{{Total}} - SS_{{Factor_B}} - SS_{{AxB}}}}\)</span><br> <br><span class="math inline">\(\eta_p^2 = \frac{421.08}{{1284.32} - {1.88} - {124.04}}\)</span><br> <br><span class="math inline">\(\eta_p^2 = \frac{421.08}{1158.4}\)</span><br> <br><span class="math inline">\(\eta_p^2 = {0.36}\)</span><br><br> The results: <br><br> reject the null hypothesis, results are significant, <br><br> <span class="math inline">\(F({2}, {84}) = {23.98}, p &lt; {0.05}, \eta_p^2 = {0.36}\)</span> <br><br>Stage 2 calculations for <span class="math inline">\(Factor_B\)</span><br><br> Summary Data for Factor_B <br> <span class="math inline">\(T_{B_1} = {751}  \quad n_{B_1} = {45}\)</span> <br> <span class="math inline">\(T_{B_2} = {738}  \quad n_{B_2} = {45}\)</span> <br> <br> State the Hypotheses <br> <span class="math inline">\(H_0: \mu_1 = \mu_2\)</span> <br> <span class="math inline">\(H_1: \mu_1 \ne \mu_2\)</span> <br> <br>partition df for <span class="math inline">\(Factor_B\)</span> <br><br> <span class="math inline">\(df_{Factor_B} = k_{Factor_B} - 1\)</span> <br><br> <span class="math inline">\(df_{Factor_B} = {2} - 1\)</span> <br><br> <span class="math inline">\(df_{Factor_B} = {1}\)</span> <br><br> <br> The decision criteria: <br><br> <span class="math inline">\(F_{crit} = {3.95}, \alpha = {0.05}\)</span> <br><br> Partition the SS for <span class="math inline">\(Factor_B\)</span><br><br> Calculate <span class="math inline">\(SS_{Factor_B}\)</span> <br><br> <span class="math inline">\(\Sigma{\frac{{T_{Factor_B}}^2}{n_{Factor_B}}} - \frac{G^2}{N}\)</span> <br><br> <span class="math inline">\(SS_{Factor_B} = {\frac{{751}^2}{45} + \frac{{738}^2}{45}} - \frac{{1489}^2}{90}\)</span> <br><br> <span class="math inline">\(SS_{Factor_B} = {\frac{{564001}}{45} + \frac{{544644}}{45}} - \frac{{2217121}}{90}\)</span><br><br> <span class="math inline">\(SS_{Factor_B} = {{12533.36} + {12103.2}} - {24634.68}\)</span> <br><br> <span class="math inline">\(SS_{Factor_B} = {24636.56} - {24634.68}\)</span> <br><br> <span class="math inline">\(SS_{Factor_B} = {1.88}\)</span> <br><br> Mean Squares for <span class="math inline">\({Factor_B}\)</span> <br><br> <span class="math inline">\(MS_{Factor_B} = \frac{SS_{Factor_B}}{df_{Factor_B}}\)</span><br> <br> <span class="math inline">\(MS_{Factor_B} = \frac{1.88}{1}\)</span> <br><br> <span class="math inline">\(MS_{Factor_B} = {1.88}\)</span><br><br></p>
+<p>Calculate the F-Ratio for <span class="math inline">\({Factor_B}\)</span> <br><br> <span class="math inline">\(F_{Factor_B} = \frac{MS_{Factor_B}}{MS_{Within}}\)</span> <br><br> <span class="math inline">\(F_{Factor_B} = \frac{1.88}{8.78}\)</span> <br><br> <span class="math inline">\(F_{Factor_B} = {0.21}\)</span> <br><br></p>
+<p><br> Calculate <span class="math inline">\(\eta_p^2 \text{ for } Factor_B\)</span> <br> <br><span class="math inline">\(\eta_p^2 = \frac{{SS_{{Factor_B}}}}{{SS_{{Total}} - SS_{{Factor_A}} - SS_{{AxB}}}}\)</span><br> <br><span class="math inline">\(\eta_p^2 = \frac{1.88}{{1284.32} - {421.08} - {124.04}}\)</span><br> <br><span class="math inline">\(\eta_p^2 = \frac{1.88}{739.2}\)</span><br> <br><span class="math inline">\(\eta_p^2 = {0.0}\)</span><br><br> The results: <br><br> fail to reject the null hypothesis, results not significant, <br><br> <span class="math inline">\(F({1}, {84}) = {0.21}, p &gt; {0.05}, \eta_p^2 = {0.0}\)</span> <br><br> Stage 2 calculations for the <span class="math inline">\(AxB\)</span> interaction <br><br> <br> State the Hypotheses <br> <span class="math inline">\(H_0:\)</span> There is no AxB interation <br> <span class="math inline">\(H_1:\)</span> There is an AxB interaction <br> <br>Partition df for the interaction <br><br> <span class="math inline">\(df_{AxB} = df_{Between} -df_{Factor_A} - df_{Factor_B}\)</span> <br><br> <span class="math inline">\(df_{AxB} = {5} - {2} - {1}\)</span> <br><br> <span class="math inline">\(df_{AxB} = {2}\)</span> <br><br><br></p>
+<p><br> The decision criteria: <br><br> <span class="math inline">\(F_{crit} = {3.11}, \alpha = {0.05}\)</span> <br><br> Partition the SS for <span class="math inline">\(AxB\)</span><br><br> Calculate <span class="math inline">\(SS_{AxB}\)</span> <br><br> <span class="math inline">\(SS_{{AxB}} = SS_{{Between}} - SS_{{Factor_A}} - SS_{{Factor_B}}\)</span><br><br> <span class="math inline">\(SS_{AxB} = {547.0} - {421.08} - {1.88}\)</span> <br><br> <span class="math inline">\(SS_{AxB} = {124.04}\)</span> <br><br> Mean Squares for <span class="math inline">\({AxB}\)</span> <br><br> <span class="math inline">\(MS_{AxB} = \frac{SS_{AxB}}{df_{AxB}}\)</span><br> <br> <span class="math inline">\(MS_{AxB} = \frac{124.04}{2}\)</span> <br><br> <span class="math inline">\(MS_{AxB} = {62.02}\)</span><br><br></p>
+<p>Calculate the F-Ratio for <span class="math inline">\({AxB}\)</span> <br><br> <span class="math inline">\(F_{AxB} = \frac{MS_{AxB}}{MS_{Within}}\)</span> <br><br> <span class="math inline">\(F_{AxB} = \frac{62.02}{8.78}\)</span> <br><br> <span class="math inline">\(F_{AxB} = {7.06}\)</span> <br><br></p>
+<p><br> Calculate <span class="math inline">\(\eta_p^2 \text{ for } AxB\)</span> <br> <br><span class="math inline">\(\eta_p^2 = \frac{{SS_{{AxB}}}}{{SS_{{Total}} - SS_{{Factor_A}} - SS_{{Factor_B}}}}\)</span><br> <br><span class="math inline">\(\eta_p^2 = \frac{124.04}{{1284.32} - {421.08} - {1.88}}\)</span><br> <br><span class="math inline">\(\eta_p^2 = \frac{124.04}{861.36}\)</span><br> <br><span class="math inline">\(\eta_p^2 = {0.14}\)</span><br><br> The results: <br><br> reject the null hypothesis, results are significant, <br><br> <span class="math inline">\(F({2}, {84}) = {7.06}, p &lt; {0.05}, \eta_p^2 = {0.14}\)</span></p>
 
 
 </section>

@@ -18,7 +18,8 @@ This readme file needs significant updates
 Starting with hypothesis testing, individual .qmd files call the stats_project.py file.  The bulk of the code was written when I had *very little* experience with classes in python and much of this should be restructured.  Currently, the code is being adapted to use quarto to render accessible .html documents to meet tile II accessibility guidelines. 
 
 ## Documents to produce accessible .html practice problems
-Each document will produces 30 practice problems in a .html slideshow rendered with revealjs.  Each slide is scrollable and contains a single problem.  Problems are generated with a randomly determined sample size between 5 and 15 per group.  When more than one group, sample size is equivalent between groups.
+Each document will produces 30 practice problems in a .html slideshow rendered with revealjs.  Each slide is scrollable and contains a single problem.  Problems are generated with a randomly determined sample size between 5 and 15 per group.  When more than one group, sample size is equivalent between groups.<br>
+
 * 08 - Hypothesis_Test_z-Scores.qmd: *hypothesis testing with z-scores*
 * 09 - Single-Sample_t-Tests.qmd: *one-sample t-tests*
 * 10 - Independent-Samples_t-Tests.qmd: *independent-samples t-tests*

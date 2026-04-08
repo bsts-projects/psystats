@@ -2,12 +2,16 @@
 title: Hypothesis Testing with Dependent-Samples *t*-tests
 subtitle: Practice Problems for PSY 241
 author: Guenther, Benjamin A.
+project:
+  type: website
+  output-dir: docs
 format: 
   revealjs:
     incremental: false
     html-math-method: mathjax
-    self-contained-math: true
-    embed-resources: true
+    self-contained-math: false
+    embed-resources: false
+    smaller: true
 jupyter: python3
 ---
 
