@@ -16,7 +16,11 @@ project:
 website:
   title: "Practice Problem Generator"
   site-url: "https://bsts-projects.github.io/pystats/"
-  repo-url: "https://github.com/bsts-projects/psystats"
+  navbar: 
+    right: 
+      - icon: github
+        href: https://github.com/bsts-projects/psystats
+        aria-label: GitHub
   
 format:
   revealjs: 

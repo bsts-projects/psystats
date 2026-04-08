@@ -1,6 +1,6 @@
 ---
-title: Practice Problem Generator
-subtitle: Statistics in Psychology
+title: Start Here! - Sample Document
+subtitle: An example of each type of problem
 author: Guenther, Benjamin A.
 project:
   type: website
