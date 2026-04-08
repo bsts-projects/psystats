@@ -2,17 +2,21 @@
 title: Practice Problem Generator
 subtitle: Statistics in Psychology
 author: Guenther, Benjamin A.
-format: 
-  revealjs:
-    html-math-method: mathjax
-    smaller: true
 project:
   type: website
   output-dir: docs
+format: 
+  revealjs:
+    incremental: false
+    html-math-method: mathjax
+    self-contained-math: false
+    embed-resources: false
+    smaller: true
 jupyter: python3
 ---
 
 ```{python}
+#| echo: false
 import importlib
 import stats_project 
 import random
