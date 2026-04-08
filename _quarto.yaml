@@ -11,11 +11,16 @@ project:
     - 12 - one-way_ANOVA.qmd
     - 13 - repeated-measures_ANOVA.qmd
     - 14 - factorial_ANOVA.qmd
+    - README.md
 
 website:
   title: "Practice Problem Generator"
   site-url: "https://bsts-projects.github.io/pystats/"
+  repo-url: "https://github.com/bsts-projects/psystats"
   
 format:
   revealjs: 
     theme: default
+
+execute: 
+  freeze: false
