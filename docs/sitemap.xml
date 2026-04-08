@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://bsts-projects.github.io/pystats/14 - factorial_ANOVA.html</loc>
+    <lastmod>2026-03-31T13:58:47.807Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bsts-projects.github.io/pystats/12 - one-way_ANOVA.html</loc>
+    <lastmod>2026-03-26T10:16:01.607Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bsts-projects.github.io/pystats/10 - Independent-Samples_t-Tests.html</loc>
+    <lastmod>2026-03-26T13:12:16.019Z</lastmod>
+  </url>
+  <url>
     <loc>https://bsts-projects.github.io/pystats/Sample_Document.html</loc>
-    <lastmod>2026-04-08T09:49:08.442Z</lastmod>
+    <lastmod>2026-04-08T12:40:51.848Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bsts-projects.github.io/pystats/08 - Hypothesis_Test_z-Scores.html</loc>
+    <lastmod>2026-03-26T13:11:26.446Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bsts-projects.github.io/pystats/11 - Dependent-Samples_t-Tests.html</loc>
+    <lastmod>2026-03-26T13:12:27.669Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bsts-projects.github.io/pystats/13 - repeated-measures_ANOVA.html</loc>
+    <lastmod>2026-03-26T10:17:26.224Z</lastmod>
   </url>
 </urlset>

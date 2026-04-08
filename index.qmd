@@ -1,3 +1,7 @@
+---
+title: Practice Problem Generator
+subtitle: Statistics in Psychology
+author: Guenther, Benjamin A.
 project:
   type: website
   output-dir: docs
@@ -10,11 +14,9 @@ project:
     - 12 - one-way_ANOVA.qmd
     - 13 - repeated-measures_ANOVA.qmd
     - 14 - factorial_ANOVA.qmd
+format: 
+  html: default
+listing:
+  type: table
+---
 
-website:
-  title: "Practice Problem Generator"
-  site-url: "https://bsts-projects.github.io/pystats/"
-  
-format:
-  revealjs: 
-    theme: default
