@@ -1,43 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://bsts-projects.github.io/pystats/README.html</loc>
-    <lastmod>2026-04-08T14:26:05.021Z</lastmod>
-  </url>
-  <url>
-    <loc>https://bsts-projects.github.io/pystats/13 - repeated-measures_ANOVA.html</loc>
-    <lastmod>2026-04-08T14:26:05.029Z</lastmod>
-  </url>
-  <url>
-    <loc>https://bsts-projects.github.io/pystats/11 - Dependent-Samples_t-Tests.html</loc>
-    <lastmod>2026-04-08T14:26:05.021Z</lastmod>
-  </url>
-  <url>
-    <loc>https://bsts-projects.github.io/pystats/09 - Single-Sample_t-Tests.html</loc>
-    <lastmod>2026-04-08T14:50:24.188Z</lastmod>
-  </url>
-  <url>
-    <loc>https://bsts-projects.github.io/pystats/Sample_Document.html</loc>
-    <lastmod>2026-04-08T14:17:16.521Z</lastmod>
-  </url>
-  <url>
     <loc>https://bsts-projects.github.io/pystats/index.html</loc>
-    <lastmod>2026-04-08T14:53:24.089Z</lastmod>
+    <lastmod>2026-04-09T10:40:02.898Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bsts-projects.github.io/pystats/README.html</loc>
+    <lastmod>2026-04-08T22:21:28.037Z</lastmod>
   </url>
   <url>
     <loc>https://bsts-projects.github.io/pystats/08 - Hypothesis_Test_z-Scores.html</loc>
-    <lastmod>2026-04-08T14:25:46.270Z</lastmod>
+    <lastmod>2026-04-09T10:23:53.968Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bsts-projects.github.io/pystats/09 - Single-Sample_t-Tests.html</loc>
+    <lastmod>2026-04-09T10:23:53.968Z</lastmod>
   </url>
   <url>
     <loc>https://bsts-projects.github.io/pystats/10 - Independent-Samples_t-Tests.html</loc>
-    <lastmod>2026-04-08T14:26:05.021Z</lastmod>
+    <lastmod>2026-04-09T10:23:53.968Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bsts-projects.github.io/pystats/11 - Dependent-Samples_t-Tests.html</loc>
+    <lastmod>2026-04-09T10:23:53.968Z</lastmod>
   </url>
   <url>
     <loc>https://bsts-projects.github.io/pystats/12 - one-way_ANOVA.html</loc>
-    <lastmod>2026-04-08T14:26:05.021Z</lastmod>
+    <lastmod>2026-04-09T10:23:53.968Z</lastmod>
+  </url>
+  <url>
+    <loc>https://bsts-projects.github.io/pystats/13 - repeated-measures_ANOVA.html</loc>
+    <lastmod>2026-04-09T10:23:53.968Z</lastmod>
   </url>
   <url>
     <loc>https://bsts-projects.github.io/pystats/14 - factorial_ANOVA.html</loc>
-    <lastmod>2026-04-08T14:26:05.021Z</lastmod>
+    <lastmod>2026-04-09T10:23:53.968Z</lastmod>
   </url>
 </urlset>

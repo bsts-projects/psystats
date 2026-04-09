@@ -3,21 +3,11 @@ title: Practice Problem Generator
 subtitle: Statistics in Psychology
 author: Guenther, Benjamin A.
 project:
-  type: website
+  type: book
   output-dir: docs
 format: 
-  html: default
-listing:
-  contents:
-    - Sample_Document.qmd
-    - README.md
-    - 08 - Hypothesis_Test_z-Scores.qmd
-    - 09 - Single-Sample_t-Tests.qmd
-    - 10 - Independent-Samples_t-Tests.qmd
-    - 11 - Dependent-Samples_t-Tests.qmd
-    - 12 - one-way_ANOVA.qmd
-    - 13 - repeated-measures_ANOVA.qmd
-    - 14 - factorial_ANOVA.qmd
-  type: table
-  sort: false
+  html: 
+    theme: cosmo
 ---
+
+text about the book goes here maybe?

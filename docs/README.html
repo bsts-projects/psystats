@@ -2,14 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.36">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Guenther, Benjamin A.">
 
-<title>README – Practice Problem Generator</title>
+<title>2&nbsp; README – Practice Problem Generator</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -31,17 +34,18 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./08 - Hypothesis_Test_z-Scores.html" rel="next">
+<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ff63373b1067ca6f91cf1456aa1f00a2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -73,7 +77,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-sidebar floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -101,18 +105,105 @@ ul.task-list li input[type="checkbox"] {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./README.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">README</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Practice Problem Generator</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./README.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">README</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08 - Hypothesis_Test_z-Scores.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hypothesis Testing with z-Scores</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09 - Single-Sample_t-Tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hypothesis Testing with One-Sample <em>t</em>-tests</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10 - Independent-Samples_t-Tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hypothesis Testing with Independent-Samples <em>t</em>-tests</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11 - Dependent-Samples_t-Tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Hypothesis Testing with Dependent-Samples <em>t</em>-tests</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12 - one-way_ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13 - repeated-measures_ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Repeated-Measures ANOVA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14 - factorial_ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Two-Factor ANOVA</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sample-problem-generator-for-an-undergraduate-statistics-in-psychology-course" id="toc-sample-problem-generator-for-an-undergraduate-statistics-in-psychology-course" class="nav-link active" data-scroll-target="#sample-problem-generator-for-an-undergraduate-statistics-in-psychology-course"><span class="header-section-number">3</span> Sample Problem Generator for an Undergraduate Statistics in Psychology Course</a>
+  <ul class="collapse">
+  <li><a href="#major-update" id="toc-major-update" class="nav-link" data-scroll-target="#major-update"><span class="header-section-number">3.1</span> Major update</a></li>
+  <li><a href="#documents-to-produce-accessible-.html-practice-problems" id="toc-documents-to-produce-accessible-.html-practice-problems" class="nav-link" data-scroll-target="#documents-to-produce-accessible-.html-practice-problems"><span class="header-section-number">3.2</span> Documents to produce accessible .html practice problems</a></li>
+  <li><a href="#title-ii-updates-in-the-immediate-queue" id="toc-title-ii-updates-in-the-immediate-queue" class="nav-link" data-scroll-target="#title-ii-updates-in-the-immediate-queue"><span class="header-section-number">3.3</span> Title II Updates in the immediate queue</a></li>
+  <li><a href="#title-ii-updates-remaining" id="toc-title-ii-updates-remaining" class="nav-link" data-scroll-target="#title-ii-updates-remaining"><span class="header-section-number">3.4</span> Title II Updates remaining</a></li>
+  <li><a href="#functionality-to-add" id="toc-functionality-to-add" class="nav-link" data-scroll-target="#functionality-to-add"><span class="header-section-number">3.5</span> Functionality to add</a></li>
+  <li><a href="#future-directions" id="toc-future-directions" class="nav-link" data-scroll-target="#future-directions"><span class="header-section-number">3.6</span> Future directions</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">README</h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">README</span></h1>
 </div>
 
 
@@ -135,16 +226,16 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="sample-problem-generator-for-an-undergraduate-statistics-in-psychology-course" class="level1">
-<h1>Sample Problem Generator for an Undergraduate Statistics in Psychology Course</h1>
+<section id="sample-problem-generator-for-an-undergraduate-statistics-in-psychology-course" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Sample Problem Generator for an Undergraduate Statistics in Psychology Course</h1>
 <p>An ongoing project to create a series of <del>juypter notebooks</del> .qmd files that can be used to randomly generate sample problems and their worked solutions using python</p>
 <p>This readme file needs significant updates</p>
-<section id="major-update" class="level2">
-<h2 class="anchored" data-anchor-id="major-update">Major update</h2>
+<section id="major-update" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="major-update"><span class="header-section-number">3.1</span> Major update</h2>
 <p>Starting with hypothesis testing, individual .qmd files call the stats_project.py file. The bulk of the code was written when I had <em>very little</em> experience with classes in python and much of this should be restructured. Currently, the code is being adapted to use quarto to render accessible .html documents to meet tile II accessibility guidelines.</p>
 </section>
-<section id="documents-to-produce-accessible-.html-practice-problems" class="level2">
-<h2 class="anchored" data-anchor-id="documents-to-produce-accessible-.html-practice-problems">Documents to produce accessible .html practice problems</h2>
+<section id="documents-to-produce-accessible-.html-practice-problems" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="documents-to-produce-accessible-.html-practice-problems"><span class="header-section-number">3.2</span> Documents to produce accessible .html practice problems</h2>
 <p>Each document will produces 30 practice problems in a .html slideshow rendered with revealjs. Each slide is scrollable and contains a single problem. Problems are generated with a randomly determined sample size between 5 and 15 per group. When more than one group, sample size is equivalent between groups.<br></p>
 <ul>
 <li>08 - Hypothesis_Test_z-Scores.qmd: <em>hypothesis testing with z-scores</em></li>
@@ -156,22 +247,22 @@ ul.task-list li input[type="checkbox"] {
 <li>14 - factorial_ANOVA: <em>two-factor ANOVA</em></li>
 </ul>
 </section>
-<section id="title-ii-updates-in-the-immediate-queue" class="level2">
-<h2 class="anchored" data-anchor-id="title-ii-updates-in-the-immediate-queue">Title II Updates in the immediate queue</h2>
+<section id="title-ii-updates-in-the-immediate-queue" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="title-ii-updates-in-the-immediate-queue"><span class="header-section-number">3.3</span> Title II Updates in the immediate queue</h2>
 <ul>
 <li><del>One-Way ANOVA</del></li>
 <li><del>Repeated-Measures ANOVA</del></li>
 </ul>
 </section>
-<section id="title-ii-updates-remaining" class="level2">
-<h2 class="anchored" data-anchor-id="title-ii-updates-remaining">Title II Updates remaining</h2>
+<section id="title-ii-updates-remaining" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="title-ii-updates-remaining"><span class="header-section-number">3.4</span> Title II Updates remaining</h2>
 <ul>
 <li>standard deviation exercises</li>
 <li>basic z-scores and using z-scores with sample means</li>
 </ul>
 </section>
-<section id="functionality-to-add" class="level2">
-<h2 class="anchored" data-anchor-id="functionality-to-add">Functionality to add</h2>
+<section id="functionality-to-add" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="functionality-to-add"><span class="header-section-number">3.5</span> Functionality to add</h2>
 <ul>
 <li>correlation</li>
 <li>regression</li>
@@ -181,8 +272,8 @@ ul.task-list li input[type="checkbox"] {
 <li><del>include specifying the hypotheses for NHST (null and alternative)</del></li>
 </ul>
 </section>
-<section id="future-directions" class="level2">
-<h2 class="anchored" data-anchor-id="future-directions">Future directions</h2>
+<section id="future-directions" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="future-directions"><span class="header-section-number">3.6</span> Future directions</h2>
 <ul>
 <li>seperate defining question from displaying the results
 <ul>
@@ -609,6 +700,18 @@ ul.task-list li input[type="checkbox"] {
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Practice Problem Generator">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Practice Problem Generator</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./08 - Hypothesis_Test_z-Scores.html" class="pagination-link" aria-label="Hypothesis Testing with z-Scores">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hypothesis Testing with z-Scores</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 
 

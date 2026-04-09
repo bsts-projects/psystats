@@ -1,9 +1,9 @@
 project:
-  type: website
+  type: book
   output-dir: docs
   render:
     - index.qmd
-    - Sample_Document.qmd
+    - README.md
     - 08 - Hypothesis_Test_z-Scores.qmd
     - 09 - Single-Sample_t-Tests.qmd
     - 10 - Independent-Samples_t-Tests.qmd
@@ -11,20 +11,31 @@ project:
     - 12 - one-way_ANOVA.qmd
     - 13 - repeated-measures_ANOVA.qmd
     - 14 - factorial_ANOVA.qmd
-    - README.md
-
-website:
+   
+book:
   title: "Practice Problem Generator"
+  author: Guenther, Benjamin A.
+  date: 2026-04-09
   site-url: "https://bsts-projects.github.io/pystats/"
   navbar: 
     right: 
       - icon: github
         href: https://github.com/bsts-projects/psystats
         aria-label: GitHub
-  
+  chapters:
+    - index.qmd
+    - README.md
+    - 08 - Hypothesis_Test_z-Scores.qmd
+    - 09 - Single-Sample_t-Tests.qmd
+    - 10 - Independent-Samples_t-Tests.qmd
+    - 11 - Dependent-Samples_t-Tests.qmd
+    - 12 - one-way_ANOVA.qmd
+    - 13 - repeated-measures_ANOVA.qmd
+    - 14 - factorial_ANOVA.qmd
+
 format:
-  revealjs: 
-    theme: default
+  html: 
+    theme: cosmo
 
 execute: 
   freeze: false

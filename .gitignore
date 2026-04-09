@@ -12,4 +12,4 @@ local_files/
 **/*.quarto_ipynb
 14 - factorial_ANOVA_files/
 .vscode/
-
+revealjs_versions/
