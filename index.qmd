@@ -10,4 +10,4 @@ format:
     theme: cosmo
 ---
 
-text about the book goes here maybe?
+Move information and overview from he readme to here (after significant edits)

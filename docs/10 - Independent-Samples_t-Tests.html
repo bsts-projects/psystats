@@ -24,41 +24,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -198,7 +163,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./README.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">README</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sample Problem Generator for an Undergraduate Statistics in Psychology Course</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -280,80 +245,75 @@ window.Quarto = {
 </header>
 
 
-<div id="5d51a256" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> importlib</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> stats_project </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># This is to clear cache and reload after edits to the .py file</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>importlib.<span class="bu">reload</span>(stats_project)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> stats_project <span class="im">import</span> RandomData </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
 <p>Given the following between-subjects data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from the mean of <span class="math inline">\(Group_B\)</span>? Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.01}\)</span><br><br></p>
 <style type="text/css">
 </style>
 
-<table id="T_f3f79" class="caption-top table">
+<table id="T_a0f1d" class="caption-top table">
 <thead>
 <tr class="header">
-<th id="T_f3f79_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
-<th id="T_f3f79_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">B</th>
+<th id="T_a0f1d_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
+<th id="T_a0f1d_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">B</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_f3f79_row0_col0" class="data row0 col0">55</td>
-<td id="T_f3f79_row0_col1" class="data row0 col1">49</td>
+<td id="T_a0f1d_row0_col0" class="data row0 col0">45</td>
+<td id="T_a0f1d_row0_col1" class="data row0 col1">39</td>
 </tr>
 <tr class="even">
-<td id="T_f3f79_row1_col0" class="data row1 col0">57</td>
-<td id="T_f3f79_row1_col1" class="data row1 col1">46</td>
+<td id="T_a0f1d_row1_col0" class="data row1 col0">49</td>
+<td id="T_a0f1d_row1_col1" class="data row1 col1">52</td>
 </tr>
 <tr class="odd">
-<td id="T_f3f79_row2_col0" class="data row2 col0">56</td>
-<td id="T_f3f79_row2_col1" class="data row2 col1">41</td>
+<td id="T_a0f1d_row2_col0" class="data row2 col0">57</td>
+<td id="T_a0f1d_row2_col1" class="data row2 col1">52</td>
 </tr>
 <tr class="even">
-<td id="T_f3f79_row3_col0" class="data row3 col0">57</td>
-<td id="T_f3f79_row3_col1" class="data row3 col1">44</td>
+<td id="T_a0f1d_row3_col0" class="data row3 col0">45</td>
+<td id="T_a0f1d_row3_col1" class="data row3 col1">36</td>
 </tr>
 <tr class="odd">
-<td id="T_f3f79_row4_col0" class="data row4 col0">60</td>
-<td id="T_f3f79_row4_col1" class="data row4 col1">44</td>
+<td id="T_a0f1d_row4_col0" class="data row4 col0">47</td>
+<td id="T_a0f1d_row4_col1" class="data row4 col1">46</td>
 </tr>
 <tr class="even">
-<td id="T_f3f79_row5_col0" class="data row5 col0">57</td>
-<td id="T_f3f79_row5_col1" class="data row5 col1">43</td>
+<td id="T_a0f1d_row5_col0" class="data row5 col0">52</td>
+<td id="T_a0f1d_row5_col1" class="data row5 col1">40</td>
 </tr>
 <tr class="odd">
-<td id="T_f3f79_row6_col0" class="data row6 col0">57</td>
-<td id="T_f3f79_row6_col1" class="data row6 col1">50</td>
+<td id="T_a0f1d_row6_col0" class="data row6 col0">38</td>
+<td id="T_a0f1d_row6_col1" class="data row6 col1">47</td>
 </tr>
 <tr class="even">
-<td id="T_f3f79_row7_col0" class="data row7 col0">55</td>
-<td id="T_f3f79_row7_col1" class="data row7 col1">50</td>
+<td id="T_a0f1d_row7_col0" class="data row7 col0">50</td>
+<td id="T_a0f1d_row7_col1" class="data row7 col1">26</td>
 </tr>
 <tr class="odd">
-<td id="T_f3f79_row8_col0" class="data row8 col0">62</td>
-<td id="T_f3f79_row8_col1" class="data row8 col1">51</td>
+<td id="T_a0f1d_row8_col0" class="data row8 col0">57</td>
+<td id="T_a0f1d_row8_col1" class="data row8 col1">43</td>
 </tr>
 <tr class="even">
-<td id="T_f3f79_row9_col0" class="data row9 col0">65</td>
-<td id="T_f3f79_row9_col1" class="data row9 col1">41</td>
+<td id="T_a0f1d_row9_col0" class="data row9 col0">46</td>
+<td id="T_a0f1d_row9_col1" class="data row9 col1">35</td>
 </tr>
 <tr class="odd">
-<td id="T_f3f79_row10_col0" class="data row10 col0">60</td>
-<td id="T_f3f79_row10_col1" class="data row10 col1">48</td>
+<td id="T_a0f1d_row10_col0" class="data row10 col0">45</td>
+<td id="T_a0f1d_row10_col1" class="data row10 col1">38</td>
+</tr>
+<tr class="even">
+<td id="T_a0f1d_row11_col0" class="data row11 col0">47</td>
+<td id="T_a0f1d_row11_col1" class="data row11 col1">44</td>
 </tr>
 </tbody>
 </table>
-<p><br> The necessary summary Statistis for these data:<br> <span class="math display">\[M_A = {58.27}, M_B = {46.09}\]</span> <span class="math display">\[SS_A = {98.18}, SS_B = {136.91}\]</span> <span class="math display">\[n_A = {11}, n_B = {11}\]</span><br></p>
+<p><br> The necessary summary Statistis for these data:<br> <span class="math display">\[M_A = {48.17}, M_B = {41.5}\]</span> <span class="math display">\[SS_A = {315.67}, SS_B = {613.0}\]</span> <span class="math display">\[n_A = {12}, n_B = {12}\]</span><br></p>
 <p>State the Hypotheses <br> <span class="math display">\[H_0: \mu_A - \mu_B = 0\]</span> <span class="math display">\[H_1: \mu_A - \mu_B \ne 0\]</span> <br></p>
-<p><br>The decision criteria: <br><br> <span class="math inline">\(t_{crit} = \pm{2.85}, \alpha_{two-tailed} = {0.01}, df = {20}\)</span><br><br> Calculate the pooled variance: <br> <span class="math display">\[s_p^2 = {\frac{SS_A + SS_B}{df_A + df_B}}\]</span> <br> <span class="math display">\[s_p^2 = {\frac{98.18 + 136.91}{10 + 10}}\]</span> <br> <span class="math display">\[s_p^2 = \frac{235.09}{20}\]</span> <br> <span class="math display">\[s_p^2 = {11.75}\]</span> <br><br></p>
-<p>Calculate the estimated error of the difference between means: <span class="math inline">\(s_{(M_A - M_B)}\)</span> <br> <span class="math display">\[s_{(M_A - M_B)} = \sqrt{\frac{s_p^2}{n_1} + \frac{s_p^2}{n_1}}\]</span> <br> <span class="math display">\[s_{(M_A - M_B)} = \sqrt{\frac{11.75}{11} + \frac{11.75}{11}}\]</span> <br> <span class="math display">\[s_{(M_A - M_B)} = \sqrt{1.07 + 1.07}\]</span> <br> <span class="math display">\[s_{(M_A - M_B)} = \sqrt{2.14}\]</span> <br> <span class="math display">\[s_{(M_A - M_B)} = {1.46}\]</span> <br><br></p>
-<p>Calculate <span class="math inline">\(t_{obt}\)</span> <br> <span class="math display">\[t_{obt} = {\frac{(M_A - M_B) - (\mu_A - \mu_B)}{s_{(M_A - M_B)}}}\]</span> <br> <span class="math display">\[t_{obt} = \frac{(58.27 - 46.09) - {0}}{1.46}\]</span> <br> <span class="math display">\[t_{obt} = \frac{12.18}{1.46}\]</span> <br> <span class="math display">\[t_{obt} = {8.34}\]</span> <br><br></p>
-<p>Calculate Cohen’s <em>d</em> <br> <span class="math display">\[d = \frac{M_A - M_B}{\sqrt{s_p^2}}\]</span> <br> <span class="math display">\[d = \frac{(58.27 - 46.09)}{{{\sqrt{11.75}}}}\]</span> <br> <span class="math display">\[d = \frac{(12.18)}{3.43}\]</span> <br> <span class="math display">\[d = {3.55}\]</span> <br><br></p>
-<p>The results: <br><br> reject the null hypothesis, results are significant, <br> <em>t</em>(20) = 8.34, <em>p</em> &lt; 0.01, <em>d</em> = 3.55<br><br></p>
+<p><br>The decision criteria: <br><br> <span class="math inline">\(t_{crit} = \pm{2.82}, \alpha_{two-tailed} = {0.01}, df = {22}\)</span><br><br> Calculate the pooled variance: <br> <span class="math display">\[s_p^2 = {\frac{SS_A + SS_B}{df_A + df_B}}\]</span> <br> <span class="math display">\[s_p^2 = {\frac{315.67 + 613.0}{11 + 11}}\]</span> <br> <span class="math display">\[s_p^2 = \frac{928.67}{22}\]</span> <br> <span class="math display">\[s_p^2 = {42.21}\]</span> <br><br></p>
+<p>Calculate the estimated error of the difference between means: <span class="math inline">\(s_{(M_A - M_B)}\)</span> <br> <span class="math display">\[s_{(M_A - M_B)} = \sqrt{\frac{s_p^2}{n_1} + \frac{s_p^2}{n_1}}\]</span> <br> <span class="math display">\[s_{(M_A - M_B)} = \sqrt{\frac{42.21}{12} + \frac{42.21}{12}}\]</span> <br> <span class="math display">\[s_{(M_A - M_B)} = \sqrt{3.52 + 3.52}\]</span> <br> <span class="math display">\[s_{(M_A - M_B)} = \sqrt{7.04}\]</span> <br> <span class="math display">\[s_{(M_A - M_B)} = {2.65}\]</span> <br><br></p>
+<p>Calculate <span class="math inline">\(t_{obt}\)</span> <br> <span class="math display">\[t_{obt} = {\frac{(M_A - M_B) - (\mu_A - \mu_B)}{s_{(M_A - M_B)}}}\]</span> <br> <span class="math display">\[t_{obt} = \frac{(48.17 - 41.5) - {0}}{2.65}\]</span> <br> <span class="math display">\[t_{obt} = \frac{6.67}{2.65}\]</span> <br> <span class="math display">\[t_{obt} = {2.52}\]</span> <br><br></p>
+<p>Calculate Cohen’s <em>d</em> <br> <span class="math display">\[d = \frac{M_A - M_B}{\sqrt{s_p^2}}\]</span> <br> <span class="math display">\[d = \frac{(48.17 - 41.5)}{{{\sqrt{42.21}}}}\]</span> <br> <span class="math display">\[d = \frac{(6.67)}{6.5}\]</span> <br> <span class="math display">\[d = {1.03}\]</span> <br><br></p>
+<p>The results: <br><br> fail to reject the null hypothesis, results not significant, <br> <em>t</em>(22) = 2.52, <em>p</em> &gt; 0.01, <em>d</em> = 1.03<br><br></p>
 
 
 

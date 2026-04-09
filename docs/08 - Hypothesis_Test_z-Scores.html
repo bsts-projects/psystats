@@ -24,41 +24,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -198,7 +163,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./README.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">README</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sample Problem Generator for an Undergraduate Statistics in Psychology Course</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -280,76 +245,43 @@ window.Quarto = {
 </header>
 
 
-<div id="5c6983db" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> importlib</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> stats_project </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># This is to clear cache and reload after edits to the .py file</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>importlib.<span class="bu">reload</span>(stats_project)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> stats_project <span class="im">import</span> RandomData </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from the population mean: <span class="math inline">\(\mu = {18}\)</span>? <br><br>Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.05}\)</span><br><br></p>
+<p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly less than the population mean: <span class="math inline">\(\mu = {17}\)</span>? <br><br>Use a <span class="math inline">\({1}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.05}\)</span><br><br></p>
 <style type="text/css">
 </style>
 
-<table id="T_ea5be" class="caption-top table">
+<table id="T_ae8d7" class="caption-top table">
 <thead>
 <tr class="header">
-<th id="T_ea5be_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
+<th id="T_ae8d7_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_ea5be_row0_col0" class="data row0 col0">21</td>
+<td id="T_ae8d7_row0_col0" class="data row0 col0">16</td>
 </tr>
 <tr class="even">
-<td id="T_ea5be_row1_col0" class="data row1 col0">19</td>
+<td id="T_ae8d7_row1_col0" class="data row1 col0">17</td>
 </tr>
 <tr class="odd">
-<td id="T_ea5be_row2_col0" class="data row2 col0">28</td>
+<td id="T_ae8d7_row2_col0" class="data row2 col0">16</td>
 </tr>
 <tr class="even">
-<td id="T_ea5be_row3_col0" class="data row3 col0">21</td>
+<td id="T_ae8d7_row3_col0" class="data row3 col0">17</td>
 </tr>
 <tr class="odd">
-<td id="T_ea5be_row4_col0" class="data row4 col0">27</td>
+<td id="T_ae8d7_row4_col0" class="data row4 col0">20</td>
 </tr>
 <tr class="even">
-<td id="T_ea5be_row5_col0" class="data row5 col0">19</td>
+<td id="T_ae8d7_row5_col0" class="data row5 col0">18</td>
 </tr>
 <tr class="odd">
-<td id="T_ea5be_row6_col0" class="data row6 col0">26</td>
-</tr>
-<tr class="even">
-<td id="T_ea5be_row7_col0" class="data row7 col0">19</td>
-</tr>
-<tr class="odd">
-<td id="T_ea5be_row8_col0" class="data row8 col0">16</td>
-</tr>
-<tr class="even">
-<td id="T_ea5be_row9_col0" class="data row9 col0">23</td>
-</tr>
-<tr class="odd">
-<td id="T_ea5be_row10_col0" class="data row10 col0">26</td>
-</tr>
-<tr class="even">
-<td id="T_ea5be_row11_col0" class="data row11 col0">20</td>
-</tr>
-<tr class="odd">
-<td id="T_ea5be_row12_col0" class="data row12 col0">20</td>
-</tr>
-<tr class="even">
-<td id="T_ea5be_row13_col0" class="data row13 col0">28</td>
-</tr>
-<tr class="odd">
-<td id="T_ea5be_row14_col0" class="data row14 col0">27</td>
+<td id="T_ae8d7_row6_col0" class="data row6 col0">21</td>
 </tr>
 </tbody>
 </table>
-<p><br>The necessary summary statistics for these data<br> <span class="math display">\[M_A = {22.67}\]</span> <span class="math display">\[{\sigma} = {4}\]</span> <span class="math display">\[n = {15}\]</span><br></p>
-<p>State the Hypotheses <br> <span class="math display">\[H_0: \mu = 18\]</span> <span class="math display">\[H_1: \mu \ne 18\]</span> <br></p>
-<p><br>The decision criteria: <br><br> <span class="math inline">\(z_{crit} = \pm{1.96}, \alpha_{two-tailed} = {0.05}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[\sigma_M = \frac{\sigma}{\sqrt{N}}\]</span> <br> <span class="math display">\[\sigma_M = \frac{4}{\sqrt{15}}\]</span> <br> <span class="math display">\[\sigma_M = \frac{4}{3.87}\]</span> <br> <span class="math display">\[\sigma_M = {1.03}\]</span> <br><br> Calculate <span class="math inline">\(z_{obt}\)</span> <br> <span class="math display">\[z_{obt} = {\frac{M - \mu}{\sigma_M}}\]</span> <br> <span class="math display">\[z_{obt} = \frac{22.67 - 18}{1.03}\]</span> <br> <span class="math display">\[z_{obt} = \frac{4.67}{1.03}\]</span> <br> <span class="math display">\[z_{obt} = {4.53}\]</span> <br><br> Calculate Cohen’s d for effect size <br> <span class="math display">\[d = \frac{M - \mu}{\sigma}\]</span> <br> <span class="math display">\[d = \frac{22.67 - 18}{4}\]</span> <br> <span class="math display">\[d = \frac{4.67}{4}\]</span> <br> <span class="math display">\[d = {1.17}\]</span> <br><br> The results: <br><br> reject the null hypothesis, results are significant, <br> <em>z</em> = 4.53, <em>p</em> &lt; 0.05, <em>d</em> = 1.17<br><br></p>
+<p><br>The necessary summary statistics for these data<br> <span class="math display">\[M_A = {17.86}\]</span> <span class="math display">\[{\sigma} = {3}\]</span> <span class="math display">\[n = {7}\]</span><br></p>
+<p>State the Hypotheses <br> <span class="math display">\[H_0: \mu \geq 17\]</span> <span class="math display">\[H_1: \mu \lt 17\]</span> <br></p>
+<p><br>The decision criteria: <br><br> <span class="math inline">\(z_{crit} = {-1.645}, \alpha_{one-tailed} = {0.05}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[\sigma_M = \frac{\sigma}{\sqrt{N}}\]</span> <br> <span class="math display">\[\sigma_M = \frac{3}{\sqrt{7}}\]</span> <br> <span class="math display">\[\sigma_M = \frac{3}{2.65}\]</span> <br> <span class="math display">\[\sigma_M = {1.13}\]</span> <br><br> Calculate <span class="math inline">\(z_{obt}\)</span> <br> <span class="math display">\[z_{obt} = {\frac{M - \mu}{\sigma_M}}\]</span> <br> <span class="math display">\[z_{obt} = \frac{17.86 - 17}{1.13}\]</span> <br> <span class="math display">\[z_{obt} = \frac{0.86}{1.13}\]</span> <br> <span class="math display">\[z_{obt} = {0.76}\]</span> <br><br> Calculate Cohen’s d for effect size <br> <span class="math display">\[d = \frac{M - \mu}{\sigma}\]</span> <br> <span class="math display">\[d = \frac{17.86 - 17}{3}\]</span> <br> <span class="math display">\[d = \frac{0.86}{3}\]</span> <br> <span class="math display">\[d = {0.29}\]</span> <br><br> The results: <br><br> fail to reject the null hypothesis, results not significant, <br> <em>z</em> = 0.76, <em>p</em> &gt; 0.05, <em>d</em> = 0.29<br><br></p>
 
 
 
@@ -756,8 +688,8 @@ window.Quarto = {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./README.html" class="pagination-link" aria-label="README">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">README</span></span>
+      <a href="./README.html" class="pagination-link" aria-label="Sample Problem Generator for an Undergraduate Statistics in Psychology Course">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sample Problem Generator for an Undergraduate Statistics in Psychology Course</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
