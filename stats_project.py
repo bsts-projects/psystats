@@ -1225,6 +1225,9 @@ class FactorialData:
 
         display(Markdown("<br> Full Group Summary Data <br>"))
         self.summary_by_group()
+        # need to add G and total sum of squares
+        display(Markdown(f"$\\Sigma X^2 = {{{self.summary["grand_sum_squared_scores"]}}}$ <br>"))
+        display(Markdown(f"$G = {{{self.summary["grand_sum_scores"]}}}$ <br>"))
 
         display(Markdown("<br> Stage 1 ANOVA Calculations <br>"))
         self.stage_1_df()
