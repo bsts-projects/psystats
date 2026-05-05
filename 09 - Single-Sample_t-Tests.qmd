@@ -24,8 +24,19 @@ importlib.reload(stats_project)
 from stats_project import RandomData 
 ```
 
+# Problem 1
+
 ```{python}
-#| echo: false
+#| echo: true
+#| output: asis
+sample_size = random.randint(5,15)
+RandomData(groups = 1, n = sample_size).one_sample_t_test()
+```
+
+# Problem 2
+
+```{python}
+#| echo: true
 #| output: asis
 sample_size = random.randint(5,15)
 RandomData(groups = 1, n = sample_size).one_sample_t_test()

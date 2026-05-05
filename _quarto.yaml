@@ -37,4 +37,4 @@ format:
     theme: cosmo
 
 execute: 
-  freeze: false
+  freeze: auto

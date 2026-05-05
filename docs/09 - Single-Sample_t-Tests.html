@@ -24,6 +24,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -207,8 +242,15 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#problem-1" id="toc-problem-1" class="nav-link active" data-scroll-target="#problem-1"><span class="header-section-number">4</span> Problem 1</a></li>
+  <li><a href="#problem-2" id="toc-problem-2" class="nav-link" data-scroll-target="#problem-2"><span class="header-section-number">5</span> Problem 2</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -239,52 +281,94 @@ window.Quarto = {
 </header>
 
 
-<p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from <span class="math inline">\({49}\)</span>? Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.05}\)</span> <br><br></p>
+<section id="problem-1" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Problem 1</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>sample_size <span class="op">=</span> random.randint(<span class="dv">5</span>,<span class="dv">15</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>RandomData(groups <span class="op">=</span> <span class="dv">1</span>, n <span class="op">=</span> sample_size).one_sample_t_test()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from <span class="math inline">\({39}\)</span>? Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.01}\)</span> <br><br></p>
 <style type="text/css">
 </style>
 
-<table id="T_600fc" class="caption-top table">
+<table id="T_602ae" class="caption-top table">
 <thead>
 <tr class="header">
-<th id="T_600fc_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
+<th id="T_602ae_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_600fc_row0_col0" class="data row0 col0">47</td>
+<td id="T_602ae_row0_col0" class="data row0 col0">59</td>
 </tr>
 <tr class="even">
-<td id="T_600fc_row1_col0" class="data row1 col0">55</td>
+<td id="T_602ae_row1_col0" class="data row1 col0">52</td>
 </tr>
 <tr class="odd">
-<td id="T_600fc_row2_col0" class="data row2 col0">53</td>
+<td id="T_602ae_row2_col0" class="data row2 col0">32</td>
 </tr>
 <tr class="even">
-<td id="T_600fc_row3_col0" class="data row3 col0">42</td>
+<td id="T_602ae_row3_col0" class="data row3 col0">59</td>
 </tr>
 <tr class="odd">
-<td id="T_600fc_row4_col0" class="data row4 col0">46</td>
+<td id="T_602ae_row4_col0" class="data row4 col0">34</td>
 </tr>
 <tr class="even">
-<td id="T_600fc_row5_col0" class="data row5 col0">45</td>
-</tr>
-<tr class="odd">
-<td id="T_600fc_row6_col0" class="data row6 col0">36</td>
-</tr>
-<tr class="even">
-<td id="T_600fc_row7_col0" class="data row7 col0">49</td>
-</tr>
-<tr class="odd">
-<td id="T_600fc_row8_col0" class="data row8 col0">47</td>
+<td id="T_602ae_row5_col0" class="data row5 col0">51</td>
 </tr>
 </tbody>
 </table>
-<p><br> The necessary summary statistics for these data<br> <span class="math display">\[M_A = {46.67}\]</span> <span class="math display">\[s^2 = {31.75}\]</span> <span class="math display">\[n = {9}\]</span><br></p>
-<p>State the Hypotheses <br> <span class="math display">\[H_0: \mu = 49\]</span> <span class="math display">\[H_1: \mu \ne 49\]</span> <br></p>
-<p><br>The decision criteria: <br><br> <span class="math inline">\(t_{crit} = \pm{2.31}, \alpha_{two-tailed} = {0.05}, df = {8}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[s_M = \sqrt{\frac{s^2}{n}}\]</span> <br> <span class="math display">\[s_M = \sqrt{\frac{31.75}{9}}\]</span> <br> <span class="math display">\[s_M = \sqrt{3.53}\]</span> <br> <span class="math display">\[s_M = {1.88}\]</span> <br><br> calculate <span class="math inline">\(t_{obt}\)</span> <br> <span class="math display">\[t_{obt} = {\frac{M - \mu}{s_M}}\]</span> <br> <span class="math display">\[t_{obt} = \frac{46.67 - 49}{1.88}\]</span> <br> <span class="math display">\[t_{obt} = \frac{-2.33}{1.88}\]</span> <br> <span class="math display">\[t_{obt} = {-1.24}\]</span> <br><br> calculate Cohen’s d <br> <span class="math display">\[d = \frac{M - \mu}{s}\]</span> <br> <span class="math display">\[d = \frac{46.67 - 49}{5.63}\]</span> <br> <span class="math display">\[d = \frac{-2.33}{5.63}\]</span> <br> <span class="math display">\[d = {-0.41}\]</span> <br><br></p>
-<p>The results: <br><br> fail to reject the null hypothesis, results not significant, <br> <em>t</em>(8) = -1.24, <em>p</em> &gt; 0.05, <em>d</em> = -0.41<br><br></p>
+<p><br> The necessary summary statistics for these data<br> <span class="math display">\[M_A = {47.83}\]</span> <span class="math display">\[s^2 = {143.77}\]</span> <span class="math display">\[n = {6}\]</span><br></p>
+<p>State the Hypotheses <br> <span class="math display">\[H_0: \mu = 39\]</span> <span class="math display">\[H_1: \mu \ne 39\]</span> <br></p>
+<p><br>The decision criteria: <br><br> <span class="math inline">\(t_{crit} = \pm{4.03}, \alpha_{two-tailed} = {0.01}, df = {5}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[s_M = \sqrt{\frac{s^2}{n}}\]</span> <br> <span class="math display">\[s_M = \sqrt{\frac{143.77}{6}}\]</span> <br> <span class="math display">\[s_M = \sqrt{23.96}\]</span> <br> <span class="math display">\[s_M = {4.89}\]</span> <br><br> calculate <span class="math inline">\(t_{obt}\)</span> <br> <span class="math display">\[t_{obt} = {\frac{M - \mu}{s_M}}\]</span> <br> <span class="math display">\[t_{obt} = \frac{47.83 - 39}{4.89}\]</span> <br> <span class="math display">\[t_{obt} = \frac{8.83}{4.89}\]</span> <br> <span class="math display">\[t_{obt} = {1.81}\]</span> <br><br> calculate Cohen’s d <br> <span class="math display">\[d = \frac{M - \mu}{s}\]</span> <br> <span class="math display">\[d = \frac{47.83 - 39}{11.99}\]</span> <br> <span class="math display">\[d = \frac{8.83}{11.99}\]</span> <br> <span class="math display">\[d = {0.74}\]</span> <br><br></p>
+<p>The results: <br><br> fail to reject the null hypothesis, results not significant, <br> <em>t</em>(5) = 1.81, <em>p</em> &gt; 0.01, <em>d</em> = 0.74<br><br></p>
+</section>
+<section id="problem-2" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Problem 2</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sample_size <span class="op">=</span> random.randint(<span class="dv">5</span>,<span class="dv">15</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>RandomData(groups <span class="op">=</span> <span class="dv">1</span>, n <span class="op">=</span> sample_size).one_sample_t_test()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly greater than <span class="math inline">\({37}\)</span>? Use a <span class="math inline">\({1}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.05}\)</span> <br><br></p>
+<style type="text/css">
+</style>
+
+<table id="T_9ee71" class="caption-top table">
+<thead>
+<tr class="header">
+<th id="T_9ee71_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_9ee71_row0_col0" class="data row0 col0">29</td>
+</tr>
+<tr class="even">
+<td id="T_9ee71_row1_col0" class="data row1 col0">36</td>
+</tr>
+<tr class="odd">
+<td id="T_9ee71_row2_col0" class="data row2 col0">24</td>
+</tr>
+<tr class="even">
+<td id="T_9ee71_row3_col0" class="data row3 col0">48</td>
+</tr>
+<tr class="odd">
+<td id="T_9ee71_row4_col0" class="data row4 col0">49</td>
+</tr>
+<tr class="even">
+<td id="T_9ee71_row5_col0" class="data row5 col0">42</td>
+</tr>
+<tr class="odd">
+<td id="T_9ee71_row6_col0" class="data row6 col0">35</td>
+</tr>
+<tr class="even">
+<td id="T_9ee71_row7_col0" class="data row7 col0">40</td>
+</tr>
+</tbody>
+</table>
+<p><br> The necessary summary statistics for these data<br> <span class="math display">\[M_A = {37.88}\]</span> <span class="math display">\[s^2 = {75.84}\]</span> <span class="math display">\[n = {8}\]</span><br></p>
+<p>State the Hypotheses <br> <span class="math display">\[H_0: \mu \leq 37\]</span> <span class="math display">\[H_1: \mu \gt 37\]</span> <br></p>
+<p><br>The decision criteria: <br><br> <span class="math inline">\(t_{crit} = +{1.89}, \alpha_{one-tailed} = {0.05}, df = {7}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[s_M = \sqrt{\frac{s^2}{n}}\]</span> <br> <span class="math display">\[s_M = \sqrt{\frac{75.84}{8}}\]</span> <br> <span class="math display">\[s_M = \sqrt{9.48}\]</span> <br> <span class="math display">\[s_M = {3.08}\]</span> <br><br> calculate <span class="math inline">\(t_{obt}\)</span> <br> <span class="math display">\[t_{obt} = {\frac{M - \mu}{s_M}}\]</span> <br> <span class="math display">\[t_{obt} = \frac{37.88 - 37}{3.08}\]</span> <br> <span class="math display">\[t_{obt} = \frac{0.88}{3.08}\]</span> <br> <span class="math display">\[t_{obt} = {0.29}\]</span> <br><br> calculate Cohen’s d <br> <span class="math display">\[d = \frac{M - \mu}{s}\]</span> <br> <span class="math display">\[d = \frac{37.88 - 37}{8.71}\]</span> <br> <span class="math display">\[d = \frac{0.88}{8.71}\]</span> <br> <span class="math display">\[d = {0.1}\]</span> <br><br></p>
+<p>The results: <br><br> fail to reject the null hypothesis, results not significant, <br> <em>t</em>(7) = 0.29, <em>p</em> &gt; 0.05, <em>d</em> = 0.1<br><br></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
