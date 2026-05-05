@@ -1,21 +1,19 @@
 ---
-title: Practice Problem Generator
+title: Statistics Problem and Solution Generator
 subtitle: Statistics in Psychology
 author: Guenther, Benjamin A.
 project:
-  type: book
+  type: website
   output-dir: docs
 format: 
   html: 
     theme: cosmo
 ---
 
-This an ongoing project to create a series of ~~juypter notebooks~~ .qmd files that can be used to randomly generate sample problems and their worked solutions using python
+This an ongoing project to create a series of randomly generate problems and their fully worked solutions for use in an undergraduate psychology course.
 
-This readme file needs significant updates
+# About the Project
 
-# Major update
-Starting with hypothesis testing, individual .qmd files call the stats_project.py file.  The bulk of the code was written when I had *very little* experience with classes in python and much of this should be restructured.  Currently, the code is being adapted to use quarto to render accessible .html documents to meet tile II accessibility guidelines. 
 
 # Documents to produce accessible .html practice problems
 Each document will produces 30 practice problems in a .html slideshow rendered with revealjs.  Each slide is scrollable and contains a single problem.  Problems are generated with a randomly determined sample size between 5 and 15 per group.  When more than one group, sample size is equivalent between groups.<br>
