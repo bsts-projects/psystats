@@ -12,9 +12,10 @@ project:
     - 14 - factorial_ANOVA.qmd
    
 book:
-  title: "Practice Problem Generator"
+  title: "Satistics Problem Generator"
   author: Guenther, Benjamin A.
-  date: 2026-04-09
+  date: last-modified # or today
+  date-format: YYYY-MM-DD
   site-url: "https://bsts-projects.github.io/pystats/"
   navbar: 
     right: 
