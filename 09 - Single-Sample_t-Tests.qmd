@@ -41,7 +41,7 @@ RandomData(groups = 1, n = sample_size).one_sample_t_test()
 
 # Problem 1
 ```{python}
-#| echo: true
+#| echo: false
 #| output: asis
 sample_size = random.randint(5,15)
 RandomData(groups = 1, n = sample_size).one_sample_t_test()
@@ -49,7 +49,7 @@ RandomData(groups = 1, n = sample_size).one_sample_t_test()
 
 # Problem 2
 ```{python}
-#| echo: true
+#| echo: false
 #| output: asis
 sample_size = random.randint(5,15)
 RandomData(groups = 1, n = sample_size).one_sample_t_test()
@@ -57,7 +57,7 @@ RandomData(groups = 1, n = sample_size).one_sample_t_test()
 
 # Problem 3
 ```{python}
-#| echo: true
+#| echo: false
 #| output: asis
 sample_size = random.randint(5,15)
 RandomData(groups = 1, n = sample_size).one_sample_t_test()
@@ -65,7 +65,7 @@ RandomData(groups = 1, n = sample_size).one_sample_t_test()
 
 # Problem 4
 ```{python}
-#| echo: true
+#| echo: false
 #| output: asis
 sample_size = random.randint(5,15)
 RandomData(groups = 1, n = sample_size).one_sample_t_test()
@@ -73,7 +73,7 @@ RandomData(groups = 1, n = sample_size).one_sample_t_test()
 
 # Problem 5
 ```{python}
-#| echo: true
+#| echo: false
 #| output: asis
 sample_size = random.randint(5,15)
 RandomData(groups = 1, n = sample_size).one_sample_t_test()
