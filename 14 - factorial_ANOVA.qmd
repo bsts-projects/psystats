@@ -24,8 +24,19 @@ importlib.reload(stats_project)
 from stats_project import FactorialData
 ```
 
+# Problem 1
 ```{python}
-#| echo: false
+#| echo: true
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+# Problem 2
+```{python}
+#| echo: true
 #| output: asis
 levels_factor_a = random.randint(2,3)
 levels_factor_b = random.randint(2,3)
