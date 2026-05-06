@@ -26,6 +26,7 @@ from stats_project import FactorialData
 
 # About
 the factorial ANOVA problems use the `FactorialData` class which requires:
+
 * a tuple to specify the levels of each factor - (factor A, factor B)
 * the sample size per group - all groups will have the same sample size
 

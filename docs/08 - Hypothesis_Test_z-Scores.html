@@ -6,7 +6,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Guenther, Benjamin A.">
 
 <title>2&nbsp; Hypothesis Testing with z-Scores – Satistics Problem Generator</title>
 <style>
@@ -23,6 +22,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -169,19 +203,19 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09 - Single-Sample_t-Tests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hypothesis Testing with One-Sample <em>t</em>-tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">One-Sample <em>t</em>-tests</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10 - Independent-Samples_t-Tests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hypothesis Testing with Independent-Samples <em>t</em>-tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Independent-Samples <em>t</em>-tests</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11 - Dependent-Samples_t-Tests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hypothesis Testing with Dependent-Samples <em>t</em>-tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Dependent-Samples <em>t</em>-tests</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -212,9 +246,12 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#problem-1" id="toc-problem-1" class="nav-link active" data-scroll-target="#problem-1"><span class="header-section-number">3</span> Problem 1</a></li>
-  <li><a href="#problem-2" id="toc-problem-2" class="nav-link" data-scroll-target="#problem-2"><span class="header-section-number">4</span> Problem 2</a></li>
-  <li><a href="#problem-3" id="toc-problem-3" class="nav-link" data-scroll-target="#problem-3"><span class="header-section-number">5</span> Problem 3</a></li>
+  <li><a href="#about" id="toc-about" class="nav-link active" data-scroll-target="#about"><span class="header-section-number">3</span> About</a></li>
+  <li><a href="#problem-1" id="toc-problem-1" class="nav-link" data-scroll-target="#problem-1"><span class="header-section-number">4</span> Problem 1</a></li>
+  <li><a href="#problem-2" id="toc-problem-2" class="nav-link" data-scroll-target="#problem-2"><span class="header-section-number">5</span> Problem 2</a></li>
+  <li><a href="#problem-3" id="toc-problem-3" class="nav-link" data-scroll-target="#problem-3"><span class="header-section-number">6</span> Problem 3</a></li>
+  <li><a href="#problem-4" id="toc-problem-4" class="nav-link" data-scroll-target="#problem-4"><span class="header-section-number">7</span> Problem 4</a></li>
+  <li><a href="#problem-5" id="toc-problem-5" class="nav-link" data-scroll-target="#problem-5"><span class="header-section-number">8</span> Problem 5</a></li>
   </ul>
 </nav>
     </div>
@@ -224,19 +261,13 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Hypothesis Testing with z-Scores</span></h1>
-<p class="subtitle lead">Practice Problems for PSY 241</p>
+<p class="subtitle lead">Samaple Problems</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Guenther, Benjamin A. </p>
-          </div>
-  </div>
     
   
     
@@ -247,134 +278,294 @@ window.Quarto = {
 </header>
 
 
-<section id="problem-1" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Problem 1</h1>
-<p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from the population mean: <span class="math inline">\(\mu = {44}\)</span>? <br><br>Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.01}\)</span><br><br></p>
-<style type="text/css">
-</style>
-
-<table id="T_b6e05" class="caption-top table">
-<thead>
-<tr class="header">
-<th id="T_b6e05_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td id="T_b6e05_row0_col0" class="data row0 col0">62</td>
-</tr>
-<tr class="even">
-<td id="T_b6e05_row1_col0" class="data row1 col0">55</td>
-</tr>
-<tr class="odd">
-<td id="T_b6e05_row2_col0" class="data row2 col0">51</td>
-</tr>
-<tr class="even">
-<td id="T_b6e05_row3_col0" class="data row3 col0">57</td>
-</tr>
-<tr class="odd">
-<td id="T_b6e05_row4_col0" class="data row4 col0">52</td>
-</tr>
-<tr class="even">
-<td id="T_b6e05_row5_col0" class="data row5 col0">66</td>
-</tr>
-</tbody>
-</table>
-<p><br>The necessary summary statistics for these data<br> <span class="math display">\[M_A = {57.17}\]</span> <span class="math display">\[{\sigma} = {8}\]</span> <span class="math display">\[n = {6}\]</span><br></p>
-<p>State the Hypotheses <br> <span class="math display">\[H_0: \mu = 44\]</span> <span class="math display">\[H_1: \mu \ne 44\]</span> <br></p>
-<p><br>The decision criteria: <br><br> <span class="math inline">\(z_{crit} = \pm{2.58}, \alpha_{two-tailed} = {0.01}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[\sigma_M = \frac{\sigma}{\sqrt{N}}\]</span> <br> <span class="math display">\[\sigma_M = \frac{8}{\sqrt{6}}\]</span> <br> <span class="math display">\[\sigma_M = \frac{8}{2.45}\]</span> <br> <span class="math display">\[\sigma_M = {3.27}\]</span> <br><br> Calculate <span class="math inline">\(z_{obt}\)</span> <br> <span class="math display">\[z_{obt} = {\frac{M - \mu}{\sigma_M}}\]</span> <br> <span class="math display">\[z_{obt} = \frac{57.17 - 44}{3.27}\]</span> <br> <span class="math display">\[z_{obt} = \frac{13.17}{3.27}\]</span> <br> <span class="math display">\[z_{obt} = {4.03}\]</span> <br><br> Calculate Cohen’s d for effect size <br> <span class="math display">\[d = \frac{M - \mu}{\sigma}\]</span> <br> <span class="math display">\[d = \frac{57.17 - 44}{8}\]</span> <br> <span class="math display">\[d = \frac{13.17}{8}\]</span> <br> <span class="math display">\[d = {1.65}\]</span> <br><br> The results: <br><br> reject the null hypothesis, results are significant, <br> <em>z</em> = 4.03, <em>p</em> &lt; 0.01, <em>d</em> = 1.65<br><br></p>
+<section id="about" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> About</h1>
+<p>the one-sample <em>z</em>-Test problems use the <code>RamdomData</code> class which requires:</p>
+<ul>
+<li>the groups variable set to 1: <code>groups = 1</code></li>
+<li>an intger for the sample size (e.g., <code>n = 30</code>)</li>
+<li>a call to the <code>z_test()</code> method</li>
+</ul>
+<p>In these sample problems, the per-group sample size is randomly set between 5 and 15. An example funciton call is included below.</p>
+<div id="3cb16f02" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>sample_size <span class="op">=</span> random.randint(<span class="dv">5</span>,<span class="dv">15</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>RandomData(groups <span class="op">=</span> <span class="dv">1</span>, n <span class="op">=</span> sample_size).z_test()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section>
-<section id="problem-2" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Problem 2</h1>
-<p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly greater than the population mean: <span class="math inline">\(\mu = {47}\)</span>? <br><br>Use a <span class="math inline">\({1}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.01}\)</span><br><br></p>
+<section id="problem-1" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Problem 1</h1>
+<p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from the population mean: <span class="math inline">\(\mu = {25}\)</span>? <br><br>Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.01}\)</span><br><br></p>
 <style type="text/css">
 </style>
 
-<table id="T_109fa" class="caption-top table">
+<table id="T_92f44" class="caption-top table">
 <thead>
 <tr class="header">
-<th id="T_109fa_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
+<th id="T_92f44_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_109fa_row0_col0" class="data row0 col0">60</td>
+<td id="T_92f44_row0_col0" class="data row0 col0">32</td>
 </tr>
 <tr class="even">
-<td id="T_109fa_row1_col0" class="data row1 col0">56</td>
+<td id="T_92f44_row1_col0" class="data row1 col0">26</td>
 </tr>
 <tr class="odd">
-<td id="T_109fa_row2_col0" class="data row2 col0">65</td>
+<td id="T_92f44_row2_col0" class="data row2 col0">27</td>
 </tr>
 <tr class="even">
-<td id="T_109fa_row3_col0" class="data row3 col0">53</td>
+<td id="T_92f44_row3_col0" class="data row3 col0">39</td>
 </tr>
 <tr class="odd">
-<td id="T_109fa_row4_col0" class="data row4 col0">62</td>
+<td id="T_92f44_row4_col0" class="data row4 col0">34</td>
 </tr>
 <tr class="even">
-<td id="T_109fa_row5_col0" class="data row5 col0">54</td>
+<td id="T_92f44_row5_col0" class="data row5 col0">26</td>
 </tr>
 <tr class="odd">
-<td id="T_109fa_row6_col0" class="data row6 col0">50</td>
+<td id="T_92f44_row6_col0" class="data row6 col0">22</td>
 </tr>
 <tr class="even">
-<td id="T_109fa_row7_col0" class="data row7 col0">67</td>
+<td id="T_92f44_row7_col0" class="data row7 col0">28</td>
 </tr>
 <tr class="odd">
-<td id="T_109fa_row8_col0" class="data row8 col0">41</td>
+<td id="T_92f44_row8_col0" class="data row8 col0">26</td>
 </tr>
 <tr class="even">
-<td id="T_109fa_row9_col0" class="data row9 col0">51</td>
+<td id="T_92f44_row9_col0" class="data row9 col0">23</td>
+</tr>
+<tr class="odd">
+<td id="T_92f44_row10_col0" class="data row10 col0">29</td>
+</tr>
+<tr class="even">
+<td id="T_92f44_row11_col0" class="data row11 col0">25</td>
+</tr>
+<tr class="odd">
+<td id="T_92f44_row12_col0" class="data row12 col0">21</td>
 </tr>
 </tbody>
 </table>
-<p><br>The necessary summary statistics for these data<br> <span class="math display">\[M_A = {55.9}\]</span> <span class="math display">\[{\sigma} = {9}\]</span> <span class="math display">\[n = {10}\]</span><br></p>
-<p>State the Hypotheses <br> <span class="math display">\[H_0: \mu \leq 47\]</span> <span class="math display">\[H_1: \mu \gt 47\]</span> <br></p>
-<p><br>The decision criteria: <br><br> <span class="math inline">\(z_{crit} = +{2.326}, \alpha_{one-tailed} = {0.01}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[\sigma_M = \frac{\sigma}{\sqrt{N}}\]</span> <br> <span class="math display">\[\sigma_M = \frac{9}{\sqrt{10}}\]</span> <br> <span class="math display">\[\sigma_M = \frac{9}{3.16}\]</span> <br> <span class="math display">\[\sigma_M = {2.85}\]</span> <br><br> Calculate <span class="math inline">\(z_{obt}\)</span> <br> <span class="math display">\[z_{obt} = {\frac{M - \mu}{\sigma_M}}\]</span> <br> <span class="math display">\[z_{obt} = \frac{55.9 - 47}{2.85}\]</span> <br> <span class="math display">\[z_{obt} = \frac{8.9}{2.85}\]</span> <br> <span class="math display">\[z_{obt} = {3.12}\]</span> <br><br> Calculate Cohen’s d for effect size <br> <span class="math display">\[d = \frac{M - \mu}{\sigma}\]</span> <br> <span class="math display">\[d = \frac{55.9 - 47}{9}\]</span> <br> <span class="math display">\[d = \frac{8.9}{9}\]</span> <br> <span class="math display">\[d = {0.99}\]</span> <br><br> The results: <br><br> reject the null hypothesis, results are significant, <br> <em>z</em> = 3.12, <em>p</em> &lt; 0.01, <em>d</em> = 0.99<br><br></p>
+<p><br>The necessary summary statistics for these data<br> <span class="math display">\[M_A = {27.54}\]</span> <span class="math display">\[{\sigma} = {6}\]</span> <span class="math display">\[n = {13}\]</span><br></p>
+<p>State the Hypotheses <br> <span class="math display">\[H_0: \mu = 25\]</span> <span class="math display">\[H_1: \mu \ne 25\]</span> <br></p>
+<p><br>The decision criteria: <br><br> <span class="math inline">\(z_{crit} = \pm{2.58}, \alpha_{two-tailed} = {0.01}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[\sigma_M = \frac{\sigma}{\sqrt{N}}\]</span> <br> <span class="math display">\[\sigma_M = \frac{6}{\sqrt{13}}\]</span> <br> <span class="math display">\[\sigma_M = \frac{6}{3.61}\]</span> <br> <span class="math display">\[\sigma_M = {1.66}\]</span> <br><br> Calculate <span class="math inline">\(z_{obt}\)</span> <br> <span class="math display">\[z_{obt} = {\frac{M - \mu}{\sigma_M}}\]</span> <br> <span class="math display">\[z_{obt} = \frac{27.54 - 25}{1.66}\]</span> <br> <span class="math display">\[z_{obt} = \frac{2.54}{1.66}\]</span> <br> <span class="math display">\[z_{obt} = {1.53}\]</span> <br><br> Calculate Cohen’s d for effect size <br> <span class="math display">\[d = \frac{M - \mu}{\sigma}\]</span> <br> <span class="math display">\[d = \frac{27.54 - 25}{6}\]</span> <br> <span class="math display">\[d = \frac{2.54}{6}\]</span> <br> <span class="math display">\[d = {0.42}\]</span> <br><br> The results: <br><br> fail to reject the null hypothesis, results not significant, <br> <em>z</em> = 1.53, <em>p</em> &gt; 0.01, <em>d</em> = 0.42<br><br></p>
 </section>
-<section id="problem-3" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Problem 3</h1>
-<p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from the population mean: <span class="math inline">\(\mu = {36}\)</span>? <br><br>Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.01}\)</span><br><br></p>
+<section id="problem-2" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Problem 2</h1>
+<p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from the population mean: <span class="math inline">\(\mu = {33}\)</span>? <br><br>Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.05}\)</span><br><br></p>
 <style type="text/css">
 </style>
 
-<table id="T_dcc9a" class="caption-top table">
+<table id="T_61a15" class="caption-top table">
 <thead>
 <tr class="header">
-<th id="T_dcc9a_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
+<th id="T_61a15_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_dcc9a_row0_col0" class="data row0 col0">54</td>
+<td id="T_61a15_row0_col0" class="data row0 col0">35</td>
 </tr>
 <tr class="even">
-<td id="T_dcc9a_row1_col0" class="data row1 col0">36</td>
+<td id="T_61a15_row1_col0" class="data row1 col0">33</td>
 </tr>
 <tr class="odd">
-<td id="T_dcc9a_row2_col0" class="data row2 col0">54</td>
+<td id="T_61a15_row2_col0" class="data row2 col0">34</td>
 </tr>
 <tr class="even">
-<td id="T_dcc9a_row3_col0" class="data row3 col0">54</td>
+<td id="T_61a15_row3_col0" class="data row3 col0">36</td>
 </tr>
 <tr class="odd">
-<td id="T_dcc9a_row4_col0" class="data row4 col0">44</td>
+<td id="T_61a15_row4_col0" class="data row4 col0">43</td>
 </tr>
 <tr class="even">
-<td id="T_dcc9a_row5_col0" class="data row5 col0">39</td>
+<td id="T_61a15_row5_col0" class="data row5 col0">38</td>
 </tr>
 <tr class="odd">
-<td id="T_dcc9a_row6_col0" class="data row6 col0">46</td>
+<td id="T_61a15_row6_col0" class="data row6 col0">37</td>
 </tr>
 <tr class="even">
-<td id="T_dcc9a_row7_col0" class="data row7 col0">44</td>
+<td id="T_61a15_row7_col0" class="data row7 col0">30</td>
+</tr>
+<tr class="odd">
+<td id="T_61a15_row8_col0" class="data row8 col0">51</td>
+</tr>
+<tr class="even">
+<td id="T_61a15_row9_col0" class="data row9 col0">44</td>
+</tr>
+<tr class="odd">
+<td id="T_61a15_row10_col0" class="data row10 col0">38</td>
 </tr>
 </tbody>
 </table>
-<p><br>The necessary summary statistics for these data<br> <span class="math display">\[M_A = {46.38}\]</span> <span class="math display">\[{\sigma} = {7}\]</span> <span class="math display">\[n = {8}\]</span><br></p>
-<p>State the Hypotheses <br> <span class="math display">\[H_0: \mu = 36\]</span> <span class="math display">\[H_1: \mu \ne 36\]</span> <br></p>
-<p><br>The decision criteria: <br><br> <span class="math inline">\(z_{crit} = \pm{2.58}, \alpha_{two-tailed} = {0.01}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[\sigma_M = \frac{\sigma}{\sqrt{N}}\]</span> <br> <span class="math display">\[\sigma_M = \frac{7}{\sqrt{8}}\]</span> <br> <span class="math display">\[\sigma_M = \frac{7}{2.83}\]</span> <br> <span class="math display">\[\sigma_M = {2.47}\]</span> <br><br> Calculate <span class="math inline">\(z_{obt}\)</span> <br> <span class="math display">\[z_{obt} = {\frac{M - \mu}{\sigma_M}}\]</span> <br> <span class="math display">\[z_{obt} = \frac{46.38 - 36}{2.47}\]</span> <br> <span class="math display">\[z_{obt} = \frac{10.38}{2.47}\]</span> <br> <span class="math display">\[z_{obt} = {4.2}\]</span> <br><br> Calculate Cohen’s d for effect size <br> <span class="math display">\[d = \frac{M - \mu}{\sigma}\]</span> <br> <span class="math display">\[d = \frac{46.38 - 36}{7}\]</span> <br> <span class="math display">\[d = \frac{10.38}{7}\]</span> <br> <span class="math display">\[d = {1.48}\]</span> <br><br> The results: <br><br> reject the null hypothesis, results are significant, <br> <em>z</em> = 4.2, <em>p</em> &lt; 0.01, <em>d</em> = 1.48<br><br></p>
+<p><br>The necessary summary statistics for these data<br> <span class="math display">\[M_A = {38.09}\]</span> <span class="math display">\[{\sigma} = {7}\]</span> <span class="math display">\[n = {11}\]</span><br></p>
+<p>State the Hypotheses <br> <span class="math display">\[H_0: \mu = 33\]</span> <span class="math display">\[H_1: \mu \ne 33\]</span> <br></p>
+<p><br>The decision criteria: <br><br> <span class="math inline">\(z_{crit} = \pm{1.96}, \alpha_{two-tailed} = {0.05}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[\sigma_M = \frac{\sigma}{\sqrt{N}}\]</span> <br> <span class="math display">\[\sigma_M = \frac{7}{\sqrt{11}}\]</span> <br> <span class="math display">\[\sigma_M = \frac{7}{3.32}\]</span> <br> <span class="math display">\[\sigma_M = {2.11}\]</span> <br><br> Calculate <span class="math inline">\(z_{obt}\)</span> <br> <span class="math display">\[z_{obt} = {\frac{M - \mu}{\sigma_M}}\]</span> <br> <span class="math display">\[z_{obt} = \frac{38.09 - 33}{2.11}\]</span> <br> <span class="math display">\[z_{obt} = \frac{5.09}{2.11}\]</span> <br> <span class="math display">\[z_{obt} = {2.41}\]</span> <br><br> Calculate Cohen’s d for effect size <br> <span class="math display">\[d = \frac{M - \mu}{\sigma}\]</span> <br> <span class="math display">\[d = \frac{38.09 - 33}{7}\]</span> <br> <span class="math display">\[d = \frac{5.09}{7}\]</span> <br> <span class="math display">\[d = {0.73}\]</span> <br><br> The results: <br><br> reject the null hypothesis, results are significant, <br> <em>z</em> = 2.41, <em>p</em> &lt; 0.05, <em>d</em> = 0.73<br><br></p>
+</section>
+<section id="problem-3" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Problem 3</h1>
+<p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly less than the population mean: <span class="math inline">\(\mu = {44}\)</span>? <br><br>Use a <span class="math inline">\({1}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.05}\)</span><br><br></p>
+<style type="text/css">
+</style>
+
+<table id="T_38d43" class="caption-top table">
+<thead>
+<tr class="header">
+<th id="T_38d43_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_38d43_row0_col0" class="data row0 col0">45</td>
+</tr>
+<tr class="even">
+<td id="T_38d43_row1_col0" class="data row1 col0">29</td>
+</tr>
+<tr class="odd">
+<td id="T_38d43_row2_col0" class="data row2 col0">34</td>
+</tr>
+<tr class="even">
+<td id="T_38d43_row3_col0" class="data row3 col0">50</td>
+</tr>
+<tr class="odd">
+<td id="T_38d43_row4_col0" class="data row4 col0">43</td>
+</tr>
+<tr class="even">
+<td id="T_38d43_row5_col0" class="data row5 col0">59</td>
+</tr>
+<tr class="odd">
+<td id="T_38d43_row6_col0" class="data row6 col0">45</td>
+</tr>
+<tr class="even">
+<td id="T_38d43_row7_col0" class="data row7 col0">33</td>
+</tr>
+<tr class="odd">
+<td id="T_38d43_row8_col0" class="data row8 col0">54</td>
+</tr>
+<tr class="even">
+<td id="T_38d43_row9_col0" class="data row9 col0">50</td>
+</tr>
+<tr class="odd">
+<td id="T_38d43_row10_col0" class="data row10 col0">48</td>
+</tr>
+<tr class="even">
+<td id="T_38d43_row11_col0" class="data row11 col0">28</td>
+</tr>
+</tbody>
+</table>
+<p><br>The necessary summary statistics for these data<br> <span class="math display">\[M_A = {43.17}\]</span> <span class="math display">\[{\sigma} = {10}\]</span> <span class="math display">\[n = {12}\]</span><br></p>
+<p>State the Hypotheses <br> <span class="math display">\[H_0: \mu \geq 44\]</span> <span class="math display">\[H_1: \mu \lt 44\]</span> <br></p>
+<p><br>The decision criteria: <br><br> <span class="math inline">\(z_{crit} = {-1.645}, \alpha_{one-tailed} = {0.05}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[\sigma_M = \frac{\sigma}{\sqrt{N}}\]</span> <br> <span class="math display">\[\sigma_M = \frac{10}{\sqrt{12}}\]</span> <br> <span class="math display">\[\sigma_M = \frac{10}{3.46}\]</span> <br> <span class="math display">\[\sigma_M = {2.89}\]</span> <br><br> Calculate <span class="math inline">\(z_{obt}\)</span> <br> <span class="math display">\[z_{obt} = {\frac{M - \mu}{\sigma_M}}\]</span> <br> <span class="math display">\[z_{obt} = \frac{43.17 - 44}{2.89}\]</span> <br> <span class="math display">\[z_{obt} = \frac{-0.83}{2.89}\]</span> <br> <span class="math display">\[z_{obt} = {-0.29}\]</span> <br><br> Calculate Cohen’s d for effect size <br> <span class="math display">\[d = \frac{M - \mu}{\sigma}\]</span> <br> <span class="math display">\[d = \frac{43.17 - 44}{10}\]</span> <br> <span class="math display">\[d = \frac{-0.83}{10}\]</span> <br> <span class="math display">\[d = {-0.08}\]</span> <br><br> The results: <br><br> fail to reject the null hypothesis, results not significant, <br> <em>z</em> = -0.29, <em>p</em> &gt; 0.05, <em>d</em> = -0.08<br><br></p>
+</section>
+<section id="problem-4" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Problem 4</h1>
+<p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly greater than the population mean: <span class="math inline">\(\mu = {45}\)</span>? <br><br>Use a <span class="math inline">\({1}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.05}\)</span><br><br></p>
+<style type="text/css">
+</style>
+
+<table id="T_b56de" class="caption-top table">
+<thead>
+<tr class="header">
+<th id="T_b56de_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_b56de_row0_col0" class="data row0 col0">56</td>
+</tr>
+<tr class="even">
+<td id="T_b56de_row1_col0" class="data row1 col0">44</td>
+</tr>
+<tr class="odd">
+<td id="T_b56de_row2_col0" class="data row2 col0">47</td>
+</tr>
+<tr class="even">
+<td id="T_b56de_row3_col0" class="data row3 col0">47</td>
+</tr>
+<tr class="odd">
+<td id="T_b56de_row4_col0" class="data row4 col0">41</td>
+</tr>
+<tr class="even">
+<td id="T_b56de_row5_col0" class="data row5 col0">46</td>
+</tr>
+<tr class="odd">
+<td id="T_b56de_row6_col0" class="data row6 col0">35</td>
+</tr>
+<tr class="even">
+<td id="T_b56de_row7_col0" class="data row7 col0">40</td>
+</tr>
+<tr class="odd">
+<td id="T_b56de_row8_col0" class="data row8 col0">39</td>
+</tr>
+<tr class="even">
+<td id="T_b56de_row9_col0" class="data row9 col0">45</td>
+</tr>
+<tr class="odd">
+<td id="T_b56de_row10_col0" class="data row10 col0">47</td>
+</tr>
+<tr class="even">
+<td id="T_b56de_row11_col0" class="data row11 col0">40</td>
+</tr>
+<tr class="odd">
+<td id="T_b56de_row12_col0" class="data row12 col0">52</td>
+</tr>
+<tr class="even">
+<td id="T_b56de_row13_col0" class="data row13 col0">39</td>
+</tr>
+<tr class="odd">
+<td id="T_b56de_row14_col0" class="data row14 col0">48</td>
+</tr>
+</tbody>
+</table>
+<p><br>The necessary summary statistics for these data<br> <span class="math display">\[M_A = {44.4}\]</span> <span class="math display">\[{\sigma} = {7}\]</span> <span class="math display">\[n = {15}\]</span><br></p>
+<p>State the Hypotheses <br> <span class="math display">\[H_0: \mu \leq 45\]</span> <span class="math display">\[H_1: \mu \gt 45\]</span> <br></p>
+<p><br>The decision criteria: <br><br> <span class="math inline">\(z_{crit} = +{1.645}, \alpha_{one-tailed} = {0.05}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[\sigma_M = \frac{\sigma}{\sqrt{N}}\]</span> <br> <span class="math display">\[\sigma_M = \frac{7}{\sqrt{15}}\]</span> <br> <span class="math display">\[\sigma_M = \frac{7}{3.87}\]</span> <br> <span class="math display">\[\sigma_M = {1.81}\]</span> <br><br> Calculate <span class="math inline">\(z_{obt}\)</span> <br> <span class="math display">\[z_{obt} = {\frac{M - \mu}{\sigma_M}}\]</span> <br> <span class="math display">\[z_{obt} = \frac{44.4 - 45}{1.81}\]</span> <br> <span class="math display">\[z_{obt} = \frac{-0.6}{1.81}\]</span> <br> <span class="math display">\[z_{obt} = {-0.33}\]</span> <br><br> Calculate Cohen’s d for effect size <br> <span class="math display">\[d = \frac{M - \mu}{\sigma}\]</span> <br> <span class="math display">\[d = \frac{44.4 - 45}{7}\]</span> <br> <span class="math display">\[d = \frac{-0.6}{7}\]</span> <br> <span class="math display">\[d = {-0.09}\]</span> <br><br> The results: <br><br> fail to reject the null hypothesis, results not significant, <br> <em>z</em> = -0.33, <em>p</em> &gt; 0.05, <em>d</em> = -0.09<br><br></p>
+</section>
+<section id="problem-5" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Problem 5</h1>
+<p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from the population mean: <span class="math inline">\(\mu = {43}\)</span>? <br><br>Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.05}\)</span><br><br></p>
+<style type="text/css">
+</style>
+
+<table id="T_57d6d" class="caption-top table">
+<thead>
+<tr class="header">
+<th id="T_57d6d_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_57d6d_row0_col0" class="data row0 col0">61</td>
+</tr>
+<tr class="even">
+<td id="T_57d6d_row1_col0" class="data row1 col0">61</td>
+</tr>
+<tr class="odd">
+<td id="T_57d6d_row2_col0" class="data row2 col0">41</td>
+</tr>
+<tr class="even">
+<td id="T_57d6d_row3_col0" class="data row3 col0">58</td>
+</tr>
+<tr class="odd">
+<td id="T_57d6d_row4_col0" class="data row4 col0">53</td>
+</tr>
+<tr class="even">
+<td id="T_57d6d_row5_col0" class="data row5 col0">47</td>
+</tr>
+<tr class="odd">
+<td id="T_57d6d_row6_col0" class="data row6 col0">37</td>
+</tr>
+<tr class="even">
+<td id="T_57d6d_row7_col0" class="data row7 col0">33</td>
+</tr>
+<tr class="odd">
+<td id="T_57d6d_row8_col0" class="data row8 col0">59</td>
+</tr>
+</tbody>
+</table>
+<p><br>The necessary summary statistics for these data<br> <span class="math display">\[M_A = {50.0}\]</span> <span class="math display">\[{\sigma} = {12}\]</span> <span class="math display">\[n = {9}\]</span><br></p>
+<p>State the Hypotheses <br> <span class="math display">\[H_0: \mu = 43\]</span> <span class="math display">\[H_1: \mu \ne 43\]</span> <br></p>
+<p><br>The decision criteria: <br><br> <span class="math inline">\(z_{crit} = \pm{1.96}, \alpha_{two-tailed} = {0.05}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[\sigma_M = \frac{\sigma}{\sqrt{N}}\]</span> <br> <span class="math display">\[\sigma_M = \frac{12}{\sqrt{9}}\]</span> <br> <span class="math display">\[\sigma_M = \frac{12}{3.0}\]</span> <br> <span class="math display">\[\sigma_M = {4.0}\]</span> <br><br> Calculate <span class="math inline">\(z_{obt}\)</span> <br> <span class="math display">\[z_{obt} = {\frac{M - \mu}{\sigma_M}}\]</span> <br> <span class="math display">\[z_{obt} = \frac{50.0 - 43}{4.0}\]</span> <br> <span class="math display">\[z_{obt} = \frac{7.0}{4.0}\]</span> <br> <span class="math display">\[z_{obt} = {1.75}\]</span> <br><br> Calculate Cohen’s d for effect size <br> <span class="math display">\[d = \frac{M - \mu}{\sigma}\]</span> <br> <span class="math display">\[d = \frac{50.0 - 43}{12}\]</span> <br> <span class="math display">\[d = \frac{7.0}{12}\]</span> <br> <span class="math display">\[d = {0.58}\]</span> <br><br> The results: <br><br> fail to reject the null hypothesis, results not significant, <br> <em>z</em> = 1.75, <em>p</em> &gt; 0.05, <em>d</em> = 0.58<br><br></p>
 
 
 </section>
@@ -787,8 +978,8 @@ window.Quarto = {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./09 - Single-Sample_t-Tests.html" class="pagination-link" aria-label="Hypothesis Testing with One-Sample *t*-tests">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hypothesis Testing with One-Sample <em>t</em>-tests</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./09 - Single-Sample_t-Tests.html" class="pagination-link" aria-label="One-Sample *t*-tests">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">One-Sample <em>t</em>-tests</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

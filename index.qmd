@@ -1,6 +1,6 @@
 ---
 title: Statistics Problem and Solution Generator
-subtitle: Statistics in Psychology
+subtitle: For an Undergraduate Level Statistics in Psychology Course
 author: Guenther, Benjamin A.
 project:
   type: website
@@ -12,8 +12,15 @@ format:
 
 This an ongoing project to create a series of randomly generate problems and their fully worked solutions for use in an undergraduate psychology course.
 
-# About the Project
+# About the Project (draft)
+The first version was developed and deployed using google colab.  The goal was to write functions that could be used to endlessly generate new practice problems and their solutions.  It was written...
 
+The original version was not as user-friendly as intended and did not meet digital accessibility guidelines so it pivoted to static document generation.  
+
+... examples hosted here document and display the functionality of the second version.  Once this page is mostly documented and ready, a significant rewrite and restructuring of the codebase will begin.  The rewrite aims to improve the code itself and prepare it for new features, more flexibility, and improved functionality.
+
+
+# information below is old will be updated soon
 
 # Documents to produce accessible .html practice problems
 Each document will produces 30 practice problems in a .html slideshow rendered with revealjs.  Each slide is scrollable and contains a single problem.  Problems are generated with a randomly determined sample size between 5 and 15 per group.  When more than one group, sample size is equivalent between groups.<br>

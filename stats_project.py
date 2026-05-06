@@ -1265,6 +1265,7 @@ class FactorialData:
 
             self.base.significance = self.base.final_decision()
             self.base.write_result()
+            display(Markdown("<br><br>"))
         
     
 """

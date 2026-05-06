@@ -1,7 +1,7 @@
 ---
 title: Repeated-Measures ANOVA
-subtitle: Practice Problems for PSY 241
-author: Guenther, Benjamin A.
+subtitle: Sample Problems
+# author: Guenther, Benjamin A.
 project:
   type: website
   output-dir: docs
@@ -24,10 +24,63 @@ importlib.reload(stats_project)
 from stats_project import RandomData 
 ```
 
+# About
+the repeated-measures ANOVA problems use the `RamdomData` class which requires:
+
+* an integer value for the number of groups
+* the sample size per group - all groups will have the same sample size
+* a call to the `anova()` method with `test = "repeated-measures"`
+
+Each of the problems below sets factor levels using a random integer between 2 and 5.  Per-group sample size is randomly set between 4 and 10. An example funciton call is included below
+
+```{python}
+#| eval: false
+n_groups = random.randint(2,5)
+sample_size = random.randint(4,10)
+RandomData(groups = n_groups, n = sample_size).anova(test = "repeated-measures")
+```
+
+# Problem 1
 ```{python}
 #| echo: false
 #| output: asis
-n_groups = random.randint(3,5)
-sample_size = random.randint(5,15)
+n_groups = random.randint(2,5)
+sample_size = random.randint(4,10)
+RandomData(groups = n_groups, n = sample_size).anova(test = "repeated-measures")
+```
+
+# Problem 2
+```{python}
+#| echo: false
+#| output: asis
+n_groups = random.randint(2,5)
+sample_size = random.randint(4,10)
+RandomData(groups = n_groups, n = sample_size).anova(test = "repeated-measures")
+```
+
+# Problem 3
+```{python}
+#| echo: false
+#| output: asis
+n_groups = random.randint(2,5)
+sample_size = random.randint(4,10)
+RandomData(groups = n_groups, n = sample_size).anova(test = "repeated-measures")
+```
+
+# Problem 4
+```{python}
+#| echo: false
+#| output: asis
+n_groups = random.randint(2,5)
+sample_size = random.randint(4,10)
+RandomData(groups = n_groups, n = sample_size).anova(test = "repeated-measures")
+```
+
+# Problem 5
+```{python}
+#| echo: false
+#| output: asis
+n_groups = random.randint(2,5)
+sample_size = random.randint(4,10)
 RandomData(groups = n_groups, n = sample_size).anova(test = "repeated-measures")
 ```
