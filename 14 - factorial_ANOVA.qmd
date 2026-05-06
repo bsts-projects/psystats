@@ -1,7 +1,7 @@
 ---
 title: Two-Factor ANOVA
-subtitle: Practice Problems for PSY 241
-author: Guenther, Benjamin A.
+subtitle: Sample Problems
+# author: Guenther, Benjamin A.
 project:
   type: website
   output-dir: docs
@@ -24,9 +24,25 @@ importlib.reload(stats_project)
 from stats_project import FactorialData
 ```
 
+# About
+the factorial ANOVA problems use the `FactorialData` class which requires:
+* a tuple to specify the levels of each factor - (factor A, factor B)
+* the sample size per group - all groups will have the same sample size
+
+Each of the problems below sets factor levels randomly with 2 or 3 levels.  Per-group sample size is randomly set between 5 and 15. An example funciton call is included below
+
+```{python}
+#| eval: false
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+
 # Problem 1
 ```{python}
-#| echo: true
+#| echo: false
 #| output: asis
 levels_factor_a = random.randint(2,3)
 levels_factor_b = random.randint(2,3)
@@ -36,7 +52,37 @@ FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factoria
 
 # Problem 2
 ```{python}
-#| echo: true
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+# Problem 3
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+# Problem 4
+```{python}
+#| echo: false
+#| output: asis
+levels_factor_a = random.randint(2,3)
+levels_factor_b = random.randint(2,3)
+n = random.randint(5,15)
+FactorialData(design = (levels_factor_a, levels_factor_b), group_n = n).factorial_ANOVA()
+```
+
+# Problem 5
+```{python}
+#| echo: false
 #| output: asis
 levels_factor_a = random.randint(2,3)
 levels_factor_b = random.randint(2,3)

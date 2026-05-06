@@ -1220,20 +1220,20 @@ class FactorialData:
 
     def factorial_ANOVA(self):
         self.base.set_test("factorial_ANOVA")
-        #self.factorial_data = {}
+        #self.factorial_data = {} I don't think this was doing anything and I'm not sure why it's here
         self.combined_values()
         self.factor_values()
 
         self.base.generate_question()
         self.base.set_null_hypothesis()
 
-        display(Markdown("<br> ## Full Group Summary Data <br>"))
+        display(Markdown("<br>Full Group Summary Data <br>"))
         self.summary_by_group()
         # need to add G and total sum of squares
         display(Markdown(f"$\\Sigma X^2 = {{{self.summary["grand_sum_squared_scores"]}}}$ <br>"))
         display(Markdown(f"$G = {{{self.summary["grand_sum_scores"]}}}$ <br>"))
 
-        display(Markdown("<br> ## Stage 1 ANOVA Calculations <br>"))
+        display(Markdown("<br>Stage 1 ANOVA Calculations <br>"))
         self.stage_1_df()
         self.stage_1_ss()
 
@@ -1245,10 +1245,10 @@ class FactorialData:
         
         for factor in ["Factor_A", "Factor_B", "AxB"]:
             if factor != "AxB":
-                display(Markdown(f"<br><br>## Stage 2 calculations for ${factor}$<br><br>"))
+                display(Markdown(f"<br><br> Stage 2 calculations for ${factor}$<br><br>"))
                 self.collapse_by_factor(factor)
             else:
-                display(Markdown(f"<br><br>## Stage 2 calculations for the ${factor}$ interaction <br><br>"))
+                display(Markdown(f"<br><br> Stage 2 calculations for the ${factor}$ interaction <br><br>"))
 
             self.test_crit_values(factor)
             self.write_factor_hypotheses(factor)
@@ -1267,7 +1267,8 @@ class FactorialData:
             self.base.write_result()
         
     
-
+"""
 if __name__ in "__main__":
     FactorialData(design = (2, 3), group_n = 2).factorial_ANOVA()
 
+"""
