@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://bsts-projects.github.io/pystats/index.html</loc>
-    <lastmod>2026-05-05T10:34:12.264Z</lastmod>
+    <lastmod>2026-05-06T09:00:03.864Z</lastmod>
   </url>
   <url>
     <loc>https://bsts-projects.github.io/pystats/08 - Hypothesis_Test_z-Scores.html</loc>
-    <lastmod>2026-04-09T10:49:46.341Z</lastmod>
+    <lastmod>2026-05-05T10:58:31.642Z</lastmod>
   </url>
   <url>
     <loc>https://bsts-projects.github.io/pystats/09 - Single-Sample_t-Tests.html</loc>
@@ -30,6 +30,6 @@
   </url>
   <url>
     <loc>https://bsts-projects.github.io/pystats/14 - factorial_ANOVA.html</loc>
-    <lastmod>2026-04-09T10:49:46.337Z</lastmod>
+    <lastmod>2026-05-06T09:22:12.649Z</lastmod>
   </url>
 </urlset>
