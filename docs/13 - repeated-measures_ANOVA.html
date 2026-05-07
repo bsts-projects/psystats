@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; Repeated-Measures ANOVA – Statistics Problem and Solution Generator</title>
+<title>8&nbsp; Repeated-Measures ANOVA – Statistics Problem and Solution Generator</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -174,7 +174,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./13 - repeated-measures_ANOVA.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Repeated-Measures ANOVA</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./13 - repeated-measures_ANOVA.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Repeated-Measures ANOVA</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -194,44 +194,50 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./code_overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Overview of the Underlying Code</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./08 - Hypothesis_Test_z-Scores.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Hypothesis Testing with z-Scores</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hypothesis Testing with z-Scores</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09 - Single-Sample_t-Tests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">One-Sample <em>t</em>-tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">One-Sample <em>t</em>-tests</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10 - Independent-Samples_t-Tests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Independent-Samples <em>t</em>-tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Independent-Samples <em>t</em>-tests</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11 - Dependent-Samples_t-Tests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Dependent-Samples <em>t</em>-tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Dependent-Samples <em>t</em>-tests</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12 - one-way_ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13 - repeated-measures_ANOVA.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Repeated-Measures ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Repeated-Measures ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14 - factorial_ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Two-Factor ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Two-Factor ANOVA</span></span></a>
   </div>
 </li>
     </ul>
@@ -244,12 +250,12 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#about" id="toc-about" class="nav-link active" data-scroll-target="#about"><span class="header-section-number">7.1</span> About</a></li>
-  <li><a href="#problem-1" id="toc-problem-1" class="nav-link" data-scroll-target="#problem-1"><span class="header-section-number">7.2</span> Problem 1</a></li>
-  <li><a href="#problem-2" id="toc-problem-2" class="nav-link" data-scroll-target="#problem-2"><span class="header-section-number">7.3</span> Problem 2</a></li>
-  <li><a href="#problem-3" id="toc-problem-3" class="nav-link" data-scroll-target="#problem-3"><span class="header-section-number">7.4</span> Problem 3</a></li>
-  <li><a href="#problem-4" id="toc-problem-4" class="nav-link" data-scroll-target="#problem-4"><span class="header-section-number">7.5</span> Problem 4</a></li>
-  <li><a href="#problem-5" id="toc-problem-5" class="nav-link" data-scroll-target="#problem-5"><span class="header-section-number">7.6</span> Problem 5</a></li>
+  <li><a href="#about" id="toc-about" class="nav-link active" data-scroll-target="#about"><span class="header-section-number">8.1</span> About</a></li>
+  <li><a href="#problem-1" id="toc-problem-1" class="nav-link" data-scroll-target="#problem-1"><span class="header-section-number">8.2</span> Problem 1</a></li>
+  <li><a href="#problem-2" id="toc-problem-2" class="nav-link" data-scroll-target="#problem-2"><span class="header-section-number">8.3</span> Problem 2</a></li>
+  <li><a href="#problem-3" id="toc-problem-3" class="nav-link" data-scroll-target="#problem-3"><span class="header-section-number">8.4</span> Problem 3</a></li>
+  <li><a href="#problem-4" id="toc-problem-4" class="nav-link" data-scroll-target="#problem-4"><span class="header-section-number">8.5</span> Problem 4</a></li>
+  <li><a href="#problem-5" id="toc-problem-5" class="nav-link" data-scroll-target="#problem-5"><span class="header-section-number">8.6</span> Problem 5</a></li>
   </ul>
 </nav>
     </div>
@@ -258,7 +264,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Repeated-Measures ANOVA</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Repeated-Measures ANOVA</span></h1>
 <p class="subtitle lead">Sample Problems</p>
 </div>
 
@@ -276,8 +282,8 @@ window.Quarto = {
 </header>
 
 
-<section id="about" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="about"><span class="header-section-number">7.1</span> About</h2>
+<section id="about" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="about"><span class="header-section-number">8.1</span> About</h2>
 <p>the repeated-measures ANOVA problems use the <code>RamdomData</code> class which requires:</p>
 <ul>
 <li>an integer value for the number of groups</li>
@@ -291,8 +297,8 @@ window.Quarto = {
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>RandomData(groups <span class="op">=</span> n_groups, n <span class="op">=</span> sample_size).anova(test <span class="op">=</span> <span class="st">"repeated-measures"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="problem-1" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="problem-1"><span class="header-section-number">7.2</span> Problem 1</h2>
+<section id="problem-1" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="problem-1"><span class="header-section-number">8.2</span> Problem 1</h2>
 <p>Given the following within-subjects data, use a repeated-measures ANOVA with <span class="math inline">\(\alpha = {0.05}\)</span></p>
 <style type="text/css">
 </style>
@@ -413,8 +419,8 @@ window.Quarto = {
 <p>Calculate <span class="math inline">\(\eta^2\)</span> <br> <span class="math display">\[\eta_p^2 = \frac{SS{between}}{SS_{total} - SS_{subjects}}\]</span> <br> <span class="math display">\[\eta_p^2 = \frac{60.08}{{539.5} - {191.0}}\]</span> <br> <span class="math display">\[\eta_p^2 = \frac{60.08}{348.5}\]</span> <br> <span class="math display">\[\eta_p^2 = {0.17}\]</span> <br><br></p>
 <p>The results: <br><br> fail to reject the null hypothesis, results not significant, <br><br> <span class="math inline">\(F({1}, {6}) = {1.25}, p &gt; {0.05}, \eta_p^2 = {0.17}\)</span></p>
 </section>
-<section id="problem-2" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="problem-2"><span class="header-section-number">7.3</span> Problem 2</h2>
+<section id="problem-2" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="problem-2"><span class="header-section-number">8.3</span> Problem 2</h2>
 <p>Given the following within-subjects data, use a repeated-measures ANOVA with <span class="math inline">\(\alpha = {0.01}\)</span></p>
 <style type="text/css">
 </style>
@@ -552,8 +558,8 @@ window.Quarto = {
 <p>Calculate <span class="math inline">\(\eta^2\)</span> <br> <span class="math display">\[\eta_p^2 = \frac{SS{between}}{SS_{total} - SS_{subjects}}\]</span> <br> <span class="math display">\[\eta_p^2 = \frac{853.0}{{1591.33} - {209.83}}\]</span> <br> <span class="math display">\[\eta_p^2 = \frac{853.0}{1381.5}\]</span> <br> <span class="math display">\[\eta_p^2 = {0.62}\]</span> <br><br></p>
 <p>The results: <br><br> reject the null hypothesis, results are significant, <br><br> <span class="math inline">\(F({3}, {15}) = {8.07}, p &lt; {0.01}, \eta_p^2 = {0.62}\)</span></p>
 </section>
-<section id="problem-3" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="problem-3"><span class="header-section-number">7.4</span> Problem 3</h2>
+<section id="problem-3" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="problem-3"><span class="header-section-number">8.4</span> Problem 3</h2>
 <p>Given the following within-subjects data, use a repeated-measures ANOVA with <span class="math inline">\(\alpha = {0.05}\)</span></p>
 <style type="text/css">
 </style>
@@ -676,8 +682,8 @@ window.Quarto = {
 <p>Calculate <span class="math inline">\(\eta^2\)</span> <br> <span class="math display">\[\eta_p^2 = \frac{SS{between}}{SS_{total} - SS_{subjects}}\]</span> <br> <span class="math display">\[\eta_p^2 = \frac{250.2}{{647.8} - {156.3}}\]</span> <br> <span class="math display">\[\eta_p^2 = \frac{250.2}{491.5}\]</span> <br> <span class="math display">\[\eta_p^2 = {0.51}\]</span> <br><br></p>
 <p>The results: <br><br> reject the null hypothesis, results are significant, <br><br> <span class="math inline">\(F({3}, {12}) = {4.15}, p &lt; {0.05}, \eta_p^2 = {0.51}\)</span></p>
 </section>
-<section id="problem-4" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="problem-4"><span class="header-section-number">7.5</span> Problem 4</h2>
+<section id="problem-4" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="problem-4"><span class="header-section-number">8.5</span> Problem 4</h2>
 <p>Given the following within-subjects data, use a repeated-measures ANOVA with <span class="math inline">\(\alpha = {0.05}\)</span></p>
 <style type="text/css">
 </style>
@@ -787,8 +793,8 @@ window.Quarto = {
 <p>Calculate <span class="math inline">\(\eta^2\)</span> <br> <span class="math display">\[\eta_p^2 = \frac{SS{between}}{SS_{total} - SS_{subjects}}\]</span> <br> <span class="math display">\[\eta_p^2 = \frac{363.0}{{643.0} - {152.0}}\]</span> <br> <span class="math display">\[\eta_p^2 = \frac{363.0}{491.0}\]</span> <br> <span class="math display">\[\eta_p^2 = {0.74}\]</span> <br><br></p>
 <p>The results: <br><br> reject the null hypothesis, results are significant, <br><br> <span class="math inline">\(F({1}, {5}) = {14.18}, p &lt; {0.05}, \eta_p^2 = {0.74}\)</span></p>
 </section>
-<section id="problem-5" class="level2" data-number="7.6">
-<h2 data-number="7.6" class="anchored" data-anchor-id="problem-5"><span class="header-section-number">7.6</span> Problem 5</h2>
+<section id="problem-5" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="problem-5"><span class="header-section-number">8.6</span> Problem 5</h2>
 <p>Given the following within-subjects data, use a repeated-measures ANOVA with <span class="math inline">\(\alpha = {0.01}\)</span></p>
 <style type="text/css">
 </style>
@@ -1305,12 +1311,12 @@ window.Quarto = {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./12 - one-way_ANOVA.html" class="pagination-link" aria-label="One-Way ANOVA">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./14 - factorial_ANOVA.html" class="pagination-link" aria-label="Two-Factor ANOVA">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Two-Factor ANOVA</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Two-Factor ANOVA</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; One-Sample t-tests – Statistics Problem and Solution Generator</title>
+<title>4&nbsp; One-Sample t-tests – Statistics Problem and Solution Generator</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -174,7 +174,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09 - Single-Sample_t-Tests.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">One-Sample <em>t</em>-tests</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09 - Single-Sample_t-Tests.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">One-Sample <em>t</em>-tests</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -194,44 +194,50 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./code_overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Overview of the Underlying Code</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./08 - Hypothesis_Test_z-Scores.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Hypothesis Testing with z-Scores</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hypothesis Testing with z-Scores</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09 - Single-Sample_t-Tests.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">One-Sample <em>t</em>-tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">One-Sample <em>t</em>-tests</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10 - Independent-Samples_t-Tests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Independent-Samples <em>t</em>-tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Independent-Samples <em>t</em>-tests</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11 - Dependent-Samples_t-Tests.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Dependent-Samples <em>t</em>-tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Dependent-Samples <em>t</em>-tests</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12 - one-way_ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">One-Way ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13 - repeated-measures_ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Repeated-Measures ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Repeated-Measures ANOVA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14 - factorial_ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Two-Factor ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Two-Factor ANOVA</span></span></a>
   </div>
 </li>
     </ul>
@@ -244,12 +250,12 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#about" id="toc-about" class="nav-link active" data-scroll-target="#about"><span class="header-section-number">3.1</span> About</a></li>
-  <li><a href="#problem-1" id="toc-problem-1" class="nav-link" data-scroll-target="#problem-1"><span class="header-section-number">3.2</span> Problem 1</a></li>
-  <li><a href="#problem-2" id="toc-problem-2" class="nav-link" data-scroll-target="#problem-2"><span class="header-section-number">3.3</span> Problem 2</a></li>
-  <li><a href="#problem-3" id="toc-problem-3" class="nav-link" data-scroll-target="#problem-3"><span class="header-section-number">3.4</span> Problem 3</a></li>
-  <li><a href="#problem-4" id="toc-problem-4" class="nav-link" data-scroll-target="#problem-4"><span class="header-section-number">3.5</span> Problem 4</a></li>
-  <li><a href="#problem-5" id="toc-problem-5" class="nav-link" data-scroll-target="#problem-5"><span class="header-section-number">3.6</span> Problem 5</a></li>
+  <li><a href="#about" id="toc-about" class="nav-link active" data-scroll-target="#about"><span class="header-section-number">4.1</span> About</a></li>
+  <li><a href="#problem-1" id="toc-problem-1" class="nav-link" data-scroll-target="#problem-1"><span class="header-section-number">4.2</span> Problem 1</a></li>
+  <li><a href="#problem-2" id="toc-problem-2" class="nav-link" data-scroll-target="#problem-2"><span class="header-section-number">4.3</span> Problem 2</a></li>
+  <li><a href="#problem-3" id="toc-problem-3" class="nav-link" data-scroll-target="#problem-3"><span class="header-section-number">4.4</span> Problem 3</a></li>
+  <li><a href="#problem-4" id="toc-problem-4" class="nav-link" data-scroll-target="#problem-4"><span class="header-section-number">4.5</span> Problem 4</a></li>
+  <li><a href="#problem-5" id="toc-problem-5" class="nav-link" data-scroll-target="#problem-5"><span class="header-section-number">4.6</span> Problem 5</a></li>
   </ul>
 </nav>
     </div>
@@ -258,7 +264,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">One-Sample <em>t</em>-tests</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">One-Sample <em>t</em>-tests</span></h1>
 <p class="subtitle lead">Sample Problems</p>
 </div>
 
@@ -276,8 +282,8 @@ window.Quarto = {
 </header>
 
 
-<section id="about" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="about"><span class="header-section-number">3.1</span> About</h2>
+<section id="about" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="about"><span class="header-section-number">4.1</span> About</h2>
 <p>the one-sample <em>t</em>-Test problems use the <code>RamdomData</code> class which requires:</p>
 <ul>
 <li>the groups variable set to 1: <code>groups = 1</code></li>
@@ -290,8 +296,8 @@ window.Quarto = {
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>RandomData(groups <span class="op">=</span> <span class="dv">1</span>, n <span class="op">=</span> sample_size).one_sample_t_test()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="problem-1" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="problem-1"><span class="header-section-number">3.2</span> Problem 1</h2>
+<section id="problem-1" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="problem-1"><span class="header-section-number">4.2</span> Problem 1</h2>
 <p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from <span class="math inline">\({13}\)</span>? Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.01}\)</span> <br><br></p>
 <style type="text/css">
 </style>
@@ -355,8 +361,8 @@ window.Quarto = {
 <p><br>The decision criteria: <br><br> <span class="math inline">\(t_{crit} = \pm{2.98}, \alpha_{two-tailed} = {0.01}, df = {14}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[s_M = \sqrt{\frac{s^2}{n}}\]</span> <br> <span class="math display">\[s_M = \sqrt{\frac{2.83}{15}}\]</span> <br> <span class="math display">\[s_M = \sqrt{0.19}\]</span> <br> <span class="math display">\[s_M = {0.44}\]</span> <br><br> calculate <span class="math inline">\(t_{obt}\)</span> <br> <span class="math display">\[t_{obt} = {\frac{M - \mu}{s_M}}\]</span> <br> <span class="math display">\[t_{obt} = \frac{15.6 - 13}{0.44}\]</span> <br> <span class="math display">\[t_{obt} = \frac{2.6}{0.44}\]</span> <br> <span class="math display">\[t_{obt} = {5.91}\]</span> <br><br> calculate Cohen’s d <br> <span class="math display">\[d = \frac{M - \mu}{s}\]</span> <br> <span class="math display">\[d = \frac{15.6 - 13}{1.68}\]</span> <br> <span class="math display">\[d = \frac{2.6}{1.68}\]</span> <br> <span class="math display">\[d = {1.55}\]</span> <br><br></p>
 <p>The results: <br><br> reject the null hypothesis, results are significant, <br> <em>t</em>(14) = 5.91, <em>p</em> &lt; 0.01, <em>d</em> = 1.55<br><br></p>
 </section>
-<section id="problem-2" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="problem-2"><span class="header-section-number">3.3</span> Problem 2</h2>
+<section id="problem-2" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="problem-2"><span class="header-section-number">4.3</span> Problem 2</h2>
 <p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from <span class="math inline">\({23}\)</span>? Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.01}\)</span> <br><br></p>
 <style type="text/css">
 </style>
@@ -399,8 +405,8 @@ window.Quarto = {
 <p><br>The decision criteria: <br><br> <span class="math inline">\(t_{crit} = \pm{3.5}, \alpha_{two-tailed} = {0.01}, df = {7}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[s_M = \sqrt{\frac{s^2}{n}}\]</span> <br> <span class="math display">\[s_M = \sqrt{\frac{11.55}{8}}\]</span> <br> <span class="math display">\[s_M = \sqrt{1.44}\]</span> <br> <span class="math display">\[s_M = {1.2}\]</span> <br><br> calculate <span class="math inline">\(t_{obt}\)</span> <br> <span class="math display">\[t_{obt} = {\frac{M - \mu}{s_M}}\]</span> <br> <span class="math display">\[t_{obt} = \frac{20.88 - 23}{1.2}\]</span> <br> <span class="math display">\[t_{obt} = \frac{-2.12}{1.2}\]</span> <br> <span class="math display">\[t_{obt} = {-1.77}\]</span> <br><br> calculate Cohen’s d <br> <span class="math display">\[d = \frac{M - \mu}{s}\]</span> <br> <span class="math display">\[d = \frac{20.88 - 23}{3.4}\]</span> <br> <span class="math display">\[d = \frac{-2.12}{3.4}\]</span> <br> <span class="math display">\[d = {-0.62}\]</span> <br><br></p>
 <p>The results: <br><br> fail to reject the null hypothesis, results not significant, <br> <em>t</em>(7) = -1.77, <em>p</em> &gt; 0.01, <em>d</em> = -0.62<br><br></p>
 </section>
-<section id="problem-3" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="problem-3"><span class="header-section-number">3.4</span> Problem 3</h2>
+<section id="problem-3" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="problem-3"><span class="header-section-number">4.4</span> Problem 3</h2>
 <p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from <span class="math inline">\({10}\)</span>? Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.05}\)</span> <br><br></p>
 <style type="text/css">
 </style>
@@ -446,8 +452,8 @@ window.Quarto = {
 <p><br>The decision criteria: <br><br> <span class="math inline">\(t_{crit} = \pm{2.31}, \alpha_{two-tailed} = {0.05}, df = {8}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[s_M = \sqrt{\frac{s^2}{n}}\]</span> <br> <span class="math display">\[s_M = \sqrt{\frac{5.61}{9}}\]</span> <br> <span class="math display">\[s_M = \sqrt{0.62}\]</span> <br> <span class="math display">\[s_M = {0.79}\]</span> <br><br> calculate <span class="math inline">\(t_{obt}\)</span> <br> <span class="math display">\[t_{obt} = {\frac{M - \mu}{s_M}}\]</span> <br> <span class="math display">\[t_{obt} = \frac{11.11 - 10}{0.79}\]</span> <br> <span class="math display">\[t_{obt} = \frac{1.11}{0.79}\]</span> <br> <span class="math display">\[t_{obt} = {1.41}\]</span> <br><br> calculate Cohen’s d <br> <span class="math display">\[d = \frac{M - \mu}{s}\]</span> <br> <span class="math display">\[d = \frac{11.11 - 10}{2.37}\]</span> <br> <span class="math display">\[d = \frac{1.11}{2.37}\]</span> <br> <span class="math display">\[d = {0.47}\]</span> <br><br></p>
 <p>The results: <br><br> fail to reject the null hypothesis, results not significant, <br> <em>t</em>(8) = 1.41, <em>p</em> &gt; 0.05, <em>d</em> = 0.47<br><br></p>
 </section>
-<section id="problem-4" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="problem-4"><span class="header-section-number">3.5</span> Problem 4</h2>
+<section id="problem-4" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="problem-4"><span class="header-section-number">4.5</span> Problem 4</h2>
 <p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from <span class="math inline">\({32}\)</span>? Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.05}\)</span> <br><br></p>
 <style type="text/css">
 </style>
@@ -502,8 +508,8 @@ window.Quarto = {
 <p><br>The decision criteria: <br><br> <span class="math inline">\(t_{crit} = \pm{2.2}, \alpha_{two-tailed} = {0.05}, df = {11}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[s_M = \sqrt{\frac{s^2}{n}}\]</span> <br> <span class="math display">\[s_M = \sqrt{\frac{46.81}{12}}\]</span> <br> <span class="math display">\[s_M = \sqrt{3.9}\]</span> <br> <span class="math display">\[s_M = {1.97}\]</span> <br><br> calculate <span class="math inline">\(t_{obt}\)</span> <br> <span class="math display">\[t_{obt} = {\frac{M - \mu}{s_M}}\]</span> <br> <span class="math display">\[t_{obt} = \frac{29.08 - 32}{1.97}\]</span> <br> <span class="math display">\[t_{obt} = \frac{-2.92}{1.97}\]</span> <br> <span class="math display">\[t_{obt} = {-1.48}\]</span> <br><br> calculate Cohen’s d <br> <span class="math display">\[d = \frac{M - \mu}{s}\]</span> <br> <span class="math display">\[d = \frac{29.08 - 32}{6.84}\]</span> <br> <span class="math display">\[d = \frac{-2.92}{6.84}\]</span> <br> <span class="math display">\[d = {-0.43}\]</span> <br><br></p>
 <p>The results: <br><br> fail to reject the null hypothesis, results not significant, <br> <em>t</em>(11) = -1.48, <em>p</em> &gt; 0.05, <em>d</em> = -0.43<br><br></p>
 </section>
-<section id="problem-5" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="problem-5"><span class="header-section-number">3.6</span> Problem 5</h2>
+<section id="problem-5" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="problem-5"><span class="header-section-number">4.6</span> Problem 5</h2>
 <p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly greater than <span class="math inline">\({36}\)</span>? Use a <span class="math inline">\({1}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.05}\)</span> <br><br></p>
 <style type="text/css">
 </style>
@@ -956,12 +962,12 @@ window.Quarto = {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./08 - Hypothesis_Test_z-Scores.html" class="pagination-link" aria-label="Hypothesis Testing with z-Scores">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Hypothesis Testing with z-Scores</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hypothesis Testing with z-Scores</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./10 - Independent-Samples_t-Tests.html" class="pagination-link" aria-label="Independent-Samples *t*-tests">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Independent-Samples <em>t</em>-tests</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Independent-Samples <em>t</em>-tests</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -3,6 +3,7 @@ project:
   output-dir: docs
   render:
     - index.qmd
+    - code_overview.qmd
     - 08 - Hypothesis_Test_z-Scores.qmd
     - 09 - Single-Sample_t-Tests.qmd
     - 10 - Independent-Samples_t-Tests.qmd
@@ -24,6 +25,7 @@ book:
         aria-label: GitHub
   chapters:
     - index.qmd
+    - code_overview.qmd
     - 08 - Hypothesis_Test_z-Scores.qmd
     - 09 - Single-Sample_t-Tests.qmd
     - 10 - Independent-Samples_t-Tests.qmd

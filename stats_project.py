@@ -27,7 +27,7 @@ class RandomData():
         self.null = int
         self.obt = float
         self.effect_size = float
-        self.crit_values = {} # dict (it was originally typed {}; dict but I have no idea why)
+        self.crit_values = {}
         self.significance = bool
         if distribution == "normal":
             self.distribution = distribution 

@@ -1,0 +1,58 @@
+---
+title: Overview of the Underlying Code
+#subtitle: Sample Problems
+# author: Guenther, Benjamin A.
+project:
+  type: website
+  output-dir: docs
+format: 
+  html:
+    html-math-method: mathjax
+    self-contained-math: false
+    embed-resources: false
+jupyter: python3
+---
+
+## Generating the Core Dataset for Each Problem
+The core of each problem is managed in the `RandomData` class.  which takes three initial arguments:
+
+* groups: integer value to specify the number of columns in the dataframe.  defaults to `groups = 1`
+* n: integer value to define the nubmer of rows in the data frame.  Also the number of scores in each condition.  defaults to `n = 10`
+* distribution: written as a placeholder to allow specificaion the distribtuion from which to sample the data.  defaults to (and can only handle) `distribution = "normal"`
+
+
+The actual dataframe is generated during class instantiation by calling the `generate_data()` method without any additional arguments.  The full method is displayed below:
+```{python}
+#| eval: false
+def generate_data(self):
+    df = pd.DataFrame()
+    letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    
+    self.pop_mean = random.randint(10, 50)
+    self.pop_sd = round(self.pop_mean * random.uniform(0.10, 0.30))
+        
+    for group in range(self.groups):
+        mean = self.pop_mean 
+        sd = self.pop_sd
+
+        same_diff = random.randint(0,3)
+        if same_diff >= 1:
+            effect =  round(mean * random.uniform(0.10, 0.50))
+            mean +=  effect
+        samples = np.random.normal(mean, sd, self.n)
+
+        sample = np.round(samples).astype(int)
+
+        df[f'{letters[group]}'] = sample
+    return df
+```
+
+The variable `letters` holds letters that are used to define the columns.  
+
+The first variables to be defined are the population parameters $\mu$ and $\sigma$.  The population mean ($\mu$) uses `random.randint()` to select a random integer between 10 and 50.  The population standard deviation ($\sigma$) multiplies $\mu$ by a random value between .10 and .30 using `random.uniform()` to select a $\sigma$ that is between 10-30% of $\mu$, rounded to the nearest whole number.
+
+Samples are generated within a for loop.  The start of the loop sets the population parameters as the source for the sample.  Then a d3 is rolled (`random.randint(1,3)`) to determine if the sample is drawn from the population distribution or a different distribution.  If the roll is 2 or 3 then the sample will be drawn from a new distribution.  The size of the effect is randomized to be between 10 and 50% of the mean value, rounded to the nearest whole number, and then the new mean (e.g., $\mu_A$) is set as $\mu$ + the effect.
+
+Then $n$ samples are pulled from a normal distribution with the defined parameters with each data point rounded to the nearest whole number.  
+
+

@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Guenther, Benjamin A.">
-<meta name="dcterms.date" content="2026-05-07">
 
-<title>Statistics Problem and Solution Generator</title>
+<title>2&nbsp; Overview of the Underlying Code – Statistics Problem and Solution Generator</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -32,7 +65,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./code_overview.html" rel="next">
+<link href="./08 - Hypothesis_Test_z-Scores.html" rel="next">
+<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -72,6 +106,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -108,7 +171,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Statistics Problem and Solution Generator</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./code_overview.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Overview of the Underlying Code</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -122,13 +185,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Statistics Problem and Solution Generator</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./code_overview.html" class="sidebar-item-text sidebar-link">
+  <a href="./code_overview.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Overview of the Underlying Code</span></span></a>
   </div>
 </li>
@@ -184,23 +247,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#about-the-project" id="toc-about-the-project" class="nav-link active" data-scroll-target="#about-the-project"><span class="header-section-number">1</span> About the Project</a>
-  <ul class="collapse">
-  <li><a href="#development-history" id="toc-development-history" class="nav-link" data-scroll-target="#development-history"><span class="header-section-number">1.1</span> Development History</a>
-  <ul class="collapse">
-  <li><a href="#current-status" id="toc-current-status" class="nav-link" data-scroll-target="#current-status"><span class="header-section-number">1.1.1</span> Current Status</a></li>
-  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps"><span class="header-section-number">1.1.2</span> Next Steps</a></li>
-  <li><a href="#future-goals" id="toc-future-goals" class="nav-link" data-scroll-target="#future-goals"><span class="header-section-number">1.1.3</span> Future Goals</a></li>
-  </ul></li>
-  <li><a href="#information-below-is-old-and-needs-update" id="toc-information-below-is-old-and-needs-update" class="nav-link" data-scroll-target="#information-below-is-old-and-needs-update"><span class="header-section-number">1.2</span> information below is old and needs update</a>
-  <ul class="collapse">
-  <li><a href="#documents-to-produce-accessible-.html-practice-problems" id="toc-documents-to-produce-accessible-.html-practice-problems" class="nav-link" data-scroll-target="#documents-to-produce-accessible-.html-practice-problems"><span class="header-section-number">1.2.1</span> Documents to produce accessible .html practice problems</a></li>
-  <li><a href="#title-ii-updates-in-the-immediate-queue" id="toc-title-ii-updates-in-the-immediate-queue" class="nav-link" data-scroll-target="#title-ii-updates-in-the-immediate-queue"><span class="header-section-number">1.2.2</span> Title II Updates in the immediate queue</a></li>
-  <li><a href="#title-ii-updates-remaining" id="toc-title-ii-updates-remaining" class="nav-link" data-scroll-target="#title-ii-updates-remaining"><span class="header-section-number">1.2.3</span> Title II Updates remaining</a></li>
-  <li><a href="#functionality-to-add" id="toc-functionality-to-add" class="nav-link" data-scroll-target="#functionality-to-add"><span class="header-section-number">1.2.4</span> Functionality to add</a></li>
-  <li><a href="#future-directions" id="toc-future-directions" class="nav-link" data-scroll-target="#future-directions"><span class="header-section-number">1.2.5</span> Future directions</a></li>
-  </ul></li>
-  </ul></li>
+  <li><a href="#generating-the-core-dataset-for-each-problem" id="toc-generating-the-core-dataset-for-each-problem" class="nav-link active" data-scroll-target="#generating-the-core-dataset-for-each-problem"><span class="header-section-number">2.1</span> Generating the Core Dataset for Each Problem</a></li>
   </ul>
 </nav>
     </div>
@@ -209,27 +256,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Statistics Problem and Solution Generator</h1>
-<p class="subtitle lead">For an Undergraduate Level Statistics in Psychology Course</p>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Overview of the Underlying Code</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Guenther, Benjamin A. </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">2026-05-07</p>
-    </div>
-  </div>
   
     
   </div>
@@ -239,94 +273,44 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="about-the-project" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> About the Project</h1>
-<p>This is a project, under development, to produce accessible documents that meet the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA standard consisting of randomly generate problems and their fully worked solutions for use in an undergraduate statistics in psychology course.</p>
-<section id="development-history" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="development-history"><span class="header-section-number">1.1</span> Development History</h2>
-<p>The first version began with the goal of providing a way for students to access unlimited practice problems to encourage practice until mastery. The code was originally deployed on google colab and was written with the goal of making it as simple as possible to use from the student’s perspective. It was designed such that an initial block of code could be run once and then minimized/hidden to get it out of the way. Then subsequent blocks could be used to call the class and methods using a simple, single line, of pre-populated code. Each call would produce a new problem and display the fully worked solution. The solution would display the result as if being worked by hand and rounding to 2 decimal places for every calculation (when necessary)</p>
-<p>As I began updating my course materials to meet the WCAG 2.1 Levell AA guidelines, I realized that the google colab option would not work. Thus, I started developing a new version that would adapt the existing codebase to produce static documents and ensure that the text (including the math) would meet the accessibility standards. That version is what is being used to render each of the chapters within this document. The code is written in python and the documents are quarto. So far, I’ve used this version to render sample problems into book formats (as in this document), .html documents, and slide decks using a combination of quarto and revealjs (using a scrollable slide for each problem).</p>
-<section id="current-status" class="level3" data-number="1.1.1">
-<h3 data-number="1.1.1" class="anchored" data-anchor-id="current-status"><span class="header-section-number">1.1.1</span> Current Status</h3>
-<p>The current task/goal is to fully document this version of the code on this site. Once it’s fully documented, I’d like to add links to some example documents in other formats to illustrate the different ways I’ve successfully used this version. This should include a guide on how to use the generator as it is currently designed.</p>
-</section>
-<section id="next-steps" class="level3" data-number="1.1.2">
-<h3 data-number="1.1.2" class="anchored" data-anchor-id="next-steps"><span class="header-section-number">1.1.2</span> Next Steps</h3>
-<p>After completing the above tasks, I will start working version 3.0 (branch name tbd). The third version will consist of a major rewrite and restructuring of the underlying codebase. The current version is too inflexible, many of the methods are doing too many things. The individual tasks necessary to achieve the software’s goals need to be better managed and more efficiently delegated.</p>
-<p>The rewrite should seperate the question from the solution. The new version needs to group questions into their own document need to be created (converting into an assingment and/or exam generator). It also needs to be able to produce a key to go along with any assignment generated. There needs to be a way to display the solution in small pieces so that additional text can be added. For example, creating an initial walkthrough that contains detailed step-by-step instructions.</p>
-</section>
-<section id="future-goals" class="level3" data-number="1.1.3">
-<h3 data-number="1.1.3" class="anchored" data-anchor-id="future-goals"><span class="header-section-number">1.1.3</span> Future Goals</h3>
-<p>as this site expands to include step-by-step guides along with the sample problems. I’d like to start introducing solutions that rely on coding in addition to ones designed to be calculated by hand. Have a question at the top followed by different types of solutions: by hand, Python, and R.</p>
-<p>Another future goal is to really expand the content included with the question being generated. Using more text, adding specific variables, using known distributions, and other factors.</p>
-</section>
-</section>
-<section id="information-below-is-old-and-needs-update" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="information-below-is-old-and-needs-update"><span class="header-section-number">1.2</span> information below is old and needs update</h2>
-<section id="documents-to-produce-accessible-.html-practice-problems" class="level3" data-number="1.2.1">
-<h3 data-number="1.2.1" class="anchored" data-anchor-id="documents-to-produce-accessible-.html-practice-problems"><span class="header-section-number">1.2.1</span> Documents to produce accessible .html practice problems</h3>
-<p>Each document will produces 30 practice problems in a .html slideshow rendered with revealjs. Each slide is scrollable and contains a single problem. Problems are generated with a randomly determined sample size between 5 and 15 per group. When more than one group, sample size is equivalent between groups.<br></p>
+<section id="generating-the-core-dataset-for-each-problem" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="generating-the-core-dataset-for-each-problem"><span class="header-section-number">2.1</span> Generating the Core Dataset for Each Problem</h2>
+<p>The core of each problem is managed in the <code>RandomData</code> class. which takes three initial arguments:</p>
 <ul>
-<li>08 - Hypothesis_Test_z-Scores.qmd: <em>hypothesis testing with z-scores</em></li>
-<li>09 - Single-Sample_t-Tests.qmd: <em>one-sample t-tests</em></li>
-<li>10 - Independent-Samples_t-Tests.qmd: <em>independent-samples t-tests</em></li>
-<li>11 - Dependent-Samples_t-Tests.qmd: <em>dependent-samples t-tests</em></li>
-<li>12 - one-way_ANOVA.qmd: <em>one-way ANOVA</em></li>
-<li>13 - repeated-measures_ANOVA: <em>repeated-measures ANOVA</em></li>
-<li>14 - factorial_ANOVA: <em>two-factor ANOVA</em></li>
+<li>groups: integer value to specify the number of columns in the dataframe. defaults to <code>groups = 1</code></li>
+<li>n: integer value to define the nubmer of rows in the data frame. Also the number of scores in each condition. defaults to <code>n = 10</code></li>
+<li>distribution: written as a placeholder to allow specificaion the distribtuion from which to sample the data. defaults to (and can only handle) <code>distribution = "normal"</code></li>
 </ul>
-</section>
-<section id="title-ii-updates-in-the-immediate-queue" class="level3" data-number="1.2.2">
-<h3 data-number="1.2.2" class="anchored" data-anchor-id="title-ii-updates-in-the-immediate-queue"><span class="header-section-number">1.2.2</span> Title II Updates in the immediate queue</h3>
-<ul>
-<li><del>One-Way ANOVA</del></li>
-<li><del>Repeated-Measures ANOVA</del></li>
-</ul>
-</section>
-<section id="title-ii-updates-remaining" class="level3" data-number="1.2.3">
-<h3 data-number="1.2.3" class="anchored" data-anchor-id="title-ii-updates-remaining"><span class="header-section-number">1.2.3</span> Title II Updates remaining</h3>
-<ul>
-<li>standard deviation exercises</li>
-<li>basic z-scores and using z-scores with sample means</li>
-</ul>
-</section>
-<section id="functionality-to-add" class="level3" data-number="1.2.4">
-<h3 data-number="1.2.4" class="anchored" data-anchor-id="functionality-to-add"><span class="header-section-number">1.2.4</span> Functionality to add</h3>
-<ul>
-<li>correlation</li>
-<li>regression</li>
-<li><del>two-factor ANOVA</del></li>
-<li>Post-hoc testing for ANOVA</li>
-<li>Alt-text for figures. Can the alt- and descriptive-text be auto generated based on the matplotlib input?</li>
-<li><del>include specifying the hypotheses for NHST (null and alternative)</del></li>
-</ul>
-</section>
-<section id="future-directions" class="level3" data-number="1.2.5">
-<h3 data-number="1.2.5" class="anchored" data-anchor-id="future-directions"><span class="header-section-number">1.2.5</span> Future directions</h3>
-<ul>
-<li>seperate defining question from displaying the results
-<ul>
-<li>consider adding: <code>class Question:</code> that will hold the question (this might not be necessary)</li>
-<li>consider adding: <code>class Assignment:</code> to hold a collection of question objects.
-<ul>
-<li>will output a formatted assignment and it’s answer key</li>
-</ul></li>
-</ul></li>
-<li>add functionality to specify some details when creating the question such as the distribution
-<ul>
-<li>add common standardized distributions as options</li>
-</ul></li>
-<li>expand the text of the question, inlcude a list of common variables</li>
-<li>switch from slide-based format to a book
-<ul>
-<li>combine all into a single book style document.</li>
-<li>add instructions and a full walkthrough for each problem type</li>
-</ul></li>
-</ul>
+<p>The actual dataframe is generated during class instantiation by calling the <code>generate_data()</code> method without any additional arguments. The full method is displayed below:</p>
+<div id="2a5b2d80" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_data(<span class="va">self</span>):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame()</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    letters <span class="op">=</span> <span class="st">"ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.pop_mean <span class="op">=</span> random.randint(<span class="dv">10</span>, <span class="dv">50</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.pop_sd <span class="op">=</span> <span class="bu">round</span>(<span class="va">self</span>.pop_mean <span class="op">*</span> random.uniform(<span class="fl">0.10</span>, <span class="fl">0.30</span>))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> group <span class="kw">in</span> <span class="bu">range</span>(<span class="va">self</span>.groups):</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        mean <span class="op">=</span> <span class="va">self</span>.pop_mean </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        sd <span class="op">=</span> <span class="va">self</span>.pop_sd</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        same_diff <span class="op">=</span> random.randint(<span class="dv">0</span>,<span class="dv">3</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> same_diff <span class="op">&gt;=</span> <span class="dv">1</span>:</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            effect <span class="op">=</span>  <span class="bu">round</span>(mean <span class="op">*</span> random.uniform(<span class="fl">0.10</span>, <span class="fl">0.50</span>))</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>            mean <span class="op">+=</span>  effect</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        samples <span class="op">=</span> np.random.normal(mean, sd, <span class="va">self</span>.n)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        sample <span class="op">=</span> np.<span class="bu">round</span>(samples).astype(<span class="bu">int</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        df[<span class="ss">f'</span><span class="sc">{</span>letters[group]<span class="sc">}</span><span class="ss">'</span>] <span class="op">=</span> sample</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The variable <code>letters</code> holds letters that are used to define the columns.</p>
+<p>The first variables to be defined are the population parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>. The population mean (<span class="math inline">\(\mu\)</span>) uses <code>random.randint()</code> to select a random integer between 10 and 50. The population standard deviation (<span class="math inline">\(\sigma\)</span>) multiplies <span class="math inline">\(\mu\)</span> by a random value between .10 and .30 using <code>random.uniform()</code> to select a <span class="math inline">\(\sigma\)</span> that is between 10-30% of <span class="math inline">\(\mu\)</span>, rounded to the nearest whole number.</p>
+<p>Samples are generated within a for loop. The start of the loop sets the population parameters as the source for the sample. Then a d3 is rolled (<code>random.randint(1,3)</code>) to determine if the sample is drawn from the population distribution or a different distribution. If the roll is 2 or 3 then the sample will be drawn from a new distribution. The size of the effect is randomized to be between 10 and 50% of the mean value, rounded to the nearest whole number, and then the new mean (e.g., <span class="math inline">\(\mu_A\)</span>) is set as <span class="math inline">\(\mu\)</span> + the effect.</p>
+<p>Then <span class="math inline">\(n\)</span> samples are pulled from a normal distribution with the defined parameters with each data point rounded to the nearest whole number.</p>
 
 
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -732,10 +716,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Statistics Problem and Solution Generator">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Statistics Problem and Solution Generator</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./code_overview.html" class="pagination-link" aria-label="Overview of the Underlying Code">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Overview of the Underlying Code</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./08 - Hypothesis_Test_z-Scores.html" class="pagination-link" aria-label="Hypothesis Testing with z-Scores">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hypothesis Testing with z-Scores</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
