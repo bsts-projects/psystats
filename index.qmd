@@ -31,7 +31,7 @@ as this site expands to include step-by-step guides along with the sample proble
 Another future goal is to really expand the content included with the question being generated.  Using more text, adding specific variables, using known distributions, and other factors.
 
 
-# information below is old will be updated soon
+# information below is old and needs update
 
 ## Documents to produce accessible .html practice problems
 Each document will produces 30 practice problems in a .html slideshow rendered with revealjs.  Each slide is scrollable and contains a single problem.  Problems are generated with a randomly determined sample size between 5 and 15 per group.  When more than one group, sample size is equivalent between groups.<br>

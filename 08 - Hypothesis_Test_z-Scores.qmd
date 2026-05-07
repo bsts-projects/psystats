@@ -1,6 +1,6 @@
 ---
 title: Hypothesis Testing with z-Scores
-subtitle: Samaple Problems
+subtitle: Sample Problems
 # author: Guenther, Benjamin A.
 project:
   type: website

@@ -244,12 +244,12 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#about" id="toc-about" class="nav-link active" data-scroll-target="#about"><span class="header-section-number">4</span> About</a></li>
-  <li><a href="#problem-1" id="toc-problem-1" class="nav-link" data-scroll-target="#problem-1"><span class="header-section-number">5</span> Problem 1</a></li>
-  <li><a href="#problem-2" id="toc-problem-2" class="nav-link" data-scroll-target="#problem-2"><span class="header-section-number">6</span> Problem 2</a></li>
-  <li><a href="#problem-3" id="toc-problem-3" class="nav-link" data-scroll-target="#problem-3"><span class="header-section-number">7</span> Problem 3</a></li>
-  <li><a href="#problem-4" id="toc-problem-4" class="nav-link" data-scroll-target="#problem-4"><span class="header-section-number">8</span> Problem 4</a></li>
-  <li><a href="#problem-5" id="toc-problem-5" class="nav-link" data-scroll-target="#problem-5"><span class="header-section-number">9</span> Problem 5</a></li>
+  <li><a href="#about" id="toc-about" class="nav-link active" data-scroll-target="#about"><span class="header-section-number">3.1</span> About</a></li>
+  <li><a href="#problem-1" id="toc-problem-1" class="nav-link" data-scroll-target="#problem-1"><span class="header-section-number">3.2</span> Problem 1</a></li>
+  <li><a href="#problem-2" id="toc-problem-2" class="nav-link" data-scroll-target="#problem-2"><span class="header-section-number">3.3</span> Problem 2</a></li>
+  <li><a href="#problem-3" id="toc-problem-3" class="nav-link" data-scroll-target="#problem-3"><span class="header-section-number">3.4</span> Problem 3</a></li>
+  <li><a href="#problem-4" id="toc-problem-4" class="nav-link" data-scroll-target="#problem-4"><span class="header-section-number">3.5</span> Problem 4</a></li>
+  <li><a href="#problem-5" id="toc-problem-5" class="nav-link" data-scroll-target="#problem-5"><span class="header-section-number">3.6</span> Problem 5</a></li>
   </ul>
 </nav>
     </div>
@@ -276,8 +276,8 @@ window.Quarto = {
 </header>
 
 
-<section id="about" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> About</h1>
+<section id="about" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="about"><span class="header-section-number">3.1</span> About</h2>
 <p>the one-sample <em>t</em>-Test problems use the <code>RamdomData</code> class which requires:</p>
 <ul>
 <li>the groups variable set to 1: <code>groups = 1</code></li>
@@ -285,254 +285,269 @@ window.Quarto = {
 <li>a call to the <code>one_sample_t_test()</code> method</li>
 </ul>
 <p>In these sample problems, the per-group sample size is randomly set between 5 and 15. An example funciton call is included below</p>
-<div id="30d83de8" class="cell" data-execution_count="2">
+<div id="3a126428" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>sample_size <span class="op">=</span> random.randint(<span class="dv">5</span>,<span class="dv">15</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>RandomData(groups <span class="op">=</span> <span class="dv">1</span>, n <span class="op">=</span> sample_size).one_sample_t_test()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="problem-1" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Problem 1</h1>
+<section id="problem-1" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="problem-1"><span class="header-section-number">3.2</span> Problem 1</h2>
+<p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from <span class="math inline">\({13}\)</span>? Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.01}\)</span> <br><br></p>
+<style type="text/css">
+</style>
+
+<table id="T_d9550" class="caption-top table">
+<thead>
+<tr class="header">
+<th id="T_d9550_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_d9550_row0_col0" class="data row0 col0">17</td>
+</tr>
+<tr class="even">
+<td id="T_d9550_row1_col0" class="data row1 col0">15</td>
+</tr>
+<tr class="odd">
+<td id="T_d9550_row2_col0" class="data row2 col0">18</td>
+</tr>
+<tr class="even">
+<td id="T_d9550_row3_col0" class="data row3 col0">17</td>
+</tr>
+<tr class="odd">
+<td id="T_d9550_row4_col0" class="data row4 col0">15</td>
+</tr>
+<tr class="even">
+<td id="T_d9550_row5_col0" class="data row5 col0">12</td>
+</tr>
+<tr class="odd">
+<td id="T_d9550_row6_col0" class="data row6 col0">14</td>
+</tr>
+<tr class="even">
+<td id="T_d9550_row7_col0" class="data row7 col0">17</td>
+</tr>
+<tr class="odd">
+<td id="T_d9550_row8_col0" class="data row8 col0">16</td>
+</tr>
+<tr class="even">
+<td id="T_d9550_row9_col0" class="data row9 col0">17</td>
+</tr>
+<tr class="odd">
+<td id="T_d9550_row10_col0" class="data row10 col0">13</td>
+</tr>
+<tr class="even">
+<td id="T_d9550_row11_col0" class="data row11 col0">17</td>
+</tr>
+<tr class="odd">
+<td id="T_d9550_row12_col0" class="data row12 col0">15</td>
+</tr>
+<tr class="even">
+<td id="T_d9550_row13_col0" class="data row13 col0">16</td>
+</tr>
+<tr class="odd">
+<td id="T_d9550_row14_col0" class="data row14 col0">15</td>
+</tr>
+</tbody>
+</table>
+<p><br> The necessary summary statistics for these data<br> <span class="math display">\[M_A = {15.6}\]</span> <span class="math display">\[s^2 = {2.83}\]</span> <span class="math display">\[n = {15}\]</span><br></p>
+<p>State the Hypotheses <br> <span class="math display">\[H_0: \mu = 13\]</span> <span class="math display">\[H_1: \mu \ne 13\]</span> <br></p>
+<p><br>The decision criteria: <br><br> <span class="math inline">\(t_{crit} = \pm{2.98}, \alpha_{two-tailed} = {0.01}, df = {14}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[s_M = \sqrt{\frac{s^2}{n}}\]</span> <br> <span class="math display">\[s_M = \sqrt{\frac{2.83}{15}}\]</span> <br> <span class="math display">\[s_M = \sqrt{0.19}\]</span> <br> <span class="math display">\[s_M = {0.44}\]</span> <br><br> calculate <span class="math inline">\(t_{obt}\)</span> <br> <span class="math display">\[t_{obt} = {\frac{M - \mu}{s_M}}\]</span> <br> <span class="math display">\[t_{obt} = \frac{15.6 - 13}{0.44}\]</span> <br> <span class="math display">\[t_{obt} = \frac{2.6}{0.44}\]</span> <br> <span class="math display">\[t_{obt} = {5.91}\]</span> <br><br> calculate Cohen’s d <br> <span class="math display">\[d = \frac{M - \mu}{s}\]</span> <br> <span class="math display">\[d = \frac{15.6 - 13}{1.68}\]</span> <br> <span class="math display">\[d = \frac{2.6}{1.68}\]</span> <br> <span class="math display">\[d = {1.55}\]</span> <br><br></p>
+<p>The results: <br><br> reject the null hypothesis, results are significant, <br> <em>t</em>(14) = 5.91, <em>p</em> &lt; 0.01, <em>d</em> = 1.55<br><br></p>
+</section>
+<section id="problem-2" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="problem-2"><span class="header-section-number">3.3</span> Problem 2</h2>
+<p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from <span class="math inline">\({23}\)</span>? Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.01}\)</span> <br><br></p>
+<style type="text/css">
+</style>
+
+<table id="T_d5cde" class="caption-top table">
+<thead>
+<tr class="header">
+<th id="T_d5cde_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td id="T_d5cde_row0_col0" class="data row0 col0">23</td>
+</tr>
+<tr class="even">
+<td id="T_d5cde_row1_col0" class="data row1 col0">22</td>
+</tr>
+<tr class="odd">
+<td id="T_d5cde_row2_col0" class="data row2 col0">18</td>
+</tr>
+<tr class="even">
+<td id="T_d5cde_row3_col0" class="data row3 col0">20</td>
+</tr>
+<tr class="odd">
+<td id="T_d5cde_row4_col0" class="data row4 col0">16</td>
+</tr>
+<tr class="even">
+<td id="T_d5cde_row5_col0" class="data row5 col0">19</td>
+</tr>
+<tr class="odd">
+<td id="T_d5cde_row6_col0" class="data row6 col0">22</td>
+</tr>
+<tr class="even">
+<td id="T_d5cde_row7_col0" class="data row7 col0">27</td>
+</tr>
+</tbody>
+</table>
+<p><br> The necessary summary statistics for these data<br> <span class="math display">\[M_A = {20.88}\]</span> <span class="math display">\[s^2 = {11.55}\]</span> <span class="math display">\[n = {8}\]</span><br></p>
+<p>State the Hypotheses <br> <span class="math display">\[H_0: \mu = 23\]</span> <span class="math display">\[H_1: \mu \ne 23\]</span> <br></p>
+<p><br>The decision criteria: <br><br> <span class="math inline">\(t_{crit} = \pm{3.5}, \alpha_{two-tailed} = {0.01}, df = {7}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[s_M = \sqrt{\frac{s^2}{n}}\]</span> <br> <span class="math display">\[s_M = \sqrt{\frac{11.55}{8}}\]</span> <br> <span class="math display">\[s_M = \sqrt{1.44}\]</span> <br> <span class="math display">\[s_M = {1.2}\]</span> <br><br> calculate <span class="math inline">\(t_{obt}\)</span> <br> <span class="math display">\[t_{obt} = {\frac{M - \mu}{s_M}}\]</span> <br> <span class="math display">\[t_{obt} = \frac{20.88 - 23}{1.2}\]</span> <br> <span class="math display">\[t_{obt} = \frac{-2.12}{1.2}\]</span> <br> <span class="math display">\[t_{obt} = {-1.77}\]</span> <br><br> calculate Cohen’s d <br> <span class="math display">\[d = \frac{M - \mu}{s}\]</span> <br> <span class="math display">\[d = \frac{20.88 - 23}{3.4}\]</span> <br> <span class="math display">\[d = \frac{-2.12}{3.4}\]</span> <br> <span class="math display">\[d = {-0.62}\]</span> <br><br></p>
+<p>The results: <br><br> fail to reject the null hypothesis, results not significant, <br> <em>t</em>(7) = -1.77, <em>p</em> &gt; 0.01, <em>d</em> = -0.62<br><br></p>
+</section>
+<section id="problem-3" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="problem-3"><span class="header-section-number">3.4</span> Problem 3</h2>
 <p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from <span class="math inline">\({10}\)</span>? Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.05}\)</span> <br><br></p>
 <style type="text/css">
 </style>
 
-<table id="T_e5b5a" class="caption-top table">
+<table id="T_d8756" class="caption-top table">
 <thead>
 <tr class="header">
-<th id="T_e5b5a_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
+<th id="T_d8756_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_e5b5a_row0_col0" class="data row0 col0">16</td>
+<td id="T_d8756_row0_col0" class="data row0 col0">13</td>
 </tr>
 <tr class="even">
-<td id="T_e5b5a_row1_col0" class="data row1 col0">16</td>
+<td id="T_d8756_row1_col0" class="data row1 col0">7</td>
 </tr>
 <tr class="odd">
-<td id="T_e5b5a_row2_col0" class="data row2 col0">16</td>
+<td id="T_d8756_row2_col0" class="data row2 col0">12</td>
 </tr>
 <tr class="even">
-<td id="T_e5b5a_row3_col0" class="data row3 col0">15</td>
+<td id="T_d8756_row3_col0" class="data row3 col0">11</td>
 </tr>
 <tr class="odd">
-<td id="T_e5b5a_row4_col0" class="data row4 col0">15</td>
+<td id="T_d8756_row4_col0" class="data row4 col0">8</td>
 </tr>
 <tr class="even">
-<td id="T_e5b5a_row5_col0" class="data row5 col0">14</td>
+<td id="T_d8756_row5_col0" class="data row5 col0">13</td>
 </tr>
 <tr class="odd">
-<td id="T_e5b5a_row6_col0" class="data row6 col0">14</td>
+<td id="T_d8756_row6_col0" class="data row6 col0">12</td>
 </tr>
 <tr class="even">
-<td id="T_e5b5a_row7_col0" class="data row7 col0">14</td>
+<td id="T_d8756_row7_col0" class="data row7 col0">14</td>
+</tr>
+<tr class="odd">
+<td id="T_d8756_row8_col0" class="data row8 col0">10</td>
 </tr>
 </tbody>
 </table>
-<p><br> The necessary summary statistics for these data<br> <span class="math display">\[M_A = {15.0}\]</span> <span class="math display">\[s^2 = {0.86}\]</span> <span class="math display">\[n = {8}\]</span><br></p>
+<p><br> The necessary summary statistics for these data<br> <span class="math display">\[M_A = {11.11}\]</span> <span class="math display">\[s^2 = {5.61}\]</span> <span class="math display">\[n = {9}\]</span><br></p>
 <p>State the Hypotheses <br> <span class="math display">\[H_0: \mu = 10\]</span> <span class="math display">\[H_1: \mu \ne 10\]</span> <br></p>
-<p><br>The decision criteria: <br><br> <span class="math inline">\(t_{crit} = \pm{2.36}, \alpha_{two-tailed} = {0.05}, df = {7}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[s_M = \sqrt{\frac{s^2}{n}}\]</span> <br> <span class="math display">\[s_M = \sqrt{\frac{0.86}{8}}\]</span> <br> <span class="math display">\[s_M = \sqrt{0.11}\]</span> <br> <span class="math display">\[s_M = {0.33}\]</span> <br><br> calculate <span class="math inline">\(t_{obt}\)</span> <br> <span class="math display">\[t_{obt} = {\frac{M - \mu}{s_M}}\]</span> <br> <span class="math display">\[t_{obt} = \frac{15.0 - 10}{0.33}\]</span> <br> <span class="math display">\[t_{obt} = \frac{5.0}{0.33}\]</span> <br> <span class="math display">\[t_{obt} = {15.15}\]</span> <br><br> calculate Cohen’s d <br> <span class="math display">\[d = \frac{M - \mu}{s}\]</span> <br> <span class="math display">\[d = \frac{15.0 - 10}{0.93}\]</span> <br> <span class="math display">\[d = \frac{5.0}{0.93}\]</span> <br> <span class="math display">\[d = {5.38}\]</span> <br><br></p>
-<p>The results: <br><br> reject the null hypothesis, results are significant, <br> <em>t</em>(7) = 15.15, <em>p</em> &lt; 0.05, <em>d</em> = 5.38<br><br></p>
+<p><br>The decision criteria: <br><br> <span class="math inline">\(t_{crit} = \pm{2.31}, \alpha_{two-tailed} = {0.05}, df = {8}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[s_M = \sqrt{\frac{s^2}{n}}\]</span> <br> <span class="math display">\[s_M = \sqrt{\frac{5.61}{9}}\]</span> <br> <span class="math display">\[s_M = \sqrt{0.62}\]</span> <br> <span class="math display">\[s_M = {0.79}\]</span> <br><br> calculate <span class="math inline">\(t_{obt}\)</span> <br> <span class="math display">\[t_{obt} = {\frac{M - \mu}{s_M}}\]</span> <br> <span class="math display">\[t_{obt} = \frac{11.11 - 10}{0.79}\]</span> <br> <span class="math display">\[t_{obt} = \frac{1.11}{0.79}\]</span> <br> <span class="math display">\[t_{obt} = {1.41}\]</span> <br><br> calculate Cohen’s d <br> <span class="math display">\[d = \frac{M - \mu}{s}\]</span> <br> <span class="math display">\[d = \frac{11.11 - 10}{2.37}\]</span> <br> <span class="math display">\[d = \frac{1.11}{2.37}\]</span> <br> <span class="math display">\[d = {0.47}\]</span> <br><br></p>
+<p>The results: <br><br> fail to reject the null hypothesis, results not significant, <br> <em>t</em>(8) = 1.41, <em>p</em> &gt; 0.05, <em>d</em> = 0.47<br><br></p>
 </section>
-<section id="problem-2" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Problem 2</h1>
-<p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from <span class="math inline">\({50}\)</span>? Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.01}\)</span> <br><br></p>
+<section id="problem-4" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="problem-4"><span class="header-section-number">3.5</span> Problem 4</h2>
+<p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from <span class="math inline">\({32}\)</span>? Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.05}\)</span> <br><br></p>
 <style type="text/css">
 </style>
 
-<table id="T_bdef9" class="caption-top table">
+<table id="T_e7aec" class="caption-top table">
 <thead>
 <tr class="header">
-<th id="T_bdef9_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
+<th id="T_e7aec_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_bdef9_row0_col0" class="data row0 col0">26</td>
+<td id="T_e7aec_row0_col0" class="data row0 col0">35</td>
 </tr>
 <tr class="even">
-<td id="T_bdef9_row1_col0" class="data row1 col0">27</td>
+<td id="T_e7aec_row1_col0" class="data row1 col0">24</td>
 </tr>
 <tr class="odd">
-<td id="T_bdef9_row2_col0" class="data row2 col0">73</td>
+<td id="T_e7aec_row2_col0" class="data row2 col0">43</td>
 </tr>
 <tr class="even">
-<td id="T_bdef9_row3_col0" class="data row3 col0">58</td>
+<td id="T_e7aec_row3_col0" class="data row3 col0">22</td>
 </tr>
 <tr class="odd">
-<td id="T_bdef9_row4_col0" class="data row4 col0">45</td>
+<td id="T_e7aec_row4_col0" class="data row4 col0">23</td>
 </tr>
 <tr class="even">
-<td id="T_bdef9_row5_col0" class="data row5 col0">55</td>
+<td id="T_e7aec_row5_col0" class="data row5 col0">36</td>
 </tr>
 <tr class="odd">
-<td id="T_bdef9_row6_col0" class="data row6 col0">53</td>
+<td id="T_e7aec_row6_col0" class="data row6 col0">25</td>
 </tr>
 <tr class="even">
-<td id="T_bdef9_row7_col0" class="data row7 col0">71</td>
+<td id="T_e7aec_row7_col0" class="data row7 col0">36</td>
 </tr>
 <tr class="odd">
-<td id="T_bdef9_row8_col0" class="data row8 col0">38</td>
+<td id="T_e7aec_row8_col0" class="data row8 col0">26</td>
 </tr>
 <tr class="even">
-<td id="T_bdef9_row9_col0" class="data row9 col0">77</td>
+<td id="T_e7aec_row9_col0" class="data row9 col0">28</td>
 </tr>
 <tr class="odd">
-<td id="T_bdef9_row10_col0" class="data row10 col0">49</td>
+<td id="T_e7aec_row10_col0" class="data row10 col0">22</td>
 </tr>
 <tr class="even">
-<td id="T_bdef9_row11_col0" class="data row11 col0">71</td>
-</tr>
-<tr class="odd">
-<td id="T_bdef9_row12_col0" class="data row12 col0">44</td>
+<td id="T_e7aec_row11_col0" class="data row11 col0">29</td>
 </tr>
 </tbody>
 </table>
-<p><br> The necessary summary statistics for these data<br> <span class="math display">\[M_A = {52.85}\]</span> <span class="math display">\[s^2 = {286.97}\]</span> <span class="math display">\[n = {13}\]</span><br></p>
-<p>State the Hypotheses <br> <span class="math display">\[H_0: \mu = 50\]</span> <span class="math display">\[H_1: \mu \ne 50\]</span> <br></p>
-<p><br>The decision criteria: <br><br> <span class="math inline">\(t_{crit} = \pm{3.05}, \alpha_{two-tailed} = {0.01}, df = {12}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[s_M = \sqrt{\frac{s^2}{n}}\]</span> <br> <span class="math display">\[s_M = \sqrt{\frac{286.97}{13}}\]</span> <br> <span class="math display">\[s_M = \sqrt{22.07}\]</span> <br> <span class="math display">\[s_M = {4.7}\]</span> <br><br> calculate <span class="math inline">\(t_{obt}\)</span> <br> <span class="math display">\[t_{obt} = {\frac{M - \mu}{s_M}}\]</span> <br> <span class="math display">\[t_{obt} = \frac{52.85 - 50}{4.7}\]</span> <br> <span class="math display">\[t_{obt} = \frac{2.85}{4.7}\]</span> <br> <span class="math display">\[t_{obt} = {0.61}\]</span> <br><br> calculate Cohen’s d <br> <span class="math display">\[d = \frac{M - \mu}{s}\]</span> <br> <span class="math display">\[d = \frac{52.85 - 50}{16.94}\]</span> <br> <span class="math display">\[d = \frac{2.85}{16.94}\]</span> <br> <span class="math display">\[d = {0.17}\]</span> <br><br></p>
-<p>The results: <br><br> fail to reject the null hypothesis, results not significant, <br> <em>t</em>(12) = 0.61, <em>p</em> &gt; 0.01, <em>d</em> = 0.17<br><br></p>
+<p><br> The necessary summary statistics for these data<br> <span class="math display">\[M_A = {29.08}\]</span> <span class="math display">\[s^2 = {46.81}\]</span> <span class="math display">\[n = {12}\]</span><br></p>
+<p>State the Hypotheses <br> <span class="math display">\[H_0: \mu = 32\]</span> <span class="math display">\[H_1: \mu \ne 32\]</span> <br></p>
+<p><br>The decision criteria: <br><br> <span class="math inline">\(t_{crit} = \pm{2.2}, \alpha_{two-tailed} = {0.05}, df = {11}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[s_M = \sqrt{\frac{s^2}{n}}\]</span> <br> <span class="math display">\[s_M = \sqrt{\frac{46.81}{12}}\]</span> <br> <span class="math display">\[s_M = \sqrt{3.9}\]</span> <br> <span class="math display">\[s_M = {1.97}\]</span> <br><br> calculate <span class="math inline">\(t_{obt}\)</span> <br> <span class="math display">\[t_{obt} = {\frac{M - \mu}{s_M}}\]</span> <br> <span class="math display">\[t_{obt} = \frac{29.08 - 32}{1.97}\]</span> <br> <span class="math display">\[t_{obt} = \frac{-2.92}{1.97}\]</span> <br> <span class="math display">\[t_{obt} = {-1.48}\]</span> <br><br> calculate Cohen’s d <br> <span class="math display">\[d = \frac{M - \mu}{s}\]</span> <br> <span class="math display">\[d = \frac{29.08 - 32}{6.84}\]</span> <br> <span class="math display">\[d = \frac{-2.92}{6.84}\]</span> <br> <span class="math display">\[d = {-0.43}\]</span> <br><br></p>
+<p>The results: <br><br> fail to reject the null hypothesis, results not significant, <br> <em>t</em>(11) = -1.48, <em>p</em> &gt; 0.05, <em>d</em> = -0.43<br><br></p>
 </section>
-<section id="problem-3" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Problem 3</h1>
-<p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from <span class="math inline">\({25}\)</span>? Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.05}\)</span> <br><br></p>
+<section id="problem-5" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="problem-5"><span class="header-section-number">3.6</span> Problem 5</h2>
+<p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly greater than <span class="math inline">\({36}\)</span>? Use a <span class="math inline">\({1}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.05}\)</span> <br><br></p>
 <style type="text/css">
 </style>
 
-<table id="T_9050b" class="caption-top table">
+<table id="T_4a873" class="caption-top table">
 <thead>
 <tr class="header">
-<th id="T_9050b_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
+<th id="T_4a873_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_9050b_row0_col0" class="data row0 col0">29</td>
+<td id="T_4a873_row0_col0" class="data row0 col0">34</td>
 </tr>
 <tr class="even">
-<td id="T_9050b_row1_col0" class="data row1 col0">39</td>
+<td id="T_4a873_row1_col0" class="data row1 col0">39</td>
 </tr>
 <tr class="odd">
-<td id="T_9050b_row2_col0" class="data row2 col0">40</td>
+<td id="T_4a873_row2_col0" class="data row2 col0">34</td>
 </tr>
 <tr class="even">
-<td id="T_9050b_row3_col0" class="data row3 col0">38</td>
+<td id="T_4a873_row3_col0" class="data row3 col0">35</td>
 </tr>
 <tr class="odd">
-<td id="T_9050b_row4_col0" class="data row4 col0">37</td>
+<td id="T_4a873_row4_col0" class="data row4 col0">17</td>
 </tr>
 <tr class="even">
-<td id="T_9050b_row5_col0" class="data row5 col0">40</td>
+<td id="T_4a873_row5_col0" class="data row5 col0">43</td>
 </tr>
 <tr class="odd">
-<td id="T_9050b_row6_col0" class="data row6 col0">36</td>
+<td id="T_4a873_row6_col0" class="data row6 col0">31</td>
 </tr>
 <tr class="even">
-<td id="T_9050b_row7_col0" class="data row7 col0">27</td>
+<td id="T_4a873_row7_col0" class="data row7 col0">42</td>
+</tr>
+<tr class="odd">
+<td id="T_4a873_row8_col0" class="data row8 col0">38</td>
 </tr>
 </tbody>
 </table>
-<p><br> The necessary summary statistics for these data<br> <span class="math display">\[M_A = {35.75}\]</span> <span class="math display">\[s^2 = {25.07}\]</span> <span class="math display">\[n = {8}\]</span><br></p>
-<p>State the Hypotheses <br> <span class="math display">\[H_0: \mu = 25\]</span> <span class="math display">\[H_1: \mu \ne 25\]</span> <br></p>
-<p><br>The decision criteria: <br><br> <span class="math inline">\(t_{crit} = \pm{2.36}, \alpha_{two-tailed} = {0.05}, df = {7}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[s_M = \sqrt{\frac{s^2}{n}}\]</span> <br> <span class="math display">\[s_M = \sqrt{\frac{25.07}{8}}\]</span> <br> <span class="math display">\[s_M = \sqrt{3.13}\]</span> <br> <span class="math display">\[s_M = {1.77}\]</span> <br><br> calculate <span class="math inline">\(t_{obt}\)</span> <br> <span class="math display">\[t_{obt} = {\frac{M - \mu}{s_M}}\]</span> <br> <span class="math display">\[t_{obt} = \frac{35.75 - 25}{1.77}\]</span> <br> <span class="math display">\[t_{obt} = \frac{10.75}{1.77}\]</span> <br> <span class="math display">\[t_{obt} = {6.07}\]</span> <br><br> calculate Cohen’s d <br> <span class="math display">\[d = \frac{M - \mu}{s}\]</span> <br> <span class="math display">\[d = \frac{35.75 - 25}{5.01}\]</span> <br> <span class="math display">\[d = \frac{10.75}{5.01}\]</span> <br> <span class="math display">\[d = {2.15}\]</span> <br><br></p>
-<p>The results: <br><br> reject the null hypothesis, results are significant, <br> <em>t</em>(7) = 6.07, <em>p</em> &lt; 0.05, <em>d</em> = 2.15<br><br></p>
-</section>
-<section id="problem-4" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Problem 4</h1>
-<p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from <span class="math inline">\({16}\)</span>? Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.01}\)</span> <br><br></p>
-<style type="text/css">
-</style>
-
-<table id="T_2f37e" class="caption-top table">
-<thead>
-<tr class="header">
-<th id="T_2f37e_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td id="T_2f37e_row0_col0" class="data row0 col0">14</td>
-</tr>
-<tr class="even">
-<td id="T_2f37e_row1_col0" class="data row1 col0">17</td>
-</tr>
-<tr class="odd">
-<td id="T_2f37e_row2_col0" class="data row2 col0">21</td>
-</tr>
-<tr class="even">
-<td id="T_2f37e_row3_col0" class="data row3 col0">24</td>
-</tr>
-<tr class="odd">
-<td id="T_2f37e_row4_col0" class="data row4 col0">16</td>
-</tr>
-<tr class="even">
-<td id="T_2f37e_row5_col0" class="data row5 col0">17</td>
-</tr>
-<tr class="odd">
-<td id="T_2f37e_row6_col0" class="data row6 col0">20</td>
-</tr>
-<tr class="even">
-<td id="T_2f37e_row7_col0" class="data row7 col0">21</td>
-</tr>
-<tr class="odd">
-<td id="T_2f37e_row8_col0" class="data row8 col0">24</td>
-</tr>
-<tr class="even">
-<td id="T_2f37e_row9_col0" class="data row9 col0">11</td>
-</tr>
-<tr class="odd">
-<td id="T_2f37e_row10_col0" class="data row10 col0">20</td>
-</tr>
-</tbody>
-</table>
-<p><br> The necessary summary statistics for these data<br> <span class="math display">\[M_A = {18.64}\]</span> <span class="math display">\[s^2 = {16.45}\]</span> <span class="math display">\[n = {11}\]</span><br></p>
-<p>State the Hypotheses <br> <span class="math display">\[H_0: \mu = 16\]</span> <span class="math display">\[H_1: \mu \ne 16\]</span> <br></p>
-<p><br>The decision criteria: <br><br> <span class="math inline">\(t_{crit} = \pm{3.17}, \alpha_{two-tailed} = {0.01}, df = {10}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[s_M = \sqrt{\frac{s^2}{n}}\]</span> <br> <span class="math display">\[s_M = \sqrt{\frac{16.45}{11}}\]</span> <br> <span class="math display">\[s_M = \sqrt{1.5}\]</span> <br> <span class="math display">\[s_M = {1.22}\]</span> <br><br> calculate <span class="math inline">\(t_{obt}\)</span> <br> <span class="math display">\[t_{obt} = {\frac{M - \mu}{s_M}}\]</span> <br> <span class="math display">\[t_{obt} = \frac{18.64 - 16}{1.22}\]</span> <br> <span class="math display">\[t_{obt} = \frac{2.64}{1.22}\]</span> <br> <span class="math display">\[t_{obt} = {2.16}\]</span> <br><br> calculate Cohen’s d <br> <span class="math display">\[d = \frac{M - \mu}{s}\]</span> <br> <span class="math display">\[d = \frac{18.64 - 16}{4.06}\]</span> <br> <span class="math display">\[d = \frac{2.64}{4.06}\]</span> <br> <span class="math display">\[d = {0.65}\]</span> <br><br></p>
-<p>The results: <br><br> fail to reject the null hypothesis, results not significant, <br> <em>t</em>(10) = 2.16, <em>p</em> &gt; 0.01, <em>d</em> = 0.65<br><br></p>
-</section>
-<section id="problem-5" class="level1" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> Problem 5</h1>
-<p>Given the following data, is the mean of <span class="math inline">\(Group_A\)</span> significantly different from <span class="math inline">\({28}\)</span>? Use a <span class="math inline">\({2}\)</span> tailed-test with <span class="math inline">\(\alpha = {0.05}\)</span> <br><br></p>
-<style type="text/css">
-</style>
-
-<table id="T_3a72d" class="caption-top table">
-<thead>
-<tr class="header">
-<th id="T_3a72d_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">A</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td id="T_3a72d_row0_col0" class="data row0 col0">40</td>
-</tr>
-<tr class="even">
-<td id="T_3a72d_row1_col0" class="data row1 col0">32</td>
-</tr>
-<tr class="odd">
-<td id="T_3a72d_row2_col0" class="data row2 col0">41</td>
-</tr>
-<tr class="even">
-<td id="T_3a72d_row3_col0" class="data row3 col0">40</td>
-</tr>
-<tr class="odd">
-<td id="T_3a72d_row4_col0" class="data row4 col0">33</td>
-</tr>
-<tr class="even">
-<td id="T_3a72d_row5_col0" class="data row5 col0">40</td>
-</tr>
-<tr class="odd">
-<td id="T_3a72d_row6_col0" class="data row6 col0">39</td>
-</tr>
-<tr class="even">
-<td id="T_3a72d_row7_col0" class="data row7 col0">26</td>
-</tr>
-</tbody>
-</table>
-<p><br> The necessary summary statistics for these data<br> <span class="math display">\[M_A = {36.38}\]</span> <span class="math display">\[s^2 = {29.41}\]</span> <span class="math display">\[n = {8}\]</span><br></p>
-<p>State the Hypotheses <br> <span class="math display">\[H_0: \mu = 28\]</span> <span class="math display">\[H_1: \mu \ne 28\]</span> <br></p>
-<p><br>The decision criteria: <br><br> <span class="math inline">\(t_{crit} = \pm{2.36}, \alpha_{two-tailed} = {0.05}, df = {7}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[s_M = \sqrt{\frac{s^2}{n}}\]</span> <br> <span class="math display">\[s_M = \sqrt{\frac{29.41}{8}}\]</span> <br> <span class="math display">\[s_M = \sqrt{3.68}\]</span> <br> <span class="math display">\[s_M = {1.92}\]</span> <br><br> calculate <span class="math inline">\(t_{obt}\)</span> <br> <span class="math display">\[t_{obt} = {\frac{M - \mu}{s_M}}\]</span> <br> <span class="math display">\[t_{obt} = \frac{36.38 - 28}{1.92}\]</span> <br> <span class="math display">\[t_{obt} = \frac{8.38}{1.92}\]</span> <br> <span class="math display">\[t_{obt} = {4.36}\]</span> <br><br> calculate Cohen’s d <br> <span class="math display">\[d = \frac{M - \mu}{s}\]</span> <br> <span class="math display">\[d = \frac{36.38 - 28}{5.42}\]</span> <br> <span class="math display">\[d = \frac{8.38}{5.42}\]</span> <br> <span class="math display">\[d = {1.55}\]</span> <br><br></p>
-<p>The results: <br><br> reject the null hypothesis, results are significant, <br> <em>t</em>(7) = 4.36, <em>p</em> &lt; 0.05, <em>d</em> = 1.55<br><br></p>
+<p><br> The necessary summary statistics for these data<br> <span class="math display">\[M_A = {34.78}\]</span> <span class="math display">\[s^2 = {59.94}\]</span> <span class="math display">\[n = {9}\]</span><br></p>
+<p>State the Hypotheses <br> <span class="math display">\[H_0: \mu \leq 36\]</span> <span class="math display">\[H_1: \mu \gt 36\]</span> <br></p>
+<p><br>The decision criteria: <br><br> <span class="math inline">\(t_{crit} = +{1.86}, \alpha_{one-tailed} = {0.05}, df = {8}\)</span><br><br> Calculate the standard error <br> <span class="math display">\[s_M = \sqrt{\frac{s^2}{n}}\]</span> <br> <span class="math display">\[s_M = \sqrt{\frac{59.94}{9}}\]</span> <br> <span class="math display">\[s_M = \sqrt{6.66}\]</span> <br> <span class="math display">\[s_M = {2.58}\]</span> <br><br> calculate <span class="math inline">\(t_{obt}\)</span> <br> <span class="math display">\[t_{obt} = {\frac{M - \mu}{s_M}}\]</span> <br> <span class="math display">\[t_{obt} = \frac{34.78 - 36}{2.58}\]</span> <br> <span class="math display">\[t_{obt} = \frac{-1.22}{2.58}\]</span> <br> <span class="math display">\[t_{obt} = {-0.47}\]</span> <br><br> calculate Cohen’s d <br> <span class="math display">\[d = \frac{M - \mu}{s}\]</span> <br> <span class="math display">\[d = \frac{34.78 - 36}{7.74}\]</span> <br> <span class="math display">\[d = \frac{-1.22}{7.74}\]</span> <br> <span class="math display">\[d = {-0.16}\]</span> <br><br></p>
+<p>The results: <br><br> fail to reject the null hypothesis, results not significant, <br> <em>t</em>(8) = -0.47, <em>p</em> &gt; 0.05, <em>d</em> = -0.16<br><br></p>
 
 
 </section>

@@ -24,7 +24,7 @@ importlib.reload(stats_project)
 from stats_project import RandomData 
 ```
 
-# About
+## About
 the one-way ANOVA problems use the `RamdomData` class which requires:
 
 * an integer value for the number of groups
@@ -40,7 +40,7 @@ sample_size = random.randint(5,15)
 RandomData(groups = n_groups, n = sample_size).anova(test = "one-way")
 ```
 
-# Problem 1
+## Problem 1
 ```{python}
 #| echo: false
 #| output: asis
@@ -49,7 +49,7 @@ sample_size = random.randint(5,15)
 RandomData(groups = n_groups, n = sample_size).anova(test = "one-way")
 ```
 
-# Problem 2
+## Problem 2
 ```{python}
 #| echo: false
 #| output: asis
@@ -58,7 +58,7 @@ sample_size = random.randint(5,15)
 RandomData(groups = n_groups, n = sample_size).anova(test = "one-way")
 ```
 
-# Problem 3
+## Problem 3
 ```{python}
 #| echo: false
 #| output: asis
@@ -67,7 +67,7 @@ sample_size = random.randint(5,15)
 RandomData(groups = n_groups, n = sample_size).anova(test = "one-way")
 ```
 
-# Problem 4
+## Problem 4
 ```{python}
 #| echo: false
 #| output: asis
@@ -76,7 +76,7 @@ sample_size = random.randint(5,15)
 RandomData(groups = n_groups, n = sample_size).anova(test = "one-way")
 ```
 
-# Problem 5
+## Problem 5
 ```{python}
 #| echo: false
 #| output: asis
