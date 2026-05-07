@@ -12,7 +12,7 @@ project:
     - 14 - factorial_ANOVA.qmd
    
 book:
-  title: "Satistics Problem Generator"
+  title: "Staistics Problem Generator"
   author: Guenther, Benjamin A.
   date: last-modified # or today
   date-format: YYYY-MM-DD
