@@ -24,7 +24,7 @@ importlib.reload(stats_project)
 from stats_project import RandomData 
 ```
 
-# About
+## About
 the one-sample *z*-Test problems use the `RamdomData` class which requires:
 
 * the groups variable set to 1: `groups = 1`
@@ -39,7 +39,7 @@ sample_size = random.randint(5,15)
 RandomData(groups = 1, n = sample_size).z_test()
 ```
 
-# Problem 1
+## Problem 1
 ```{python}
 #| echo: false
 #| output: asis
@@ -47,7 +47,7 @@ sample_size = random.randint(5,15)
 RandomData(groups = 1, n = sample_size).z_test()
 ```
 
-# Problem 2
+## Problem 2
 ```{python}
 #| echo: false
 #| output: asis
@@ -55,7 +55,7 @@ sample_size = random.randint(5,15)
 RandomData(groups = 1, n = sample_size).z_test()
 ```
 
-# Problem 3
+## Problem 3
 ```{python}
 #| echo: false
 #| output: asis
@@ -63,7 +63,7 @@ sample_size = random.randint(5,15)
 RandomData(groups = 1, n = sample_size).z_test()
 ```
 
-# Problem 4
+## Problem 4
 ```{python}
 #| echo: false
 #| output: asis
@@ -71,7 +71,7 @@ sample_size = random.randint(5,15)
 RandomData(groups = 1, n = sample_size).z_test()
 ```
 
-# Problem 5
+## Problem 5
 ```{python}
 #| echo: false
 #| output: asis
