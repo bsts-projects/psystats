@@ -14,7 +14,7 @@ jupyter: python3
 ---
 
 ## Generating the Core Dataset for Each Problem
-The core of each problem is managed in the `RandomData` class.  which takes three initial arguments:
+The core of each problem is managed in the `RandomData` class which takes three initial arguments:
 
 * groups: integer value to specify the number of columns in the dataframe.  defaults to `groups = 1`
 * n: integer value to define the nubmer of rows in the data frame.  Also the number of scores in each condition.  defaults to `n = 10`
@@ -47,12 +47,66 @@ def generate_data(self):
     return df
 ```
 
-The variable `letters` holds letters that are used to define the columns.  
+The variable `letters` holds the labels (e.g., A, B, C, ...) that are used to define the columns.  
 
 The first variables to be defined are the population parameters $\mu$ and $\sigma$.  The population mean ($\mu$) uses `random.randint()` to select a random integer between 10 and 50.  The population standard deviation ($\sigma$) multiplies $\mu$ by a random value between .10 and .30 using `random.uniform()` to select a $\sigma$ that is between 10-30% of $\mu$, rounded to the nearest whole number.
+
+Sampling is based on the logic of null hypothesis significance testing (NHST).  The null hypothesis ($H_0$) states that the independent variable (IV) has no effect on the (DV).  If we have a treatatment (tx) and a control condition, then $\mu_{control} = \mu_{tx}$.  If the tx has an effect on the DV then it is assumed to add a constant to every score.  Thus, $\mu_{tx} = \mu_{control} + \text{effect of tx}$.
 
 Samples are generated within a for loop.  The start of the loop sets the population parameters as the source for the sample.  Then a d3 is rolled (`random.randint(1,3)`) to determine if the sample is drawn from the population distribution or a different distribution.  If the roll is 2 or 3 then the sample will be drawn from a new distribution.  The size of the effect is randomized to be between 10 and 50% of the mean value, rounded to the nearest whole number, and then the new mean (e.g., $\mu_A$) is set as $\mu$ + the effect.
 
 Then $n$ samples are pulled from a normal distribution with the defined parameters with each data point rounded to the nearest whole number.  
+
+## Generating the Question
+The `generate_question()` sets the question text based on...
+
+
+
+the alpha level ($\alpha$) is set by calling the `set_alpha()` method and uses `random.choice()` to select one of two options: $\alpha = 0.05$ or $\alpha = 0.01$
+```{python}
+#| eval: false
+def set_alpha(self):
+    self.alpha = random.choice([0.05, 0.01])
+```
+
+For tests where either one- or two-tailed tests are possilbe (*z*-scores and one-sample *t*-tests), this is set within the `critical_value()` method.  The relevant section is displayed below.  A d5 is rolled and a one-tailed test is selected if the result is 1, else a two-tailed test is used.  This method sets a 20% probability of a one-tailed test and 80% for a two-tailed test
+```{python}
+#| eval: false
+def critical_value(self):
+    roll = random.randint(0, 5)
+    self.tails = 1 if roll == 0 else 2
+    # the rest of the method is not displayed here
+```
+
+TBD - describe 
+```{python}
+#| eval: false
+def critical_value(self):
+    # ...
+    # excerpt
+    if self.test in ["one-way ANOVA", "repeated-measures ANOVA"]:
+            self.crit_values["direction"] = "increase"
+    else:
+        if self.tails == 1:  
+            direction = random.choice(["increase", "decrease"])
+            self.crit_values["direction"] = direction
+        else:
+            return ValueError("tails must be 1 for directional crit values")
+    # end excerpt
+```
+
+
+the value for the null $H_0$ is set using the `set_null_hypothesis()` method (see below).  For *z*-scores and one-sample *t*-tests, the null is set as the population mean $\mu$.  For all other tests, it is set to be 0.
+```{python}
+#| eval: false
+def set_null_hypothesis(self):
+    if self.test in ["z", "one-sample t-test"]:
+        self.null = self.pop_mean
+    else:
+        self.null = 0
+```
+
+### *z*-Scores
+
 
 
