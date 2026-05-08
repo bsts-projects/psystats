@@ -37,7 +37,7 @@ class RandomData():
 
     def set_alpha(self):
         self.alpha = random.choice([0.05, 0.01])
-        return self.alpha
+        #return self.alpha
         
     
     def generate_data(self):
@@ -248,7 +248,7 @@ class RandomData():
             self.null = self.pop_mean
         else:
             self.null = 0
-        return self.null
+        #return self.null
 
 
     def write_hypotheses(self):
@@ -411,7 +411,7 @@ class RandomData():
                 self.crit_values["direction"] = direction
             else:
                 return ValueError("tails must be 1 for directional crit values")
-        return self.crit_values
+        #return self.crit_values
 
 
     def z_test(self):
