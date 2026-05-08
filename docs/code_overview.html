@@ -288,7 +288,7 @@ window.Quarto = {
 <li>distribution: written as a placeholder to allow specificaion the distribtuion from which to sample the data. defaults to (and can only handle) <code>distribution = "normal"</code></li>
 </ul>
 <p>The actual dataframe is generated during class instantiation by calling the <code>generate_data()</code> method without any additional arguments. The full method is displayed below:</p>
-<div id="801d25a4" class="cell" data-execution_count="1">
+<div id="0189e9de" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_data(<span class="va">self</span>):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame()</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    letters <span class="op">=</span> <span class="st">"ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span></span>
@@ -314,26 +314,26 @@ window.Quarto = {
 <p>The variable <code>letters</code> holds the labels (e.g., A, B, C, …) that are used to define the columns.</p>
 <p>The first variables to be defined are the population parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>. The population mean (<span class="math inline">\(\mu\)</span>) uses <code>random.randint()</code> to select a random integer between 10 and 50. The population standard deviation (<span class="math inline">\(\sigma\)</span>) multiplies <span class="math inline">\(\mu\)</span> by a random value between .10 and .30 using <code>random.uniform()</code> to select a <span class="math inline">\(\sigma\)</span> that is between 10-30% of <span class="math inline">\(\mu\)</span>, rounded to the nearest whole number.</p>
 <p>Sampling is based on the logic of null hypothesis significance testing (NHST). The null hypothesis (<span class="math inline">\(H_0\)</span>) states that the independent variable (IV) has no effect on the (DV). If we have a treatatment (tx) and a control condition, then <span class="math inline">\(\mu_{control} = \mu_{tx}\)</span>. If the tx has an effect on the DV then it is assumed to add a constant to every score. Thus, <span class="math inline">\(\mu_{tx} = \mu_{control} + \text{effect of tx}\)</span>.</p>
-<p>Samples are generated within a for loop. The start of the loop sets the population parameters as the source for the sample. Then a d3 is rolled (<code>random.randint(1,3)</code>) to determine if the sample is drawn from the population distribution or a different distribution. If the roll is 2 or 3 then the sample will be drawn from a new distribution. The size of the effect is randomized to be between 10 and 50% of the mean value, rounded to the nearest whole number, and then the new mean (e.g., <span class="math inline">\(\mu_A\)</span>) is set as <span class="math inline">\(\mu\)</span> + the effect.</p>
+<p>Samples are generated within a for loop. The start of the loop sets the population parameters as the source for the sample. Then a d3 is rolled (<code>random.randint(0,3)</code>) to determine if the sample is drawn from the population distribution or a different distribution. If the roll is 1 or 2 then the sample will be drawn from a new distribution. The size of the effect is randomized to be between 10 and 50% of the mean value, rounded to the nearest whole number, and then the new mean (e.g., <span class="math inline">\(\mu_A\)</span>) is set as <span class="math inline">\(\mu\)</span> + the effect.</p>
 <p>Then <span class="math inline">\(n\)</span> samples are pulled from a normal distribution with the defined parameters with each data point rounded to the nearest whole number.</p>
 </section>
 <section id="generating-the-question" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="generating-the-question"><span class="header-section-number">2.2</span> Generating the Question</h2>
 <p>The <code>generate_question()</code> sets the question text based on…</p>
 <p>the alpha level (<span class="math inline">\(\alpha\)</span>) is set by calling the <code>set_alpha()</code> method and uses <code>random.choice()</code> to select one of two options: <span class="math inline">\(\alpha = 0.05\)</span> or <span class="math inline">\(\alpha = 0.01\)</span></p>
-<div id="72948c62" class="cell" data-execution_count="2">
+<div id="c641c240" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> set_alpha(<span class="va">self</span>):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.alpha <span class="op">=</span> random.choice([<span class="fl">0.05</span>, <span class="fl">0.01</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>For tests where either one- or two-tailed tests are possilbe (<em>z</em>-scores and one-sample <em>t</em>-tests), this is set within the <code>critical_value()</code> method. The relevant section is displayed below. A d5 is rolled and a one-tailed test is selected if the result is 1, else a two-tailed test is used. This method sets a 20% probability of a one-tailed test and 80% for a two-tailed test</p>
-<div id="15171b3b" class="cell" data-execution_count="3">
+<p>For tests where either one- or two-tailed tests are possilbe (<em>z</em>-scores and one-sample <em>t</em>-tests), this is set within the <code>critical_value()</code> method. The relevant section is displayed below. A d5 is rolled and a one-tailed test is selected if the result is 0, else a two-tailed test is used. This method sets a 20% probability of a one-tailed test and 80% for a two-tailed test</p>
+<div id="4a17a431" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> critical_value(<span class="va">self</span>):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    roll <span class="op">=</span> random.randint(<span class="dv">0</span>, <span class="dv">5</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.tails <span class="op">=</span> <span class="dv">1</span> <span class="cf">if</span> roll <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span> <span class="dv">2</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># the rest of the method is not displayed here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>TBD - describe</p>
-<div id="91bb82a4" class="cell" data-execution_count="4">
+<div id="321a37eb" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> critical_value(<span class="va">self</span>):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ...</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># excerpt</span></span>
@@ -348,7 +348,7 @@ window.Quarto = {
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># end excerpt</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>the value for the null <span class="math inline">\(H_0\)</span> is set using the <code>set_null_hypothesis()</code> method (see below). For <em>z</em>-scores and one-sample <em>t</em>-tests, the null is set as the population mean <span class="math inline">\(\mu\)</span>. For all other tests, it is set to be 0.</p>
-<div id="a8165761" class="cell" data-execution_count="5">
+<div id="d820c08b" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> set_null_hypothesis(<span class="va">self</span>):</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="va">self</span>.test <span class="kw">in</span> [<span class="st">"z"</span>, <span class="st">"one-sample t-test"</span>]:</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.null <span class="op">=</span> <span class="va">self</span>.pop_mean</span>

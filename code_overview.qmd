@@ -53,7 +53,7 @@ The first variables to be defined are the population parameters $\mu$ and $\sigm
 
 Sampling is based on the logic of null hypothesis significance testing (NHST).  The null hypothesis ($H_0$) states that the independent variable (IV) has no effect on the (DV).  If we have a treatatment (tx) and a control condition, then $\mu_{control} = \mu_{tx}$.  If the tx has an effect on the DV then it is assumed to add a constant to every score.  Thus, $\mu_{tx} = \mu_{control} + \text{effect of tx}$.
 
-Samples are generated within a for loop.  The start of the loop sets the population parameters as the source for the sample.  Then a d3 is rolled (`random.randint(1,3)`) to determine if the sample is drawn from the population distribution or a different distribution.  If the roll is 2 or 3 then the sample will be drawn from a new distribution.  The size of the effect is randomized to be between 10 and 50% of the mean value, rounded to the nearest whole number, and then the new mean (e.g., $\mu_A$) is set as $\mu$ + the effect.
+Samples are generated within a for loop.  The start of the loop sets the population parameters as the source for the sample.  Then a d3 is rolled (`random.randint(0,3)`) to determine if the sample is drawn from the population distribution or a different distribution.  If the roll is 1 or 2 then the sample will be drawn from a new distribution.  The size of the effect is randomized to be between 10 and 50% of the mean value, rounded to the nearest whole number, and then the new mean (e.g., $\mu_A$) is set as $\mu$ + the effect.
 
 Then $n$ samples are pulled from a normal distribution with the defined parameters with each data point rounded to the nearest whole number.  
 
@@ -69,7 +69,7 @@ def set_alpha(self):
     self.alpha = random.choice([0.05, 0.01])
 ```
 
-For tests where either one- or two-tailed tests are possilbe (*z*-scores and one-sample *t*-tests), this is set within the `critical_value()` method.  The relevant section is displayed below.  A d5 is rolled and a one-tailed test is selected if the result is 1, else a two-tailed test is used.  This method sets a 20% probability of a one-tailed test and 80% for a two-tailed test
+For tests where either one- or two-tailed tests are possilbe (*z*-scores and one-sample *t*-tests), this is set within the `critical_value()` method.  The relevant section is displayed below.  A d5 is rolled and a one-tailed test is selected if the result is 0, else a two-tailed test is used.  This method sets a 20% probability of a one-tailed test and 80% for a two-tailed test
 ```{python}
 #| eval: false
 def critical_value(self):
